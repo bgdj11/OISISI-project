@@ -25,6 +25,17 @@ namespace CLI.Model
         public List<Student> spisakPolozenihStudenata { get; set; }
         public List<Student> spisakNepolozenihStudenata { get; set; }
 
+        public Predmet(string sifra, string naziv, Semestar sem, int godina, Profesor profesor, int espb)
+        {
+            sifraPredmeta = sifra;
+            nazivPredmeta = naziv;
+            semestar = sem;
+            godinaStudija = godina;
+            predmetniProfesor = profesor;
+            brojESPB = espb;
+            spisakPolozenihStudenata = new List<Student>();
+            spisakNepolozenihStudenata = new List<Student>();
+        }
 
         public string[] ToCSV()
         {

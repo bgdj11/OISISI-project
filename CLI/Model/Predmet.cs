@@ -16,14 +16,14 @@ namespace CLI.Model
 {
     class Predmet : ISerializable
     {
-        public string SifraPredmeta { get; set; }
-        public string NazivPredmeta { get; set; }
-        public Semestar Semestar { get; set; }
-        public int GodinaStudija { get; set; }
-        public Profesor PredmetniProfesor { get; set; }
-        public int BrojESPB { get; set; }
-        public List<Student> SpisakPolozenihStudenata { get; set; }
-        public List<Student> SpisakNepolozenihStudenata { get; set; }
+        public string sifraPredmeta { get; set; }
+        public string nazivPredmeta { get; set; }
+        public Semestar semestar { get; set; }
+        public int godinaStudija { get; set; }
+        public Profesor predmetniProfesor { get; set; }
+        public int brojESPB { get; set; }
+        public List<Student> spisakPolozenihStudenata { get; set; }
+        public List<Student> spisakNepolozenihStudenata { get; set; }
 
 
         public string[] ToCSV()

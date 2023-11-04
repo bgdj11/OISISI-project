@@ -10,18 +10,18 @@ namespace CLI.Model
 {
     class Profesor : ISerializable
     {
-        public string ProfesorID { get; set; }
-        public string Prezime { get; set; }
-        public string Ime { get; set; }
-        public DateTime DatumRodjenja { get; set; }
+        public string profesorID { get; set; }
+        public string prezime { get; set; }
+        public string ime { get; set; }
+        public DateTime datumRodjenja { get; set; }
 
         // public Adresa AdresaStanovanja { get; set; }
-        public string KontaktTelefon { get; set; }
-        public string EmailAdresa { get; set; }
-        public string BrojLicneKarte { get; set; }
-        public string Zvanje { get; set; }
-        public int GodineStaza { get; set; }
-        public List<Predmet> SpisakPredmeta { get; set; }
+        public string kontaktTelefon { get; set; }
+        public string emailAdresa { get; set; }
+        public string brojLicneKarte { get; set; }
+        public string zvanje { get; set; }
+        public int godineStaza { get; set; }
+        public List<Predmet> spisakPredmeta { get; set; }
 
         public void FromCSV(string[] values)
         {

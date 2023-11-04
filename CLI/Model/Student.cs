@@ -16,20 +16,20 @@ namespace CLI.Model
 {
     class Student : ISerializable
     {
-        public string Prezime { get; set; }
-        public string Ime { get; set; }
-        public DateTime DatumRodjenja { get; set; }
+        public string prezime { get; set; }
+        public string ime { get; set; }
+        public DateTime datumRodjenja { get; set; }
 
         // public Adresa AdresaStanovanja { get; set; }
-        public string KontaktTelefon { get; set; }
-        public string EmailAdresa { get; set; }
-        public string BrojIndeksa { get; set; }
-        public int TrenutnaGodinaStudija { get; set; }
+        public string kontaktTelefon { get; set; }
+        public string emailAdresa { get; set; }
+        public string brojIndeksa { get; set; }
+        public int trenutnaGodinaStudija { get; set; }
 
-        public Status Status { get; set; }
-        public double ProsecnaOcena { get; set; }
+        public Status status { get; set; }
+        public double prosecnaOcena { get; set; }
         // public List<Ocena> SpisakPolozenihIspita { get; set; }
-        public List<Predmet> SpisakNepolozenihIspita { get; set; }
+        public List<Predmet> spisakNepolozenihIspita { get; set; }
 
 
         public string[] ToCSV()

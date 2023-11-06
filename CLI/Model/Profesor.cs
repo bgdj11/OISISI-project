@@ -12,9 +12,11 @@ namespace CLI.Model
         public int idProfesor { get; set; }
         public string prezime { get; set; }
         public string ime { get; set; }
-        public DateTime datumRodjenja { get; set; }
+        public DateOnly datumRodjenja { get; set; }
 
-        public Adresa AdresaStanovanja { get; set; }
+        public Adresa adresaStanovanja { get; set; }
+
+        public int idAdrese { get; set; }
         public string kontaktTelefon { get; set; }
         public string emailAdresa { get; set; }
         public string brojLicneKarte { get; set; }
@@ -26,7 +28,7 @@ namespace CLI.Model
         string idProfesor,
         string prezime,
         string ime,
-        DateTime datumRodjenja,
+        DateOnly datumRodjenja,
         Adresa adresaStanovanja,
         string kontaktTelefon,
         string emailAdresa,
@@ -48,19 +50,40 @@ namespace CLI.Model
         }
 
 
-        public void FromCSV(string[] values)
-        {
-
-        }
-
         public string[] ToCSV()
         {
             string[] csvValues =
             {
-
+                idProfesor.ToString(),
+                prezime,
+                ime,
+                datumRodjenja.ToString(),
+                adresaStanovanja.idAdrese.ToString(),
+                kontaktTelefon,
+                emailAdresa,
+                brojLicneKarte,
+                zvanje,
+                godineStaza.ToString()
         };
             return csvValues;
         }
+
+
+        public void FromCSV(string[] values)
+        {
+            idProfesor = int.Parse(values[0]);
+            prezime = values[1];
+            ime = values[2];
+            datumRodjenja = DateOnly.Parse(values[3]);
+            idAdrese = int.Parse(values[4]);
+            kontaktTelefon = values[5];
+            emailAdresa = values[6];   
+            brojLicneKarte = values[7];
+            zvanje = values[8];
+            godineStaza = int.Parse(values[9]);
+
+        }
+
 
 
         public override string ToString()
@@ -70,7 +93,7 @@ namespace CLI.Model
             sb.AppendLine("Prezime: " + prezime);
             sb.AppendLine("Ime: " + ime);
             sb.AppendLine("Datum rođenja: " + datumRodjenja.ToString("dd.MM.yyyy"));
-            sb.AppendLine("Adresa stanovanja: " + AdresaStanovanja);
+            sb.AppendLine("Adresa stanovanja: " + adresaStanovanja);
             sb.AppendLine("Kontakt telefon: " + kontaktTelefon);
             sb.AppendLine("Email adresa: " + emailAdresa);
             sb.AppendLine("Broj lične karte: " + brojLicneKarte);

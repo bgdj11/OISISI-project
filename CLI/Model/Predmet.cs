@@ -21,6 +21,8 @@ namespace CLI.Model
         public Semestar semestar { get; set; }
         public int godinaStudija { get; set; }
         public Profesor predmetniProfesor { get; set; }
+
+        public int  idPredmetnogProfesora { get; set; }
         public int brojESPB { get; set; }
         public List<Student> spisakPolozenihStudenata { get; set; }
         public List<Student> spisakNepolozenihStudenata { get; set; }
@@ -41,14 +43,26 @@ namespace CLI.Model
         {
             string[] csvValues =
             {
-
+                idPredmet.ToString(),
+                sifraPredmeta,
+                nazivPredmeta,
+                semestar.ToString(),
+                godinaStudija.ToString(),
+                idPredmetnogProfesora.ToString(),
+                brojESPB.ToString()
         };
             return csvValues;
         }
 
         public void FromCSV(string[] values)
         {
-
+            idPredmet = int.Parse(values[0]);
+            sifraPredmeta = values[1];
+            nazivPredmeta = values[2];
+            semestar = (Semestar)Enum.Parse(typeof(Semestar), values[3]);
+            godinaStudija = int.Parse(values[4]);
+            idPredmetnogProfesora = int.Parse(values[5]);
+            brojESPB = int.Parse(values[6]);
         }
 
 

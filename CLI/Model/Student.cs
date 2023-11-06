@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Markup;
 using System.Xml.Linq;
 
 enum Status
@@ -20,9 +21,11 @@ namespace CLI.Model
         public int idStudent {  get; set; }
         public string prezime { get; set; }
         public string ime { get; set; }
-        public DateTime datumRodjenja { get; set; }
+        public DateOnly datumRodjenja { get; set; }
 
-        public Adresa AdresaStanovanja { get; set; }
+        public Adresa adresaStanovanja { get; set; }
+
+        public int idAdrese { get; set; }
         public string kontaktTelefon { get; set; }
         public string emailAdresa { get; set; }
         public string brojIndeksa { get; set; }
@@ -36,7 +39,7 @@ namespace CLI.Model
         public Student(
         string prezime,
         string ime,
-        DateTime datumRodjenja,
+        DateOnly datumRodjenja,
         Adresa adresaStanovanja,
         string kontaktTelefon,
         string emailAdresa,
@@ -63,13 +66,34 @@ namespace CLI.Model
         {
             string[] csvValues =
             {
-
+                idStudent.ToString(),
+                prezime,
+                ime,
+                datumRodjenja.ToString(),
+                adresaStanovanja.idAdrese.ToString(),
+                kontaktTelefon,
+                emailAdresa,
+                brojIndeksa,
+                trenutnaGodinaStudija.ToString(),
+                Enum.GetName(typeof(Status),status),
+                prosecnaOcena.ToString(),
         };
             return csvValues;
         }
 
         public void FromCSV(string[] values)
         {
+            idStudent = int.Parse(values[0]);
+            prezime = values[1];
+            ime = values[2];
+            datumRodjenja = DateOnly.Parse(values[3]);
+            idAdrese = int.Parse(values[4]);
+            kontaktTelefon = values[5];
+            emailAdresa = values[6];
+            brojIndeksa = values[7];
+            trenutnaGodinaStudija = int.Parse(values[8]);
+            status = (Status)Enum.Parse(typeof(Status), values[9]);
+            prosecnaOcena = double.Parse(values[10]);  
 
         }
 
@@ -80,7 +104,7 @@ namespace CLI.Model
             sb.AppendLine("Prezime: " + prezime);
             sb.AppendLine("Ime: " + ime);
             sb.AppendLine("Datum rođenja: " + datumRodjenja.ToString("dd.MM.yyyy"));
-            sb.AppendLine("Adresa stanovanja: " + AdresaStanovanja);
+            sb.AppendLine("Adresa stanovanja: " + adresaStanovanja);
             sb.AppendLine("Kontakt telefon: " + kontaktTelefon);
             sb.AppendLine("Email adresa: " + emailAdresa);
             sb.AppendLine("Broj indeksa: " + brojIndeksa);

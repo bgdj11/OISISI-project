@@ -16,6 +16,8 @@ namespace CLI.Model
 {
     class Student : ISerializable
     {
+
+        public int idStudent {  get; set; }
         public string prezime { get; set; }
         public string ime { get; set; }
         public DateTime datumRodjenja { get; set; }
@@ -69,6 +71,36 @@ namespace CLI.Model
         public void FromCSV(string[] values)
         {
 
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("ID studenta: " + idStudent);
+            sb.AppendLine("Prezime: " + prezime);
+            sb.AppendLine("Ime: " + ime);
+            sb.AppendLine("Datum rođenja: " + datumRodjenja.ToString("dd.MM.yyyy"));
+            sb.AppendLine("Adresa stanovanja: " + AdresaStanovanja);
+            sb.AppendLine("Kontakt telefon: " + kontaktTelefon);
+            sb.AppendLine("Email adresa: " + emailAdresa);
+            sb.AppendLine("Broj indeksa: " + brojIndeksa);
+            sb.AppendLine("Trenutna godina studija: " + trenutnaGodinaStudija);
+            sb.AppendLine("Status: " + status);
+            sb.AppendLine("Prosečna ocena: " + prosecnaOcena);
+
+            sb.AppendLine("Spisak položenih ispita:");
+            foreach (OcenaNaUpisu ocena in spisakPolozenihIspita)
+            {
+                sb.AppendLine(ocena.ToString());
+            }
+
+            sb.AppendLine("Spisak nepoloženih ispita:");
+            foreach (Predmet predmet in spisakNepolozenihIspita)
+            {
+                sb.AppendLine(predmet.ToString());
+            }
+
+            return sb.ToString();
         }
 
     }

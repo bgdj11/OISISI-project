@@ -15,6 +15,7 @@ namespace CLI.Model
 {
     class Predmet : ISerializable
     {
+        public int idPredmet { get; set; }
         public string sifraPredmeta { get; set; }
         public string nazivPredmeta { get; set; }
         public Semestar semestar { get; set; }
@@ -48,6 +49,33 @@ namespace CLI.Model
         public void FromCSV(string[] values)
         {
 
+        }
+
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("ID predmeta: " + idPredmet);
+            sb.AppendLine("Šifra predmeta: " + sifraPredmeta);
+            sb.AppendLine("Naziv predmeta: " + nazivPredmeta);
+            sb.AppendLine("Semestar: " + semestar);
+            sb.AppendLine("Godina studija: " + godinaStudija);
+            sb.AppendLine("Predmetni profesor: " + predmetniProfesor.ime + " " + predmetniProfesor.prezime);
+            sb.AppendLine("Broj ESPB bodova: " + brojESPB);
+
+            sb.AppendLine("Spisak položenih studenata:");
+            foreach (Student student in spisakPolozenihStudenata)
+            {
+                sb.AppendLine(student.ToString());
+            }
+
+            sb.AppendLine("Spisak nepoloženih studenata:");
+            foreach (Student student in spisakNepolozenihStudenata)
+            {
+                sb.AppendLine(student.ToString());
+            }
+
+            return sb.ToString();
         }
     }
 }

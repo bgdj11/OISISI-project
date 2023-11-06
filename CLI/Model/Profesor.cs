@@ -9,7 +9,7 @@ namespace CLI.Model
 {
     class Profesor : ISerializable
     {
-        public string profesorID { get; set; }
+        public int idProfesor { get; set; }
         public string prezime { get; set; }
         public string ime { get; set; }
         public DateTime datumRodjenja { get; set; }
@@ -23,7 +23,7 @@ namespace CLI.Model
         public List<Predmet> spisakPredmeta { get; set; }
 
         public Profesor(
-        string profesorID,
+        string idProfesor,
         string prezime,
         string ime,
         DateTime datumRodjenja,
@@ -34,7 +34,7 @@ namespace CLI.Model
         string zvanje,
         int godineStaza)
         {
-            profesorID = profesorID;
+            idProfesor = idProfesor;
             prezime = prezime;
             ime = ime;
             datumRodjenja = datumRodjenja;
@@ -62,5 +62,28 @@ namespace CLI.Model
             return csvValues;
         }
 
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("ID profesora: " + idProfesor);
+            sb.AppendLine("Prezime: " + prezime);
+            sb.AppendLine("Ime: " + ime);
+            sb.AppendLine("Datum rođenja: " + datumRodjenja.ToString("dd.MM.yyyy"));
+            sb.AppendLine("Adresa stanovanja: " + AdresaStanovanja);
+            sb.AppendLine("Kontakt telefon: " + kontaktTelefon);
+            sb.AppendLine("Email adresa: " + emailAdresa);
+            sb.AppendLine("Broj lične karte: " + brojLicneKarte);
+            sb.AppendLine("Zvanje: " + zvanje);
+            sb.AppendLine("Godine staža: " + godineStaza);
+
+            sb.AppendLine("Spisak predmeta:");
+            foreach (Predmet predmet in spisakPredmeta)
+            {
+                sb.AppendLine(predmet.ToString());
+            }
+
+            return sb.ToString();
+        }
     }
 }

@@ -28,7 +28,7 @@ namespace CLI.Model
 
         public Status status { get; set; }
         public double prosecnaOcena { get; set; }
-        public List<OcenaNaUpisu> SpisakPolozenihIspita { get; set; }
+        public List<OcenaNaUpisu> spisakPolozenihIspita { get; set; }
         public List<Predmet> spisakNepolozenihIspita { get; set; }
 
         public Student(

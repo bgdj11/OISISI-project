@@ -13,6 +13,8 @@ namespace CLI.Model
         public int idKatedre { get; set; }
         public int sifraKatedre { get; set; }
         public string nazivKatedre { get; set; }
+
+        public int idSefa {  get; set; }
         public Profesor sefKatedre { get; set; }
         public List<Profesor> profesoriNaKatedri { get; set; }
 
@@ -27,14 +29,20 @@ namespace CLI.Model
         {
             string[] csvValues =
             {
-
-        };
+                   idKatedre.ToString(),
+                   sifraKatedre.ToString(),
+                   nazivKatedre,
+                   idSefa.ToString()
+            };
             return csvValues;
         }
 
         public void FromCSV(string[] values)
         {
-
+            idKatedre = int.Parse(values[0]);
+            sifraKatedre = int.Parse(values[1]);
+            nazivKatedre = values[2];
+            idSefa = int.Parse(values[3]);
         }
 
         public override string ToString()

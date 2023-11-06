@@ -27,19 +27,27 @@ namespace CLI.Model
         {
             string[] csvValues =
             {
-
-        };
+                idAdrese.ToString(),
+                ulica,
+                broj.ToString(),
+                grad,
+                drzava
+            
+            };
             return csvValues;
         }
 
         public void FromCSV(string[] values)
         {
-
+            idAdrese = int.Parse(values[0]);
+            ulica = values[1];
+            broj = int.Parse(values[2]);
+            grad = values[3];
+            drzava = values[4];
         }
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("IdAdrese: ").Append(idAdrese).Append(", ");
             sb.Append("Ulica: ").Append(ulica).Append(", ");
             sb.Append("Broj: ").Append(broj).Append(", ");
             sb.Append("Grad: ").Append(grad).Append(", ");

@@ -10,38 +10,46 @@ namespace CLI.Model
     class Indeks : ISerializable
     {   
         public int idIndeksa { get; set; }
-        public string OznakaSmera { get; set; }
-        public int BrojUpisa { get; set; }  
-        public int GodinaUpisa { get; set; }
+        public string oznakaSmera { get; set; }
+        public int brojUpisa { get; set; }  
+        public int godinaUpisa { get; set; }
 
         public Indeks(string oznakaSmera, int brojUpisa, int godinaUpisa)
         {
-            OznakaSmera = oznakaSmera;
-            BrojUpisa = brojUpisa;
-            GodinaUpisa = godinaUpisa;
+            oznakaSmera = oznakaSmera;
+            brojUpisa = brojUpisa;
+            godinaUpisa = godinaUpisa;
         }
 
         public string[] ToCSV()
         {
             string[] csvValues =
             {
+                idIndeksa.ToString(),
+                oznakaSmera, 
+                brojUpisa.ToString(),
+                godinaUpisa.ToString()
 
-        };
+            };
             return csvValues;
         }
 
         public void FromCSV(string[] values)
         {
+            idIndeksa = int.Parse(values[0]);
+            oznakaSmera = values[1];
+            brojUpisa = int.Parse(values[2]);
+            godinaUpisa = int.Parse(values[3]);
 
         }
 
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("IdIndeksa: ").Append(idIndeksa).Append(", ");
-            sb.Append("OznakaSmera: ").Append(OznakaSmera).Append(", ");
-            sb.Append("BrojUpisa: ").Append(BrojUpisa).Append(", ");
-            sb.Append("GodinaUpisa: ").Append(GodinaUpisa);
+            sb.Append(idIndeksa);
+            sb.Append(oznakaSmera).Append("/");
+            sb.Append(brojUpisa).Append("/");
+            sb.Append(godinaUpisa);
             return sb.ToString();
         }
 

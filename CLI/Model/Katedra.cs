@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using CLI.Serialization;
@@ -9,7 +10,7 @@ namespace CLI.Model
 {
     class Katedra : ISerializable
     {
-
+        public int idKatedre { get; set; }
         public int sifraKatedre { get; set; }
         public string nazivKatedre { get; set; }
         public Profesor sefKatedre { get; set; }
@@ -35,5 +36,37 @@ namespace CLI.Model
         {
 
         }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("IdKatedre: ").Append(idKatedre).Append(", ");
+            sb.Append("SifraKatedre: ").Append(sifraKatedre).Append(", ");
+            sb.Append("NazivKatedre: ").Append(nazivKatedre).Append(", ");
+
+            if (sefKatedre != null)
+            {
+                sb.Append("SefKatedre: ").Append(sefKatedre.ToString()).Append(", ");
+            }
+            else
+            {
+                sb.Append("SefKatedre: [null], ");
+            }
+
+            sb.Append("ProfesoriNaKatedri: [");
+            if (profesoriNaKatedri != null && profesoriNaKatedri.Count > 0)
+            {
+                foreach (var profesor in profesoriNaKatedri)
+                {
+                    sb.Append(profesor.ToString()).Append(", ");
+                }
+                
+                sb.Length -= 2;
+            }
+            sb.Append("]");
+
+            return sb.ToString();
+        }
+
     }
 }

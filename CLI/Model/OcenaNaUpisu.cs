@@ -9,6 +9,7 @@ namespace CLI.Model
 {
     class OcenaNaUpisu : ISerializable
     {
+        public int idOcene { get; set; }
         public Student student { get; set; }
         public Predmet predmet { get; set; }
         public DateTime datum { get; set; }
@@ -53,6 +54,34 @@ namespace CLI.Model
         {
 
         }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("IdOcene: ").Append(idOcene).Append(", ");
+            sb.Append("Student: ");
+            if (student != null)
+            {
+                sb.Append(student.ToString()).Append(", ");
+            }
+            else
+            {
+                sb.Append("[null], ");
+            }
+            sb.Append("Predmet: ");
+            if (predmet != null)
+            {
+                sb.Append(predmet.ToString()).Append(", ");
+            }
+            else
+            {
+                sb.Append("[null], ");
+            }
+            sb.Append("Datum: ").Append(datum);
+
+            return sb.ToString();
+        }
+
 
     }
 }

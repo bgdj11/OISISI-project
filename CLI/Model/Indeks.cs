@@ -8,7 +8,8 @@ using CLI.Serialization;
 namespace CLI.Model
 {
     class Indeks : ISerializable
-    {
+    {   
+        public int idIndeksa { get; set; }
         public string OznakaSmera { get; set; }
         public int BrojUpisa { get; set; }  
         public int GodinaUpisa { get; set; }
@@ -33,5 +34,16 @@ namespace CLI.Model
         {
 
         }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("IdIndeksa: ").Append(idIndeksa).Append(", ");
+            sb.Append("OznakaSmera: ").Append(OznakaSmera).Append(", ");
+            sb.Append("BrojUpisa: ").Append(BrojUpisa).Append(", ");
+            sb.Append("GodinaUpisa: ").Append(GodinaUpisa);
+            return sb.ToString();
+        }
+
     }
 }

@@ -9,7 +9,7 @@ namespace CLI.Model
 {
     class Adresa : ISerializable
     {
-
+        public int idAdrese { get; set;}
         public string ulica {get;set;}
         public int broj {get;set;} 
         public string grad {get;set;}  
@@ -36,6 +36,18 @@ namespace CLI.Model
         {
 
         }
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("IdAdrese: ").Append(idAdrese).Append(", ");
+            sb.Append("Ulica: ").Append(ulica).Append(", ");
+            sb.Append("Broj: ").Append(broj).Append(", ");
+            sb.Append("Grad: ").Append(grad).Append(", ");
+            sb.Append("Drzava: ").Append(drzava);
+            return sb.ToString();
+        }
+
+
 
     }
 }

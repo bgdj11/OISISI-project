@@ -10,9 +10,11 @@ namespace CLI.Model
     class OcenaNaUpisu : ISerializable
     {
         public int idOcene { get; set; }
+        public int idStudenta {  get; set; }
         public Student student { get; set; }
+        public int idPredmeta { get; set; }
         public Predmet predmet { get; set; }
-        public DateTime datum { get; set; }
+        public DateOnly datum { get; set; }
 
         private int ocena;
 
@@ -32,7 +34,7 @@ namespace CLI.Model
                 }
             }
         }
-        public OcenaNaUpisu(Student student, Predmet predmet, DateTime datum, int ocena, int oc)
+        public OcenaNaUpisu(Student student, Predmet predmet, DateOnly datum, int ocena, int oc)
         {
             this.student = student;
             this.predmet = predmet;
@@ -45,20 +47,28 @@ namespace CLI.Model
         {
             string[] csvValues =
             {
-
-        };
+                idOcene.ToString(),
+                ocena.ToString(),
+                idStudenta.ToString(),
+                idPredmeta.ToString(),
+                datum.ToString()
+            };
             return csvValues;
         }
 
         public void FromCSV(string[] values)
         {
-
+            idOcene = int.Parse(values[0]);
+            ocena = int.Parse(values[1]);
+            idStudenta = int.Parse(values[2]);
+            idPredmeta = int.Parse(values[3]);
+            datum = DateOnly.Parse(values[4]);
         }
 
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("IdOcene: ").Append(idOcene).Append(", ");
+            sb.Append("Ocena: ").Append(ocena.ToString()).Append(", ");
             sb.Append("Student: ");
             if (student != null)
             {

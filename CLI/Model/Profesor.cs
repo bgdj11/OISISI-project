@@ -30,7 +30,6 @@ namespace CLI.Model
         }
 
         public Profesor(
-        string idProfesor,
         string prezime,
         string ime,
         DateOnly datumRodjenja,
@@ -41,16 +40,15 @@ namespace CLI.Model
         string zvanje,
         int godineStaza)
         {
-            idProfesor = idProfesor;
-            prezime = prezime;
-            ime = ime;
-            datumRodjenja = datumRodjenja;
-            idAdrese = id;
-            kontaktTelefon = kontaktTelefon;
-            emailAdresa = emailAdresa;
-            brojLicneKarte = brojLicneKarte;
-            zvanje = zvanje;
-            godineStaza = godineStaza;
+            this.prezime = prezime;
+            this.ime = ime;
+            this.datumRodjenja = datumRodjenja;
+            this.idAdrese = id;
+            this.kontaktTelefon = kontaktTelefon;
+            this.emailAdresa = emailAdresa;
+            this.brojLicneKarte = brojLicneKarte;
+            this.zvanje = zvanje;
+            this.godineStaza = godineStaza;
             spisakPredmeta = new List<Predmet>();
         }
 

@@ -34,12 +34,12 @@ namespace CLI.Model
                 }
             }
         }
+        public OcenaNaUpisu() { }
         public OcenaNaUpisu(Student student, Predmet predmet, DateOnly datum, int ocena, int oc)
         {
             this.student = student;
             this.predmet = predmet;
             this.datum = datum;
-            Ocena = oc;
             Ocena = oc;
         }
 

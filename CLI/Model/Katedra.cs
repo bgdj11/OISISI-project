@@ -18,6 +18,8 @@ namespace CLI.Model
         public Profesor sefKatedre { get; set; }
         public List<Profesor> profesoriNaKatedri { get; set; }
 
+        public Katedra() { }
+
         public Katedra(int sifra, string naziv, int id)
         {
             sifraKatedre = sifra;

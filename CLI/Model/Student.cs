@@ -54,16 +54,16 @@ namespace CLI.Model
         Status status,
         double prosecnaOcena)
         {
-            prezime = prezime;
-            ime = ime;
-            datumRodjenja = datumRodjenja;
-            adresaStanovanja = adresaStanovanja;
-            kontaktTelefon = kontaktTelefon;
-            emailAdresa = emailAdresa;
-            brojIndeksa = brojIndeksa;
-            trenutnaGodinaStudija = trenutnaGodinaStudija;
-            status = status;
-            prosecnaOcena = prosecnaOcena;
+            this.prezime = prezime;
+            this.ime = ime;
+            this.datumRodjenja = datumRodjenja;
+            this.adresaStanovanja = adresaStanovanja;
+            this.kontaktTelefon = kontaktTelefon;
+            this.emailAdresa = emailAdresa;
+            this.brojIndeksa = brojIndeksa;
+            this.trenutnaGodinaStudija = trenutnaGodinaStudija;
+            this.status = status;
+            this.prosecnaOcena = prosecnaOcena;
             spisakPolozenihIspita = new List<OcenaNaUpisu>();
             spisakNepolozenihIspita = new List<Predmet>();
         }

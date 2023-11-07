@@ -18,11 +18,11 @@ namespace CLI.Model
         public Profesor sefKatedre { get; set; }
         public List<Profesor> profesoriNaKatedri { get; set; }
 
-        public Katedra(int sifra, string naziv, Profesor sef)
+        public Katedra(int sifra, string naziv, int id)
         {
             sifraKatedre = sifra;
             nazivKatedre = naziv;
-            sefKatedre = sef;
+            idSefa = id;
             profesoriNaKatedri = new List<Profesor>();
         }       
 ]       public string[] ToCSV()

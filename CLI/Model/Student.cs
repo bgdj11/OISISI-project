@@ -18,7 +18,7 @@ namespace CLI.Model
     class Student : ISerializable
     {
 
-        public int idStudent {  get; set; }
+        public int idStudent { get; set; }
         public string prezime { get; set; }
         public string ime { get; set; }
         public DateOnly datumRodjenja { get; set; }

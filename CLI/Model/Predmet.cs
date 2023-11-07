@@ -27,6 +27,11 @@ namespace CLI.Model
         public List<Student> spisakPolozenihStudenata { get; set; }
         public List<Student> spisakNepolozenihStudenata { get; set; }
 
+        public Predmet()
+        {
+
+        }
+
         public Predmet(string sifra, string naziv, Semestar sem, int godina, Profesor profesor, int espb)
         {
             sifraPredmeta = sifra;

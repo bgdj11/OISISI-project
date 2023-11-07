@@ -24,6 +24,11 @@ namespace CLI.Model
         public int godineStaza { get; set; }
         public List<Predmet> spisakPredmeta { get; set; }
 
+        public Profesor()
+        {
+
+        }
+
         public Profesor(
         string idProfesor,
         string prezime,
@@ -40,7 +45,7 @@ namespace CLI.Model
             prezime = prezime;
             ime = ime;
             datumRodjenja = datumRodjenja;
-            idAdrese = id; ;
+            idAdrese = id;
             kontaktTelefon = kontaktTelefon;
             emailAdresa = emailAdresa;
             brojLicneKarte = brojLicneKarte;

@@ -36,6 +36,12 @@ namespace CLI.Model
         public List<OcenaNaUpisu> spisakPolozenihIspita { get; set; }
         public List<Predmet> spisakNepolozenihIspita { get; set; }
 
+
+        public Student()
+        {
+
+        }
+
         public Student(
         string prezime,
         string ime,

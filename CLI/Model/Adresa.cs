@@ -15,6 +15,7 @@ namespace CLI.Model
         public string grad {get;set;}  
         public string drzava {get;set;}
 
+        public Adresa() { }
         public Adresa(string ulica, int broj, string grad, string drzava)
         {
             this.ulica = ulica;

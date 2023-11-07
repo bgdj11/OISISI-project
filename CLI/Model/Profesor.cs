@@ -29,7 +29,7 @@ namespace CLI.Model
         string prezime,
         string ime,
         DateOnly datumRodjenja,
-        Adresa adresaStanovanja,
+        int id,
         string kontaktTelefon,
         string emailAdresa,
         string brojLicneKarte,
@@ -40,7 +40,7 @@ namespace CLI.Model
             prezime = prezime;
             ime = ime;
             datumRodjenja = datumRodjenja;
-            adresaStanovanja = adresaStanovanja;
+            idAdrese = id; ;
             kontaktTelefon = kontaktTelefon;
             emailAdresa = emailAdresa;
             brojLicneKarte = brojLicneKarte;

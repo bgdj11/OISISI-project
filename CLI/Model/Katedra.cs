@@ -25,7 +25,7 @@ namespace CLI.Model
             idSefa = id;
             profesoriNaKatedri = new List<Profesor>();
         }       
-]       public string[] ToCSV()
+        public string[] ToCSV()
         {
             string[] csvValues =
             {

@@ -14,11 +14,13 @@ namespace CLI.Model
         public int brojUpisa { get; set; }  
         public int godinaUpisa { get; set; }
 
+        public Indeks() { }
+
         public Indeks(string oznakaSmera, int brojUpisa, int godinaUpisa)
         {
-            oznakaSmera = oznakaSmera;
-            brojUpisa = brojUpisa;
-            godinaUpisa = godinaUpisa;
+            this.oznakaSmera = oznakaSmera;
+            this.brojUpisa = brojUpisa;
+            this.godinaUpisa = godinaUpisa;
         }
 
         public string[] ToCSV()

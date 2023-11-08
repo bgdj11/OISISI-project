@@ -78,7 +78,7 @@ class StudentDAO
             return _students;
         }
 
-        public List<Student> GetAllVehicles(int page, int pageSize, string sortCriteria, SortDirection sortDirection)
+        public List<Student> GetAllStudents(int page, int pageSize, string sortCriteria, SortDirection sortDirection)
         {
             IEnumerable<Student> students = _students;
 

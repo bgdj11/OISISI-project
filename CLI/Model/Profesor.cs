@@ -23,6 +23,8 @@ namespace CLI.Model
         public string zvanje { get; set; }
         public int godineStaza { get; set; }
         public List<Predmet> spisakPredmeta { get; set; }
+        
+        public List<int> idPredmeta { get; set; }
 
         public Profesor()
         {
@@ -38,7 +40,8 @@ namespace CLI.Model
         string emailAdresa,
         string brojLicneKarte,
         string zvanje,
-        int godineStaza)
+        int godineStaza,
+        List<int> idPredmeta)
         {
             this.prezime = prezime;
             this.ime = ime;
@@ -49,7 +52,7 @@ namespace CLI.Model
             this.brojLicneKarte = brojLicneKarte;
             this.zvanje = zvanje;
             this.godineStaza = godineStaza;
-            spisakPredmeta = new List<Predmet>();
+            this.idPredmeta = idPredmeta;
         }
 
 
@@ -104,9 +107,9 @@ namespace CLI.Model
             sb.AppendLine("Godine staža: " + godineStaza);
 
             sb.AppendLine("Spisak predmeta:");
-            foreach (Predmet predmet in spisakPredmeta)
+            foreach (int predmet in idPredmeta)
             {
-                sb.AppendLine(predmet.ToString());
+                sb.AppendLine(predmet.ToString() + " ");
             }
 
             return sb.ToString();

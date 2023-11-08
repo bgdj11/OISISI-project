@@ -68,12 +68,12 @@ namespace CLI.DAO
             return _profesori.Find(p => p.idProfesor == idProfesor);
         }
 
-        public List<Profesor> GetAllProfesori()
+        public List<Profesor> GetAllProfesors()
         {
             return _profesori;
         }
 
-        public List<Profesor> GetAllProfesori(int page, int pageSize, string sortCriteria, SortDirection sortDirection)
+        public List<Profesor> GetAllProfesors(int page, int pageSize, string sortCriteria, SortDirection sortDirection)
         {
             IEnumerable<Profesor> profesori = _profesori;
 

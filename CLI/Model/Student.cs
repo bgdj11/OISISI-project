@@ -34,7 +34,11 @@ namespace CLI.Model
         public Status status { get; set; }
         public double prosecnaOcena { get; set; }
         public List<OcenaNaUpisu> spisakPolozenihIspita { get; set; }
+
+        public List<int> idPolozenihIspita { get; set; }
         public List<Predmet> spisakNepolozenihIspita { get; set; }
+
+        public List<int> idNepolozenihIspita { get; set; }
 
 
         public Student()
@@ -46,26 +50,28 @@ namespace CLI.Model
         string prezime,
         string ime,
         DateOnly datumRodjenja,
-        Adresa adresaStanovanja,
+        int adresa,
         string kontaktTelefon,
         string emailAdresa,
         string brojIndeksa,
         int trenutnaGodinaStudija,
         Status status,
-        double prosecnaOcena)
+        double prosecnaOcena,
+        List<int> polozeni,
+        List<int> nepolozeni)
         {
             this.prezime = prezime;
             this.ime = ime;
             this.datumRodjenja = datumRodjenja;
-            this.adresaStanovanja = adresaStanovanja;
+            this.idAdrese = adresa;
             this.kontaktTelefon = kontaktTelefon;
             this.emailAdresa = emailAdresa;
             this.brojIndeksa = brojIndeksa;
             this.trenutnaGodinaStudija = trenutnaGodinaStudija;
             this.status = status;
             this.prosecnaOcena = prosecnaOcena;
-            spisakPolozenihIspita = new List<OcenaNaUpisu>();
-            spisakNepolozenihIspita = new List<Predmet>();
+            this.idPolozenihIspita = polozeni;
+            this.idNepolozenihIspita = nepolozeni;
         }
 
         public string[] ToCSV()

@@ -69,24 +69,8 @@ namespace CLI.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("Ocena: ").Append(ocena.ToString()).Append(", ");
-            sb.Append("Student: ");
-            if (student != null)
-            {
-                sb.Append(student.ToString()).Append(", ");
-            }
-            else
-            {
-                sb.Append("[null], ");
-            }
-            sb.Append("Predmet: ");
-            if (predmet != null)
-            {
-                sb.Append(predmet.ToString()).Append(", ");
-            }
-            else
-            {
-                sb.Append("[null], ");
-            }
+            sb.Append("IdStudenta: ").Append(idStudenta.ToString()).Append(", ");
+            sb.Append("IdPredmeta: ").Append(idPredmeta.ToString()).Append(", ");  
             sb.Append("Datum: ").Append(datum);
 
             return sb.ToString();

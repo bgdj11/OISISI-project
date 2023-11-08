@@ -1,2 +1,15 @@
 ﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+using CLI.Console;
+using CLI.Model;
+using CLI.DAO;
+using CLI.Storage;
+using CLI.Serialization;
+
+class Program
+{
+    static void Main()
+    {
+        MainMenu menu = new MainMenu();
+        menu.RunMenu();
+    }
+}

@@ -36,7 +36,7 @@ class StudentConsoleView
             System.Console.WriteLine("Unesite datum rođenja (yyyy-MM-dd): ");
             if (DateOnly.TryParse(System.Console.ReadLine(), out DateOnly datumRodjenja))
             {
-                throw new Exception("Datum nije validan");
+                throw new ArgumentException("Datum nije validan");
             }
 
             System.Console.WriteLine("Unesite ID adrese stanovanja: ");

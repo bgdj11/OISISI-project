@@ -59,7 +59,13 @@ namespace CLI.DAO
             return _katedre.Find(k => k.idKatedre == id);
         }
 
-        public List<Katedra> GetAllKatedre(int page, int pageSize, string sortCriteria, SortDirection sortDirection)
+        public List<Katedra> GetAllKatedra() 
+        {
+            return _katedre;
+        }
+
+
+        public List<Katedra> GetAllKatedra(int page, int pageSize, string sortCriteria, SortDirection sortDirection)
         {
             IEnumerable<Katedra> katedre = _katedre;
 

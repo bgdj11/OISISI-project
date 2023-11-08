@@ -60,7 +60,12 @@ namespace CLI.DAO
             return _ocene.Find(o => o.idOcene == id);
         }
 
-        public List<OcenaNaUpisu> GetAllOcene(int page, int pageSize, string sortCriteria, SortDirection sortDirection)
+        public List<OcenaNaUpisu> GetAllOcena()
+        {
+            return _ocene;
+        }
+
+        public List<OcenaNaUpisu> GetAllOcena(int page, int pageSize, string sortCriteria, SortDirection sortDirection)
         {
             IEnumerable<OcenaNaUpisu> ocene = _ocene;
 

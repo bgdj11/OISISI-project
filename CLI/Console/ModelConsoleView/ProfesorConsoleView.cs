@@ -36,7 +36,7 @@ class ProfesorConsoleView
             System.Console.WriteLine("Unesite datum rođenja (yyyy-MM-dd): ");
             if (DateOnly.TryParse(System.Console.ReadLine(), out DateOnly datumRodjenja))
             {
-                // Ako unos nije validan, postavite datumRodjenja na default(DateTime) ili obradite grešku na odgovarajući način
+                throw new ArgumentException("Datum nije validan");
             }
 
             System.Console.WriteLine("Unesite ID adrese: ");

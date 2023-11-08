@@ -59,7 +59,12 @@ namespace CLI.DAO
             return _indeksi.Find(i => i.idIndeksa == id);
         }
 
-        public List<Indeks> GetAllIndeksi(int page, int pageSize, string sortCriteria, SortDirection sortDirection)
+        public List<Indeks> GetAllIndeks()
+        {
+            return _indeksi;
+        }
+
+        public List<Indeks> GetAllIndeks(int page, int pageSize, string sortCriteria, SortDirection sortDirection)
         {
             IEnumerable<Indeks> indeksi = _indeksi;
 

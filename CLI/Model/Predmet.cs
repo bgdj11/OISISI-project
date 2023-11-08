@@ -32,13 +32,13 @@ namespace CLI.Model
 
         }
 
-        public Predmet(string sifra, string naziv, Semestar sem, int godina, Profesor profesor, int espb)
+        public Predmet(string sifra, string naziv, Semestar sem, int godina, int idProfesora, int espb)
         {
             sifraPredmeta = sifra;
             nazivPredmeta = naziv;
             semestar = sem;
             godinaStudija = godina;
-            predmetniProfesor = profesor;
+            idPredmetnogProfesora = idProfesora;
             brojESPB = espb;
             spisakPolozenihStudenata = new List<Student>();
             spisakNepolozenihStudenata = new List<Student>();

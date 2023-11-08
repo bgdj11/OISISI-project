@@ -59,6 +59,11 @@ namespace CLI.DAO
             return _adrese.Find(a => a.idAdrese == id);
         }
 
+        public List<Adresa> GetAllAdresa()
+        {
+            return _adrese;
+        }
+
         public List<Adresa> GetAllAdresa(int page, int pageSize, string sortCriteria, SortDirection sortDirection)
         {
             IEnumerable<Adresa> adrese = _adrese;

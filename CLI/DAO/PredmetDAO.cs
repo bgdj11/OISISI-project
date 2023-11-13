@@ -60,7 +60,7 @@ namespace CLI.DAO
             return predmet;
         }
 
-        private Predmet? GetPredmetById(int idPredmet)
+        public Predmet? GetPredmetById(int idPredmet)
         {
             return _predmeti.Find(p => p.idPredmet == idPredmet);
         }

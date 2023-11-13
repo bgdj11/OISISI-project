@@ -18,6 +18,11 @@ namespace CLI.Console
 
         public void RunMenu()
         {
+
+            // ovde
+            // StudentDAO student = new StudentDAO();
+            // StudentSubjectDAO studen_Subject;
+
             while (true)
             {
                 ShowMenu();

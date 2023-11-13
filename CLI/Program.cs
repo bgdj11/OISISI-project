@@ -5,6 +5,7 @@ using CLI.DAO;
 using CLI.Storage;
 using CLI.Serialization;
 
+// bojana.zoranovic@uns.ac.rs  
 class Program
 {
     static void Main()

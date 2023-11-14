@@ -25,7 +25,7 @@ namespace CLI.Console
             }
         }
 
-        private Indeks InputIndeks()
+        public Indeks InputIndeks()
         {
             System.Console.WriteLine("Unesite oznaku smera: ");
             string oznakaSmera = System.Console.ReadLine() ?? string.Empty;

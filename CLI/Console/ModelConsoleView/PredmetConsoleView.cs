@@ -17,11 +17,13 @@ namespace CLI.Console
         private void PrintPredmeti(List<Predmet> predmeti)
         {
             System.Console.WriteLine("Predmeti: ");
-            string header = $"ID {"",6} | SifraPredmeta {"",12} | NazivPredmeta {"",18} | Semestar {"",12} | GodinaStudija {"",15} | PredmetniProfesor {"",20} | BrojESPB {"",8}";
+          /*  string header = $"ID {"",6} | SifraPredmeta {"",12} | NazivPredmeta {"",18} | Semestar {"",12} | GodinaStudija {"",15} | PredmetniProfesor {"",20} | BrojESPB {"",8}";
             System.Console.WriteLine(header);
+            */
+
             foreach (Predmet predmet in predmeti)
             {
-                System.Console.WriteLine(predmet);
+                System.Console.WriteLine(predmet.ToString());
             }
         }
 

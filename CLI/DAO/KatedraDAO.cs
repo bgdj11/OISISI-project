@@ -13,7 +13,7 @@ namespace CLI.DAO
 
         public KatedraDAO()
         {
-            _storage = new Storage<Katedra>("katedre.txt");
+            _storage = new Storage<Katedra>("katedre.csv");
             _katedre = new List<Katedra>();
         }
 

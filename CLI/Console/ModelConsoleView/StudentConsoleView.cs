@@ -14,14 +14,16 @@ class StudentConsoleView
 
         private void PrintStudents(List<Student> students)
         {
-            System.Console.WriteLine("Students: ");
+           /* System.Console.WriteLine("Students: ");
             string header = $"ID {"",6} |  Prezime {"",21} | Ime {"",10} | Datum rodjenja{"",12}" +
                             $"| Kontakt telefon {"",12} | Email adresa {"",20} Broj Indeksa {"",10}" +
                             $"| Trenutna godina studija {"",4} | Status {"",10} | Prosecna ocena {"",5}";
             System.Console.WriteLine(header);
+            */
+
             foreach (Student student in students)
             {
-                System.Console.WriteLine(student);
+                System.Console.WriteLine(student.ToString());
             }
         }
 
@@ -36,11 +38,11 @@ class StudentConsoleView
             System.Console.WriteLine("Unesite datum rođenja (yyyy-MM-dd): ");
             if (DateOnly.TryParse(System.Console.ReadLine(), out DateOnly datumRodjenja))
             {
-                throw new ArgumentException("Datum nije validan");
+                DateOnly datum = datumRodjenja; 
             }
 
-            System.Console.WriteLine("Unesite ID adrese stanovanja: ");
-            int idAdrese = ConsoleViewUtils.SafeInputInt();
+           // System.Console.WriteLine("Unesite ID adrese stanovanja: ");
+            // int idAdrese = ConsoleViewUtils.SafeInputInt();
 
             System.Console.WriteLine("Unesite kontakt telefon: ");
             string kontaktTelefon = System.Console.ReadLine() ?? string.Empty;
@@ -59,14 +61,29 @@ class StudentConsoleView
             {
             }
 
+            AdresaDAO _adresa = new AdresaDAO();
+            AdresaConsoleView _adresaView = new AdresaConsoleView(_adresa);
+            Adresa a = _adresaView.InputAdresa();
+            _adresa.AddAdresa(a);
+
+            int idAdrese = a.idAdrese;
+
+
+            IndeksDAO _indeks = new IndeksDAO();
+            IndeksConsoleView _indeksConsoleView = new IndeksConsoleView(_indeks);
+            Indeks i = _indeksConsoleView.InputIndeks();
+            _indeks.AddIndeks(i);
+
+            int idIndeksa = i.idIndeksa;
+
             System.Console.WriteLine("Unesite prosečnu ocenu: ");
             if (double.TryParse(System.Console.ReadLine(), out double prosecnaOcena))
             {
             
             }
 
-            List<int> polozeni = new List<int>();
-            List<int> nepolozeni = new List<int>();
+            //List<int> polozeni = new List<int>();
+            //List<int> nepolozeni = new List<int>();
 
             /*
             System.Console.WriteLine("Unesite ID-ove položenih predmeta (razdvajati sa razmakom ");
@@ -81,7 +98,7 @@ class StudentConsoleView
 
             //  NULL MOGUCE VREDNOSTI PAZI
 
-            System.Console.WriteLine("Unesite ID-ove nepoloženih predmeta (razdvajati sa razmakom): ");
+          /*  System.Console.WriteLine("Unesite ID-ove nepoloženih predmeta (razdvajati sa razmakom): ");
             string[]? nepolozeniIds = System.Console.ReadLine()?.Split(' ');
             foreach (string id in nepolozeniIds)
             {
@@ -90,8 +107,9 @@ class StudentConsoleView
                     nepolozeni.Add(nepolozeniId);
                 }
             }
+          */
 
-            return new Student(prezime, ime, datumRodjenja, idAdrese, kontaktTelefon, emailAdresa, brojIndeksa, trenutnaGodinaStudija, status, prosecnaOcena, polozeni, nepolozeni);
+            return new Student(prezime, ime, datumRodjenja, idAdrese, kontaktTelefon, emailAdresa, brojIndeksa, trenutnaGodinaStudija, status, prosecnaOcena, a, idIndeksa, i);
         }
 
         private int InputStudentId()

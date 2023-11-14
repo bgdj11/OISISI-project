@@ -23,12 +23,13 @@ namespace CLI.Model
         public string zvanje { get; set; }
         public int godineStaza { get; set; }
         public List<Predmet> spisakPredmeta { get; set; }
-        
-        public List<int> idPredmeta { get; set; }
+
+        public int IdKatedre { get; set; }
 
         public Profesor()
         {
-
+            adresaStanovanja = new Adresa();
+            spisakPredmeta = new List<Predmet>();
         }
 
         public Profesor(
@@ -41,7 +42,8 @@ namespace CLI.Model
         string brojLicneKarte,
         string zvanje,
         int godineStaza,
-        List<int> idPredmeta)
+        int IdKatedre,
+        Adresa adresa)
         {
             this.prezime = prezime;
             this.ime = ime;
@@ -52,7 +54,9 @@ namespace CLI.Model
             this.brojLicneKarte = brojLicneKarte;
             this.zvanje = zvanje;
             this.godineStaza = godineStaza;
-            this.idPredmeta = idPredmeta;
+            spisakPredmeta = new List<Predmet>();
+            adresaStanovanja = adresa;
+            this.IdKatedre = IdKatedre;
         }
 
 
@@ -69,7 +73,8 @@ namespace CLI.Model
                 emailAdresa,
                 brojLicneKarte,
                 zvanje,
-                godineStaza.ToString()
+                godineStaza.ToString(),
+                IdKatedre.ToString()
         };
             return csvValues;
         }
@@ -87,6 +92,7 @@ namespace CLI.Model
             brojLicneKarte = values[7];
             zvanje = values[8];
             godineStaza = int.Parse(values[9]);
+            IdKatedre = int.Parse(values[10]);
 
         }
 
@@ -106,10 +112,11 @@ namespace CLI.Model
             sb.AppendLine("Zvanje: " + zvanje);
             sb.AppendLine("Godine staža: " + godineStaza);
 
-            sb.AppendLine("Spisak predmeta:");
-            foreach (int predmet in idPredmeta)
+            sb.Append("\n Predmeti na kojima predaje: \n");
+
+            foreach (Predmet p in spisakPredmeta)
             {
-                sb.AppendLine(predmet.ToString() + " ");
+                sb.Append(p.ToString() + "\n");
             }
 
             return sb.ToString();

@@ -25,7 +25,7 @@ namespace CLI.Console
             }
         }
 
-        private Adresa InputAdresa()
+        public Adresa InputAdresa()
         {
             System.Console.WriteLine("Unesite ulicu: ");
             string ulica = System.Console.ReadLine() ?? string.Empty;

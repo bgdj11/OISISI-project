@@ -23,6 +23,10 @@ namespace CLI.Model
         public string ime { get; set; }
         public DateOnly datumRodjenja { get; set; }
 
+        public int idIndeksa {  get; set; }
+
+        public Indeks indeks { get; set; }
+
         public Adresa adresaStanovanja { get; set; }
 
         public int idAdrese { get; set; }
@@ -33,17 +37,20 @@ namespace CLI.Model
 
         public Status status { get; set; }
         public double prosecnaOcena { get; set; }
-        public List<OcenaNaUpisu> spisakPolozenihIspita { get; set; }
+        public List<OcenaNaUpisu> PolozeniIspiti { get; set; }
 
-        public List<int> idPolozenihIspita { get; set; }
-        public List<Predmet> spisakNepolozenihIspita { get; set; }
+        // public List<int> idPolozenihIspita { get; set; }
+        public List<Predmet> NepolozeniIspiti { get; set; }
 
-        public List<int> idNepolozenihIspita { get; set; }
+        // public List<int> idNepolozenihIspita { get; set; }
 
 
         public Student()
         {
-
+            adresaStanovanja = new Adresa();
+            indeks = new Indeks();
+            PolozeniIspiti = new List<OcenaNaUpisu>();
+            NepolozeniIspiti = new List<Predmet>();
         }
 
         public Student(
@@ -57,21 +64,25 @@ namespace CLI.Model
         int trenutnaGodinaStudija,
         Status status,
         double prosecnaOcena,
-        List<int> polozeni,
-        List<int> nepolozeni)
+        Adresa a,
+        int idInd,
+        Indeks ind)
         {
             this.prezime = prezime;
             this.ime = ime;
             this.datumRodjenja = datumRodjenja;
-            this.idAdrese = adresa;
+            adresaStanovanja = a;
             this.kontaktTelefon = kontaktTelefon;
             this.emailAdresa = emailAdresa;
             this.brojIndeksa = brojIndeksa;
             this.trenutnaGodinaStudija = trenutnaGodinaStudija;
             this.status = status;
             this.prosecnaOcena = prosecnaOcena;
-            this.idPolozenihIspita = polozeni;
-            this.idNepolozenihIspita = nepolozeni;
+            idAdrese = adresa;
+            idIndeksa = idInd;
+            indeks = ind;
+            PolozeniIspiti = new List<OcenaNaUpisu>();
+            NepolozeniIspiti = new List<Predmet>();
         }
 
         public string[] ToCSV()
@@ -125,13 +136,13 @@ namespace CLI.Model
             sb.AppendLine("Prosečna ocena: " + prosecnaOcena);
 
             sb.AppendLine("Spisak položenih ispita:");
-            foreach (OcenaNaUpisu ocena in spisakPolozenihIspita)
+            foreach (OcenaNaUpisu ocena in PolozeniIspiti)
             {
                 sb.AppendLine(ocena.ToString());
             }
 
             sb.AppendLine("Spisak nepoloženih ispita:");
-            foreach (Predmet predmet in spisakNepolozenihIspita)
+            foreach (Predmet predmet in NepolozeniIspiti)
             {
                 sb.AppendLine(predmet.ToString());
             }

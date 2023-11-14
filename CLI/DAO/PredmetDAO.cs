@@ -16,7 +16,7 @@ namespace CLI.DAO
 
         public PredmetDAO()
         {
-            _storage = new Storage<Predmet>("predmeti.txt");
+            _storage = new Storage<Predmet>("predmeti.csv");
             _predmeti = _storage.Load();
         }
 
@@ -26,10 +26,48 @@ namespace CLI.DAO
             return _predmeti[^1].idPredmet + 1;
         }
 
+        private void MakePredmet()
+        {
+            Storage<Student> _studentStorage = new Storage<Student>("studenti.csv");
+            List<Student> _studenti = _studentStorage.Load();
+
+            Storage<Profesor> _profesorStorage = new Storage<Profesor>("profesori.csv");
+            List<Profesor> _profesori = _profesorStorage.Load();
+
+
+            foreach (Predmet p in _predmeti)
+            {
+                foreach (Student s in _studenti)
+                {
+                    if (s.NepolozeniIspiti.Find(n => n.idPredmet == p.idPredmet) != null)
+                    {
+                        p.spisakNepolozenihStudenata.Add(s);
+                    }
+
+                    if (s.PolozeniIspiti.Find(n => n.idPredmeta == p.idPredmet) != null)
+                    {
+                        p.spisakPolozenihStudenata.Add(s);
+                    }
+                }
+
+                foreach (Profesor pr in _profesori)
+                {
+                    if (pr.idProfesor == p.idProfesora)
+                    {
+                        p.profesor = pr;
+                    }
+                }
+            }
+
+            _storage.Save(_predmeti);
+            _profesorStorage.Save(_profesori);
+        }
+
         public Predmet AddPredmet(Predmet predmet)
         {
             predmet.idPredmet = GenerateId();
             _predmeti.Add(predmet);
+            MakePredmet();
             _storage.Save(_predmeti);
             return predmet;
         }
@@ -43,8 +81,10 @@ namespace CLI.DAO
             oldPredmet.nazivPredmeta = predmet.nazivPredmeta;
             oldPredmet.semestar = predmet.semestar;
             oldPredmet.godinaStudija = predmet.godinaStudija;
-            oldPredmet.idPredmetnogProfesora = predmet.idPredmetnogProfesora;
+            oldPredmet.idProfesora = predmet.idProfesora;
             oldPredmet.brojESPB = predmet.brojESPB;
+
+            MakePredmet();
 
             _storage.Save(_predmeti);
             return oldPredmet;
@@ -92,7 +132,7 @@ namespace CLI.DAO
                     predmeti = _predmeti.OrderBy(p => p.godinaStudija);
                     break;
                 case "IdPredmetnogProfesora":
-                    predmeti = _predmeti.OrderBy(p => p.idPredmetnogProfesora);
+                    predmeti = _predmeti.OrderBy(p => p.idProfesora);
                     break;
                 case "BrojESPB":
                     predmeti = _predmeti.OrderBy(p => p.brojESPB);

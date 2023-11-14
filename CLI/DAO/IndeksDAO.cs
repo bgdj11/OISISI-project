@@ -13,7 +13,7 @@ namespace CLI.DAO
 
         public IndeksDAO()
         {
-            _storage = new Storage<Indeks>("indeksi.txt");
+            _storage = new Storage<Indeks>("indeksi.csv");
             _indeksi = new List<Indeks>();
         }
 

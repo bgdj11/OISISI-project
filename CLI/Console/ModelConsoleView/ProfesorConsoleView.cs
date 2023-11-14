@@ -1,5 +1,6 @@
 ﻿using CLI.DAO;
 using CLI.Model;
+using CLI.Console;
 
 namespace CLI.Console
 {
@@ -15,13 +16,15 @@ class ProfesorConsoleView
         private void PrintProfessors(List<Profesor> profesors)
         {
             System.Console.WriteLine("Profesori: ");
-            string header = $"ID {"",6} |  Prezime {"",21} | Ime {"",10} | Datum rodjenja{"",12}" +
+
+            /* string header = $"ID {"",6} |  Prezime {"",21} | Ime {"",10} | Datum rodjenja{"",12}" +
                             $"| Kontakt telefon {"",12} | Email adresa {"",20} Broj Lične Karte {"",10}" +
                             $"| Zvanje {"",15} | Godine Staza {"",4} | ID Predmeta";
             System.Console.WriteLine(header);
+            */
             foreach (Profesor profesor in profesors)
             {
-                System.Console.WriteLine(profesor);
+                System.Console.WriteLine(profesor.ToString());
             }
         }
 
@@ -39,8 +42,9 @@ class ProfesorConsoleView
                 throw new ArgumentException("Datum nije validan");
             }
 
-            System.Console.WriteLine("Unesite ID adrese: ");
+            /*System.Console.WriteLine("Unesite ID adrese: ");
             int idAdrese = ConsoleViewUtils.SafeInputInt();
+            */
 
             System.Console.WriteLine("Unesite kontakt telefon: ");
             string kontaktTelefon = System.Console.ReadLine() ?? string.Empty;
@@ -57,7 +61,17 @@ class ProfesorConsoleView
             System.Console.WriteLine("Unesite godine staza: ");
             int godineStaza = ConsoleViewUtils.SafeInputInt();
 
-            List<int> idPredmeta = new List<int>();
+            System.Console.WriteLine("Unesi id katedre: ");
+            int idK = ConsoleViewUtils.SafeInputInt();
+
+            AdresaDAO _adresa = new AdresaDAO();
+            AdresaConsoleView _adresaView = new AdresaConsoleView(_adresa);
+            Adresa a = _adresaView.InputAdresa();
+            _adresa.AddAdresa(a);
+
+            int idAdrese = a.idAdrese;
+
+            /*List<int> idPredmeta = new List<int>();
             System.Console.WriteLine("Unesite ID-ove predmeta (razdvajati sa zarezom): ");
             string[] idPredmetaIds = System.Console.ReadLine()?.Split(',');
             foreach (string id in idPredmetaIds)
@@ -67,8 +81,9 @@ class ProfesorConsoleView
                     idPredmeta.Add(predmetId);
                 }
             }
+            */
 
-            return new Profesor(prezime, ime, datumRodjenja, idAdrese, kontaktTelefon, emailAdresa, brojLicneKarte, zvanje, godineStaza, idPredmeta);
+            return new Profesor(prezime, ime, datumRodjenja, idAdrese, kontaktTelefon, emailAdresa, brojLicneKarte, zvanje, godineStaza, idK, a);
         }
 
 

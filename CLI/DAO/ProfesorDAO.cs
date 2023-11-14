@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 using CLI.Model;
 using CLI.Storage;
+using CLI.Serialization;
+using CLI.DAO;
 
 namespace CLI.DAO
 {
@@ -16,7 +18,7 @@ namespace CLI.DAO
 
         public ProfesorDAO()
         {
-            _storage = new Storage<Profesor>("profesori.txt");
+            _storage = new Storage<Profesor>("profesori.csv");
             _profesori = _storage.Load();
         }
 
@@ -26,10 +28,57 @@ namespace CLI.DAO
             return _profesori[^1].idProfesor + 1;
         }
 
+        private void MakeProfesor()
+        {
+            Storage<Adresa> _adresaStorage = new Storage<Adresa>("adrese.csv");
+            List<Adresa> _adrese = _adresaStorage.Load();
+
+            Storage<Katedra> _katedreStorage = new Storage<Katedra>("katedre.csv");
+            List<Katedra> _katedre = _katedreStorage.Load();
+
+            Storage<Predmet> _predmetiStorage = new Storage<Predmet>("predmeti.csv");
+            List<Predmet> _predmeti = _predmetiStorage.Load();
+
+            // dodajemo u katedru odgovarajuceg profesora
+
+            foreach (Profesor p in _profesori)
+            {
+                if(_katedre.Find(n => n.idKatedre == p.IdKatedre) != null)
+                {
+                    _katedre.Find(n => n.idKatedre == p.IdKatedre).profesoriNaKatedri.Add(p);
+                }
+            }
+
+            // dodajemo adresu stanovanja
+
+            foreach(Profesor p in _profesori)
+            {
+                if(_adrese.Find(n => n.idAdrese == p.idAdrese) != null)
+                {
+                    p.adresaStanovanja = _adrese.Find(n => n.idAdrese == p.idAdrese);
+                }
+            }
+
+            // dodajemo predmete u listu predmeta kod profesora
+
+            foreach (Profesor p in _profesori)
+            {
+                if(_predmeti.Find(n => n.idPredmet == p.idProfesor) != null)
+                {
+                    p.spisakPredmeta.Add(_predmeti.Find(n => n.idPredmet == p.idProfesor));
+                }
+            }
+
+                _katedreStorage.Save(_katedre);
+            _storage.Save(_profesori);
+        }
+
         public Profesor AddProfesor(Profesor profesor)
         {
             profesor.idProfesor = GenerateId();
+            
             _profesori.Add(profesor);
+            MakeProfesor();
             _storage.Save(_profesori);
             return profesor;
         }
@@ -48,6 +97,8 @@ namespace CLI.DAO
             oldProfesor.brojLicneKarte = profesor.brojLicneKarte;
             oldProfesor.zvanje = profesor.zvanje;
             oldProfesor.godineStaza = profesor.godineStaza;
+
+            MakeProfesor();
 
             _storage.Save(_profesori);
             return oldProfesor;

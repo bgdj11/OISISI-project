@@ -13,7 +13,7 @@ namespace CLI.DAO
 
         public OcenaNaUpisuDAO()
         {
-            _storage = new Storage<OcenaNaUpisu>("ocene.txt");
+            _storage = new Storage<OcenaNaUpisu>("ocene.csv");
             _ocene = new List<OcenaNaUpisu>();
         }
 

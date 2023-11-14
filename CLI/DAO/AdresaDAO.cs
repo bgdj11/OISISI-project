@@ -12,7 +12,7 @@ namespace CLI.DAO
 
         public AdresaDAO()
         {
-            _storage = new Storage<Adresa>("adrese.txt");
+            _storage = new Storage<Adresa>("adrese.csv");
             _adrese = new List<Adresa>();
 
         }
@@ -27,6 +27,7 @@ namespace CLI.DAO
         {
             adresa.idAdrese = GenerateID();
             _adrese.Add(adresa);
+            _storage.Save(_adrese);
             return adresa;
         }
 

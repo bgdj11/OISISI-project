@@ -20,16 +20,17 @@ namespace CLI.Model
         public string nazivPredmeta { get; set; }
         public Semestar semestar { get; set; }
         public int godinaStudija { get; set; }
-        public Profesor predmetniProfesor { get; set; }
+        public Profesor profesor { get; set; }
 
-        public int  idPredmetnogProfesora { get; set; }
+        public int  idProfesora { get; set; }
         public int brojESPB { get; set; }
         public List<Student> spisakPolozenihStudenata { get; set; }
         public List<Student> spisakNepolozenihStudenata { get; set; }
 
         public Predmet()
         {
-
+            spisakNepolozenihStudenata = new List<Student>();
+            spisakPolozenihStudenata = new List<Student>();
         }
 
         public Predmet(string sifra, string naziv, Semestar sem, int godina, int idProfesora, int espb)
@@ -38,7 +39,7 @@ namespace CLI.Model
             nazivPredmeta = naziv;
             semestar = sem;
             godinaStudija = godina;
-            idPredmetnogProfesora = idProfesora;
+            this.idProfesora = idProfesora;
             brojESPB = espb;
             spisakPolozenihStudenata = new List<Student>();
             spisakNepolozenihStudenata = new List<Student>();
@@ -53,7 +54,7 @@ namespace CLI.Model
                 nazivPredmeta,
                 semestar.ToString(),
                 godinaStudija.ToString(),
-                idPredmetnogProfesora.ToString(),
+                idProfesora.ToString(),
                 brojESPB.ToString()
         };
             return csvValues;
@@ -66,7 +67,7 @@ namespace CLI.Model
             nazivPredmeta = values[2];
             semestar = (Semestar)Enum.Parse(typeof(Semestar), values[3]);
             godinaStudija = int.Parse(values[4]);
-            idPredmetnogProfesora = int.Parse(values[5]);
+            idProfesora = int.Parse(values[5]);
             brojESPB = int.Parse(values[6]);
         }
 
@@ -79,9 +80,10 @@ namespace CLI.Model
             sb.AppendLine("Naziv predmeta: " + nazivPredmeta);
             sb.AppendLine("Semestar: " + semestar);
             sb.AppendLine("Godina studija: " + godinaStudija);
-            sb.AppendLine("Predmetni profesor: " + predmetniProfesor.ime + " " + predmetniProfesor.prezime);
+            sb.AppendLine("Predmetni profesor: " + profesor.ime + " " + profesor.prezime);
             sb.AppendLine("Broj ESPB bodova: " + brojESPB);
 
+            /*
             sb.AppendLine("Spisak položenih studenata:");
             foreach (Student student in spisakPolozenihStudenata)
             {
@@ -92,7 +94,22 @@ namespace CLI.Model
             foreach (Student student in spisakNepolozenihStudenata)
             {
                 sb.AppendLine(student.ToString());
+            
+            */
+
+            sb.AppendLine("Studenti koji su polozili: \n");
+
+            foreach(Student s in spisakPolozenihStudenata)
+            {
+                sb.Append(s.indeks.ToString() + " " + s.ime + " " + s.prezime + "\n");
             }
+
+            sb.AppendLine("Studenti koji nisu polozili: \n");
+            foreach (Student s in spisakNepolozenihStudenata)
+            {
+                sb.Append(s.indeks.ToString() + " " + s.ime + " " + s.prezime + "\n");
+            }
+
 
             return sb.ToString();
         }

@@ -106,8 +106,8 @@ namespace CLI.Model
             trenutnaGodinaStudija = int.Parse(values[8]);
             status = (Status)Enum.Parse(typeof(Status), values[9]);
             prosecnaOcena = double.Parse(values[10]);  
-
         }
+
 
         public override string ToString()
         {

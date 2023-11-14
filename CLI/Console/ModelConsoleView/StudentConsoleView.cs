@@ -54,7 +54,7 @@ class StudentConsoleView
             System.Console.WriteLine("Unesite trenutnu godinu studija: ");
             int trenutnaGodinaStudija = ConsoleViewUtils.SafeInputInt();
 
-            System.Console.WriteLine("Unesite status studenta (Aktivan/Neaktivan): ");
+            System.Console.WriteLine("Unesite status studenta (B/S): ");
             if (Enum.TryParse(System.Console.ReadLine(), out Status status))
             {
             }
@@ -68,6 +68,7 @@ class StudentConsoleView
             List<int> polozeni = new List<int>();
             List<int> nepolozeni = new List<int>();
 
+            /*
             System.Console.WriteLine("Unesite ID-ove položenih predmeta (razdvajati sa razmakom ");
             string[]? polozeniIds = System.Console.ReadLine()?.Split(' ');
             foreach (string id in polozeniIds)
@@ -76,7 +77,7 @@ class StudentConsoleView
                 {
                     polozeni.Add(polozeniId);
                 }
-            }
+            } */
 
             //  NULL MOGUCE VREDNOSTI PAZI
 

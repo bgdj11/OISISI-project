@@ -19,7 +19,7 @@ class StudentDAO
 
         public StudentDAO()
         {
-            _storage = new Storage<Student>("students.txt");
+            _storage = new Storage<Student>("students.csv");
             _students = _storage.Load();
         }
 
@@ -68,7 +68,7 @@ class StudentDAO
             return student;
         }
 
-        private Student? GetStudentById(int idStudent)
+        public Student? GetStudentById(int idStudent)
         {
             return _students.Find(s => s.idStudent == idStudent);
         }

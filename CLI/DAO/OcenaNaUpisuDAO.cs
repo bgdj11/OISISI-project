@@ -23,6 +23,33 @@ namespace CLI.DAO
             return _ocene[^1].idOcene + 1;
         }
 
+        public void MakeOcena()
+        {
+            Storage<Student> _studentStorage = new Storage<Student>("studenti.csv");
+            List<Student> _studenti = _studentStorage.Load();
+
+            Storage<Predmet> _predmetStorage = new Storage<Predmet>("predmeti.csv");
+            List<Predmet> _predmeti = _predmetStorage.Load();
+
+            foreach(OcenaNaUpisu o in _ocene)
+            {
+                Student s = _studenti.Find(n => n.idStudent == o.idStudenta);
+                o.student = s;
+
+                if(o.idStudenta == s.idStudent)
+                {
+                    s.PolozeniIspiti.Add(o);
+                }
+
+                Predmet p = _predmeti.Find(n => n.idPredmet == o.idPredmeta);
+                o.predmet = p;
+            }
+
+            _storage.Save(_ocene);
+            _studentStorage.Save(_studenti);
+
+        }
+
         public OcenaNaUpisu AddOcena(OcenaNaUpisu ocena)
         {
             ocena.idOcene = GenerateID();

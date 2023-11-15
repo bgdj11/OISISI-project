@@ -9,9 +9,9 @@ namespace CLI.Model
         public int IdProfesora {  get; set; }
         public int IdPredmeta {  get; set; }
 
-        ProfesorPredmet() { }
+        public ProfesorPredmet() { }
 
-        ProfesorPredmet(int IdProfesora, int IdPredmeta)
+        public ProfesorPredmet(int IdProfesora, int IdPredmeta)
         {
             this.IdProfesora = IdProfesora;
             this.IdPredmeta = IdPredmeta;

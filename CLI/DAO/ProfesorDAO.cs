@@ -39,6 +39,9 @@ namespace CLI.DAO
             Storage<Predmet> _predmetiStorage = new Storage<Predmet>("predmeti.csv");
             List<Predmet> _predmeti = _predmetiStorage.Load();
 
+            Storage<ProfesorPredmet> _profPredStorage = new Storage<ProfesorPredmet>("ProfesorPredmet.csv");
+            List<ProfesorPredmet> _profPred = _profPredStorage.Load();
+
             // dodajemo u katedru odgovarajuceg profesora
 
             foreach (Profesor p in _profesori)
@@ -63,13 +66,15 @@ namespace CLI.DAO
 
             foreach (Profesor p in _profesori)
             {
-                if(_predmeti.Find(n => n.idPredmet == p.idProfesor) != null)
+                if(_predmeti.Find(n => n.idProfesora == p.idProfesor) != null)
                 {
                     p.spisakPredmeta.Add(_predmeti.Find(n => n.idPredmet == p.idProfesor));
                 }
             }
 
-                _katedreStorage.Save(_katedre);
+            
+
+            _katedreStorage.Save(_katedre);
             _storage.Save(_profesori);
         }
 

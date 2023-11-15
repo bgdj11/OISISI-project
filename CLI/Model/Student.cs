@@ -39,10 +39,8 @@ namespace CLI.Model
         public double prosecnaOcena { get; set; }
         public List<OcenaNaUpisu> PolozeniIspiti { get; set; }
 
-        // public List<int> idPolozenihIspita { get; set; }
         public List<Predmet> NepolozeniIspiti { get; set; }
 
-        // public List<int> idNepolozenihIspita { get; set; }
 
 
         public Student()
@@ -60,7 +58,6 @@ namespace CLI.Model
         int adresa,
         string kontaktTelefon,
         string emailAdresa,
-        string brojIndeksa,
         int trenutnaGodinaStudija,
         Status status,
         double prosecnaOcena,
@@ -74,7 +71,6 @@ namespace CLI.Model
             adresaStanovanja = a;
             this.kontaktTelefon = kontaktTelefon;
             this.emailAdresa = emailAdresa;
-            this.brojIndeksa = brojIndeksa;
             this.trenutnaGodinaStudija = trenutnaGodinaStudija;
             this.status = status;
             this.prosecnaOcena = prosecnaOcena;
@@ -123,29 +119,21 @@ namespace CLI.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("ID studenta: " + idStudent);
-            sb.AppendLine("Prezime: " + prezime);
-            sb.AppendLine("Ime: " + ime);
-            sb.AppendLine("Datum rođenja: " + datumRodjenja.ToString("dd.MM.yyyy"));
-            sb.AppendLine("Adresa stanovanja: " + adresaStanovanja);
-            sb.AppendLine("Kontakt telefon: " + kontaktTelefon);
-            sb.AppendLine("Email adresa: " + emailAdresa);
-            sb.AppendLine("Broj indeksa: " + brojIndeksa);
-            sb.AppendLine("Trenutna godina studija: " + trenutnaGodinaStudija);
-            sb.AppendLine("Status: " + status);
-            sb.AppendLine("Prosečna ocena: " + prosecnaOcena);
 
-            sb.AppendLine("Spisak položenih ispita:");
-            foreach (OcenaNaUpisu ocena in PolozeniIspiti)
-            {
-                sb.AppendLine(ocena.ToString());
-            }
+            int maxLabelLength = 30;
+            string format = "{0,-" + maxLabelLength + "}: {1}";
 
-            sb.AppendLine("Spisak nepoloženih ispita:");
-            foreach (Predmet predmet in NepolozeniIspiti)
-            {
-                sb.AppendLine(predmet.ToString());
-            }
+            sb.AppendLine(string.Format(format, "ID studenta", idStudent));
+            sb.AppendLine(string.Format(format, "Prezime", prezime));
+            sb.AppendLine(string.Format(format, "Ime", ime));
+            sb.AppendLine(string.Format(format, "Datum rođenja", datumRodjenja.ToString("dd.MM.yyyy")));
+            sb.AppendLine(string.Format(format, "Adresa stanovanja", adresaStanovanja));
+            sb.AppendLine(string.Format(format, "Kontakt telefon", kontaktTelefon));
+            sb.AppendLine(string.Format(format, "Email adresa", emailAdresa));
+            sb.AppendLine(string.Format(format, "Broj indeksa", brojIndeksa));
+            sb.AppendLine(string.Format(format, "Trenutna godina studija", trenutnaGodinaStudija));
+            sb.AppendLine(string.Format(format, "Status", status));
+            sb.AppendLine(string.Format(format, "Prosečna ocena", prosecnaOcena));
 
             return sb.ToString();
         }

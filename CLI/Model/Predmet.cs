@@ -80,35 +80,8 @@ namespace CLI.Model
             sb.AppendLine("Naziv predmeta: " + nazivPredmeta);
             sb.AppendLine("Semestar: " + semestar);
             sb.AppendLine("Godina studija: " + godinaStudija);
-            sb.AppendLine("Predmetni profesor: " + profesor.ime + " " + profesor.prezime);
+            //sb.AppendLine("Predmetni profesor: " + profesor.ime + " " + profesor.prezime);
             sb.AppendLine("Broj ESPB bodova: " + brojESPB);
-
-            /*
-            sb.AppendLine("Spisak položenih studenata:");
-            foreach (Student student in spisakPolozenihStudenata)
-            {
-                sb.AppendLine(student.ToString());
-            }
-
-            sb.AppendLine("Spisak nepoloženih studenata:");
-            foreach (Student student in spisakNepolozenihStudenata)
-            {
-                sb.AppendLine(student.ToString());
-            
-            */
-
-            sb.AppendLine("Studenti koji su polozili: \n");
-
-            foreach(Student s in spisakPolozenihStudenata)
-            {
-                sb.Append(s.indeks.ToString() + " " + s.ime + " " + s.prezime + "\n");
-            }
-
-            sb.AppendLine("Studenti koji nisu polozili: \n");
-            foreach (Student s in spisakNepolozenihStudenata)
-            {
-                sb.Append(s.indeks.ToString() + " " + s.ime + " " + s.prezime + "\n");
-            }
 
 
             return sb.ToString();

@@ -45,42 +45,37 @@ namespace CLI.Console
             System.Console.WriteLine("0: Close");
         }
 
+
+
         private void HandleMenu(string input)
         {
+            StudentDAO student = new StudentDAO();
+            PredmetDAO predmet = new PredmetDAO();
+            ProfesorDAO profesor = new ProfesorDAO();
+            KatedraDAO katedra = new KatedraDAO();
+            AdresaDAO adresa = new AdresaDAO();
+            IndeksDAO indeks = new IndeksDAO();
+            OcenaNaUpisuDAO ocena = new OcenaNaUpisuDAO();
+
             switch (input)
             {
                 case "1":
-                    StudentDAO student = new StudentDAO();
                     StudentConsoleView studentView = new StudentConsoleView(student);
                     studentView.RunMenu();
                     break;
                 case "2":
-                    PredmetDAO predmet = new PredmetDAO();
                     PredmetConsoleView predmetView = new PredmetConsoleView(predmet);
                     predmetView.RunMenu();
                     break;
                 case "3":
-                    ProfesorDAO profesor = new ProfesorDAO();
                     ProfesorConsoleView profesorView = new ProfesorConsoleView(profesor);
                     profesorView.RunMenu();
                     break;
                 case "4":
-                    KatedraDAO katedra = new KatedraDAO();
                     KatedraConsoleView katedraView = new KatedraConsoleView(katedra);
                     katedraView.RunMenu();
                     break;
-                case "5":
-                    AdresaDAO adresa = new AdresaDAO();
-                    AdresaConsoleView adresaView = new AdresaConsoleView(adresa);
-                    adresaView.RunMenu();
-                    break;
-                case "6":
-                    IndeksDAO indeks = new IndeksDAO();
-                    IndeksConsoleView indeksView = new IndeksConsoleView(indeks);
-                    indeksView.RunMenu();
-                    break;
                 case "7":
-                    OcenaNaUpisuDAO ocena = new OcenaNaUpisuDAO();
                     OcenaNaUpisuConsoleView ocenaView = new OcenaNaUpisuConsoleView(ocena);
                     ocenaView.RunMenu();
                     break;

@@ -4,7 +4,7 @@ namespace CLI.Serialization;
 
 class Serializer<T> where T : ISerializable, new()
 {
-    private const char Delimiter = '|';
+    private const char Delimiter = ',';
 
     public string ToCSV(List<T> objects)
     {

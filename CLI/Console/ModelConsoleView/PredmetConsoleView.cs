@@ -17,9 +17,6 @@ namespace CLI.Console
         private void PrintPredmeti(List<Predmet> predmeti)
         {
             System.Console.WriteLine("Predmeti: ");
-          /*  string header = $"ID {"",6} | SifraPredmeta {"",12} | NazivPredmeta {"",18} | Semestar {"",12} | GodinaStudija {"",15} | PredmetniProfesor {"",20} | BrojESPB {"",8}";
-            System.Console.WriteLine(header);
-            */
 
             foreach (Predmet predmet in predmeti)
             {
@@ -29,25 +26,40 @@ namespace CLI.Console
 
         private Predmet InputPredmet()
         {
-            System.Console.WriteLine("Enter SifraPredmeta: ");
+            System.Console.WriteLine("Unesi SifraPredmeta: ");
             string sifraPredmeta = System.Console.ReadLine() ?? string.Empty;
 
-            System.Console.WriteLine("Enter NazivPredmeta: ");
+            System.Console.WriteLine("Unesi NazivPredmeta: ");
             string nazivPredmeta = System.Console.ReadLine() ?? string.Empty;
 
-            System.Console.WriteLine("Enter Semestar (L or Z): ");
-            if (Enum.TryParse(System.Console.ReadLine(), out Semestar semestar))
+
+
+            Semestar semestar;
+
+            while (true)
             {
-                throw new Exception("Invalid input");
+                System.Console.WriteLine("Unesi Semestar (L ili Z): ");
+                string input = System.Console.ReadLine();
+
+                if (Enum.TryParse(input, out semestar))
+                {
+                    break; 
+                }
+                else
+                {
+                    System.Console.WriteLine("Pogrešan unos. Ponovite unos.");
+                }
             }
 
-            System.Console.WriteLine("Enter GodinaStudija: ");
+
+
+            System.Console.WriteLine("Unesi godinu studija: ");
             int godinaStudija = ConsoleViewUtils.SafeInputInt();
 
-            System.Console.WriteLine("Enter PredmetniProfesor ID: ");
+            System.Console.WriteLine("Unesi id profesora: ");
             int idPredmetnogProfesora = ConsoleViewUtils.SafeInputInt();
 
-            System.Console.WriteLine("Enter BrojESPB: ");
+            System.Console.WriteLine("Unesi BrojESPB: ");
             int brojESPB = ConsoleViewUtils.SafeInputInt();
 
             Predmet predmet = new Predmet(sifraPredmeta, nazivPredmeta, semestar, godinaStudija, idPredmetnogProfesora, brojESPB);

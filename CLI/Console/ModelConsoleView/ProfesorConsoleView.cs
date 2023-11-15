@@ -17,11 +17,7 @@ class ProfesorConsoleView
         {
             System.Console.WriteLine("Profesori: ");
 
-            /* string header = $"ID {"",6} |  Prezime {"",21} | Ime {"",10} | Datum rodjenja{"",12}" +
-                            $"| Kontakt telefon {"",12} | Email adresa {"",20} Broj Lične Karte {"",10}" +
-                            $"| Zvanje {"",15} | Godine Staza {"",4} | ID Predmeta";
-            System.Console.WriteLine(header);
-            */
+
             foreach (Profesor profesor in profesors)
             {
                 System.Console.WriteLine(profesor.ToString());
@@ -42,9 +38,6 @@ class ProfesorConsoleView
                 throw new ArgumentException("Datum nije validan");
             }
 
-            /*System.Console.WriteLine("Unesite ID adrese: ");
-            int idAdrese = ConsoleViewUtils.SafeInputInt();
-            */
 
             System.Console.WriteLine("Unesite kontakt telefon: ");
             string kontaktTelefon = System.Console.ReadLine() ?? string.Empty;
@@ -71,17 +64,6 @@ class ProfesorConsoleView
 
             int idAdrese = a.idAdrese;
 
-            /*List<int> idPredmeta = new List<int>();
-            System.Console.WriteLine("Unesite ID-ove predmeta (razdvajati sa zarezom): ");
-            string[] idPredmetaIds = System.Console.ReadLine()?.Split(',');
-            foreach (string id in idPredmetaIds)
-            {
-                if (int.TryParse(id, out int predmetId))
-                {
-                    idPredmeta.Add(predmetId);
-                }
-            }
-            */
 
             return new Profesor(prezime, ime, datumRodjenja, idAdrese, kontaktTelefon, emailAdresa, brojLicneKarte, zvanje, godineStaza, idK, a);
         }

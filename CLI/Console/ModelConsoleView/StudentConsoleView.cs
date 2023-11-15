@@ -14,13 +14,6 @@ class StudentConsoleView
 
         private void PrintStudents(List<Student> students)
         {
-           /* System.Console.WriteLine("Students: ");
-            string header = $"ID {"",6} |  Prezime {"",21} | Ime {"",10} | Datum rodjenja{"",12}" +
-                            $"| Kontakt telefon {"",12} | Email adresa {"",20} Broj Indeksa {"",10}" +
-                            $"| Trenutna godina studija {"",4} | Status {"",10} | Prosecna ocena {"",5}";
-            System.Console.WriteLine(header);
-            */
-
             foreach (Student student in students)
             {
                 System.Console.WriteLine(student.ToString());
@@ -35,14 +28,19 @@ class StudentConsoleView
             System.Console.WriteLine("Unesite ime studenta: ");
             string ime = System.Console.ReadLine() ?? string.Empty;
 
-            System.Console.WriteLine("Unesite datum rođenja (yyyy-MM-dd): ");
-            if (DateOnly.TryParse(System.Console.ReadLine(), out DateOnly datumRodjenja))
+            DateOnly datumRodjenja;
+            while (true)
             {
-                DateOnly datum = datumRodjenja; 
+                System.Console.WriteLine("Unesite datum rođenja (yyyy-MM-dd): ");
+                if (DateOnly.TryParse(System.Console.ReadLine(), out datumRodjenja))
+                {
+                    break; 
+                }
+                else
+                {
+                    System.Console.WriteLine("Pogrešan format datuma. Ponovite unos.");
+                }
             }
-
-           // System.Console.WriteLine("Unesite ID adrese stanovanja: ");
-            // int idAdrese = ConsoleViewUtils.SafeInputInt();
 
             System.Console.WriteLine("Unesite kontakt telefon: ");
             string kontaktTelefon = System.Console.ReadLine() ?? string.Empty;
@@ -50,15 +48,21 @@ class StudentConsoleView
             System.Console.WriteLine("Unesite email adresu: ");
             string emailAdresa = System.Console.ReadLine() ?? string.Empty;
 
-            System.Console.WriteLine("Unesite broj indeksa: ");
-            string brojIndeksa = System.Console.ReadLine() ?? string.Empty;
-
             System.Console.WriteLine("Unesite trenutnu godinu studija: ");
             int trenutnaGodinaStudija = ConsoleViewUtils.SafeInputInt();
 
-            System.Console.WriteLine("Unesite status studenta (B/S): ");
-            if (Enum.TryParse(System.Console.ReadLine(), out Status status))
+            Status status;
+            while (true)
             {
+                System.Console.WriteLine("Unesite status studenta (B/S): ");
+                if (Enum.TryParse(System.Console.ReadLine(), out status))
+                {
+                    break; 
+                }
+                else
+                {
+                    System.Console.WriteLine("Pogrešan unos statusa. Ponovite unos.");
+                }
             }
 
             AdresaDAO _adresa = new AdresaDAO();
@@ -82,34 +86,8 @@ class StudentConsoleView
             
             }
 
-            //List<int> polozeni = new List<int>();
-            //List<int> nepolozeni = new List<int>();
 
-            /*
-            System.Console.WriteLine("Unesite ID-ove položenih predmeta (razdvajati sa razmakom ");
-            string[]? polozeniIds = System.Console.ReadLine()?.Split(' ');
-            foreach (string id in polozeniIds)
-            {
-                if (int.TryParse(id, out int polozeniId))
-                {
-                    polozeni.Add(polozeniId);
-                }
-            } */
-
-            //  NULL MOGUCE VREDNOSTI PAZI
-
-          /*  System.Console.WriteLine("Unesite ID-ove nepoloženih predmeta (razdvajati sa razmakom): ");
-            string[]? nepolozeniIds = System.Console.ReadLine()?.Split(' ');
-            foreach (string id in nepolozeniIds)
-            {
-                if (int.TryParse(id, out int nepolozeniId))
-                {
-                    nepolozeni.Add(nepolozeniId);
-                }
-            }
-          */
-
-            return new Student(prezime, ime, datumRodjenja, idAdrese, kontaktTelefon, emailAdresa, brojIndeksa, trenutnaGodinaStudija, status, prosecnaOcena, a, idIndeksa, i);
+            return new Student(prezime, ime, datumRodjenja, idAdrese, kontaktTelefon, emailAdresa, trenutnaGodinaStudija, status, prosecnaOcena, a, idIndeksa, i);
         }
 
         private int InputStudentId()

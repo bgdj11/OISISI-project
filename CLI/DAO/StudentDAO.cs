@@ -22,6 +22,7 @@ class StudentDAO
         {
             _storage = new Storage<Student>("studenti.csv");
             _studenti = _storage.Load();
+            MakeStudent();
         }
 
         private int GenerateId()

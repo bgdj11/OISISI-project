@@ -20,6 +20,7 @@ namespace CLI.DAO
         {
             _storage = new Storage<Profesor>("profesori.csv");
             _profesori = _storage.Load();
+            MakeProfesor();
         }
 
         private int GenerateId()

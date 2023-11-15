@@ -9,10 +9,17 @@ namespace CLI.Console
 
         private readonly StudentPredmetDAO _studentPredmetDao;
 
-        public StudentConsoleView(StudentDAO studentsDao, StudentPredmetDAO _spd)
+        private readonly AdresaDAO _adresa;
+
+        private readonly IndeksDAO _indeks;
+
+
+        public StudentConsoleView(StudentDAO studentsDao, StudentPredmetDAO _spd, AdresaDAO a, IndeksDAO i)
         {
             _studentsDao = studentsDao;
             _studentPredmetDao = _spd;
+            _indeks = i;
+            _adresa = a;
         }
 
         private void PrintStudents(List<Student> students)
@@ -68,16 +75,13 @@ namespace CLI.Console
                 }
             }
 
-            AdresaDAO _adresa = new AdresaDAO();
             AdresaConsoleView _adresaView = new AdresaConsoleView(_adresa);
             Adresa a = _adresaView.InputAdresa();
             _adresa.AddAdresa(a);
 
-
             int idAdrese = a.idAdrese;
 
-
-            IndeksDAO _indeks = new IndeksDAO();
+            
             IndeksConsoleView _indeksConsoleView = new IndeksConsoleView(_indeks);
             Indeks i = _indeksConsoleView.InputIndeks();
             _indeks.AddIndeks(i);

@@ -55,7 +55,7 @@ namespace CLI.Console
             switch (input)
             {
                 case "1":
-                    StudentConsoleView studentView = new StudentConsoleView(student, studentpredmet);
+                    StudentConsoleView studentView = new StudentConsoleView(student, studentpredmet, adresa, indeks);
                     studentView.RunMenu();
                     break;
                 case "2":

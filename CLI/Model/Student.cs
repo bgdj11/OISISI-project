@@ -89,10 +89,10 @@ namespace CLI.Model
                 prezime,
                 ime,
                 datumRodjenja.ToString(),
-                adresaStanovanja.idAdrese.ToString(),
+                idAdrese.ToString(),
                 kontaktTelefon,
                 emailAdresa,
-                brojIndeksa,
+                idIndeksa.ToString(),
                 trenutnaGodinaStudija.ToString(),
                 Enum.GetName(typeof(Status),status),
                 prosecnaOcena.ToString(),
@@ -109,7 +109,7 @@ namespace CLI.Model
             idAdrese = int.Parse(values[4]);
             kontaktTelefon = values[5];
             emailAdresa = values[6];
-            brojIndeksa = values[7];
+            idIndeksa = int.Parse(values[7]);
             trenutnaGodinaStudija = int.Parse(values[8]);
             status = (Status)Enum.Parse(typeof(Status), values[9]);
             prosecnaOcena = double.Parse(values[10]);  

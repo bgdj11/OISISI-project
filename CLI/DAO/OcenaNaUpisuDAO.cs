@@ -54,6 +54,7 @@ namespace CLI.DAO
         {
             ocena.idOcene = GenerateID();
             _ocene.Add(ocena);
+            MakeOcena();
             _storage.Save(_ocene);
             return ocena;
         }
@@ -68,6 +69,8 @@ namespace CLI.DAO
             oldOcena.idPredmeta = ocena.idPredmeta;
             oldOcena.datum = ocena.datum;
 
+            MakeOcena();
+
             _storage.Save(_ocene);
             return oldOcena;
         }
@@ -78,6 +81,7 @@ namespace CLI.DAO
             if (ocena == null) return null;
 
             _ocene.Remove(ocena);
+            MakeOcena();
             _storage.Save(_ocene);
             return ocena;
         }

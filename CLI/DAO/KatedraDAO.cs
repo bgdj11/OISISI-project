@@ -23,10 +23,30 @@ namespace CLI.DAO
             return _katedre[^1].idKatedre + 1;
         }
 
+        private void MakeKatedra()
+        {
+            Storage<Profesor> _profesorStorage = new Storage<Profesor>("profesori.csv");
+            List<Profesor> _profesori = _profesorStorage.Load();
+
+            foreach (Katedra k in _katedre)
+            {
+                foreach(Profesor p in _profesori)
+                {
+                    if(p.IdKatedre == k.idKatedre)
+                    {
+                        k.profesoriNaKatedri.Add(p);
+                    }
+                }
+            }
+
+            _storage.Save(_katedre);
+        }
+
         public Katedra AddKatedra(Katedra katedra)
         {
             katedra.idKatedre = GenerateID();
             _katedre.Add(katedra);
+            MakeKatedra();
             _storage.Save(_katedre);
             return katedra;
         }
@@ -40,6 +60,8 @@ namespace CLI.DAO
             oldKatedra.nazivKatedre = katedra.nazivKatedre;
             oldKatedra.idSefa = katedra.idSefa;
 
+            MakeKatedra();
+
             _storage.Save(_katedre);
             return oldKatedra;
         }
@@ -50,6 +72,7 @@ namespace CLI.DAO
             if (katedra == null) return null;
 
             _katedre.Remove(katedra);
+            MakeKatedra();
             _storage.Save(_katedre);
             return katedra;
         }

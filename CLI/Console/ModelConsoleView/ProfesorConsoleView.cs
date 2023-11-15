@@ -82,6 +82,16 @@ class ProfesorConsoleView
             return id;
         }
 
+        private void AddPredmetToProfesor()
+        {
+            int idProf = InputId();
+            System.Console.WriteLine("Unesite ID predmeta: ");
+            int idPredmeta = ConsoleViewUtils.SafeInputInt();
+
+            ProfesorPredmetDAO pp = new ProfesorPredmetDAO();
+            pp.AddPredmetToProfesor(idProf, idPredmeta);
+
+        }
 
         private void RemoveProfesor()
         {
@@ -154,6 +164,7 @@ class ProfesorConsoleView
             System.Console.WriteLine("3: Update Professor");
             System.Console.WriteLine("4: Remove Professor");
             System.Console.WriteLine("5: Show and Sort Professors");
+            System.Console.WriteLine("6: Add Predmet to Profesor");
             System.Console.WriteLine("0: Close");
         }
 
@@ -175,6 +186,9 @@ class ProfesorConsoleView
                     break;
                 case "5":
                     ShowAndSortProfesors();
+                    break;
+                case "6":
+                    AddPredmetToProfesor();
                     break;
             }
         }

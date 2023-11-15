@@ -90,6 +90,8 @@ class StudentDAO
             }
 
             _storage.Save(_studenti);
+            _adresaStorage.Save(_adrese);
+            _indeksStorage.Save(_indeksi);
 
         }
 

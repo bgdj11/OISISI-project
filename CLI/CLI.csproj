@@ -13,4 +13,8 @@
     <None Remove="Data\NewFolder\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
+
 </Project>

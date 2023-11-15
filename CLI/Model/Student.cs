@@ -127,10 +127,10 @@ namespace CLI.Model
             sb.AppendLine(string.Format(format, "Prezime", prezime));
             sb.AppendLine(string.Format(format, "Ime", ime));
             sb.AppendLine(string.Format(format, "Datum rođenja", datumRodjenja.ToString("dd.MM.yyyy")));
-            sb.AppendLine(string.Format(format, "Adresa stanovanja", adresaStanovanja));
+            sb.AppendLine(string.Format(format, "Adresa stanovanja", adresaStanovanja.ToString()));
             sb.AppendLine(string.Format(format, "Kontakt telefon", kontaktTelefon));
             sb.AppendLine(string.Format(format, "Email adresa", emailAdresa));
-            sb.AppendLine(string.Format(format, "Broj indeksa", brojIndeksa));
+            sb.AppendLine(string.Format(format, "Broj indeksa", indeks.ToString()));
             sb.AppendLine(string.Format(format, "Trenutna godina studija", trenutnaGodinaStudija));
             sb.AppendLine(string.Format(format, "Status", status));
             sb.AppendLine(string.Format(format, "Prosečna ocena", prosecnaOcena));

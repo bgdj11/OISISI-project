@@ -7,10 +7,11 @@ namespace CLI.Console
 class ProfesorConsoleView
 {
         private readonly ProfesorDAO _profesorsDao;
-
-        public ProfesorConsoleView(ProfesorDAO profesorsDao)
+        private readonly AdresaDAO _adresa;
+        public ProfesorConsoleView(ProfesorDAO profesorsDao, AdresaDAO adresa)
         {
             _profesorsDao = profesorsDao;
+            _adresa = adresa;
         }
 
         private void PrintProfessors(List<Profesor> profesors)
@@ -35,7 +36,7 @@ class ProfesorConsoleView
             System.Console.WriteLine("Unesite datum rođenja (yyyy-MM-dd): ");
             if (DateOnly.TryParse(System.Console.ReadLine(), out DateOnly datumRodjenja))
             {
-                throw new ArgumentException("Datum nije validan");
+                
             }
 
 
@@ -57,7 +58,7 @@ class ProfesorConsoleView
             System.Console.WriteLine("Unesi id katedre: ");
             int idK = ConsoleViewUtils.SafeInputInt();
 
-            AdresaDAO _adresa = new AdresaDAO();
+            
             AdresaConsoleView _adresaView = new AdresaConsoleView(_adresa);
             Adresa a = _adresaView.InputAdresa();
             _adresa.AddAdresa(a);

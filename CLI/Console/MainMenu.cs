@@ -63,7 +63,7 @@ namespace CLI.Console
                     predmetView.RunMenu();
                     break;
                 case "3":
-                    ProfesorConsoleView profesorView = new ProfesorConsoleView(profesor);
+                    ProfesorConsoleView profesorView = new ProfesorConsoleView(profesor, adresa);
                     profesorView.RunMenu();
                     break;
                 case "4":

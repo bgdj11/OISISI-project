@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,22 +16,16 @@ class StudentPredmetDAO
         private readonly Storage<StudentPredmet> _storage;
 
 
-        public StudentPredmetDAO(StudentDAO _student, PredmetDAO _predmet){
-            _storage = new Storage<StudentPredmet>("studentpretmet.csv");
+        public StudentPredmetDAO(){
+            _storage = new Storage<StudentPredmet>("studentpredmet.csv");
             _studentpredmet = _storage.Load();
+        }
 
-            foreach(StudentPredmet studentpredmet in _studentpredmet ) {
-                Predmet predmetTmp = new Predmet();
-                predmetTmp = _predmet.GetPredmetById(studentpredmet.IdPredmet);
-                Student studentTmp = new Student();
-                studentTmp = _student.GetStudentById(studentpredmet.IdStudent);
-
-                //metoda dodaj predmet studentu unutar modela student
-                //_student.dodajPredmetStudentu(IdStudent, Predmet);
-                //metoda dodaj studenta predmetu unutar modela predmet
-                //_predmet.dodajStudentaPredmetu(IdPredmet, Student);
-            }
-
+        public void AddPredmetToStudent(int ids, int idp)
+        {
+            StudentPredmet sp = new StudentPredmet(ids, idp);
+            _studentpredmet.Add(sp);
+            _storage.Save(_studentpredmet);
         }
 }
 }

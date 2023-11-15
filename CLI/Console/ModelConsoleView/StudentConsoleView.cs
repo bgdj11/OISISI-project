@@ -3,13 +3,16 @@ using CLI.Model;
 
 namespace CLI.Console
 {
-class StudentConsoleView
-{
+    class StudentConsoleView
+    {
         private readonly StudentDAO _studentsDao;
 
-        public StudentConsoleView(StudentDAO studentsDao)
+        private readonly StudentPredmetDAO _studentPredmetDao;
+
+        public StudentConsoleView(StudentDAO studentsDao, StudentPredmetDAO _spd)
         {
             _studentsDao = studentsDao;
+            _studentPredmetDao = _spd;
         }
 
         private void PrintStudents(List<Student> students)
@@ -34,7 +37,7 @@ class StudentConsoleView
                 System.Console.WriteLine("Unesite datum rođenja (yyyy-MM-dd): ");
                 if (DateOnly.TryParse(System.Console.ReadLine(), out datumRodjenja))
                 {
-                    break; 
+                    break;
                 }
                 else
                 {
@@ -57,7 +60,7 @@ class StudentConsoleView
                 System.Console.WriteLine("Unesite status studenta (B/S): ");
                 if (Enum.TryParse(System.Console.ReadLine(), out status))
                 {
-                    break; 
+                    break;
                 }
                 else
                 {
@@ -69,6 +72,7 @@ class StudentConsoleView
             AdresaConsoleView _adresaView = new AdresaConsoleView(_adresa);
             Adresa a = _adresaView.InputAdresa();
             _adresa.AddAdresa(a);
+
 
             int idAdrese = a.idAdrese;
 
@@ -83,7 +87,7 @@ class StudentConsoleView
             System.Console.WriteLine("Unesite prosečnu ocenu: ");
             if (double.TryParse(System.Console.ReadLine(), out double prosecnaOcena))
             {
-            
+
             }
 
 
@@ -110,11 +114,12 @@ class StudentConsoleView
         private void ShowMenu()
         {
             System.Console.WriteLine("\nChoose an option: ");
-            System.Console.WriteLine("1: Show All students");
-            System.Console.WriteLine("2: Add student");
-            System.Console.WriteLine("3: Update student");
-            System.Console.WriteLine("4: Remove student");
+            System.Console.WriteLine("1: Prikazi sve studente");
+            System.Console.WriteLine("2: Dodaj studenta");
+            System.Console.WriteLine("3: Update studenta");
+            System.Console.WriteLine("4: Izbrisi studenta");
             System.Console.WriteLine("5: Show and sort students");
+            System.Console.WriteLine("6: Dodaj predmet studentu");
             System.Console.WriteLine("0: Close");
         }
 
@@ -136,6 +141,9 @@ class StudentConsoleView
                     break;
                 case "5":
                     ShowAndSortStudents();
+                    break;
+                case "6":
+                    AddPredmetToStudent();
                     break;
             }
         }
@@ -196,5 +204,16 @@ class StudentConsoleView
             PrintStudents(_studentsDao.GetAllStudents(page, pageSize, sortCriteria, sortDirection));
         }
 
+        private void AddPredmetToStudent()
+        {
+            System.Console.WriteLine("\nUnesi ID Studenta: ");
+            int ids = ConsoleViewUtils.SafeInputInt();
+
+            System.Console.WriteLine("\nUnesi ID Predmeta: ");
+            int idp = ConsoleViewUtils.SafeInputInt();
+
+            _studentPredmetDao.AddPredmetToStudent(ids, idp);
+
+        }
     }
 }

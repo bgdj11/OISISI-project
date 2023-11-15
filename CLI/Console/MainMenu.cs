@@ -19,10 +19,6 @@ namespace CLI.Console
         public void RunMenu()
         {
 
-            // ovde
-            // StudentDAO student = new StudentDAO();
-            // StudentSubjectDAO studen_Subject;
-
             while (true)
             {
                 ShowMenu();
@@ -38,9 +34,7 @@ namespace CLI.Console
             System.Console.WriteLine("2: Predmeti");
             System.Console.WriteLine("3: Profesori");
             System.Console.WriteLine("4: Katedre");
-            System.Console.WriteLine("5: Adrese");
-            System.Console.WriteLine("6: Inedeksi");
-            System.Console.WriteLine("7: Ocene");
+            System.Console.WriteLine("5: Ocene");
             
             System.Console.WriteLine("0: Close");
         }
@@ -56,11 +50,12 @@ namespace CLI.Console
             AdresaDAO adresa = new AdresaDAO();
             IndeksDAO indeks = new IndeksDAO();
             OcenaNaUpisuDAO ocena = new OcenaNaUpisuDAO();
+            StudentPredmetDAO studentpredmet = new StudentPredmetDAO();
 
             switch (input)
             {
                 case "1":
-                    StudentConsoleView studentView = new StudentConsoleView(student);
+                    StudentConsoleView studentView = new StudentConsoleView(student, studentpredmet);
                     studentView.RunMenu();
                     break;
                 case "2":
@@ -75,7 +70,7 @@ namespace CLI.Console
                     KatedraConsoleView katedraView = new KatedraConsoleView(katedra);
                     katedraView.RunMenu();
                     break;
-                case "7":
+                case "5":
                     OcenaNaUpisuConsoleView ocenaView = new OcenaNaUpisuConsoleView(ocena);
                     ocenaView.RunMenu();
                     break;

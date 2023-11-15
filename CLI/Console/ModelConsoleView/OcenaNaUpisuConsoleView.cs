@@ -33,10 +33,18 @@ namespace CLI.Console
             System.Console.WriteLine("Enter Predmet ID: ");
             int idPredmeta = ConsoleViewUtils.SafeInputInt();
 
-            System.Console.WriteLine("Enter Datum (yyyy-MM-dd): ");
-            if (DateOnly.TryParse(System.Console.ReadLine(), out DateOnly datum))
+            DateOnly datumpol;
+            while (true)
             {
-                throw new ArgumentException("Datum nije validan");
+                System.Console.WriteLine("Unesite datum rođenja (yyyy-MM-dd): ");
+                if (DateOnly.TryParse(System.Console.ReadLine(), out datumpol))
+                {
+                    break; // Break the loop if parsing is successful
+                }
+                else
+                {
+                    System.Console.WriteLine("Pogrešan format datuma. Ponovite unos.");
+                }
             }
 
             System.Console.WriteLine("Enter Ocena (6-10): ");
@@ -46,7 +54,7 @@ namespace CLI.Console
             {
                 idStudenta = idStudenta,
                 idPredmeta = idPredmeta,
-                datum = datum,
+                datum = datumpol,
                 Ocena = ocena
             };
 

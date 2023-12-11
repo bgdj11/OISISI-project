@@ -45,7 +45,7 @@ namespace CLI.Console
 
         private int InputIndeksId()
         {
-            System.Console.WriteLine("Enter Indeks ID: ");
+            System.Console.WriteLine("Unesi id indeksa: ");
             if (int.TryParse(System.Console.ReadLine(), out int id))
             {
                 return id;
@@ -66,12 +66,12 @@ namespace CLI.Console
 
         private void ShowMenu()
         {
-            System.Console.WriteLine("\nChoose an option: ");
-            System.Console.WriteLine("1: Show All Indeksi");
-            System.Console.WriteLine("2: Add Indeks");
-            System.Console.WriteLine("3: Update Indeks");
-            System.Console.WriteLine("4: Remove Indeks");
-            System.Console.WriteLine("0: Close");
+            System.Console.WriteLine("\nIzaberite opciju: ");
+            System.Console.WriteLine("1: Prikazi sve indekse");
+            System.Console.WriteLine("2: Dodaj Indeks");
+            System.Console.WriteLine("3: Azuriraj Indeks");
+            System.Console.WriteLine("4: Izbaci Indeks");
+            System.Console.WriteLine("0: Zatvori");
         }
 
         private void HandleMenuInput(string input)
@@ -104,11 +104,11 @@ namespace CLI.Console
             Indeks removedIndeks = _indeksDao.RemoveIndeks(id);
             if (removedIndeks != null)
             {
-                System.Console.WriteLine("Indeks removed");
+                System.Console.WriteLine("Indeks izbrisan");
             }
             else
             {
-                System.Console.WriteLine("Indeks not found");
+                System.Console.WriteLine("Indeks nije pronadjen");
             }
         }
 
@@ -120,11 +120,11 @@ namespace CLI.Console
             Indeks updatedIndeks = _indeksDao.UpdateIndeks(indeks);
             if (updatedIndeks != null)
             {
-                System.Console.WriteLine("Indeks updated");
+                System.Console.WriteLine("Indeks azuriran");
             }
             else
             {
-                System.Console.WriteLine("Indeks not found");
+                System.Console.WriteLine("Indeks nije pronadjen");
             }
         }
 
@@ -132,7 +132,7 @@ namespace CLI.Console
         {
             Indeks indeks = InputIndeks();
             _indeksDao.AddIndeks(indeks);
-            System.Console.WriteLine("Indeks added");
+            System.Console.WriteLine("Indeks dodat");
         }
     }
 }

@@ -27,16 +27,16 @@ namespace CLI.Console
 
         private OcenaNaUpisu InputOcenaNaUpisu()
         {
-            System.Console.WriteLine("Enter Student ID: ");
+            System.Console.WriteLine("Unesi id studenta: ");
             int idStudenta = ConsoleViewUtils.SafeInputInt();
 
-            System.Console.WriteLine("Enter Predmet ID: ");
+            System.Console.WriteLine("Unesi id predmeta: ");
             int idPredmeta = ConsoleViewUtils.SafeInputInt();
 
             DateOnly datumpol;
             while (true)
             {
-                System.Console.WriteLine("Unesite datum rođenja (yyyy-MM-dd): ");
+                System.Console.WriteLine("Unesite datum rađenja (yyyy-MM-dd): ");
                 if (DateOnly.TryParse(System.Console.ReadLine(), out datumpol))
                 {
                     break; // Break the loop if parsing is successful
@@ -47,7 +47,7 @@ namespace CLI.Console
                 }
             }
 
-            System.Console.WriteLine("Enter Ocena (6-10): ");
+            System.Console.WriteLine("Unesite ocenu (6-10): ");
             int ocena = ConsoleViewUtils.SafeInputInt();
 
             OcenaNaUpisu ocenaNaUpisu = new OcenaNaUpisu()
@@ -80,12 +80,12 @@ namespace CLI.Console
 
         private void ShowMenu()
         {
-            System.Console.WriteLine("\nChoose an option: ");
-            System.Console.WriteLine("1: Show All Ocene na upisu");
-            System.Console.WriteLine("2: Add Ocena na upisu");
-            System.Console.WriteLine("3: Update Ocena na upisu");
-            System.Console.WriteLine("4: Remove Ocena na upisu");
-            System.Console.WriteLine("0: Close");
+            System.Console.WriteLine("\nIzaberite opciju: ");
+            System.Console.WriteLine("1: Prikazi sve Ocene na upisu");
+            System.Console.WriteLine("2: Dodaj Ocenu na upisu");
+            System.Console.WriteLine("3: Azuriraj Ocenu na upisu");
+            System.Console.WriteLine("4: Izbaci Ocena na upisu");
+            System.Console.WriteLine("0: Zatvori");
         }
 
         private void HandleMenuInput(string input)
@@ -118,11 +118,11 @@ namespace CLI.Console
             OcenaNaUpisu removedOcenaNaUpisu = _ocenaNaUpisuDao.RemoveOcena(id);
             if (removedOcenaNaUpisu != null)
             {
-                System.Console.WriteLine("Ocena na upisu removed");
+                System.Console.WriteLine("Ocena na upisu izbrisana");
             }
             else
             {
-                System.Console.WriteLine("Ocena na upisu not found");
+                System.Console.WriteLine("Ocena na upisu nije pronadjena");
             }
         }
 
@@ -134,11 +134,11 @@ namespace CLI.Console
             OcenaNaUpisu updatedOcenaNaUpisu = _ocenaNaUpisuDao.UpdateOcena(ocenaNaUpisu);
             if (updatedOcenaNaUpisu != null)
             {
-                System.Console.WriteLine("Ocena na upisu updated");
+                System.Console.WriteLine("Ocena na upisu azurirana");
             }
             else
             {
-                System.Console.WriteLine("Ocena na upisu not found");
+                System.Console.WriteLine("Ocena na upisu nije pronadjena");
             }
         }
 
@@ -146,7 +146,7 @@ namespace CLI.Console
         {
             OcenaNaUpisu ocenaNaUpisu = InputOcenaNaUpisu();
             _ocenaNaUpisuDao.AddOcena(ocenaNaUpisu);
-            System.Console.WriteLine("Ocena na upisu added");
+            System.Console.WriteLine("Ocena na upisu dodata");
         }
     }
 }

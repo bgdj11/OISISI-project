@@ -27,13 +27,13 @@ namespace CLI.Console
 
         private Katedra InputKatedra()
         {
-            System.Console.WriteLine("Enter SifraKatedre: ");
+            System.Console.WriteLine("Unesite sifru katedre: ");
             int sifraKatedre = ConsoleViewUtils.SafeInputInt();
 
-            System.Console.WriteLine("Enter NazivKatedre: ");
+            System.Console.WriteLine("Unesite naziv  katedre: ");
             string nazivKatedre = System.Console.ReadLine() ?? string.Empty;
 
-            System.Console.WriteLine("Enter IdSefa: ");
+            System.Console.WriteLine("Unesite ID sefa katedre:");
             int idSefa = ConsoleViewUtils.SafeInputInt();
 
             Katedra katedra = new Katedra(sifraKatedre, nazivKatedre, idSefa);
@@ -43,7 +43,7 @@ namespace CLI.Console
 
         private int InputKatedraId()
         {
-            System.Console.WriteLine("Enter Katedra ID: ");
+            System.Console.WriteLine("Unesite id katedre: ");
             return ConsoleViewUtils.SafeInputInt();
         }
 
@@ -60,12 +60,12 @@ namespace CLI.Console
 
         private void ShowMenu()
         {
-            System.Console.WriteLine("\nChoose an option: ");
-            System.Console.WriteLine("1: Show All Katedre");
-            System.Console.WriteLine("2: Add Katedra");
-            System.Console.WriteLine("3: Update Katedra");
-            System.Console.WriteLine("4: Remove Katedra");
-            System.Console.WriteLine("0: Close");
+            System.Console.WriteLine("\nIzaberite opciju: ");
+            System.Console.WriteLine("1: Prikazi sve katedre");
+            System.Console.WriteLine("2: Dodaj katedru");
+            System.Console.WriteLine("3: Azuriraj katedru");
+            System.Console.WriteLine("4: Izbaci katedru");
+            System.Console.WriteLine("0: Zatvori");
         }
 
         private void HandleMenuInput(string input)
@@ -98,11 +98,11 @@ namespace CLI.Console
             Katedra removedKatedra = _katedraDao.RemoveKatedra(id);
             if (removedKatedra != null)
             {
-                System.Console.WriteLine("Katedra removed");
+                System.Console.WriteLine("Katedra izbrisana");
             }
             else
             {
-                System.Console.WriteLine("Katedra not found");
+                System.Console.WriteLine("Katedra nije pronadjena");
             }
         }
 
@@ -114,11 +114,11 @@ namespace CLI.Console
             Katedra updatedKatedra = _katedraDao.UpdateKatedra(katedra);
             if (updatedKatedra != null)
             {
-                System.Console.WriteLine("Katedra updated");
+                System.Console.WriteLine("Katedra azurirana");
             }
             else
             {
-                System.Console.WriteLine("Katedra not found");
+                System.Console.WriteLine("Katedra nije pronadjena");
             }
         }
 
@@ -126,7 +126,7 @@ namespace CLI.Console
         {
             Katedra katedra = InputKatedra();
             _katedraDao.AddKatedra(katedra);
-            System.Console.WriteLine("Katedra added");
+            System.Console.WriteLine("Katedra dodata");
         }
     }
 }

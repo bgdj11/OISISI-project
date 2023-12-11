@@ -26,10 +26,10 @@ namespace CLI.Console
 
         private Predmet InputPredmet()
         {
-            System.Console.WriteLine("Unesi SifraPredmeta: ");
+            System.Console.WriteLine("Unesite sifru predmeta: ");
             string sifraPredmeta = System.Console.ReadLine() ?? string.Empty;
 
-            System.Console.WriteLine("Unesi NazivPredmeta: ");
+            System.Console.WriteLine("Unesite naziv predmeta: ");
             string nazivPredmeta = System.Console.ReadLine() ?? string.Empty;
 
 
@@ -38,7 +38,7 @@ namespace CLI.Console
 
             while (true)
             {
-                System.Console.WriteLine("Unesi Semestar (L ili Z): ");
+                System.Console.WriteLine("Unesite Semestar (L ili Z): ");
                 string input = System.Console.ReadLine();
 
                 if (Enum.TryParse(input, out semestar))
@@ -53,13 +53,13 @@ namespace CLI.Console
 
 
 
-            System.Console.WriteLine("Unesi godinu studija: ");
+            System.Console.WriteLine("Unesite godinu studija: ");
             int godinaStudija = ConsoleViewUtils.SafeInputInt();
 
-            System.Console.WriteLine("Unesi id profesora: ");
+            System.Console.WriteLine("Unesite id profesora: ");
             int idPredmetnogProfesora = ConsoleViewUtils.SafeInputInt();
 
-            System.Console.WriteLine("Unesi BrojESPB: ");
+            System.Console.WriteLine("Unesite BrojESPB: ");
             int brojESPB = ConsoleViewUtils.SafeInputInt();
 
             Predmet predmet = new Predmet(sifraPredmeta, nazivPredmeta, semestar, godinaStudija, idPredmetnogProfesora, brojESPB);
@@ -69,7 +69,7 @@ namespace CLI.Console
 
         private int InputPredmetId()
         {
-            System.Console.WriteLine("Enter Predmet ID: ");
+            System.Console.WriteLine("Unesite ID predmeta: ");
             return ConsoleViewUtils.SafeInputInt();
         }
 
@@ -86,12 +86,12 @@ namespace CLI.Console
 
         private void ShowMenu()
         {
-            System.Console.WriteLine("\nChoose an option: ");
-            System.Console.WriteLine("1: Show All Predmeti");
-            System.Console.WriteLine("2: Add Predmet");
-            System.Console.WriteLine("3: Update Predmet");
-            System.Console.WriteLine("4: Remove Predmet");
-            System.Console.WriteLine("0: Close");
+            System.Console.WriteLine("\nIzaberi opciju: ");
+            System.Console.WriteLine("1: Prikazi sve predmete");
+            System.Console.WriteLine("2: Dodaj predmet");
+            System.Console.WriteLine("3: Azuriraj predmet");
+            System.Console.WriteLine("4: Izbaci predmet");
+            System.Console.WriteLine("0: Zatvori");
         }
 
         private void HandleMenuInput(string input)
@@ -124,11 +124,11 @@ namespace CLI.Console
             Predmet removedPredmet = _predmetDao.RemovePredmet(id);
             if (removedPredmet != null)
             {
-                System.Console.WriteLine("Predmet removed");
+                System.Console.WriteLine("Predmet izb risan");
             }
             else
             {
-                System.Console.WriteLine("Predmet not found");
+                System.Console.WriteLine("Predmet nije pronadjen");
             }
         }
 
@@ -140,11 +140,11 @@ namespace CLI.Console
             Predmet updatedPredmet = _predmetDao.UpdatePredmet(predmet);
             if (updatedPredmet != null)
             {
-                System.Console.WriteLine("Predmet updated");
+                System.Console.WriteLine("Predmet azuriran");
             }
             else
             {
-                System.Console.WriteLine("Predmet not found");
+                System.Console.WriteLine("Predmet nije pronadjen");
             }
         }
 
@@ -152,7 +152,7 @@ namespace CLI.Console
         {
             Predmet predmet = InputPredmet();
             _predmetDao.AddPredmet(predmet);
-            System.Console.WriteLine("Predmet added");
+            System.Console.WriteLine("Predmet dodat");
         }
     }
 }

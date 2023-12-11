@@ -100,11 +100,11 @@ class ProfesorConsoleView
             Profesor? removedProfesor = _profesorsDao.RemoveProfesor(id);
             if (removedProfesor is null)
             {
-                System.Console.WriteLine("Profesor not found");
+                System.Console.WriteLine("Profesor nije pronadjen");
                 return;
             }
 
-            System.Console.WriteLine("Profesor removed");
+            System.Console.WriteLine("Profesor izbrisan");
         }
 
         private void UpdateProfesor()
@@ -115,18 +115,18 @@ class ProfesorConsoleView
             Profesor? updatedProfesor = _profesorsDao.UpdateProfesor(profesor);
             if (updatedProfesor is null)
             {
-                System.Console.WriteLine("Profesor not found");
+                System.Console.WriteLine("Profesor nije pronadjen");
                 return;
             }
 
-            System.Console.WriteLine("Profesor updated");
+            System.Console.WriteLine("Profesor azuriran");
         }
 
         private void AddProfesor()
         {
             Profesor profesor = InputProfesor();
             _profesorsDao.AddProfesor(profesor);
-            System.Console.WriteLine("Profesor added");
+            System.Console.WriteLine("Profesor dodat");
         }
 
 
@@ -159,14 +159,14 @@ class ProfesorConsoleView
 
         private void ShowMenu()
         {
-            System.Console.WriteLine("\nChoose an option: ");
-            System.Console.WriteLine("1: Show All Professors");
-            System.Console.WriteLine("2: Add Professor");
-            System.Console.WriteLine("3: Update Professor");
-            System.Console.WriteLine("4: Remove Professor");
-            System.Console.WriteLine("5: Show and Sort Professors");
-            System.Console.WriteLine("6: Add Predmet to Profesor");
-            System.Console.WriteLine("0: Close");
+            System.Console.WriteLine("\nIzaberi opciju: ");
+            System.Console.WriteLine("1: Prikazi sve predmete");
+            System.Console.WriteLine("2: Dodaj profesora");
+            System.Console.WriteLine("3: Azuriraj profesora");
+            System.Console.WriteLine("4: Izbaci profesora");
+            System.Console.WriteLine("5: Prikazi i sortiraj profesore");
+            System.Console.WriteLine("6: Dodaj predmet profesoru");
+            System.Console.WriteLine("0: Zatvori");
         }
 
         private void HandleMenuInput(string input)

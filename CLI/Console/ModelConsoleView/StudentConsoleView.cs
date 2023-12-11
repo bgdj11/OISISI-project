@@ -117,14 +117,14 @@ namespace CLI.Console
 
         private void ShowMenu()
         {
-            System.Console.WriteLine("\nChoose an option: ");
+            System.Console.WriteLine("\nIzaberi opciju: ");
             System.Console.WriteLine("1: Prikazi sve studente");
             System.Console.WriteLine("2: Dodaj studenta");
             System.Console.WriteLine("3: Update studenta");
             System.Console.WriteLine("4: Izbrisi studenta");
             System.Console.WriteLine("5: Show and sort students");
             System.Console.WriteLine("6: Dodaj predmet studentu");
-            System.Console.WriteLine("0: Close");
+            System.Console.WriteLine("0: Zatvori");
         }
 
         private void HandleMenuInput(string input)

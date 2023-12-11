@@ -13,7 +13,7 @@ namespace CLI.DAO
         public AdresaDAO()
         {
             _storage = new Storage<Adresa>("adrese.csv");
-            _adrese = new List<Adresa>();
+            _adrese = _storage.Load();
 
         }
 

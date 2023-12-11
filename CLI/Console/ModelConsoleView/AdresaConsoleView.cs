@@ -46,7 +46,7 @@ namespace CLI.Console
 
         private int InputAdresaId()
         {
-            System.Console.WriteLine("Enter Adresa ID: ");
+            System.Console.WriteLine("Unesite id adrese: ");
             if (int.TryParse(System.Console.ReadLine(), out int id))
             {
                 return id;
@@ -67,12 +67,12 @@ namespace CLI.Console
 
         private void ShowMenu()
         {
-            System.Console.WriteLine("\nChoose an option: ");
-            System.Console.WriteLine("1: Show All Adrese");
-            System.Console.WriteLine("2: Add Adresa");
-            System.Console.WriteLine("3: Update Adresa");
-            System.Console.WriteLine("4: Remove Adresa");
-            System.Console.WriteLine("0: Close");
+            System.Console.WriteLine("\nIzaberi opciju: ");
+            System.Console.WriteLine("1: Prikazi sve adrese");
+            System.Console.WriteLine("2: Dodaj adresu");
+            System.Console.WriteLine("3: Azuriraj adresu");
+            System.Console.WriteLine("4: Izbaci Adresu");
+            System.Console.WriteLine("0: Zatvori");
         }
 
         private void HandleMenuInput(string input)
@@ -105,11 +105,11 @@ namespace CLI.Console
             Adresa removedAdresa = _adresaDao.RemoveAdresa(id);
             if (removedAdresa != null)
             {
-                System.Console.WriteLine("Adresa removed");
+                System.Console.WriteLine("Adresa ");
             }
             else
             {
-                System.Console.WriteLine("Adresa not found");
+                System.Console.WriteLine("Adresa nije pronadjena");
             }
         }
 
@@ -121,11 +121,11 @@ namespace CLI.Console
             Adresa updatedAdresa = _adresaDao.UpdateAdresa(adresa);
             if (updatedAdresa != null)
             {
-                System.Console.WriteLine("Adresa updated");
+                System.Console.WriteLine("Adresa azurirana");
             }
             else
             {
-                System.Console.WriteLine("Adresa not found");
+                System.Console.WriteLine("Adresa nije pronadjena");
             }
         }
 
@@ -133,7 +133,7 @@ namespace CLI.Console
         {
             Adresa adresa = InputAdresa();
             _adresaDao.AddAdresa(adresa);
-            System.Console.WriteLine("Adresa added");
+            System.Console.WriteLine("Adresa dodata");
         }
     }
 }

@@ -5,8 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+            Title="MainWindow" Height="650" Width="1200" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
 
+    <Grid>
+        <DockPanel>
+            <!-- Menu Bar -->
+            <Menu DockPanel.Dock="Top">
+                <!-- Menu items here -->
+            </Menu>
+
+            <!-- Toolbar -->
+            <ToolBar DockPanel.Dock="Top">
+                <!-- Toolbar items here -->
+            </ToolBar>
+
+            <!-- Tab Control -->
+            <TabControl>
+                <TabItem Header="Studenti">
+                    <!-- controls for Studenti -->
+                </TabItem>
+                <TabItem Header="Profesori">
+                    <!-- controls for Profesori -->
+                </TabItem>
+                <TabItem Header="Predmeti">
+                    <!-- controls for Predmeti -->
+                </TabItem>
+            </TabControl>
+
+            <!-- Status Bar -->
+            <StatusBar DockPanel.Dock="Bottom">
+                <!-- Status bar items here -->
+            </StatusBar>
+        </DockPanel>
     </Grid>
 </Window>

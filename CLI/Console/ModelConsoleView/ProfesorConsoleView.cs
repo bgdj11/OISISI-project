@@ -111,7 +111,7 @@ class ProfesorConsoleView
         {
             int id = InputId();
             Profesor profesor = InputProfesor();
-            profesor.idProfesor = id;
+            profesor.IdProfesor = id;
             Profesor? updatedProfesor = _profesorsDao.UpdateProfesor(profesor);
             if (updatedProfesor is null)
             {

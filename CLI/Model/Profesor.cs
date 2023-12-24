@@ -9,27 +9,27 @@ namespace CLI.Model
 {
     public class Profesor : ISerializable
     {
-        public int idProfesor { get; set; }
-        public string prezime { get; set; }
-        public string ime { get; set; }
-        public DateOnly datumRodjenja { get; set; }
+        public int IdProfesor { get; set; }
+        public string Prezime { get; set; }
+        public string Ime { get; set; }
+        public DateOnly DatumRodjenja { get; set; }
 
-        public Adresa adresaStanovanja { get; set; }
+        public Adresa AdresaStanovanja { get; set; }
 
-        public int idAdrese { get; set; }
-        public string kontaktTelefon { get; set; }
-        public string emailAdresa { get; set; }
-        public string brojLicneKarte { get; set; }
-        public string zvanje { get; set; }
-        public int godineStaza { get; set; }
-        public List<Predmet> spisakPredmeta { get; set; }
+        public int IdAdrese { get; set; }
+        public string KontaktTelefon { get; set; }
+        public string EmailAdresa { get; set; }
+        public string BrojLicneKarte { get; set; }
+        public string Zvanje { get; set; }
+        public int GodineStaza { get; set; }
+        public List<Predmet> SpisakPredmeta { get; set; }
 
         public int IdKatedre { get; set; }
 
         public Profesor()
         {
-            adresaStanovanja = new Adresa();
-            spisakPredmeta = new List<Predmet>();
+            AdresaStanovanja = new Adresa();
+            SpisakPredmeta = new List<Predmet>();
         }
 
         public Profesor(
@@ -45,17 +45,17 @@ namespace CLI.Model
         int IdKatedre,
         Adresa adresa)
         {
-            this.prezime = prezime;
-            this.ime = ime;
-            this.datumRodjenja = datumRodjenja;
-            this.idAdrese = id;
-            this.kontaktTelefon = kontaktTelefon;
-            this.emailAdresa = emailAdresa;
-            this.brojLicneKarte = brojLicneKarte;
-            this.zvanje = zvanje;
-            this.godineStaza = godineStaza;
-            spisakPredmeta = new List<Predmet>();
-            adresaStanovanja = adresa;
+            this.Prezime = prezime;
+            this.Ime = ime;
+            this.DatumRodjenja = datumRodjenja;
+            this.IdAdrese = id;
+            this.KontaktTelefon = kontaktTelefon;
+            this.EmailAdresa = emailAdresa;
+            this.BrojLicneKarte = brojLicneKarte;
+            this.Zvanje = zvanje;
+            this.GodineStaza = godineStaza;
+            SpisakPredmeta = new List<Predmet>();
+            AdresaStanovanja = adresa;
             this.IdKatedre = IdKatedre;
         }
 
@@ -64,16 +64,16 @@ namespace CLI.Model
         {
             string[] csvValues =
             {
-                idProfesor.ToString(),
-                prezime,
-                ime,
-                datumRodjenja.ToString(),
-                adresaStanovanja.idAdrese.ToString(),
-                kontaktTelefon,
-                emailAdresa,
-                brojLicneKarte,
-                zvanje,
-                godineStaza.ToString(),
+                IdProfesor.ToString(),
+                Prezime,
+                Ime,
+                DatumRodjenja.ToString(),
+                AdresaStanovanja.idAdrese.ToString(),
+                KontaktTelefon,
+                EmailAdresa,
+                BrojLicneKarte,
+                Zvanje,
+                GodineStaza.ToString(),
                 IdKatedre.ToString()
         };
             return csvValues;
@@ -82,16 +82,16 @@ namespace CLI.Model
 
         public void FromCSV(string[] values)
         {
-            idProfesor = int.Parse(values[0]);
-            prezime = values[1];
-            ime = values[2];
-            datumRodjenja = DateOnly.Parse(values[3]);
-            idAdrese = int.Parse(values[4]);
-            kontaktTelefon = values[5];
-            emailAdresa = values[6];   
-            brojLicneKarte = values[7];
-            zvanje = values[8];
-            godineStaza = int.Parse(values[9]);
+            IdProfesor = int.Parse(values[0]);
+            Prezime = values[1];
+            Ime = values[2];
+            DatumRodjenja = DateOnly.Parse(values[3]);
+            IdAdrese = int.Parse(values[4]);
+            KontaktTelefon = values[5];
+            EmailAdresa = values[6];   
+            BrojLicneKarte = values[7];
+            Zvanje = values[8];
+            GodineStaza = int.Parse(values[9]);
             IdKatedre = int.Parse(values[10]);
 
         }
@@ -101,20 +101,20 @@ namespace CLI.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("ID profesora: " + idProfesor);
-            sb.AppendLine("Prezime: " + prezime);
-            sb.AppendLine("Ime: " + ime);
-            sb.AppendLine("Datum rođenja: " + datumRodjenja.ToString("dd.MM.yyyy"));
-            sb.AppendLine("Adresa stanovanja: " + adresaStanovanja);
-            sb.AppendLine("Kontakt telefon: " + kontaktTelefon);
-            sb.AppendLine("Email adresa: " + emailAdresa);
-            sb.AppendLine("Broj lične karte: " + brojLicneKarte);
-            sb.AppendLine("Zvanje: " + zvanje);
-            sb.AppendLine("Godine staža: " + godineStaza);
+            sb.AppendLine("ID profesora: " + IdProfesor);
+            sb.AppendLine("Prezime: " + Prezime);
+            sb.AppendLine("Ime: " + Ime);
+            sb.AppendLine("Datum rođenja: " + DatumRodjenja.ToString("dd.MM.yyyy"));
+            sb.AppendLine("Adresa stanovanja: " + AdresaStanovanja);
+            sb.AppendLine("Kontakt telefon: " + KontaktTelefon);
+            sb.AppendLine("Email adresa: " + EmailAdresa);
+            sb.AppendLine("Broj lične karte: " + BrojLicneKarte);
+            sb.AppendLine("Zvanje: " + Zvanje);
+            sb.AppendLine("Godine staža: " + GodineStaza);
 
             sb.Append("\n Predmeti na kojima predaje: \n");
 
-            foreach (Predmet p in spisakPredmeta)
+            foreach (Predmet p in SpisakPredmeta)
             {
                 sb.Append(p.ToString() + "\n");
             }

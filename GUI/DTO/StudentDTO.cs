@@ -9,7 +9,7 @@ using CLI.Model;
 
 namespace GUI.DTO
 {
-     public class StudentDTO
+     public class StudentDTO : INotifyPropertyChanged
     {
         private int studentId { get; set; }
         public int StudentId

@@ -26,7 +26,7 @@ namespace CLI.DAO
         private int GenerateId()
         {
             if (_profesori.Count == 0) return 0;
-            return _profesori[^1].idProfesor + 1;
+            return _profesori[^1].IdProfesor + 1;
         }
 
         private void MakeProfesor()
@@ -57,9 +57,9 @@ namespace CLI.DAO
 
             foreach(Profesor p in _profesori)
             {
-                if(_adrese.Find(n => n.idAdrese == p.idAdrese) != null)
+                if(_adrese.Find(n => n.idAdrese == p.IdAdrese) != null)
                 {
-                    p.adresaStanovanja = _adrese.Find(n => n.idAdrese == p.idAdrese);
+                    p.AdresaStanovanja = _adrese.Find(n => n.idAdrese == p.IdAdrese);
                 }
             }
 
@@ -67,9 +67,9 @@ namespace CLI.DAO
 
             foreach (Profesor p in _profesori)
             {
-                if(_predmeti.Find(n => n.idProfesora == p.idProfesor) != null)
+                if(_predmeti.Find(n => n.idProfesora == p.IdProfesor) != null)
                 {
-                    p.spisakPredmeta.Add(_predmeti.Find(n => n.idPredmet == p.idProfesor));
+                    p.SpisakPredmeta.Add(_predmeti.Find(n => n.idPredmet == p.IdProfesor));
                 }
             }
 
@@ -81,7 +81,7 @@ namespace CLI.DAO
 
         public Profesor AddProfesor(Profesor profesor)
         {
-            profesor.idProfesor = GenerateId();
+            profesor.IdProfesor = GenerateId();
             
             _profesori.Add(profesor);
             MakeProfesor();
@@ -91,18 +91,18 @@ namespace CLI.DAO
 
         public Profesor? UpdateProfesor(Profesor profesor)
         {
-            Profesor? oldProfesor = GetProfesorById(profesor.idProfesor);
+            Profesor? oldProfesor = GetProfesorById(profesor.IdProfesor);
             if (oldProfesor == null) return null;
 
-            oldProfesor.prezime = profesor.prezime;
-            oldProfesor.ime = profesor.ime;
-            oldProfesor.datumRodjenja = profesor.datumRodjenja;
-            oldProfesor.idAdrese = profesor.idAdrese;
-            oldProfesor.kontaktTelefon = profesor.kontaktTelefon;
-            oldProfesor.emailAdresa = profesor.emailAdresa;
-            oldProfesor.brojLicneKarte = profesor.brojLicneKarte;
-            oldProfesor.zvanje = profesor.zvanje;
-            oldProfesor.godineStaza = profesor.godineStaza;
+            oldProfesor.Prezime = profesor.Prezime;
+            oldProfesor.Ime = profesor.Ime;
+            oldProfesor.DatumRodjenja = profesor.DatumRodjenja;
+            oldProfesor.IdAdrese = profesor.IdAdrese;
+            oldProfesor.KontaktTelefon = profesor.KontaktTelefon;
+            oldProfesor.EmailAdresa = profesor.EmailAdresa;
+            oldProfesor.BrojLicneKarte = profesor.BrojLicneKarte;
+            oldProfesor.Zvanje = profesor.Zvanje;
+            oldProfesor.GodineStaza = profesor.GodineStaza;
 
             MakeProfesor();
 
@@ -122,7 +122,7 @@ namespace CLI.DAO
 
         private Profesor? GetProfesorById(int idProfesor)
         {
-            return _profesori.Find(p => p.idProfesor == idProfesor);
+            return _profesori.Find(p => p.IdProfesor == idProfesor);
         }
 
         public List<Profesor> GetAllProfesors()
@@ -137,28 +137,28 @@ namespace CLI.DAO
             switch (sortCriteria)
             {
                 case "Id":
-                    profesori = _profesori.OrderBy(p => p.idProfesor);
+                    profesori = _profesori.OrderBy(p => p.IdProfesor);
                     break;
                 case "Name":
-                    profesori = _profesori.OrderBy(p => p.ime);
+                    profesori = _profesori.OrderBy(p => p.Ime);
                     break;
                 case "DatumRodjenja":
-                    profesori = _profesori.OrderBy(p => p.datumRodjenja);
+                    profesori = _profesori.OrderBy(p => p.DatumRodjenja);
                     break;
                 case "KontaktTelefon":
-                    profesori = _profesori.OrderBy(p => p.kontaktTelefon);
+                    profesori = _profesori.OrderBy(p => p.KontaktTelefon);
                     break;
                 case "EmailAdresa":
-                    profesori = _profesori.OrderBy(p => p.emailAdresa);
+                    profesori = _profesori.OrderBy(p => p.EmailAdresa);
                     break;
                 case "BrojLicneKarte":
-                    profesori = _profesori.OrderBy(p => p.brojLicneKarte);
+                    profesori = _profesori.OrderBy(p => p.BrojLicneKarte);
                     break;
                 case "Zvanje":
-                    profesori = _profesori.OrderBy(p => p.zvanje);
+                    profesori = _profesori.OrderBy(p => p.Zvanje);
                     break;
                 case "GodineStaza":
-                    profesori = _profesori.OrderBy(p => p.godineStaza);
+                    profesori = _profesori.OrderBy(p => p.GodineStaza);
                     break;
             }
 

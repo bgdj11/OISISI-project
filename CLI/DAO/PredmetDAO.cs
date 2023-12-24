@@ -52,7 +52,7 @@ namespace CLI.DAO
 
                 foreach (Profesor pr in _profesori)
                 {
-                    if (pr.idProfesor == p.idProfesora)
+                    if (pr.IdProfesor == p.idProfesora)
                     {
                         p.profesor = pr;
                     }

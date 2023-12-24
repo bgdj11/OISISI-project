@@ -11,10 +11,12 @@ using CLI.DAO;
 
 namespace CLI.DAO
 {
-    class ProfesorDAO
+    public class ProfesorDAO
     {
         private readonly List<Profesor> _profesori;
+        private readonly AdresaDAO adresaDAO = new AdresaDAO();
         private readonly Storage<Profesor> _storage;
+
 
         public ProfesorDAO()
         {
@@ -82,7 +84,8 @@ namespace CLI.DAO
         public Profesor AddProfesor(Profesor profesor)
         {
             profesor.IdProfesor = GenerateId();
-            
+            adresaDAO.AddAdresa(profesor.AdresaStanovanja);
+            profesor.IdAdrese = adresaDAO.GetLastID();
             _profesori.Add(profesor);
             MakeProfesor();
             _storage.Save(_profesori);

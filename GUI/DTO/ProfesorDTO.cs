@@ -150,7 +150,7 @@ namespace GUI.DTO
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
@@ -167,7 +167,7 @@ namespace GUI.DTO
             Prezime = profesor.Prezime;
             Ime = profesor.Ime;
             DatumRodjenja = profesor.DatumRodjenja;
-            Adresa = profesor.Adresa;
+            Adresa = profesor.AdresaStanovanja.ToString();
             KontaktTelefon = profesor.KontaktTelefon;
             EmailAdresa = profesor.EmailAdresa;
             BrojLicneKarte = profesor.BrojLicneKarte;
@@ -176,9 +176,9 @@ namespace GUI.DTO
             IdKatedre = profesor.IdKatedre;
         }
 
-        public Profesor ToProfesor()
+        public Profesor toProfesor()
         {
-            return new Profesor(IdProfesor, Prezime, Ime, DatumRodjenja, Adresa, KontaktTelefon, EmailAdresa, BrojLicneKarte, Zvanje, GodineStaza, IdKatedre);
+            return new Profesor(Prezime, Ime, Adresa, DatumRodjenja, KontaktTelefon, EmailAdresa, BrojLicneKarte, Zvanje, GodineStaza, IdKatedre);
         }
     }
 }

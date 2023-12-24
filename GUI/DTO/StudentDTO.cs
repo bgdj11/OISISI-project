@@ -8,7 +8,7 @@ using CLI.Model;
 
 namespace GUI.DTO
 {
-    internal class StudentDTO
+     public class StudentDTO
     {
         private int studentId { get; set; }
         public int StudentId
@@ -230,6 +230,7 @@ namespace GUI.DTO
             adresaStanovanja = student.AdresaStanovanja.ToString();
             kontaktTelefon = student.KontaktTelefon;
             emailAdresa = student.EmailAdresa;
+
             indeks = student.Indeks.ToString();
             trenutnaGodinaStudija = student.TrenutnaGodinaStudija;
             statusStudenta = student.Status.ToString();

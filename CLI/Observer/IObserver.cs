@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLI.DAO;
-
-public enum SortDirection
+namespace CLI.Observer
 {
-    Ascending, 
-    Descending
+    public interface IObserver
+    {
+        void Update();
+    }
 }

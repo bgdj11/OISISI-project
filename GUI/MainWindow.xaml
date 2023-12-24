@@ -5,56 +5,113 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI"
         mc:Ignorable="d"
-            Title="MainWindow" Height="650" Width="1200" WindowStartupLocation="CenterScreen">
-
+        Title="MainWindow" Height="650" Width="1200" WindowStartupLocation="CenterScreen"
+        KeyDown = "MainWindow_KeyDown">
     <Grid>
-        <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="40*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.ColumnSpan="2">
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="520*"/>
+                <ColumnDefinition Width="280*"/>
+            </Grid.ColumnDefinitions>
+            
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <!-- Menu Bar -->
-            <Menu Grid.Row="0">
-                <MenuItem Header="File" Click="MenuItem_Click">
-                    <MenuItem Header="New" InputGestureText="Ctrl+N"></MenuItem>
-                    <MenuItem Header="Save" InputGestureText="Ctrl+S"></MenuItem>
-                    <MenuItem Header="Open"></MenuItem>
+
+            <Menu Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,0,27" Grid.RowSpan="2">
+                <MenuItem Header="File">
+                    
+                    <MenuItem Header="New" InputGestureText="Ctrl+N" Click="CreateEntityButton_Click">
+                        <MenuItem.Icon>
+                            <Image Source="Images/folder-plus.png" Width="16" Height="15"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    
+                    <MenuItem Header="Save" Click="SaveApp" InputGestureText="Ctrl+S">
+                        <MenuItem.Icon>
+                            <Image Source="Images/save.png" Width="16" Height="15"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    
+                    <MenuItem Header="Open">
+                        <MenuItem.Icon>
+                            <Image Source="Images/open-in-app.png" Width="16" Height="15"/>
+                        </MenuItem.Icon>
+                        <MenuItem Header="Studenti"  Click="MenuItem_Studenti_Click"></MenuItem>
+                        <MenuItem Header="Predmeti"  Click="MenuItem_Predmeti_Click"></MenuItem>
+                        <MenuItem Header="Profesori" Click="MenuItem_Profesori_Click"></MenuItem>
+                    </MenuItem>
+                    
+                    <Separator/>
+                    
+                    <MenuItem x:Name="CLOSE" Header="Close" Click="CloseApp_Execution" InputGestureText="ALT + F4">
+                        <MenuItem.Icon>
+                            <Image Source="Images/x.png" Width="16" Height="15"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                     
                 </MenuItem>
+                
                 <MenuItem Header="Edit">
-                    <!-- Sub-items here -->
+                    
+                    <MenuItem Header="Edit" InputGestureText="Ctrl+E">
+                        <MenuItem.Icon>
+                            <Image Source="pen.png" Width="16" Height="15"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    
+                    <MenuItem Header="Delete" InputGestureText="Delete" Click="DeleteEntityButton_Click">
+                        <MenuItem.Icon>
+                            <Image Source="Images/delete.png" Width="15" Height="15"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </MenuItem>
+
                 <MenuItem Header="Help">
-                    <!-- Sub-items here -->
+                    <MenuItem Header="About" Click="OpenAboutWindow" InputGestureText="Ctrl + H">
+                        <MenuItem.Icon>
+                            <Image Source="Images/about.png" Width="15" Height="15"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </MenuItem>
             </Menu>
 
-            <!-- Tool Bar -->
-            <ToolBar DockPanel.Dock="Top">
-                <Button Content="Add" />
-                <Button Content="Edit" />
-                <Button Content="Delete" />
-            </ToolBar>
-
-            <!-- Tab Control -->
-            <TabControl DockPanel.Dock="Top">
-                <TabItem Header="Studenti">
-                    <!-- Content for Studenti tab -->
-                </TabItem>
-                <TabItem Header="Profesori">
-                    <!-- Content for Profesori tab -->
-                </TabItem>
-                <TabItem Header="Predmeti">
-                    <!-- Content for Predmeti tab -->
+            <TabControl Grid.Row="2" x:Name="MainTabControl" Grid.ColumnSpan="2">
+                <TabItem x:Name="StudentsTab" Header="Studenti">
+                    <DataGrid Height="350"
+                  AutoGenerateColumns="False"
+                  x:Name="StudentsDataGrid"
+                  ItemsSource="{Binding Students, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding SelectedStudent, UpdateSourceTrigger=PropertyChanged}"
+                  SelectionMode="Single" IsReadOnly="True" SelectionChanged="StudentsDataGrid_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Indeks" Binding="{Binding Indeks}"/>
+                            <DataGridTextColumn Header="Ime" Binding="{Binding Ime}"/>
+                            <DataGridTextColumn Header="Prezime" Binding="{Binding Prezime}"/>
+                            <DataGridTextColumn Header="Godina Studija" Binding="{Binding TrenutnaGodinaStudija}"/>
+                            <DataGridTextColumn Header="Status" Binding="{Binding StatusStudenta}"/>
+                            <DataGridTextColumn Header="Prosek" Binding="{Binding ProsecnaOcena}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </TabItem>
             </TabControl>
-
-            <!-- Status Bar -->
-            <StatusBar VerticalAlignment="Bottom">
-                <StatusBarItem Content="12:30 26.10.2020." HorizontalAlignment="Right"/>
-            </StatusBar>
+            
+            
+            <StatusBar Grid.Row="3" VerticalAlignment="Center" Grid.ColumnSpan="2">
+    <TextBlock FontWeight="Bold" x:Name="statusAppName">Studentska sluzba</TextBlock>
+    <TextBlock>Status 2</TextBlock>
+    <TextBlock x:Name="statusTime" HorizontalAlignment="Right" Margin="0,0,10,0">Time:</TextBlock>
+    <TextBlock x:Name="statusDate" HorizontalAlignment="Right">Date:</TextBlock>
+</StatusBar>
 
         </Grid>
     </Grid>

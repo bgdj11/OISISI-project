@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CLI.Serialization;
 
-enum Semestar
+public enum Semestar
 {
     L,
     Z

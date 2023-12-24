@@ -7,7 +7,7 @@ using CLI.Serialization;
 
 namespace CLI.Model
 {
-    class Indeks : ISerializable
+    public class Indeks : ISerializable
     {   
         public int idIndeksa { get; set; }
         public string oznakaSmera { get; set; }

@@ -12,7 +12,7 @@ using CLI.Storage;
 namespace CLI.DAO
 
 {
-class StudentDAO
+public class StudentDAO
 {
         private readonly List<Student> _studenti;
         private readonly Storage<Student> _storage;
@@ -145,6 +145,7 @@ class StudentDAO
 
         public List<Student> GetAllStudents()
         {
+            MakeStudent();
             return _studenti;
         }
 

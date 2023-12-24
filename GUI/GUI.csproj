@@ -11,4 +11,8 @@
     <ProjectReference Include="..\CLI\CLI.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="View\Predmet\" />
+  </ItemGroup>
+
 </Project>

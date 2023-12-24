@@ -1,0 +1,80 @@
+﻿<Window x:Class="GUI.View.Student.AddStudent"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GUI.View.Student"
+        mc:Ignorable="d"
+       Title="Dodaj Studenta" Height="450" Width="350">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="1" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="Ime:" Grid.Row="0"/>
+            <TextBox Name="txtBoxIme" Text="{Binding Path=Student.Ime, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="1" Margin="0,0,0,5"/>
+
+            <Label Content="Prezime:" Grid.Row="1"/>
+            <TextBox Name="txtBoxPrezime" Text="{Binding Path=Student.Prezime, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5"/>
+
+            <Label Content="Datum Rodjenja:" Grid.Row="2"/>
+            <DatePicker Name="datpDatumRodjenja" SelectedDate="{Binding Path=Student.DatumRodjenja, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" Margin="0,0,0,5" Width="165"/>
+
+            <Label Content="Adresa:" Grid.Row="3"/>
+            <TextBox Name="txtBoxAdresa" Text="{Binding Path=Student.AdresaStanovanja, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" Margin="0,0,0,5"/>
+
+            <Label Content="Kontakt telefon:" Grid.Row="4"/>
+            <TextBox Name="txtBoxKontakt" Text="{Binding Path=Student.KontaktTelefon, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Margin="0,0,0,5"/>
+
+            <Label Content="Email adresa:" Grid.Row="5"/>
+            <TextBox Name="txtBoxEmail" Text="{Binding Path=Student.EmailAdresa, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1" Margin="0,0,0,5"/>
+
+            <Label Content="Broj Indeksa (XX-NNN/YYYY):" Grid.Row="6"/>
+            <TextBox Name="txtBoxIndeks" Text="{Binding Path=Student.Indeks, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="6" Grid.Column="1" Margin="0,0,0,5"/>
+
+            <Label Content="Trenutna Godina Studija:" Grid.Row="7"/>
+            <ComboBox Name="cmbGodinaStudija"  SelectedItem="{Binding Path=Student.TrenutnaGodinaStudija, UpdateSourceTrigger=PropertyChanged}" Grid.Row="7" Grid.Column="1" Width="178" Margin="0,0,0,5">
+                <ComboBoxItem>1</ComboBoxItem>
+                <ComboBoxItem>2</ComboBoxItem>
+                <ComboBoxItem>3</ComboBoxItem>
+                <ComboBoxItem>4</ComboBoxItem>
+            </ComboBox>
+
+            <Label Content="Status Studenta:" Grid.Row="8"/>
+            <ComboBox Name="cmbStatusStudenta"  SelectedItem="{Binding Path=Student.StatusStudenta, UpdateSourceTrigger=PropertyChanged}" Grid.Row="8" Grid.Column="1" Width="178" Margin="0,0,0,5">
+                <ComboBoxItem>Budzet</ComboBoxItem>
+                <ComboBoxItem>Samofinansiranje</ComboBoxItem>
+            </ComboBox>
+
+            <Label Content="Prosecna Ocena:" Grid.Row="9"/>
+            <TextBox Name="txtBoxProsecnaOcena" Text="{Binding Path=Student.ProsecnaOcena, UpdateSourceTrigger=PropertyChanged}" Grid.Row="9" Grid.Column="1" Margin="0,0,0,5"/>
+
+        </Grid>
+
+        <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,20,0,10">
+            <Button Name="btnAccept" Content="Potvrdi" Width="75" Margin="0,0,10,0" Click="btnAccept_Click" />
+            <Button Name="btnCancel" Content="Odustani" Width="75" Click="btnCancel_Click" />
+        </StackPanel>
+
+    </Grid>
+</Window>

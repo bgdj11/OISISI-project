@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace CLI.DAO
 {
-    internal class IndeksDAO
+     public class IndeksDAO
     {
         private readonly List<Indeks> _indeksi;
         private readonly Storage<Indeks> _storage;

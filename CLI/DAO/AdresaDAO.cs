@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace CLI.DAO
 {
-    internal class AdresaDAO
+    public class AdresaDAO
     {
 
         private readonly List<Adresa> _adrese;

@@ -45,6 +45,28 @@ namespace CLI.Model
             spisakNepolozenihStudenata = new List<Student>();
         }
 
+        public Predmet(string sifra, string naziv, string sem, int godina, int idProfesora, int espb)
+        {
+            sifraPredmeta = sifra;
+            nazivPredmeta = naziv;
+            semestar = MakeSemestar(sem);
+            godinaStudija = godina;
+            this.idProfesora = idProfesora;
+            brojESPB = espb;
+            spisakPolozenihStudenata = new List<Student>();
+            spisakNepolozenihStudenata = new List<Student>();
+        }
+
+        private Semestar MakeSemestar(string sem)
+        {
+            if (sem.Equals("letnji"))
+            {
+                return Semestar.L;
+            }
+            else
+                return Semestar.Z;
+        }
+
         public string[] ToCSV()
         {
             string[] csvValues =

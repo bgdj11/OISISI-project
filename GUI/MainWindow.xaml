@@ -8,11 +8,20 @@
             Title="MainWindow" Height="650" Width="1200" WindowStartupLocation="CenterScreen">
 
     <Grid>
-        <DockPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
             <!-- Menu Bar -->
-            <Menu DockPanel.Dock="Top">
-                <MenuItem Header="File">
-                    <!-- Sub-items here -->
+            <Menu Grid.Row="0">
+                <MenuItem Header="File" Click="MenuItem_Click">
+                    <MenuItem Header="New" InputGestureText="Ctrl+N"></MenuItem>
+                    <MenuItem Header="Save" InputGestureText="Ctrl+S"></MenuItem>
+                    <MenuItem Header="Open"></MenuItem>
+                    
                 </MenuItem>
                 <MenuItem Header="Edit">
                     <!-- Sub-items here -->
@@ -43,10 +52,10 @@
             </TabControl>
 
             <!-- Status Bar -->
-            <StatusBar DockPanel.Dock="Bottom">
+            <StatusBar VerticalAlignment="Bottom">
                 <StatusBarItem Content="12:30 26.10.2020." HorizontalAlignment="Right"/>
             </StatusBar>
 
-        </DockPanel>
+        </Grid>
     </Grid>
 </Window>

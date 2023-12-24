@@ -7,7 +7,7 @@ using CLI.Serialization;
 
 namespace CLI.Model
 {
-    class Profesor : ISerializable
+    public class Profesor : ISerializable
     {
         public int idProfesor { get; set; }
         public string prezime { get; set; }

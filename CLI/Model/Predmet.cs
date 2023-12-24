@@ -13,7 +13,7 @@ enum Semestar
 
 namespace CLI.Model
 {
-    class Predmet : ISerializable
+    public class Predmet : ISerializable
     {
         public int idPredmet { get; set; }
         public string sifraPredmeta { get; set; }

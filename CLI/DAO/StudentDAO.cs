@@ -28,7 +28,7 @@ class StudentDAO
         private int GenerateId()
         {
             if (_studenti.Count == 0) return 0;
-            return _studenti[^1].idStudent + 1;
+            return _studenti[^1].IdStudent + 1;
         }
 
         void MakeStudent()
@@ -52,9 +52,9 @@ class StudentDAO
             {
                 foreach (Adresa a in _adrese)
                 {
-                    if (s.idAdrese == a.idAdrese)
+                    if (s.IdAdrese == a.idAdrese)
                     {
-                        s.adresaStanovanja = a;
+                        s.AdresaStanovanja = a;
                     }
 
                 }
@@ -64,9 +64,9 @@ class StudentDAO
             {
                 foreach (Indeks i in _indeksi)
                 {
-                    if (s.idIndeksa == i.idIndeksa)
+                    if (s.IdIndeksa == i.idIndeksa)
                     {
-                        s.indeks = i;
+                        s.Indeks = i;
                     }
 
                 }
@@ -76,7 +76,7 @@ class StudentDAO
             {
                 foreach(StudentPredmet sp in _studPred)
                 {
-                    if(s.idStudent == sp.IdStudent)
+                    if(s.IdStudent == sp.IdStudent)
                     {
                         if(_ocene.Find(n => n.idPredmeta == sp.IdPredmet) != null)
                         {
@@ -98,7 +98,7 @@ class StudentDAO
 
         public Student AddStudent(Student student)
         {
-            student.idStudent = GenerateId();
+            student.IdStudent = GenerateId();
             _studenti.Add(student);
             MakeStudent();
             _storage.Save(_studenti);
@@ -107,19 +107,19 @@ class StudentDAO
 
         public Student? UpdateStudent(Student student)
         {
-            Student? oldStudent = GetStudentById(student.idStudent);
+            Student? oldStudent = GetStudentById(student.IdStudent);
             if (oldStudent == null) return null;
 
-            oldStudent.prezime = student.prezime;
-            oldStudent.ime = student.ime;
-            oldStudent.datumRodjenja = student.datumRodjenja;
-            oldStudent.idAdrese = student.idAdrese;
-            oldStudent.kontaktTelefon = student.kontaktTelefon;
-            oldStudent.emailAdresa = student.emailAdresa;
-            oldStudent.brojIndeksa = student.brojIndeksa;
-            oldStudent.trenutnaGodinaStudija = student.trenutnaGodinaStudija;
-            oldStudent.status = student.status;
-            oldStudent.prosecnaOcena = student.prosecnaOcena;
+            oldStudent.Prezime = student.Prezime;
+            oldStudent.Ime = student.Ime;
+            oldStudent.DatumRodjenja = student.DatumRodjenja;
+            oldStudent.IdAdrese = student.IdAdrese;
+            oldStudent.KontaktTelefon = student.KontaktTelefon;
+            oldStudent.EmailAdresa = student.EmailAdresa;
+            oldStudent.BrojIndeksa = student.BrojIndeksa;
+            oldStudent.TrenutnaGodinaStudija = student.TrenutnaGodinaStudija;
+            oldStudent.Status = student.Status;
+            oldStudent.ProsecnaOcena = student.ProsecnaOcena;
 
             MakeStudent();
 
@@ -140,7 +140,7 @@ class StudentDAO
 
         public Student? GetStudentById(int idStudent)
         {
-            return _studenti.Find(s => s.idStudent == idStudent);
+            return _studenti.Find(s => s.IdStudent == idStudent);
         }
 
         public List<Student> GetAllStudents()
@@ -155,34 +155,34 @@ class StudentDAO
             switch (sortCriteria)
             {
                 case "Id":
-                    students = _studenti.OrderBy(x => x.idStudent);
+                    students = _studenti.OrderBy(x => x.IdStudent);
                     break;
                 case "Name":
-                    students = _studenti.OrderBy(x => x.ime);
+                    students = _studenti.OrderBy(x => x.Ime);
                     break;
                 case "DatumRodjenja":
-                    students = _studenti.OrderBy(x => x.datumRodjenja);
+                    students = _studenti.OrderBy(x => x.DatumRodjenja);
                     break;
                 case "AdresaStanovanja":
-                    students = _studenti.OrderBy(x => x.adresaStanovanja);
+                    students = _studenti.OrderBy(x => x.AdresaStanovanja);
                     break;
                 case "KontaktTelefon":
-                    students = _studenti.OrderBy(x => x.kontaktTelefon);
+                    students = _studenti.OrderBy(x => x.KontaktTelefon);
                     break;
                 case "EmailAdresa":
-                    students = _studenti.OrderBy(x => x.emailAdresa);
+                    students = _studenti.OrderBy(x => x.EmailAdresa);
                     break;
                 case "BrojIndeksa":
-                    students = _studenti.OrderBy(x => x.brojIndeksa);
+                    students = _studenti.OrderBy(x => x.BrojIndeksa);
                     break;
                 case "TrenutnaGodinaStudija":
-                    students = _studenti.OrderBy(x => x.trenutnaGodinaStudija);
+                    students = _studenti.OrderBy(x => x.TrenutnaGodinaStudija);
                     break;
                 case "Status":
-                    students = _studenti.OrderBy(x => x.status);
+                    students = _studenti.OrderBy(x => x.Status);
                     break;
                 case "ProsecnaOcena":
-                    students = _studenti.OrderBy(x => x.prosecnaOcena);
+                    students = _studenti.OrderBy(x => x.ProsecnaOcena);
                     break;
             }
 

@@ -7,7 +7,7 @@ using CLI.Serialization;
 
 namespace CLI.Model
 {
-    class OcenaNaUpisu : ISerializable
+    public class OcenaNaUpisu : ISerializable
     {
         public int idOcene { get; set; }
         public int idStudenta {  get; set; }

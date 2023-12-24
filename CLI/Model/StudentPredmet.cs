@@ -7,7 +7,7 @@ using CLI.Serialization;
 
 namespace CLI.Model
 {
-    class StudentPredmet : ISerializable
+    public class StudentPredmet : ISerializable
     {
         public int IdStudent { get; set; }
         public int IdPredmet { get; set; }

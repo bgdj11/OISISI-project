@@ -175,7 +175,7 @@ namespace CLI.Console
         {
             int id = InputStudentId();
             Student student = InputStudent();
-            student.idStudent = id;
+            student.IdStudent = id;
             Student? updatedStudent = _studentsDao.UpdateStudent(student);
             if (updatedStudent is null)
             {

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CLI.Model 
 {
-    class ProfesorPredmet : ISerializable
+    public class ProfesorPredmet : ISerializable
     {
         public int IdProfesora {  get; set; }
         public int IdPredmeta {  get; set; }

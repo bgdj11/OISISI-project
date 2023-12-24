@@ -33,10 +33,10 @@ namespace CLI.DAO
 
             foreach(OcenaNaUpisu o in _ocene)
             {
-                Student s = _studenti.Find(n => n.idStudent == o.idStudenta);
+                Student s = _studenti.Find(n => n.IdStudent == o.idStudenta);
                 o.student = s;
 
-                if(o.idStudenta == s.idStudent)
+                if(o.idStudenta == s.IdStudent)
                 {
                     s.PolozeniIspiti.Add(o);
                 }

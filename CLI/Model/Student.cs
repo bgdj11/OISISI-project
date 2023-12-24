@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Markup;
 using System.Xml.Linq;
 
-enum Status
+public enum Status
 {
     B,
     S
@@ -15,28 +15,28 @@ enum Status
 
 namespace CLI.Model
 {
-    class Student : ISerializable
+    public class Student : ISerializable
     {
 
-        public int idStudent { get; set; }
-        public string prezime { get; set; }
-        public string ime { get; set; }
-        public DateOnly datumRodjenja { get; set; }
+        public int IdStudent { get; set; }
+        public string Prezime { get; set; }
+        public string Ime { get; set; }
+        public DateOnly DatumRodjenja { get; set; }
 
-        public int idIndeksa {  get; set; }
+        public int IdIndeksa {  get; set; }
 
-        public Indeks indeks { get; set; }
+        public Indeks Indeks { get; set; }
 
-        public Adresa adresaStanovanja { get; set; }
+        public Adresa AdresaStanovanja { get; set; }
 
-        public int idAdrese { get; set; }
-        public string kontaktTelefon { get; set; }
-        public string emailAdresa { get; set; }
-        public string brojIndeksa { get; set; }
-        public int trenutnaGodinaStudija { get; set; }
+        public int IdAdrese { get; set; }
+        public string KontaktTelefon { get; set; }
+        public string EmailAdresa { get; set; }
+        public string BrojIndeksa { get; set; }
+        public int TrenutnaGodinaStudija { get; set; }
 
-        public Status status { get; set; }
-        public double prosecnaOcena { get; set; }
+        public Status Status { get; set; }
+        public double ProsecnaOcena { get; set; }
         public List<OcenaNaUpisu> PolozeniIspiti { get; set; }
 
         public List<Predmet> NepolozeniIspiti { get; set; }
@@ -45,8 +45,8 @@ namespace CLI.Model
 
         public Student()
         {
-            adresaStanovanja = new Adresa();
-            indeks = new Indeks();
+            AdresaStanovanja = new Adresa();
+            Indeks = new Indeks();
             PolozeniIspiti = new List<OcenaNaUpisu>();
             NepolozeniIspiti = new List<Predmet>();
         }
@@ -65,54 +65,114 @@ namespace CLI.Model
         int idInd,
         Indeks ind)
         {
-            this.prezime = prezime;
-            this.ime = ime;
-            this.datumRodjenja = datumRodjenja;
-            adresaStanovanja = a;
-            this.kontaktTelefon = kontaktTelefon;
-            this.emailAdresa = emailAdresa;
-            this.trenutnaGodinaStudija = trenutnaGodinaStudija;
-            this.status = status;
-            this.prosecnaOcena = prosecnaOcena;
-            idAdrese = adresa;
-            idIndeksa = idInd;
-            indeks = ind;
+            this.Prezime = prezime;
+            this.Ime = ime;
+            this.DatumRodjenja = datumRodjenja;
+            AdresaStanovanja = a;
+            this.KontaktTelefon = kontaktTelefon;
+            this.EmailAdresa = emailAdresa;
+            this.TrenutnaGodinaStudija = trenutnaGodinaStudija;
+            this.Status = status;
+            this.ProsecnaOcena = prosecnaOcena;
+            IdAdrese = adresa;
+            IdIndeksa = idInd;
+            Indeks = ind;
             PolozeniIspiti = new List<OcenaNaUpisu>();
             NepolozeniIspiti = new List<Predmet>();
+        }
+
+        public Student(
+            string prezime, 
+            string ime,
+            DateOnly datumRodjenja,
+            string adresa,
+            string kontakttel,
+            string email,
+            string indeks, 
+            int godinastudija,
+            string status,
+            double prosecnaocena
+        )
+        {
+            this.Prezime = prezime;
+            this.Ime = ime;
+            this.DatumRodjenja = datumRodjenja;
+            this.AdresaStanovanja = makeAdresa(adresa);
+            this.KontaktTelefon = kontakttel;
+            this.EmailAdresa = email;
+            this.Indeks = makeIndex(indeks);
+            this.TrenutnaGodinaStudija = godinastudija;
+            this.Status = Status.B;
+            this.ProsecnaOcena = prosecnaocena;
+            PolozeniIspiti = new List<OcenaNaUpisu>();
+            NepolozeniIspiti = new List<Predmet>();
+            this.IdIndeksa = this.AdresaStanovanja.idAdrese;
+            this.IdIndeksa = this.Indeks.idIndeksa;
+
+        }
+
+
+        private Adresa makeAdresa(string input)
+        {
+            var delovi = input.Split(',');
+            if (delovi.Length != 4)
+            {
+                throw new FormatException("String ne sadrži ispravan broj polja.");
+            }
+
+            return new Adresa
+            (   delovi[0].Trim(),
+                int.Parse(delovi[1].Trim()),
+                delovi[2].Trim(),
+                delovi[3].Trim()
+            );
+        }
+
+        private Indeks makeIndex(string input)
+        {
+            string[] parts = input.Split('/');
+
+            string oznaka = input.Substring(0, 2);
+            int upis = int.Parse(parts[0].Substring(3));
+            int godina = int.Parse(parts[1]);
+
+            Indeks indeks = new Indeks(oznaka, upis, godina);
+
+            return indeks;
         }
 
         public string[] ToCSV()
         {
             string[] csvValues =
             {
-                idStudent.ToString(),
-                prezime,
-                ime,
-                datumRodjenja.ToString(),
-                idAdrese.ToString(),
-                kontaktTelefon,
-                emailAdresa,
-                idIndeksa.ToString(),
-                trenutnaGodinaStudija.ToString(),
-                Enum.GetName(typeof(Status),status),
-                prosecnaOcena.ToString(),
+                IdStudent.ToString(),
+                Prezime,
+                Ime,
+                DatumRodjenja.ToString(),
+                IdAdrese.ToString(),
+                KontaktTelefon,
+                EmailAdresa,
+                IdIndeksa.ToString(),
+                TrenutnaGodinaStudija.ToString(),
+                Enum.GetName(typeof(Status),Status),
+                ProsecnaOcena.ToString(),
         };
             return csvValues;
         }
 
         public void FromCSV(string[] values)
         {
-            idStudent = int.Parse(values[0]);
-            prezime = values[1];
-            ime = values[2];
-            datumRodjenja = DateOnly.Parse(values[3]);
-            idAdrese = int.Parse(values[4]);
-            kontaktTelefon = values[5];
-            emailAdresa = values[6];
-            idIndeksa = int.Parse(values[7]);
-            trenutnaGodinaStudija = int.Parse(values[8]);
-            status = (Status)Enum.Parse(typeof(Status), values[9]);
-            prosecnaOcena = double.Parse(values[10]);  
+            IdStudent = int.Parse(values[0]);
+            Prezime = values[1];
+            Ime = values[2];
+            DatumRodjenja = DateOnly.Parse(values[3]);
+            IdAdrese = int.Parse(values[4]);
+            KontaktTelefon = values[5];
+            EmailAdresa = values[6];
+            IdIndeksa = int.Parse(values[7]);
+            TrenutnaGodinaStudija = int.Parse(values[8]);
+            Status = (Status)Enum.Parse(typeof(Status), values[9]);
+            ProsecnaOcena = double.Parse(values[10]);  
         }
 
 
@@ -123,17 +183,17 @@ namespace CLI.Model
             int maxLabelLength = 30;
             string format = "{0,-" + maxLabelLength + "}: {1}";
 
-            sb.AppendLine(string.Format(format, "ID studenta", idStudent));
-            sb.AppendLine(string.Format(format, "Prezime", prezime));
-            sb.AppendLine(string.Format(format, "Ime", ime));
-            sb.AppendLine(string.Format(format, "Datum rođenja", datumRodjenja.ToString("dd.MM.yyyy")));
-            sb.AppendLine(string.Format(format, "Adresa stanovanja", adresaStanovanja.ToString()));
-            sb.AppendLine(string.Format(format, "Kontakt telefon", kontaktTelefon));
-            sb.AppendLine(string.Format(format, "Email adresa", emailAdresa));
-            sb.AppendLine(string.Format(format, "Broj indeksa", indeks.ToString()));
-            sb.AppendLine(string.Format(format, "Trenutna godina studija", trenutnaGodinaStudija));
-            sb.AppendLine(string.Format(format, "Status", status));
-            sb.AppendLine(string.Format(format, "Prosečna ocena", prosecnaOcena));
+            sb.AppendLine(string.Format(format, "ID studenta", IdStudent));
+            sb.AppendLine(string.Format(format, "Prezime", Prezime));
+            sb.AppendLine(string.Format(format, "Ime", Ime));
+            sb.AppendLine(string.Format(format, "Datum rođenja", DatumRodjenja.ToString("dd.MM.yyyy")));
+            sb.AppendLine(string.Format(format, "Adresa stanovanja", AdresaStanovanja.ToString()));
+            sb.AppendLine(string.Format(format, "Kontakt telefon", KontaktTelefon));
+            sb.AppendLine(string.Format(format, "Email adresa", EmailAdresa));
+            sb.AppendLine(string.Format(format, "Broj indeksa", Indeks.ToString()));
+            sb.AppendLine(string.Format(format, "Trenutna godina studija", TrenutnaGodinaStudija));
+            sb.AppendLine(string.Format(format, "Status", Status));
+            sb.AppendLine(string.Format(format, "Prosečna ocena", ProsecnaOcena));
 
             return sb.ToString();
         }

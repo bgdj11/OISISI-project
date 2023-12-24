@@ -14,13 +14,18 @@ namespace CLI.DAO
         public IndeksDAO()
         {
             _storage = new Storage<Indeks>("indeksi.csv");
-            _indeksi = new List<Indeks>();
+            _indeksi = _storage.Load();
         }
 
         public int GenerateID()
         {
             if (_indeksi.Count == 0) return 0;
             return _indeksi[^1].idIndeksa + 1;
+        }
+
+        public int GetLastID()
+        {
+            return _indeksi[^1].idIndeksa;
         }
 
         public Indeks AddIndeks(Indeks indeks)

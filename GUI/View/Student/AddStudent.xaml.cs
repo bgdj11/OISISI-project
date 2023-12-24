@@ -50,8 +50,8 @@ namespace GUI.View.Student
         {
             if (ValidateFields())
             {
-                adresaDAO.AddAdresa(Student.toStudent().AdresaStanovanja);
-                indeksDAO.AddIndeks(Student.toStudent().Indeks);
+                //adresaDAO.AddAdresa(Student.toStudent().AdresaStanovanja);
+                //indeksDAO.AddIndeks(Student.toStudent().Indeks);
                 studentsDAO.AddStudent(Student.toStudent());
                 MessageBox.Show("Student je uspesno dodat!", "Uspesno", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();

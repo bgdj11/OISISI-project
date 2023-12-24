@@ -32,7 +32,6 @@ namespace CLI.Model
         public int IdAdrese { get; set; }
         public string KontaktTelefon { get; set; }
         public string EmailAdresa { get; set; }
-        public string BrojIndeksa { get; set; }
         public int TrenutnaGodinaStudija { get; set; }
 
         public Status Status { get; set; }
@@ -106,8 +105,8 @@ namespace CLI.Model
             this.ProsecnaOcena = prosecnaocena;
             PolozeniIspiti = new List<OcenaNaUpisu>();
             NepolozeniIspiti = new List<Predmet>();
-            this.IdIndeksa = this.AdresaStanovanja.idAdrese;
-            this.IdIndeksa = this.Indeks.idIndeksa;
+            //this.IdAdrese = this.AdresaStanovanja.idAdrese;
+            //this.IdIndeksa = this.Indeks.idIndeksa;
 
         }
 

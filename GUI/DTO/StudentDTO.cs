@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using CLI.Model;
 
 namespace GUI.DTO
@@ -90,7 +91,7 @@ namespace GUI.DTO
                 if (adresaStanovanja != value)
                 {
                     adresaStanovanja = value;
-                    OnPropertyChanged("IdAdrese");
+                    OnPropertyChanged("AdresaStanovanja");
                 }
             }
         }
@@ -141,7 +142,7 @@ namespace GUI.DTO
                 if (indeks != value)
                 {
                     indeks = value;
-                    OnPropertyChanged("BrojIndeksa");
+                    OnPropertyChanged("Indeks");
                 }
             }
         }
@@ -217,6 +218,8 @@ namespace GUI.DTO
 
         public Student toStudent()
         {
+            MessageBox.Show("Indeks: " + indeks + "\nAdresa Stanovanja: " + adresaStanovanja);
+
             return new Student(prezime, ime, datumRodjenja, adresaStanovanja, kontaktTelefon, emailAdresa, indeks, trenutnaGodinaStudija, statusStudenta, prosecnaOcena);
         }
 

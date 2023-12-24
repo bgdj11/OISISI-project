@@ -17,7 +17,8 @@ public class StudentDAO
         private readonly List<Student> _studenti;
         private readonly Storage<Student> _storage;
 
-
+        private readonly AdresaDAO adresaDAO = new AdresaDAO();
+        private readonly IndeksDAO indeksDAO = new IndeksDAO();
         public StudentDAO()
         {
             _storage = new Storage<Student>("studenti.csv");
@@ -99,6 +100,10 @@ public class StudentDAO
         public Student AddStudent(Student student)
         {
             student.IdStudent = GenerateId();
+            indeksDAO.AddIndeks(student.Indeks);
+            adresaDAO.AddAdresa(student.AdresaStanovanja);
+            student.IdIndeksa = indeksDAO.GetLastID();
+            student.IdAdrese = adresaDAO.GetLastID();
             _studenti.Add(student);
             MakeStudent();
             _storage.Save(_studenti);
@@ -116,7 +121,7 @@ public class StudentDAO
             oldStudent.IdAdrese = student.IdAdrese;
             oldStudent.KontaktTelefon = student.KontaktTelefon;
             oldStudent.EmailAdresa = student.EmailAdresa;
-            oldStudent.BrojIndeksa = student.BrojIndeksa;
+            oldStudent.IdIndeksa = student.IdIndeksa;
             oldStudent.TrenutnaGodinaStudija = student.TrenutnaGodinaStudija;
             oldStudent.Status = student.Status;
             oldStudent.ProsecnaOcena = student.ProsecnaOcena;
@@ -172,9 +177,6 @@ public class StudentDAO
                     break;
                 case "EmailAdresa":
                     students = _studenti.OrderBy(x => x.EmailAdresa);
-                    break;
-                case "BrojIndeksa":
-                    students = _studenti.OrderBy(x => x.BrojIndeksa);
                     break;
                 case "TrenutnaGodinaStudija":
                     students = _studenti.OrderBy(x => x.TrenutnaGodinaStudija);

@@ -23,6 +23,11 @@ namespace CLI.DAO
             return _adrese[^1].idAdrese + 1;
         }
 
+        public int GetLastID()
+        {
+            return _adrese[^1].idAdrese;
+        }
+
         public Adresa AddAdresa(Adresa adresa)
         {
             adresa.idAdrese = GenerateID();

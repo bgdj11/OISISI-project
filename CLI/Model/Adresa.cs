@@ -49,10 +49,10 @@ namespace CLI.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("Ulica: ").Append(ulica).Append(", ");
-            sb.Append("Broj: ").Append(broj).Append(", ");
-            sb.Append("Grad: ").Append(grad).Append(", ");
-            sb.Append("Drzava: ").Append(drzava);
+            sb.Append(ulica).Append(", ");
+            sb.Append(broj).Append(", ");
+            sb.Append(grad).Append(", ");
+            sb.Append(drzava);
             return sb.ToString();
         }
 

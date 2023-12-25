@@ -33,6 +33,8 @@ namespace GUI
         public ObservableCollection<ProfesorDTO> Profesors { get; set; }
         public StudentDTO SelectedStudent { get; set; }
 
+        public ProfesorDTO SelectedProfesor { get; set; }
+
         private ProfesorDAO profesorDAO;
         private StudentDAO studentDAO { get; set; }
         private AdresaDAO adresaDAO { get; set; }
@@ -46,6 +48,10 @@ namespace GUI
             DataContext = this;
             Students = new ObservableCollection<StudentDTO>();
             studentDAO = new StudentDAO();
+
+            Profesors = new ObservableCollection<ProfesorDTO>();
+            profesorDAO = new ProfesorDAO();
+
             Update();
         }
 
@@ -103,6 +109,10 @@ namespace GUI
 
         public void Update()
         {
+            Profesors.Clear();
+            foreach (Profesor profesor in profesorDAO.GetAllProfesors())
+                Profesors.Add(new ProfesorDTO(profesor));
+
             Students.Clear();
             foreach (Student student in studentDAO.GetAllStudents()) 
                 Students.Add(new StudentDTO(student));
@@ -147,6 +157,7 @@ namespace GUI
                 addProfesorWindow.Owner = this;
                 addProfesorWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 addProfesorWindow.ShowDialog();
+                Update();
             }
         }
 
@@ -171,6 +182,25 @@ namespace GUI
                     }
                 }
             }
+            else if (MainTabControl.SelectedItem == ProfesorsTab) {
+                if (SelectedProfesor == null)
+                {
+                    MessageBox.Show(this, "Izaberite profesora za brisanje!");
+                }
+                else
+                {
+                    var confirmationDialog = new ConfirmationWindow("Profesor");
+                    confirmationDialog.Owner = this;
+                    confirmationDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                    confirmationDialog.ShowDialog();
+
+                    if (confirmationDialog.UserConfirmed)
+                    {
+                        profesorDAO.RemoveProfesor(SelectedProfesor.IdProfesor);
+                    }
+                }
+            }
+            Update();
         }
 
         private void CreateEntityButton_Click(object sender, RoutedEventArgs e)

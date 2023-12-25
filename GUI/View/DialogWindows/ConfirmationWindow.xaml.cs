@@ -26,7 +26,7 @@ namespace GUI.View.DialogWindows
         {
             InitializeComponent();
 
-            ConfirmationMessage.Text = $"Are you sure you want to remove the {entityType.ToLower()}?";
+            ConfirmationMessage.Text = $"Da li si siguran da zelis da obrise: {entityType.ToLower()}?";
         }
 
         private void YesButton_Click(object sender, RoutedEventArgs e)

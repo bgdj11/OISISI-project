@@ -7,8 +7,23 @@ namespace GUI.DTO
 {
     public class ProfesorDTO : INotifyPropertyChanged
     {
-        private int IdProfesor { get; set; }
+        private int idProfesor { get; set; }
 
+        public int IdProfesor
+        {
+            get
+            {
+                return idProfesor;
+            }
+            set
+            {
+                if (idProfesor != value)
+                {
+                    idProfesor = value;
+                    OnPropertyChanged("IdProfesor");
+                }
+            }
+        }
 
         private string prezime { get; set; }
         public string Prezime

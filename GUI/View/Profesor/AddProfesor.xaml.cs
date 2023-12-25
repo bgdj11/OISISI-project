@@ -24,7 +24,6 @@ namespace GUI.View.Profesor
         public ProfesorDTO Profesor { get; set; }
         private ProfesorDAO profesorsDAO;
         private AdresaDAO adresaDAO;
-        private IndeksDAO indeksDAO;
 
 
         public event PropertyChangedEventHandler? PropertyChanged;

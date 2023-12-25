@@ -86,6 +86,7 @@
             </Menu>
 
             <TabControl Grid.Row="2" x:Name="MainTabControl" Grid.ColumnSpan="2">
+
                 <TabItem x:Name="StudentsTab" Header="Studenti">
                     <DataGrid Height="350"
                   AutoGenerateColumns="False"
@@ -100,6 +101,25 @@
                             <DataGridTextColumn Header="Godina Studija" Binding="{Binding TrenutnaGodinaStudija}"/>
                             <DataGridTextColumn Header="Status" Binding="{Binding StatusStudenta}"/>
                             <DataGridTextColumn Header="Prosek" Binding="{Binding ProsecnaOcena}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+
+                <TabItem x:Name="ProfesorsTab" Header="Profesori">
+                    <DataGrid Height="350"
+                  AutoGenerateColumns="False"
+                  x:Name="ProfesorsDataGrid"
+                  ItemsSource="{Binding Profesors, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding SelectedProfesor, UpdateSourceTrigger=PropertyChanged}"
+                  SelectionMode="Single" IsReadOnly="True" SelectionChanged="StudentsDataGrid_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Ime" Binding="{Binding Ime}"/>
+                            <DataGridTextColumn Header="Prezime" Binding="{Binding Prezime}"/>
+                            <DataGridTextColumn Header="Adresa" Binding="{Binding Adresa}"/>
+                            <DataGridTextColumn Header="Kontakt Telefon" Binding="{Binding KontaktTelefon}"/>
+                            <DataGridTextColumn Header="Email" Binding="{Binding EmailAdresa}"/>
+                            <DataGridTextColumn Header="Zvanje" Binding="{Binding Zvanje}"/>
+                            <DataGridTextColumn Header="Godine Staza" Binding="{Binding GodineStaza}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>

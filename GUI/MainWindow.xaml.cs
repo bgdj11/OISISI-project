@@ -19,6 +19,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GUI.View.Profesor;
 
 namespace GUI
 {
@@ -28,7 +29,11 @@ namespace GUI
     public partial class MainWindow : Window, IObserver
     {
         public ObservableCollection<StudentDTO> Students { get; set; }
+
+        public ObservableCollection<ProfesorDTO> Profesors { get; set; }
         public StudentDTO SelectedStudent { get; set; }
+
+        private ProfesorDAO profesorDAO;
         private StudentDAO studentDAO { get; set; }
         private AdresaDAO adresaDAO { get; set; }
         private IndeksDAO indeksDAO { get; set; }
@@ -36,6 +41,7 @@ namespace GUI
         public MainWindow()
         {
             InitializeComponent();
+            InitializeStatusBar();
 
             DataContext = this;
             Students = new ObservableCollection<StudentDTO>();
@@ -134,6 +140,13 @@ namespace GUI
                 addStudentWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 addStudentWindow.ShowDialog();
                 Update();
+            }
+            else if (MainTabControl.SelectedItem == ProfesorsTab)
+            {
+                var addProfesorWindow = new AddProfesor(profesorDAO, adresaDAO);
+                addProfesorWindow.Owner = this;
+                addProfesorWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                addProfesorWindow.ShowDialog();
             }
         }
 

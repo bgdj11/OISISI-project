@@ -9,7 +9,7 @@ using CLI.Storage;
 
 namespace CLI.DAO
 {
-    class PredmetDAO
+    public class PredmetDAO
     {
         private readonly List<Predmet> _predmeti;
         private readonly Storage<Predmet> _storage;

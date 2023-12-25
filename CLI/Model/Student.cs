@@ -101,7 +101,7 @@ namespace CLI.Model
             this.EmailAdresa = email;
             this.Indeks = makeIndex(indeks);
             this.TrenutnaGodinaStudija = godinastudija;
-            this.Status = Status.B;
+            this.Status = MakeStatus(status);
             this.ProsecnaOcena = prosecnaocena;
             PolozeniIspiti = new List<OcenaNaUpisu>();
             NepolozeniIspiti = new List<Predmet>();
@@ -110,6 +110,13 @@ namespace CLI.Model
 
         }
 
+        public Status MakeStatus(string stat)
+        {
+            if (stat.Equals("Samofinansiranje"))
+                return Status.S;
+            else
+                return Status.B;
+        }
 
         private Adresa makeAdresa(string input)
         {

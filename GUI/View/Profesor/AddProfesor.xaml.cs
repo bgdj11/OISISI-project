@@ -23,19 +23,17 @@ namespace GUI.View.Profesor
     {
         public ProfesorDTO Profesor { get; set; }
         private ProfesorDAO profesorsDAO;
-        private AdresaDAO adresaDAO;
 
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public AddProfesor(ProfesorDAO profesorDAO, AdresaDAO adresaDAO) 
+        public AddProfesor(ProfesorDAO profesorDAO) 
         {
             InitializeComponent();
 
             DataContext = this;
             Profesor = new ProfesorDTO();
             this.profesorsDAO = profesorDAO;
-            this.adresaDAO = adresaDAO;
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -49,7 +47,7 @@ namespace GUI.View.Profesor
             if (ValidateFields())
             {
                 profesorsDAO.AddProfesor(Profesor.toProfesor());
-                MessageBox.Show("Student je uspesno dodat!", "Uspesno", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Profesor je uspesno dodat!", "Uspesno", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
             else

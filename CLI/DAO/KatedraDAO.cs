@@ -15,6 +15,7 @@ namespace CLI.DAO
         {
             _storage = new Storage<Katedra>("katedre.csv");
             _katedre = new List<Katedra>();
+            MakeKatedra();
         }
 
         public int GenerateID()

@@ -45,12 +45,12 @@ namespace GUI.View.Predmet
             if (ValidateFields())
             {
                 predmetDAO.AddPredmet(Predmet.toPredmet());
-                MessageBox.Show("Predmet je uspesno dodat!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Predmet je uspesno dodat!", "Uspesno", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
             else
             {
-                MessageBox.Show("Popunite sva polja!", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Popunite sva polja!", "Greska", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

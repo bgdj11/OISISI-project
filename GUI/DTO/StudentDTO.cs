@@ -218,7 +218,6 @@ namespace GUI.DTO
 
         public Student toStudent()
         {
-            MessageBox.Show("Indeks: " + indeks + "\nAdresa Stanovanja: " + adresaStanovanja);
 
             return new Student(prezime, ime, datumRodjenja, adresaStanovanja, kontaktTelefon, emailAdresa, indeks, trenutnaGodinaStudija, statusStudenta, prosecnaOcena);
         }

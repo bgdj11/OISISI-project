@@ -24,20 +24,16 @@ namespace GUI.View.Student
     {
         public StudentDTO Student { get; set; }
         private StudentDAO studentsDAO;
-        private AdresaDAO adresaDAO;
-        private IndeksDAO indeksDAO;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public AddStudent(StudentDAO studentsDAO, IndeksDAO indeksDAO, AdresaDAO adresaDAO)
+        public AddStudent(StudentDAO studentsDAO)
         {
             InitializeComponent();
 
             DataContext = this;
             Student = new StudentDTO();
             this.studentsDAO = studentsDAO;
-            this.adresaDAO = adresaDAO;
-            this.indeksDAO = indeksDAO;
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

@@ -20,6 +20,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GUI.View.Profesor;
+using GUI.View.Predmet;
 
 namespace GUI
 {
@@ -29,16 +30,17 @@ namespace GUI
     public partial class MainWindow : Window, IObserver
     {
         public ObservableCollection<StudentDTO> Students { get; set; }
-
         public ObservableCollection<ProfesorDTO> Profesors { get; set; }
+        public ObservableCollection<PredmetDTO> Subjects { get; set; }
+
         public StudentDTO SelectedStudent { get; set; }
-
         public ProfesorDTO SelectedProfesor { get; set; }
+        public PredmetDTO SelectedPredmet { get; set; }
 
-        private ProfesorDAO profesorDAO;
+        private ProfesorDAO profesorDAO { get; set; }
         private StudentDAO studentDAO { get; set; }
-        private AdresaDAO adresaDAO { get; set; }
-        private IndeksDAO indeksDAO { get; set; }
+        private PredmetDAO predmetDAO { get; set; }
+
 
         public MainWindow()
         {
@@ -46,11 +48,15 @@ namespace GUI
             InitializeStatusBar();
 
             DataContext = this;
+
             Students = new ObservableCollection<StudentDTO>();
             studentDAO = new StudentDAO();
 
             Profesors = new ObservableCollection<ProfesorDTO>();
             profesorDAO = new ProfesorDAO();
+
+            Subjects = new ObservableCollection<PredmetDTO>();
+            predmetDAO = new PredmetDAO();
 
             Update();
         }
@@ -62,15 +68,30 @@ namespace GUI
 
         private void MenuItem_Predmeti_Click()
         {
-           
+            MainTabControl.SelectedItem = MainTabControl.Items.Cast<TabItem>().First(tab => tab.Header.Equals("Predmeti"));
         }
+
         private void MenuItem_Predmeti_Click(object sender, RoutedEventArgs e)
         {
-            
+            MenuItem_Predmeti_Click();
         }
+
+        private void MenuItem_Profesori_Click()
+        {
+            MainTabControl.SelectedItem = MainTabControl.Items.Cast<TabItem>().First(tab => tab.Header.Equals("Profesori"));
+        }
+
         private void MenuItem_Profesori_Click(object sender, RoutedEventArgs e)
         {
-          
+            MenuItem_Profesori_Click();
+        }
+        private void MenuItem_Studenti_Click()
+        {
+            MainTabControl.SelectedItem = MainTabControl.Items.Cast<TabItem>().First(tab => tab.Header.Equals("Studenti"));
+        }
+        private void MenuItem_Studenti_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem_Studenti_Click();
         }
 
         private void AddNewEntity(object sender, RoutedEventArgs e)
@@ -98,14 +119,6 @@ namespace GUI
         }
 
 
-        private void MenuItem_Studenti_Click()
-        {
-            MainTabControl.SelectedItem = MainTabControl.Items.Cast<TabItem>().First(tab => tab.Header.Equals("Studenti"));
-        }
-        private void MenuItem_Studenti_Click(object sender, RoutedEventArgs e)
-        {
-            MenuItem_Studenti_Click();
-        }
 
         public void Update()
         {
@@ -116,11 +129,15 @@ namespace GUI
             Students.Clear();
             foreach (Student student in studentDAO.GetAllStudents()) 
                 Students.Add(new StudentDTO(student));
+
+            Subjects.Clear();
+            foreach (Predmet predmet in predmetDAO.GetAllPredmeti())
+                Subjects.Add(new PredmetDTO(predmet));
+
         }
 
         private void InitializeStatusBar()
         {
-            // Update date and time every second
             var timer = new System.Windows.Threading.DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             timer.Tick += (sender, e) =>
             {
@@ -145,7 +162,7 @@ namespace GUI
         {
             if (MainTabControl.SelectedItem == StudentsTab)
             {
-                var addStudentWindow = new AddStudent(studentDAO, indeksDAO, adresaDAO);
+                var addStudentWindow = new AddStudent(studentDAO);
                 addStudentWindow.Owner = this;
                 addStudentWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 addStudentWindow.ShowDialog();
@@ -153,10 +170,18 @@ namespace GUI
             }
             else if (MainTabControl.SelectedItem == ProfesorsTab)
             {
-                var addProfesorWindow = new AddProfesor(profesorDAO, adresaDAO);
+                var addProfesorWindow = new AddProfesor(profesorDAO);
                 addProfesorWindow.Owner = this;
                 addProfesorWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 addProfesorWindow.ShowDialog();
+                Update();
+            }
+            else if (MainTabControl.SelectedItem == SubjectsTab)
+            {
+                var addPredmetWindow = new AddPredmet(predmetDAO);
+                addPredmetWindow.Owner = this;
+                addPredmetWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                addPredmetWindow.ShowDialog();
                 Update();
             }
         }
@@ -199,6 +224,24 @@ namespace GUI
                         profesorDAO.RemoveProfesor(SelectedProfesor.IdProfesor);
                     }
                 }
+            } else
+            {
+                if (SelectedPredmet == null)
+                {
+                    MessageBox.Show(this, "Izaberite predmet za brisanje!");
+                } 
+                else
+                {
+                    var confirmationDialog = new ConfirmationWindow("Predmet");
+                    confirmationDialog.Owner = this;
+                    confirmationDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                    confirmationDialog.ShowDialog();
+
+                    if (confirmationDialog.UserConfirmed)
+                    {
+                        predmetDAO.RemovePredmet(SelectedPredmet.predmetId);
+                    }
+                }
             }
             Update();
         }
@@ -213,6 +256,15 @@ namespace GUI
 
         }
 
+        private void ProfesorsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void SubjectsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
 
     }
 }

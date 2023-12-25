@@ -18,6 +18,7 @@ namespace CLI.DAO
         {
             _storage = new Storage<Predmet>("predmeti.csv");
             _predmeti = _storage.Load();
+            MakePredmet();
         }
 
         private int GenerateId()
@@ -66,8 +67,9 @@ namespace CLI.DAO
         public Predmet AddPredmet(Predmet predmet)
         {
             predmet.idPredmet = GenerateId();
-            _predmeti.Add(predmet);
             MakePredmet();
+            _predmeti.Add(predmet);
+            
             _storage.Save(_predmeti);
             return predmet;
         }

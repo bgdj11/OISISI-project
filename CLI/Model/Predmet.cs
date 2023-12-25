@@ -45,13 +45,13 @@ namespace CLI.Model
             spisakNepolozenihStudenata = new List<Student>();
         }
 
-        public Predmet(string sifra, string naziv, string sem, int godina, int idProfesora, int espb)
+        public Predmet(string sifra, string naziv, string sem, int godina, int idProf, int espb)
         {
             sifraPredmeta = sifra;
             nazivPredmeta = naziv;
             semestar = MakeSemestar(sem);
             godinaStudija = godina;
-            this.idProfesora = idProfesora;
+            idProfesora = idProf;
             brojESPB = espb;
             spisakPolozenihStudenata = new List<Student>();
             spisakNepolozenihStudenata = new List<Student>();

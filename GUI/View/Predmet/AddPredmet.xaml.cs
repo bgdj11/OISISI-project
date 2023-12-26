@@ -26,12 +26,21 @@ namespace GUI.View.Predmet
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
+        List<string> Semesters { get; set; }
+        List<int> Godine { get; set; }
+
         public AddPredmet(PredmetDAO predmetDAO)
         {
             InitializeComponent();
             DataContext = this;
             Predmet = new PredmetDTO();
             this.predmetDAO = predmetDAO;
+
+            Semesters = new List<string> { "letnji", "zimski" };
+            cmbSemestar.ItemsSource = Semesters;
+
+            Godine = new List<int> { 1, 2, 3, 4 };
+            cmbGodinaStudija.ItemsSource = Godine;
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

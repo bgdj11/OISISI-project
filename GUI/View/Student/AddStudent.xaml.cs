@@ -27,6 +27,9 @@ namespace GUI.View.Student
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
+        List<int> Godine;
+        List<string> Statusi;
+
         public AddStudent(StudentDAO studentsDAO)
         {
             InitializeComponent();
@@ -34,6 +37,12 @@ namespace GUI.View.Student
             DataContext = this;
             Student = new StudentDTO();
             this.studentsDAO = studentsDAO;
+
+            Godine = new List<int> { 1, 2, 3, 4 };
+            cmbGodinaStudija.ItemsSource = Godine;
+
+            Statusi = new List<string> { "samofinasiranje", "budzet" };
+            cmbStatusStudenta.ItemsSource = Statusi;
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

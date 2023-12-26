@@ -109,6 +109,7 @@ namespace CLI.DAO
 
         public List<Predmet> GetAllPredmeti()
         {
+            MakePredmet();
             return _predmeti;
         }
 

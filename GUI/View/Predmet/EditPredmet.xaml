@@ -39,17 +39,13 @@
             <TextBox Name="txtBoxNaziv" Text="{Binding Path=Predmet.NazivPredmeta, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5"/>
 
             <Label Content="Semestar:" Grid.Row="2"/>
-            <ComboBox Name="cmbSemestar"  SelectedItem="{Binding Path=Predmet.Semestar, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" Width="170" Margin="0,0,0,5">
-                <ComboBoxItem>letnji</ComboBoxItem>
-                <ComboBoxItem>zimski</ComboBoxItem>
+            <ComboBox Name="cmbSemestar" SelectedItem="{Binding Path=Predmet.Semestar, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" Width="170" Margin="0,0,0,5">
+                
             </ComboBox>
 
             <Label Content="Godina Studija:" Grid.Row="3"/>
             <ComboBox Name="cmbGodinaStudija"  SelectedItem="{Binding Path=Predmet.GodinaStudija, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" Width="175" Margin="0,0,0,5">
-                <ComboBoxItem>1</ComboBoxItem>
-                <ComboBoxItem>2</ComboBoxItem>
-                <ComboBoxItem>3</ComboBoxItem>
-                <ComboBoxItem>4</ComboBoxItem>
+
             </ComboBox>
 
             <Label Content="ID profesora:" Grid.Row="4"/>

@@ -83,6 +83,7 @@
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
+                
             </Menu>
 
             <TabControl Grid.Row="2" x:Name="MainTabControl" Grid.ColumnSpan="2">
@@ -149,11 +150,11 @@
             
             
             <StatusBar Grid.Row="3" VerticalAlignment="Center" Grid.ColumnSpan="2">
-    <TextBlock FontWeight="Bold" x:Name="statusAppName">Studentska sluzba</TextBlock>
-    <TextBlock>Status 2</TextBlock>
-    <TextBlock x:Name="statusTime" HorizontalAlignment="Right" Margin="0,0,10,0">Time:</TextBlock>
-    <TextBlock x:Name="statusDate" HorizontalAlignment="Right">Date:</TextBlock>
-</StatusBar>
+                <TextBlock FontWeight="Bold" x:Name="statusAppName">Studentska sluzba</TextBlock>
+                <TextBlock>Status 2</TextBlock>
+                <TextBlock x:Name="statusTime" HorizontalAlignment="Right" Margin="0,0,10,0">Time:</TextBlock>
+                <TextBlock x:Name="statusDate" HorizontalAlignment="Right">Date:</TextBlock>
+            </StatusBar>
 
         </Grid>
     </Grid>

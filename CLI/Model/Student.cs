@@ -112,7 +112,7 @@ namespace CLI.Model
 
         public Status MakeStatus(string stat)
         {
-            if (stat.Equals("Samofinansiranje"))
+            if (stat.Equals("samofinansiranje"))
                 return Status.S;
             else
                 return Status.B;

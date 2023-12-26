@@ -28,12 +28,21 @@ namespace GUI.View.Predmet
         public PredmetDAO predmetDAO { get; set; }
         public PredmetDTO Predmet { get; set; }
 
+        List<string> Semesters { get; set; }
+        List<int> Godine { get; set; }
+
         public EditPredmet(PredmetDAO predmetDAO, PredmetDTO selectedPredmet)
         {
             InitializeComponent();
             DataContext = this;
             this.predmetDAO = predmetDAO;
             this.Predmet = selectedPredmet;
+
+            Semesters = new List<string> { "letnji", "zimski" };
+            cmbSemestar.ItemsSource = Semesters;
+
+            Godine = new List<int> { 1, 2, 3, 4 };
+            cmbGodinaStudija.ItemsSource = Godine;
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

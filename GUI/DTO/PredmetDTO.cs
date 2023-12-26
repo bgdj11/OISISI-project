@@ -164,5 +164,21 @@ namespace GUI.DTO
             espb = predmet.brojESPB;
         }
 
+        public PredmetDTO clone()
+        {
+            PredmetDTO pr = new PredmetDTO();
+
+            pr.predmetId = this.predmetId;
+            pr.sifraPredmeta = this.sifraPredmeta;
+            pr.nazivPredmeta = this.nazivPredmeta;
+            pr.semestar = this.semestar;
+            pr.godinaStudija = this.godinaStudija;
+            pr.profesor = this.profesor;
+            pr.profesorID = this.profesorID;
+            pr.espb = this.ESPB;
+
+            return pr;
+        }
+
     }
 }

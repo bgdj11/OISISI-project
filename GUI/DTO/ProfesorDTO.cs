@@ -25,6 +25,8 @@ namespace GUI.DTO
             }
         }
 
+        public int idAdrese {  get; set; }
+
         private string prezime { get; set; }
         public string Prezime
         {
@@ -204,6 +206,7 @@ namespace GUI.DTO
             Zvanje = profesor.Zvanje;
             GodineStaza = profesor.GodineStaza;
             IdKatedre = profesor.IdKatedre;
+            idAdrese = profesor.IdAdrese;
         }
 
 
@@ -221,15 +224,16 @@ namespace GUI.DTO
                 BrojLicneKarte = this.BrojLicneKarte,
                 Zvanje = this.Zvanje,
                 GodineStaza = this.GodineStaza,
-                IdKatedre = this.IdKatedre
-
-        };
+                IdKatedre = this.IdKatedre,
+                idAdrese= this.idAdrese
+                
+            };
         }
 
 
         public Profesor toProfesor()
         {
-            return new Profesor(Prezime, Ime, Adresa, DatumRodjenja, KontaktTelefon, EmailAdresa, BrojLicneKarte, Zvanje, GodineStaza, IdKatedre);
+            return new Profesor( Prezime, Ime, Adresa, DatumRodjenja, KontaktTelefon, EmailAdresa, BrojLicneKarte, Zvanje, GodineStaza, IdKatedre);
         }
     }
 }

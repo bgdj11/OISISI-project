@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI.View.Profesor"
         mc:Ignorable="d"
-        Title="EditProfesor" Height="450" Width="350">
+        Title="Izmeni profesora" Height="450" Width="350">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>

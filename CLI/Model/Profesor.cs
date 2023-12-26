@@ -109,7 +109,7 @@ namespace CLI.Model
                 Prezime,
                 Ime,
                 DatumRodjenja.ToString(),
-                AdresaStanovanja.idAdrese.ToString(),
+                IdAdrese.ToString(),
                 KontaktTelefon,
                 EmailAdresa,
                 BrojLicneKarte,

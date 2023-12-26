@@ -49,7 +49,12 @@ namespace GUI.View.Profesor
         {
             if (ValidateFields())
             {
-                profesorDAO.UpdateProfesor(Profesor.toProfesor());
+                CLI.Model.Profesor pr = Profesor.toProfesor();
+                pr.IdProfesor = Profesor.IdProfesor;
+                pr.IdAdrese = Profesor.idAdrese;
+                pr.AdresaStanovanja.idAdrese = Profesor.idAdrese;
+
+                profesorDAO.UpdateProfesor(pr);
                 MessageBox.Show("Profesor je uspesno promenjen!", "Uspesno", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
@@ -63,6 +68,7 @@ namespace GUI.View.Profesor
         {
             this.Close();
         }
+
 
         private bool ValidateFields()
         {

@@ -201,6 +201,19 @@ namespace GUI
                     editsProfesorWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                     editsProfesorWindow.ShowDialog();
                 }
+            }else if(MainTabControl.SelectedItem == SubjectsTab)
+            {
+                if(SelectedPredmet == null)
+                {
+                    MessageBox.Show(this, "Izaberi predmet za izmenu.");
+                }
+                else
+                {
+                    var editPredmetWindow = new EditPredmet(predmetDAO, SelectedPredmet.clone());
+                    editPredmetWindow.Owner = this;
+                    editPredmetWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                    editPredmetWindow.ShowDialog();
+                }
             }
             Update();
         }

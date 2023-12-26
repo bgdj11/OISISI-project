@@ -101,6 +101,7 @@ namespace CLI.DAO
             oldProfesor.Ime = profesor.Ime;
             oldProfesor.DatumRodjenja = profesor.DatumRodjenja;
             oldProfesor.IdAdrese = profesor.IdAdrese;
+            adresaDAO.UpdateAdresa(profesor.AdresaStanovanja);
             oldProfesor.KontaktTelefon = profesor.KontaktTelefon;
             oldProfesor.EmailAdresa = profesor.EmailAdresa;
             oldProfesor.BrojLicneKarte = profesor.BrojLicneKarte;

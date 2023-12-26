@@ -62,8 +62,8 @@
                 </MenuItem>
                 
                 <MenuItem Header="Edit">
-                    
-                    <MenuItem Header="Edit" InputGestureText="Ctrl+E">
+
+                    <MenuItem Header="Edit" InputGestureText="Ctrl+E" Click="EditEntityButton_Click">
                         <MenuItem.Icon>
                             <Image Source="pen.png" Width="16" Height="15"/>
                         </MenuItem.Icon>

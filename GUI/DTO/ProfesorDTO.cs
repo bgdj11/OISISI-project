@@ -53,6 +53,21 @@ namespace GUI.DTO
             }
         }
 
+        private string datumRodjenja { get; set; }
+        public string DatumRodjenja
+        {
+            get { return datumRodjenja; }
+            set
+            {
+                if (datumRodjenja != value)
+                {
+                    datumRodjenja = value;
+                    OnPropertyChanged("DatumRodjenja");
+                }
+            }
+        }
+
+        /*
         private DateOnly datumRodjenja { get; set; }
         public DateOnly DatumRodjenja
         {
@@ -65,7 +80,7 @@ namespace GUI.DTO
                     OnPropertyChanged("DatumRodjenja");
                 }
             }
-        }
+        } */
 
         private string adresa { get; set; }
         public string Adresa
@@ -181,7 +196,7 @@ namespace GUI.DTO
             IdProfesor = profesor.IdProfesor;
             Prezime = profesor.Prezime;
             Ime = profesor.Ime;
-            DatumRodjenja = profesor.DatumRodjenja;
+            DatumRodjenja = profesor.DatumRodjenja.ToString();
             Adresa = profesor.AdresaStanovanja.ToString();
             KontaktTelefon = profesor.KontaktTelefon;
             EmailAdresa = profesor.EmailAdresa;
@@ -190,6 +205,27 @@ namespace GUI.DTO
             GodineStaza = profesor.GodineStaza;
             IdKatedre = profesor.IdKatedre;
         }
+
+
+        public ProfesorDTO Clone()
+        {
+            return new ProfesorDTO
+            {
+                Ime = this.Ime,
+                Prezime = this.Prezime,
+                IdProfesor = this.IdProfesor,
+                DatumRodjenja = this.DatumRodjenja,
+                Adresa = this.Adresa,
+                KontaktTelefon = this.KontaktTelefon,
+                EmailAdresa = this.EmailAdresa,
+                BrojLicneKarte = this.BrojLicneKarte,
+                Zvanje = this.Zvanje,
+                GodineStaza = this.GodineStaza,
+                IdKatedre = this.IdKatedre
+
+        };
+        }
+
 
         public Profesor toProfesor()
         {

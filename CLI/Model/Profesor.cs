@@ -63,7 +63,7 @@ namespace CLI.Model
             string prezime,
             string ime, 
             string adresa,
-            DateOnly datumRodj,
+            string datumRodj,
             string kontaktTel,
             string email,
             string brojLk,
@@ -75,7 +75,7 @@ namespace CLI.Model
             this.Prezime = prezime;
             this.Ime = ime;
             this.AdresaStanovanja = makeAdresa(adresa);
-            this.DatumRodjenja = datumRodj;
+            this.DatumRodjenja = DateOnly.Parse(datumRodj);
             this.KontaktTelefon = kontaktTel;
             this.EmailAdresa = email;
             this.BrojLicneKarte = brojLk;

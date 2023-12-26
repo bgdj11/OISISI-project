@@ -186,6 +186,26 @@ namespace GUI
             }
         }
 
+        private void EditEntityButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (MainTabControl.SelectedItem == ProfesorsTab)
+            {
+                if(SelectedProfesor == null)
+                {
+                    MessageBox.Show(this, "Izaberi profesora za izmenu.");
+                }
+                else
+                {
+                    var editsProfesorWindow = new EditProfesor(profesorDAO, SelectedProfesor.Clone());
+                    editsProfesorWindow.Owner = this;
+                    editsProfesorWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                    editsProfesorWindow.ShowDialog();
+                }
+            }
+            Update();
+        }
+
+
         private void DeleteEntityButton_Click(object sender, RoutedEventArgs e)
         {
             if (MainTabControl.SelectedItem == StudentsTab)

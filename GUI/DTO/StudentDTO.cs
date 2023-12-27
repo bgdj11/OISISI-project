@@ -62,8 +62,8 @@ namespace GUI.DTO
             }
         }
 
-        private DateOnly datumRodjenja { get; set; }
-        public DateOnly DatumRodjenja
+        private string datumRodjenja { get; set; }
+        public string DatumRodjenja
         {
             get
             {
@@ -228,7 +228,7 @@ namespace GUI.DTO
             StudentId = student.IdStudent;
             ime = student.Ime;
             prezime = student.Prezime;
-            datumRodjenja = student.DatumRodjenja;
+            datumRodjenja = student.DatumRodjenja.ToString();
             adresaStanovanja = student.AdresaStanovanja.ToString();
             kontaktTelefon = student.KontaktTelefon;
             emailAdresa = student.EmailAdresa;

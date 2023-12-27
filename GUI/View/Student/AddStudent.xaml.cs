@@ -76,7 +76,7 @@ namespace GUI.View.Student
         {
             return !string.IsNullOrWhiteSpace(txtBoxIme.Text) &&
                    !string.IsNullOrWhiteSpace(txtBoxPrezime.Text) &&
-                   datpDatumRodjenja.SelectedDate.HasValue &&
+                   !string.IsNullOrWhiteSpace(datpDatumRodjenja.Text) &&
                    !string.IsNullOrWhiteSpace(txtBoxAdresa.Text) &&
                    !string.IsNullOrWhiteSpace(txtBoxKontakt.Text) &&
                    !string.IsNullOrWhiteSpace(txtBoxEmail.Text) &&

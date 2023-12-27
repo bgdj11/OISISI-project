@@ -83,7 +83,7 @@ namespace CLI.Model
         public Student(
             string prezime, 
             string ime,
-            DateOnly datumRodjenja,
+            string datumRodjenja,
             string adresa,
             string kontakttel,
             string email,
@@ -95,7 +95,7 @@ namespace CLI.Model
         {
             this.Prezime = prezime;
             this.Ime = ime;
-            this.DatumRodjenja = datumRodjenja;
+            this.DatumRodjenja = DateOnly.Parse(datumRodjenja);
             this.AdresaStanovanja = makeAdresa(adresa);
             this.KontaktTelefon = kontakttel;
             this.EmailAdresa = email;

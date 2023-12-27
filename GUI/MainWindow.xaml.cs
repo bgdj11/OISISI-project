@@ -120,6 +120,8 @@ namespace GUI
 
 
 
+
+
         public void Update()
         {
             Profesors.Clear();
@@ -278,6 +280,38 @@ namespace GUI
             }
             Update();
         }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            string searchTerm = searchTextBox.Text;
+
+
+
+            if (MainTabControl.SelectedItem == StudentsTab)
+            {
+                StudentsDataGrid.ItemsSource = FilterData(Students, searchTerm);
+            }
+            else if (MainTabControl.SelectedItem == ProfesorsTab)
+            {
+                ProfesorsDataGrid.ItemsSource = FilterData(Profesors, searchTerm);
+            }
+            else
+            {
+                SubjectsDataGrid.ItemsSource = FilterData(Subjects, searchTerm);
+            }
+
+        }
+
+        private ObservableCollection<T> FilterData<T>(ObservableCollection<T> originalCollection, string searchTerm)
+        {
+            // Dinamička pretraga po svim poljima objekta
+            return new ObservableCollection<T>(
+                originalCollection.Where(item =>
+                    item.GetType().GetProperties().Any(prop =>
+                        prop.GetValue(item, null).ToString().Contains(searchTerm)))
+            );
+        }
+
 
         private void CreateEntityButton_Click(object sender, RoutedEventArgs e)
         {

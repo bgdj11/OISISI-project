@@ -27,7 +27,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Menu Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,0,27" Grid.RowSpan="2">
+            <Menu Grid.Row="0" Margin="0,0,0,1">
                 <MenuItem Header="File">
                     
                     <MenuItem Header="New" InputGestureText="Ctrl+N" Click="CreateEntityButton_Click">
@@ -83,8 +83,35 @@
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
-                
             </Menu>
+
+            <ToolBarTray Grid.Row="1">
+                <ToolBar>
+                    <Button Click="CreateEntityButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="Images/folder.png" Width="16" Height="16" Margin="0,0,5,0"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Click="EditEntityButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="Images/pen.png" Width="16" Height="16" Margin="0,0,5,0"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Click="DeleteEntityButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="Images/kantica.png" Width="16" Height="16" Margin="0,0,5,0"/>
+                        </StackPanel>
+                    </Button>
+                    <TextBox Width="150" Margin="10,0,0,0" x:Name="searchTextBox" />
+                    <Button Click="SearchButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="Images/lupa.png" Width="16" Height="16" Margin="0,0,5,0"/>
+                        </StackPanel>
+                    </Button>
+                </ToolBar>
+            </ToolBarTray>
+
+
 
             <TabControl Grid.Row="2" x:Name="MainTabControl" Grid.ColumnSpan="2">
 

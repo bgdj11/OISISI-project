@@ -159,8 +159,17 @@ namespace GUI.DTO
             nazivPredmeta = predmet.nazivPredmeta;
             semestar = predmet.semestar.ToString();
             godinaStudija = predmet.godinaStudija;
-            profesor = predmet.profesor.Ime + " " + predmet.profesor.Prezime;
-            profesorID = predmet.idProfesora;
+            if(predmet.profesor != null)
+            {
+                profesor = predmet.profesor.Ime + " " + predmet.profesor.Prezime;
+                profesorID = predmet.idProfesora;
+            } else
+            {
+                profesor = "nedostaje profesor";
+                profesorID = -1;
+            }
+
+
             espb = predmet.brojESPB;
         }
 

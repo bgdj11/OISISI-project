@@ -53,12 +53,12 @@
             <TextBox Name="txtBoxIndeks" Text="{Binding Path=Student.Indeks, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="6" Grid.Column="1" Margin="0,0,0,5"/>
 
             <Label Content="Trenutna Godina Studija:" Grid.Row="7"/>
-            <ComboBox Name="cmbGodinaStudija"  SelectedItem="{Binding Path=Student.TrenutnaGodinaStudija, UpdateSourceTrigger=PropertyChanged}" Grid.Row="7" Grid.Column="1" Width="178" Margin="0,0,0,5">
+            <ComboBox Name="cmbGodinaStudija"  SelectedItem="{Binding Path=Student.TrenutnaGodinaStudija, UpdateSourceTrigger=PropertyChanged}" Grid.Row="7" Grid.Column="1"  Margin="0,0,0,5">
                 
             </ComboBox>
 
             <Label Content="Status Studenta:" Grid.Row="8"/>
-            <ComboBox Name="cmbStatusStudenta"  SelectedItem="{Binding Path=Student.StatusStudenta, UpdateSourceTrigger=PropertyChanged}" Grid.Row="8" Grid.Column="1" Width="178" Margin="0,0,0,5">
+            <ComboBox Name="cmbStatusStudenta"  SelectedItem="{Binding Path=Student.StatusStudenta, UpdateSourceTrigger=PropertyChanged}" Grid.Row="8" Grid.Column="1"  Margin="0,0,0,5">
                 
             </ComboBox>
 

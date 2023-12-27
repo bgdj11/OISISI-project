@@ -57,6 +57,7 @@ namespace GUI
 
             Subjects = new ObservableCollection<PredmetDTO>();
             predmetDAO = new PredmetDAO();
+            Tab.Text = "Status: Studenti";
 
             Update();
         }
@@ -69,6 +70,7 @@ namespace GUI
         private void MenuItem_Predmeti_Click()
         {
             MainTabControl.SelectedItem = MainTabControl.Items.Cast<TabItem>().First(tab => tab.Header.Equals("Predmeti"));
+            Tab.Text = "Status: Predmeti";
         }
 
         private void MenuItem_Predmeti_Click(object sender, RoutedEventArgs e)
@@ -79,6 +81,7 @@ namespace GUI
         private void MenuItem_Profesori_Click()
         {
             MainTabControl.SelectedItem = MainTabControl.Items.Cast<TabItem>().First(tab => tab.Header.Equals("Profesori"));
+            Tab.Text = "Status: Profesori";
         }
 
         private void MenuItem_Profesori_Click(object sender, RoutedEventArgs e)
@@ -88,6 +91,7 @@ namespace GUI
         private void MenuItem_Studenti_Click()
         {
             MainTabControl.SelectedItem = MainTabControl.Items.Cast<TabItem>().First(tab => tab.Header.Equals("Studenti"));
+            Tab.Text = "Status: Studenti";
         }
         private void MenuItem_Studenti_Click(object sender, RoutedEventArgs e)
         {
@@ -110,7 +114,8 @@ namespace GUI
 
         private void OpenAboutWindow()
         {
-           
+            MessageBox.Show("Bogdan Djukic RA98/2021 i Mateja Jovanovic RA160/2021", "Informacije", MessageBoxButton.OK, MessageBoxImage.Information);
+
         }
 
         private void OpenAboutWindow(object sender, RoutedEventArgs e)
@@ -334,17 +339,31 @@ namespace GUI
 
         private void StudentsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            Tab.Text = "Status: Studenti";
         }
-
         private void ProfesorsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            Tab.Text = "Status: Profesori";
         }
-
         private void SubjectsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            Tab.Text = "Status Predmeti";
+        }
 
+        private void TabSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (MainTabControl.SelectedItem == StudentsTab)
+            {
+                Tab.Text = "Status: Studenti";
+            }
+            else if (MainTabControl.SelectedItem == ProfesorsTab)
+            {
+                Tab.Text = "Status: Profesori";
+            }
+            else
+            {
+                Tab.Text = "Status Predmeti";
+            }
         }
 
     }

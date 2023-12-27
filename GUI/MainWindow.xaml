@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="650" Width="1200" WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="650" Width="850" WindowStartupLocation="CenterScreen"
         KeyDown = "MainWindow_KeyDown">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -14,12 +14,12 @@
         </Grid.ColumnDefinitions>
 
         <Grid Grid.ColumnSpan="2">
-            
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="520*"/>
                 <ColumnDefinition Width="280*"/>
             </Grid.ColumnDefinitions>
-            
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -27,21 +27,21 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Menu Grid.Row="0" Margin="0,0,0,1">
+            <Menu Grid.Row="0" Margin="0,0,0,1" Grid.ColumnSpan="2">
                 <MenuItem Header="File">
-                    
+
                     <MenuItem Header="New" InputGestureText="Ctrl+N" Click="CreateEntityButton_Click">
                         <MenuItem.Icon>
                             <Image Source="Images/folder-plus.png" Width="16" Height="15"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    
+
                     <MenuItem Header="Save" Click="SaveApp" InputGestureText="Ctrl+S">
                         <MenuItem.Icon>
                             <Image Source="Images/save.png" Width="16" Height="15"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    
+
                     <MenuItem Header="Open">
                         <MenuItem.Icon>
                             <Image Source="Images/open-in-app.png" Width="16" Height="15"/>
@@ -50,25 +50,25 @@
                         <MenuItem Header="Predmeti"  Click="MenuItem_Predmeti_Click"></MenuItem>
                         <MenuItem Header="Profesori" Click="MenuItem_Profesori_Click"></MenuItem>
                     </MenuItem>
-                    
+
                     <Separator/>
-                    
+
                     <MenuItem x:Name="CLOSE" Header="Close" Click="CloseApp_Execution" InputGestureText="ALT + F4">
                         <MenuItem.Icon>
                             <Image Source="Images/x.png" Width="16" Height="15"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    
+
                 </MenuItem>
-                
+
                 <MenuItem Header="Edit">
 
                     <MenuItem Header="Edit" InputGestureText="Ctrl+E" Click="EditEntityButton_Click">
                         <MenuItem.Icon>
-                            <Image Source="Images\pen.png" Width="16" Height="15"/>
+                            <Image Source="Images/pen.png" Width="16" Height="15"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    
+
                     <MenuItem Header="Delete" InputGestureText="Delete" Click="DeleteEntityButton_Click">
                         <MenuItem.Icon>
                             <Image Source="Images/delete.png" Width="15" Height="15"/>
@@ -85,38 +85,43 @@
                 </MenuItem>
             </Menu>
 
-            <ToolBarTray Grid.Row="1">
+            <ToolBarTray Grid.Row="1" Grid.ColumnSpan="2" Margin="0,10,0,10" Grid.RowSpan="2">
                 <ToolBar>
-                    <Button Click="CreateEntityButton_Click">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="Images/folder.png" Width="16" Height="16" Margin="0,0,5,0"/>
+                    <DockPanel LastChildFill="True">
+
+                        <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                            <Button Click="CreateEntityButton_Click">
+                                <Image Source="Images/folder.png" Width="16" Height="16" Margin="4,0,5,0"/>
+                            </Button>
+                            <Button Click="EditEntityButton_Click">
+                                <Image Source="Images/pen.png" Width="16" Height="16" Margin="0,0,5,0"/>
+                            </Button>
+                            <Button Click="DeleteEntityButton_Click" RenderTransformOrigin="0.5,0.5">
+                                <Image Source="Images/kantica.png" Width="16" Height="16" Margin="0,0,5,0"/>
+                            </Button>
                         </StackPanel>
-                    </Button>
-                    <Button Click="EditEntityButton_Click">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="Images/pen.png" Width="16" Height="16" Margin="0,0,5,0"/>
+
+                        <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" Width="550">
                         </StackPanel>
-                    </Button>
-                    <Button Click="DeleteEntityButton_Click">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="Images/kantica.png" Width="16" Height="16" Margin="0,0,5,0"/>
+
+                        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                            <TextBox Width="140" Margin="10,0,5,0" x:Name="searchTextBox" RenderTransformOrigin="0.5,0.5" Height="20"></TextBox>
+                            <Button Click="SearchButton_Click">
+                                <Image Source="Images/lupa.png" Width="16" Height="16" Margin="0,0,5,0"/>
+                            </Button>
                         </StackPanel>
-                    </Button>
-                    <TextBox Width="150" Margin="10,0,0,0" x:Name="searchTextBox" />
-                    <Button Click="SearchButton_Click">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="Images/lupa.png" Width="16" Height="16" Margin="0,0,5,0"/>
-                        </StackPanel>
-                    </Button>
+
+                    </DockPanel>
                 </ToolBar>
             </ToolBarTray>
 
 
 
-            <TabControl Grid.Row="2" x:Name="MainTabControl" Grid.ColumnSpan="2">
+
+            <TabControl Grid.Row="2" x:Name="MainTabControl" SelectionChanged="TabSelectionChanged" Grid.ColumnSpan="2" Margin="0,43,0,0">
 
                 <TabItem x:Name="StudentsTab" Header="Studenti">
-                    <DataGrid Height="350"
+                    <DataGrid Height="517"
                   AutoGenerateColumns="False"
                   x:Name="StudentsDataGrid"
                   ItemsSource="{Binding Students, UpdateSourceTrigger=PropertyChanged}"
@@ -134,7 +139,7 @@
                 </TabItem>
 
                 <TabItem x:Name="ProfesorsTab" Header="Profesori">
-                    <DataGrid Height="350"
+                    <DataGrid Height="517"
                   AutoGenerateColumns="False"
                   x:Name="ProfesorsDataGrid"
                   ItemsSource="{Binding Profesors, UpdateSourceTrigger=PropertyChanged}"
@@ -151,15 +156,15 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
-                
+
 
                 <TabItem x:Name="SubjectsTab" Header="Predmeti">
-                    <DataGrid Height="350"
+                    <DataGrid Height="517"
                 AutoGenerateColumns="False"
                 x:Name="SubjectsDataGrid"
                 ItemsSource="{Binding Subjects, UpdateSourceTrigger=PropertyChanged}"
                 SelectedItem="{Binding SelectedPredmet, UpdateSourceTrigger=PropertyChanged}"
-                SelectionMode="Single" IsReadOnly="True" SelectionChanged="SubjectsDataGrid_SelectionChanged">      
+                SelectionMode="Single" IsReadOnly="True" SelectionChanged="SubjectsDataGrid_SelectionChanged">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Sifra Predmeta" Binding="{Binding SifraPredmeta}"/>
                             <DataGridTextColumn Header="Naziv" Binding="{Binding NazivPredmeta}"/>
@@ -174,11 +179,11 @@
 
 
             </TabControl>
-            
-            
+
+
             <StatusBar Grid.Row="3" VerticalAlignment="Center" Grid.ColumnSpan="2">
                 <TextBlock FontWeight="Bold" x:Name="statusAppName">Studentska sluzba</TextBlock>
-                <TextBlock>Status 2</TextBlock>
+                <TextBlock x:Name="Tab" Margin="0,0,10,0">Status:</TextBlock>
                 <TextBlock x:Name="statusTime" HorizontalAlignment="Right" Margin="0,0,10,0">Time:</TextBlock>
                 <TextBlock x:Name="statusDate" HorizontalAlignment="Right">Date:</TextBlock>
             </StatusBar>

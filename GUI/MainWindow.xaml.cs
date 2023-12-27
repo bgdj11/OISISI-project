@@ -156,12 +156,12 @@ namespace GUI
 
         private void UpdateDate()
         {
-            statusDate.Text = $"Date: {DateTime.Now.ToString("yyyy-MM-dd")}";
+            statusDate.Text = $"Datum: {DateTime.Now.ToString("yyyy-MM-dd")}";
         }
 
         private void UpdateTime()
         {
-            statusTime.Text = $"Time: {DateTime.Now.ToString("HH:mm:ss")}";
+            statusTime.Text = $"Vreme: {DateTime.Now.ToString("HH:mm:ss")}";
         }
 
 

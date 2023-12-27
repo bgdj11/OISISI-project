@@ -216,6 +216,20 @@ namespace GUI
                     editPredmetWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                     editPredmetWindow.ShowDialog();
                 }
+            } else
+            {
+                if(SelectedStudent == null)
+                {
+                    MessageBox.Show(this, "Izaberi studenta za izmenu.");
+                }
+                else
+                {
+                    var editStudentWIndow = new EditStudent(studentDAO, SelectedStudent.Clone());
+                    editStudentWIndow.Owner = this;
+                    editStudentWIndow.WindowStartupLocation= WindowStartupLocation.CenterOwner;
+                    editStudentWIndow.ShowDialog();
+                }
+
             }
             Update();
         }

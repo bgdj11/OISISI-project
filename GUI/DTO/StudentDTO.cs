@@ -130,6 +130,8 @@ namespace GUI.DTO
             }
         }
 
+        public int idAdrese { get; set; }
+
         private string indeks { get; set; }
         public string Indeks
         {
@@ -232,11 +234,31 @@ namespace GUI.DTO
             adresaStanovanja = student.AdresaStanovanja.ToString();
             kontaktTelefon = student.KontaktTelefon;
             emailAdresa = student.EmailAdresa;
-
+            idAdrese = student.IdAdrese;
             indeks = student.Indeks.ToString();
             trenutnaGodinaStudija = student.TrenutnaGodinaStudija;
             statusStudenta = student.Status.ToString();
             prosecnaOcena = student.ProsecnaOcena;
+        }
+
+
+        public StudentDTO Clone()
+        {
+            return new StudentDTO
+            {
+                Ime = this.Ime,
+                Prezime = this.Prezime,
+                StudentId = this.StudentId,
+                DatumRodjenja = this.DatumRodjenja,
+                AdresaStanovanja = this.AdresaStanovanja,
+                KontaktTelefon = this.KontaktTelefon,
+                EmailAdresa = this.EmailAdresa,
+                Indeks = this.Indeks,
+                StatusStudenta = this.StatusStudenta,
+                TrenutnaGodinaStudija = this.TrenutnaGodinaStudija,
+                ProsecnaOcena = this.ProsecnaOcena,
+                idAdrese = this.idAdrese
+            };
         }
     }
 }

@@ -48,7 +48,7 @@ namespace CLI.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(oznakaSmera).Append("/");
+            sb.Append(oznakaSmera).Append("-");
             sb.Append(brojUpisa).Append("/");
             sb.Append(godinaUpisa);
             return sb.ToString();

@@ -20,17 +20,17 @@ namespace CLI.DAO
         public int GenerateID()
         {
             if(_adrese.Count == 0) return 0;
-            return _adrese[^1].idAdrese + 1;
+            return _adrese[^1].IdAdrese + 1;
         }
 
         public int GetLastID()
         {
-            return _adrese[^1].idAdrese;
+            return _adrese[^1].IdAdrese;
         }
 
         public Adresa AddAdresa(Adresa adresa)
         {
-            adresa.idAdrese = GenerateID();
+            adresa.IdAdrese = GenerateID();
             _adrese.Add(adresa);
             _storage.Save(_adrese);
             return adresa;
@@ -38,13 +38,13 @@ namespace CLI.DAO
 
         public Adresa? UpdateAdresa(Adresa adresa)
         {
-            Adresa? oldAdresa = GetAdresaById(adresa.idAdrese);
+            Adresa? oldAdresa = GetAdresaById(adresa.IdAdrese);
             if (oldAdresa == null) return null;
 
-            oldAdresa.ulica = adresa.ulica;
-            oldAdresa.grad = adresa.grad;
-            oldAdresa.broj = adresa.broj;
-            oldAdresa.drzava = adresa.drzava;
+            oldAdresa.Ulica = adresa.Ulica;
+            oldAdresa.Grad = adresa.Grad;
+            oldAdresa.Broj = adresa.Broj;
+            oldAdresa.Drzava = adresa.Drzava;
 
             _storage.Save(_adrese);
             return oldAdresa;
@@ -62,7 +62,7 @@ namespace CLI.DAO
 
         private Adresa? GetAdresaById(int id)
         {
-            return _adrese.Find(a => a.idAdrese == id);
+            return _adrese.Find(a => a.IdAdrese == id);
         }
 
         public List<Adresa> GetAllAdresa()
@@ -77,19 +77,19 @@ namespace CLI.DAO
             switch (sortCriteria)
             {
                 case "idAdrese":
-                    adrese = _adrese.OrderBy(x => x.idAdrese);
+                    adrese = _adrese.OrderBy(x => x.IdAdrese);
                     break;
                 case "grad":
-                    adrese = _adrese.OrderBy(x => x.grad);
+                    adrese = _adrese.OrderBy(x => x.Grad);
                     break;
                 case "ulica":
-                    adrese = _adrese.OrderBy(x => x.ulica);
+                    adrese = _adrese.OrderBy(x => x.Ulica);
                     break;
                 case "broj":
-                    adrese = _adrese.OrderBy(x => x.broj);
+                    adrese = _adrese.OrderBy(x => x.Broj);
                     break;
                 case "drzava":
-                    adrese = _adrese.OrderBy(x => x.drzava);
+                    adrese = _adrese.OrderBy(x => x.Drzava);
                     break;
             }
 

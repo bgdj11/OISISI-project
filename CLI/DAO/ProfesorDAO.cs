@@ -59,9 +59,9 @@ namespace CLI.DAO
 
             foreach(Profesor p in _profesori)
             {
-                if(_adrese.Find(n => n.idAdrese == p.IdAdrese) != null)
+                if(_adrese.Find(n => n.IdAdrese == p.IdAdrese) != null)
                 {
-                    p.AdresaStanovanja = _adrese.Find(n => n.idAdrese == p.IdAdrese);
+                    p.AdresaStanovanja = _adrese.Find(n => n.IdAdrese == p.IdAdrese);
                 }
             }
 

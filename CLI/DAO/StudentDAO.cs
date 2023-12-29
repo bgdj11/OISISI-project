@@ -53,7 +53,7 @@ public class StudentDAO
             {
                 foreach (Adresa a in _adrese)
                 {
-                    if (s.IdAdrese == a.idAdrese)
+                    if (s.IdAdrese == a.IdAdrese)
                     {
                         s.AdresaStanovanja = a;
                     }
@@ -122,6 +122,7 @@ public class StudentDAO
             oldStudent.KontaktTelefon = student.KontaktTelefon;
             oldStudent.EmailAdresa = student.EmailAdresa;
             oldStudent.IdIndeksa = student.IdIndeksa;
+            indeksDAO.UpdateIndeks(student.Indeks);
             oldStudent.TrenutnaGodinaStudija = student.TrenutnaGodinaStudija;
             oldStudent.Status = student.Status;
             oldStudent.ProsecnaOcena = student.ProsecnaOcena;

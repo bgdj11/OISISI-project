@@ -81,13 +81,18 @@ namespace CLI.Model
         }
 
         public Student(
-            string prezime, 
+            string prezime,
             string ime,
             string datumRodjenja,
-            string adresa,
+            string ulica,
+            int broj,
+            string grad,
+            string drzava,
             string kontakttel,
             string email,
-            string indeks, 
+            string oznaka,
+            int broji,
+            int godinaUpisa,
             int godinastudija,
             string status,
             double prosecnaocena
@@ -96,10 +101,10 @@ namespace CLI.Model
             this.Prezime = prezime;
             this.Ime = ime;
             this.DatumRodjenja = DateOnly.Parse(datumRodjenja);
-            this.AdresaStanovanja = makeAdresa(adresa);
+            this.AdresaStanovanja = new Adresa(ulica, broj, grad, drzava);
             this.KontaktTelefon = kontakttel;
             this.EmailAdresa = email;
-            this.Indeks = makeIndex(indeks);
+            this.Indeks = new Indeks(oznaka, broji, godinaUpisa);
             this.TrenutnaGodinaStudija = godinastudija;
             this.Status = MakeStatus(status);
             this.ProsecnaOcena = prosecnaocena;

@@ -117,7 +117,7 @@ namespace CLI.Console
         {
             int id = InputAdresaId();
             Adresa adresa = InputAdresa();
-            adresa.idAdrese = id;
+            adresa.IdAdrese = id;
             Adresa updatedAdresa = _adresaDao.UpdateAdresa(adresa);
             if (updatedAdresa != null)
             {

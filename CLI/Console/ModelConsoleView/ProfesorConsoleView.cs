@@ -63,7 +63,7 @@ class ProfesorConsoleView
             Adresa a = _adresaView.InputAdresa();
             _adresa.AddAdresa(a);
 
-            int idAdrese = a.idAdrese;
+            int idAdrese = a.IdAdrese;
 
 
             return new Profesor(prezime, ime, datumRodjenja, idAdrese, kontaktTelefon, emailAdresa, brojLicneKarte, zvanje, godineStaza, idK, a);

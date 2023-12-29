@@ -61,8 +61,14 @@ namespace GUI.View.Student
             {
                 CLI.Model.Student sr = Student.toStudent();
                 sr.IdStudent = Student.StudentId;
+
                 sr.IdAdrese = Student.idAdrese;
-                sr.AdresaStanovanja.idAdrese = Student.idAdrese;
+                sr.AdresaStanovanja.IdAdrese = Student.idAdrese;
+                
+                sr.IdIndeksa = Student.idIndeksa;
+                sr.Indeks.idIndeksa = Student.idIndeksa;
+
+                
 
                 studentDAO.UpdateStudent(sr);
                 MessageBox.Show("Student je uspesno promenjen!", "Uspesno", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -84,10 +90,15 @@ namespace GUI.View.Student
             return !string.IsNullOrWhiteSpace(txtBoxIme.Text) &&
                    !string.IsNullOrWhiteSpace(txtBoxPrezime.Text) &&
                    !string.IsNullOrWhiteSpace(datpDatumRodjenja.Text) &&
-                   !string.IsNullOrWhiteSpace(txtBoxAdresa.Text) &&
+                   !string.IsNullOrWhiteSpace(txtBoxUlica.Text) &&
+                   !string.IsNullOrWhiteSpace(txtBoxBroj.Text) &&
+                   !string.IsNullOrWhiteSpace(txtBoxGrad.Text) &&
+                   !string.IsNullOrWhiteSpace(txtBoxDrzava.Text) &&
                    !string.IsNullOrWhiteSpace(txtBoxKontakt.Text) &&
                    !string.IsNullOrWhiteSpace(txtBoxEmail.Text) &&
-                   !string.IsNullOrWhiteSpace(txtBoxIndeks.Text) &&
+                   !string.IsNullOrWhiteSpace(txtBoxOznakaSmera.Text) &&
+                   !string.IsNullOrWhiteSpace(txtBoxBrojIndeksa.Text) &&
+                   !string.IsNullOrWhiteSpace(txtBoxGodinaUpisa.Text) &&
                    cmbGodinaStudija.SelectedItem != null &&
                    cmbStatusStudenta.SelectedItem != null &&
                    !string.IsNullOrWhiteSpace(txtBoxProsecnaOcena.Text);

@@ -96,6 +96,74 @@ namespace GUI.DTO
             }
         }
 
+        private string ulica { get; set; }
+        public string Ulica
+        {
+            get
+            {
+                return ulica;
+            }
+            set
+            {
+                if (ulica != value)
+                {
+                    ulica = value;
+                    OnPropertyChanged("Ulica");
+                }
+            }
+        }
+
+        private string grad { get; set; }
+        public string Grad
+        {
+            get
+            {
+                return grad;
+            }
+            set
+            {
+                if (grad != value)
+                {
+                    grad = value;
+                    OnPropertyChanged("Grad");
+                }
+            }
+        }
+
+        private int broj { get; set; }
+        public int Broj
+        {
+            get
+            {
+                return broj;
+            }
+            set
+            {
+                if (broj != value)
+                {
+                    broj = value;
+                    OnPropertyChanged("Broj");
+                }
+            }
+        }
+
+        private string drzava { get; set; }
+        public string Drzava
+        {
+            get
+            {
+                return drzava;
+            }
+            set
+            {
+                if (drzava != value)
+                {
+                    drzava = value;
+                    OnPropertyChanged("Drzava");
+                }
+            }
+        }
+
         private string kontaktTelefon { get; set; }
         public string KontaktTelefon
         {
@@ -132,6 +200,8 @@ namespace GUI.DTO
 
         public int idAdrese { get; set; }
 
+        public int idIndeksa { get; set; }
+
         private string indeks { get; set; }
         public string Indeks
         {
@@ -148,6 +218,58 @@ namespace GUI.DTO
                 }
             }
         }
+
+        private string oznakaSmera { get; set; }
+        public string OznakaSmera
+        {
+            get
+            {
+                return oznakaSmera;
+            }
+            set
+            {
+                if (oznakaSmera != value)
+                {
+                    oznakaSmera = value;
+                    OnPropertyChanged("OznakaSmera");
+                }
+            }
+        }
+
+        private int brojIndeksa { get; set; }
+        public int BrojIndeksa
+        {
+            get
+            {
+                return brojIndeksa;
+            }
+            set
+            {
+                if (brojIndeksa != value)
+                {
+                    brojIndeksa = value;
+                    OnPropertyChanged("BrojIndeksa");
+                }
+            }
+        }
+
+        private int godinaUpisa { get; set; }
+        public int GodinaUpisa
+        {
+            get
+            {
+                return godinaUpisa;
+            }
+            set
+            {
+                if (godinaUpisa != value)
+                {
+                    godinaUpisa = value;
+                    OnPropertyChanged("GodinaUpisa");
+                }
+            }
+        }
+
 
         private int trenutnaGodinaStudija { get; set; }
         public int TrenutnaGodinaStudija
@@ -220,25 +342,33 @@ namespace GUI.DTO
 
         public Student toStudent()
         {
-
-            return new Student(prezime, ime, datumRodjenja, adresaStanovanja, kontaktTelefon, emailAdresa, indeks, trenutnaGodinaStudija, statusStudenta, prosecnaOcena);
+            
+            return new Student(prezime, ime, datumRodjenja, ulica, broj, grad, drzava, kontaktTelefon, emailAdresa, oznakaSmera, brojIndeksa, godinaUpisa, trenutnaGodinaStudija, statusStudenta, prosecnaOcena);
         }
 
 
         public StudentDTO(Student student)
         {
             StudentId = student.IdStudent;
-            ime = student.Ime;
-            prezime = student.Prezime;
-            datumRodjenja = student.DatumRodjenja.ToString();
-            adresaStanovanja = student.AdresaStanovanja.ToString();
-            kontaktTelefon = student.KontaktTelefon;
-            emailAdresa = student.EmailAdresa;
+            Ime = student.Ime;
+            Prezime = student.Prezime;
+            DatumRodjenja = student.DatumRodjenja.ToString();
+            AdresaStanovanja = student.AdresaStanovanja.ToString();
+            Ulica = student.AdresaStanovanja.Ulica;
+            Grad = student.AdresaStanovanja.Grad;
+            Broj = student.AdresaStanovanja.Broj;
+            Drzava = student.AdresaStanovanja.Drzava;
+            KontaktTelefon = student.KontaktTelefon;
+            EmailAdresa = student.EmailAdresa;
             idAdrese = student.IdAdrese;
-            indeks = student.Indeks.ToString();
-            trenutnaGodinaStudija = student.TrenutnaGodinaStudija;
-            statusStudenta = student.Status.ToString();
-            prosecnaOcena = student.ProsecnaOcena;
+            idIndeksa = student.IdIndeksa;
+            Indeks = student.Indeks.ToString();
+            oznakaSmera = student.Indeks.oznakaSmera;
+            godinaUpisa = student.Indeks.godinaUpisa;
+            brojIndeksa = student.Indeks.brojUpisa;
+            TrenutnaGodinaStudija = student.TrenutnaGodinaStudija;
+            StatusStudenta = student.Status.ToString();
+            ProsecnaOcena = student.ProsecnaOcena;
         }
 
 
@@ -251,13 +381,21 @@ namespace GUI.DTO
                 StudentId = this.StudentId,
                 DatumRodjenja = this.DatumRodjenja,
                 AdresaStanovanja = this.AdresaStanovanja,
+                Grad = this.Grad,
+                Ulica = this.Ulica,
+                Drzava = this.Drzava,
+                broj = this.Broj,
                 KontaktTelefon = this.KontaktTelefon,
                 EmailAdresa = this.EmailAdresa,
                 Indeks = this.Indeks,
+                OznakaSmera = this.OznakaSmera,
+                BrojIndeksa = this.BrojIndeksa,
+                GodinaUpisa = this.GodinaUpisa,
                 StatusStudenta = this.StatusStudenta,
                 TrenutnaGodinaStudija = this.TrenutnaGodinaStudija,
                 ProsecnaOcena = this.ProsecnaOcena,
-                idAdrese = this.idAdrese
+                idAdrese = this.idAdrese,
+                idIndeksa = this.idIndeksa
             };
         }
     }

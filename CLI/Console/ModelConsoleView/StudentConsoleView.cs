@@ -79,7 +79,7 @@ namespace CLI.Console
             Adresa a = _adresaView.InputAdresa();
             _adresa.AddAdresa(a);
 
-            int idAdrese = a.idAdrese;
+            int idAdrese = a.IdAdrese;
 
             
             IndeksConsoleView _indeksConsoleView = new IndeksConsoleView(_indeks);

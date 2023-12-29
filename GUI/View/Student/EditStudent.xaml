@@ -31,6 +31,9 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <Label Content="Ime:" Grid.Row="0"/>
@@ -42,31 +45,53 @@
                     <Label Content="Datum Rodjenja:" Grid.Row="2"/>
                     <TextBox Name="datpDatumRodjenja" Text="{Binding Path=Student.DatumRodjenja, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" Margin="0,0,0,5"/>
 
-                    <Label Content="Adresa:" Grid.Row="3"/>
-                    <TextBox Name="txtBoxAdresa" Text="{Binding Path=Student.AdresaStanovanja, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" Margin="0,0,0,5"/>
+                    <!-- Promenjeni deo za unos adrese -->
+                    <Label Content="Ulica:" Grid.Row="3"/>
+                    <TextBox Name="txtBoxUlica" Text="{Binding Path=Student.Ulica, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" Margin="0,0,0,5"/>
 
-                    <Label Content="Kontakt telefon:" Grid.Row="4"/>
-                    <TextBox Name="txtBoxKontakt" Text="{Binding Path=Student.KontaktTelefon, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Margin="0,0,0,5"/>
+                    <Label Content="Broj:" Grid.Row="4"/>
+                    <TextBox Name="txtBoxBroj" Text="{Binding Path=Student.Broj, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Margin="0,0,0,5"/>
 
-                    <Label Content="Email adresa:" Grid.Row="5"/>
-                    <TextBox Name="txtBoxEmail" Text="{Binding Path=Student.EmailAdresa, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1" Margin="0,0,0,5"/>
+                    <Label Content="Grad:" Grid.Row="5"/>
+                    <TextBox Name="txtBoxGrad" Text="{Binding Path=Student.Grad, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1" Margin="0,0,0,5"/>
 
-                    <Label Content="Broj Indeksa (XX-NNN/YYYY):" Grid.Row="6"/>
-                    <TextBox Name="txtBoxIndeks" Text="{Binding Path=Student.Indeks, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="6" Grid.Column="1" Margin="0,0,0,5"/>
+                    <Label Content="Država:" Grid.Row="6"/>
+                    <TextBox Name="txtBoxDrzava" Text="{Binding Path=Student.Drzava, UpdateSourceTrigger=PropertyChanged}" Grid.Row="6" Grid.Column="1" Margin="0,0,0,5"/>
 
-                    <Label Content="Trenutna Godina Studija:" Grid.Row="7"/>
-                    <ComboBox Name="cmbGodinaStudija"  SelectedItem="{Binding Path=Student.TrenutnaGodinaStudija, UpdateSourceTrigger=PropertyChanged}" Grid.Row="7" Grid.Column="1"  Margin="0,0,0,5">
+                    <!-- Ostatak koda prilagođen promeni redova zbog dodatnih polja -->
+                    <Label Content="Kontakt telefon:" Grid.Row="7"/>
+                    <TextBox Name="txtBoxKontakt" Text="{Binding Path=Student.KontaktTelefon, UpdateSourceTrigger=PropertyChanged}" Grid.Row="7" Grid.Column="1" Margin="0,0,0,5"/>
+
+                    <Label Content="Email adresa:" Grid.Row="8"/>
+                    <TextBox Name="txtBoxEmail" Text="{Binding Path=Student.EmailAdresa, UpdateSourceTrigger=PropertyChanged}" Grid.Row="8" Grid.Column="1" Margin="0,0,0,5"/>
+
+                    <Label Content="Broj Indeksa:" Grid.Row="9"/>
+                    <Grid Grid.Row="9" Grid.Column="1" Margin="0,0,0,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Name="txtBoxOznakaSmera" Text="{Binding Path=Student.OznakaSmera, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="0,0,5,0"/>
+                        <TextBox Name="txtBoxBrojIndeksa" Text="{Binding Path=Student.BrojIndeksa, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Margin="0,0,5,0"/>
+                        <TextBox Name="txtBoxGodinaUpisa" Text="{Binding Path=Student.GodinaUpisa, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2"/>
+                    </Grid>
+
+                    <Label Content="Trenutna Godina Studija:" Grid.Row="10"/>
+                    <ComboBox Name="cmbGodinaStudija"  SelectedItem="{Binding Path=Student.TrenutnaGodinaStudija, UpdateSourceTrigger=PropertyChanged}" Grid.Row="10" Grid.Column="1"  Margin="0,0,0,5">
 
                     </ComboBox>
 
-                    <Label Content="Status Studenta:" Grid.Row="8"/>
-                    <ComboBox Name="cmbStatusStudenta"  SelectedItem="{Binding Path=Student.StatusStudenta, UpdateSourceTrigger=PropertyChanged}" Grid.Row="8" Grid.Column="1"  Margin="0,0,0,5">
+                    <Label Content="Status Studenta:" Grid.Row="11"/>
+                    <ComboBox Name="cmbStatusStudenta"  SelectedItem="{Binding Path=Student.StatusStudenta, UpdateSourceTrigger=PropertyChanged}" Grid.Row="11" Grid.Column="1"  Margin="0,0,0,5">
 
                     </ComboBox>
 
-                    <Label Content="Prosecna Ocena:" Grid.Row="9"/>
-                    <TextBox Name="txtBoxProsecnaOcena" Text="{Binding Path=Student.ProsecnaOcena, UpdateSourceTrigger=PropertyChanged}" Grid.Row="9" Grid.Column="1" Margin="0,0,0,5"/>
+                    <Label Content="Prosecna Ocena:" Grid.Row="12"/>
+                    <TextBox Name="txtBoxProsecnaOcena" Text="{Binding Path=Student.ProsecnaOcena, UpdateSourceTrigger=PropertyChanged}" Grid.Row="12" Grid.Column="1" Margin="0,0,0,5"/>
 
+                    <!-- Ostatak koda ostaje isti -->
                 </Grid>
 
                 <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,20,0,10">

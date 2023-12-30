@@ -107,7 +107,7 @@ namespace CLI.Model
             this.Indeks = new Indeks(oznaka, broji, godinaUpisa);
             this.TrenutnaGodinaStudija = godinastudija;
             this.Status = MakeStatus(status);
-            this.ProsecnaOcena = prosecnaocena;
+            //this.ProsecnaOcena = prosecnaocena;
             PolozeniIspiti = new List<OcenaNaUpisu>();
             NepolozeniIspiti = new List<Predmet>();
             //this.IdAdrese = this.AdresaStanovanja.idAdrese;
@@ -117,7 +117,7 @@ namespace CLI.Model
 
         public Status MakeStatus(string stat)
         {
-            if (stat.Equals("samofinansiranje"))
+            if (stat.Equals("samofinasiranje"))
                 return Status.S;
             else
                 return Status.B;
@@ -166,7 +166,7 @@ namespace CLI.Model
                 IdIndeksa.ToString(),
                 TrenutnaGodinaStudija.ToString(),
                 Enum.GetName(typeof(Status),Status),
-                ProsecnaOcena.ToString(),
+               // ProsecnaOcena.ToString(),
         };
             return csvValues;
         }
@@ -183,7 +183,7 @@ namespace CLI.Model
             IdIndeksa = int.Parse(values[7]);
             TrenutnaGodinaStudija = int.Parse(values[8]);
             Status = (Status)Enum.Parse(typeof(Status), values[9]);
-            ProsecnaOcena = double.Parse(values[10]);  
+            //ProsecnaOcena = double.Parse(values[10]);  
         }
 
 
@@ -204,7 +204,7 @@ namespace CLI.Model
             sb.AppendLine(string.Format(format, "Broj indeksa", Indeks.ToString()));
             sb.AppendLine(string.Format(format, "Trenutna godina studija", TrenutnaGodinaStudija));
             sb.AppendLine(string.Format(format, "Status", Status));
-            sb.AppendLine(string.Format(format, "Prosečna ocena", ProsecnaOcena));
+            //sb.AppendLine(string.Format(format, "Prosečna ocena", ProsecnaOcena));
 
             return sb.ToString();
         }

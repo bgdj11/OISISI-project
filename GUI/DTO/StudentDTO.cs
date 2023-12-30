@@ -307,6 +307,8 @@ namespace GUI.DTO
         }
 
         private double prosecnaOcena { get; set; }
+
+        /*
         public double ProsecnaOcena
         {
             get
@@ -322,7 +324,7 @@ namespace GUI.DTO
                 }
             }
         }
-
+        */
 
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -368,7 +370,7 @@ namespace GUI.DTO
             brojIndeksa = student.Indeks.brojUpisa;
             TrenutnaGodinaStudija = student.TrenutnaGodinaStudija;
             StatusStudenta = student.Status.ToString();
-            ProsecnaOcena = student.ProsecnaOcena;
+            prosecnaOcena = student.ProsecnaOcena;
         }
 
 
@@ -393,7 +395,7 @@ namespace GUI.DTO
                 GodinaUpisa = this.GodinaUpisa,
                 StatusStudenta = this.StatusStudenta,
                 TrenutnaGodinaStudija = this.TrenutnaGodinaStudija,
-                ProsecnaOcena = this.ProsecnaOcena,
+                prosecnaOcena = this.prosecnaOcena,
                 idAdrese = this.idAdrese,
                 idIndeksa = this.idIndeksa
             };

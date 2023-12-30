@@ -79,9 +79,9 @@ public class StudentDAO
                 {
                     if(s.IdStudent == sp.IdStudent)
                     {
-                        if(_ocene.Find(n => n.idPredmeta == sp.IdPredmet) != null)
+                        if(_ocene.Find(n => n.idPredmeta == sp.IdPredmet && n.idStudenta == sp.IdStudent) != null)
                         {
-                            s.PolozeniIspiti.Add(_ocene.Find(n => n.idPredmeta == sp.IdPredmet));
+                            s.PolozeniIspiti.Add(_ocene.Find(n => n.idPredmeta == sp.IdPredmet && n.idStudenta == sp.IdStudent));
                         }
                         else
                         {

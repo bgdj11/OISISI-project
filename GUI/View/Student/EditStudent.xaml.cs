@@ -100,8 +100,8 @@ namespace GUI.View.Student
                    !string.IsNullOrWhiteSpace(txtBoxBrojIndeksa.Text) &&
                    !string.IsNullOrWhiteSpace(txtBoxGodinaUpisa.Text) &&
                    cmbGodinaStudija.SelectedItem != null &&
-                   cmbStatusStudenta.SelectedItem != null &&
-                   !string.IsNullOrWhiteSpace(txtBoxProsecnaOcena.Text);
+                   cmbStatusStudenta.SelectedItem != null;
+                   //!string.IsNullOrWhiteSpace(txtBoxProsecnaOcena.Text);
         }
 
     }

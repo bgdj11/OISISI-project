@@ -128,13 +128,13 @@
                     <Button Content="Dodaj ocenu" Click="AddGrade_Click" Margin="5"/>
                 </StackPanel>
 
-                <DataGrid Grid.Column="1" Grid.Row="2" CanUserAddRows="False" IsReadOnly="True" 
+                <DataGrid Grid.Column="1" Grid.Row="2" CanUserAddRows="False" IsReadOnly="True " AutoGenerateColumns="False"
                      ItemsSource="{Binding NotPassedSubjects}" SelectedItem="{Binding SelectedSubject}" Grid.ColumnSpan="2">
                      <DataGrid.Columns>
-                        <DataGridTextColumn Header="Oznaka predmeta" Width="110" Binding="{Binding SifraPredmeta}"/>
-                        <DataGridTextColumn Header="Naziv predmeta" Width="140" Binding="{Binding NazivPredmeta}"/>
+                        <DataGridTextColumn Header="Oznaka" Width="50" Binding="{Binding SifraPredmeta}"/>
+                        <DataGridTextColumn Header="Naziv predmeta" Width="150" Binding="{Binding NazivPredmeta}"/>
                         <DataGridTextColumn Header="ESPB" Width="45" Binding="{Binding ESPB}"/>
-                        <DataGridTextColumn Header="Godina" Width="50" Binding="{Binding GodinaStudija}"/>
+                        <DataGridTextColumn Header="Godina" Width="55" Binding="{Binding GodinaStudija}"/>
                         <DataGridTextColumn Header="Semestar" Width="*" Binding="{Binding Semestar}"/>
                      </DataGrid.Columns>
                 </DataGrid>

@@ -38,6 +38,7 @@ namespace CLI.DAO
 
             foreach (Predmet p in _predmeti)
             {
+                
                 foreach (Student s in _studenti)
                 {
                     if (s.NepolozeniIspiti.Find(n => n.idPredmet == p.idPredmet) != null)
@@ -50,6 +51,7 @@ namespace CLI.DAO
                         p.spisakPolozenihStudenata.Add(s);
                     }
                 }
+               
 
                 foreach (Profesor pr in _profesori)
                 {
@@ -104,6 +106,7 @@ namespace CLI.DAO
 
         public Predmet? GetPredmetById(int idPredmet)
         {
+            MakePredmet();
             return _predmeti.Find(p => p.idPredmet == idPredmet);
         }
 

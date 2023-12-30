@@ -73,6 +73,36 @@ public class StudentDAO
                 }
             }
 
+           
+            // Izbegava dupliranje predmeta
+            foreach (Student s in _studenti)
+            {
+                s.PolozeniIspiti.Clear(); 
+                s.NepolozeniIspiti.Clear(); 
+
+                foreach (StudentPredmet sp in _studPred)
+                {
+                    if (s.IdStudent == sp.IdStudent)
+                    {
+                        var ocena = _ocene.Find(n => n.idPredmeta == sp.IdPredmet && n.idStudenta == sp.IdStudent);
+                        if (ocena != null)
+                        {
+                            s.PolozeniIspiti.Add(ocena);
+                        }
+                        else
+                        {
+                            var nepolozenPredmet = _predmeti.Find(n => n.idPredmet == sp.IdPredmet);
+                            if (!s.NepolozeniIspiti.Contains(nepolozenPredmet))
+                            {
+                                s.NepolozeniIspiti.Add(nepolozenPredmet);
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            /*
             foreach (Student s in _studenti)
             {
                 foreach(StudentPredmet sp in _studPred)
@@ -90,6 +120,7 @@ public class StudentDAO
                     }
                 }
             }
+            */
 
             _storage.Save(_studenti);
             _adresaStorage.Save(_adrese);

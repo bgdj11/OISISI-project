@@ -337,8 +337,13 @@ namespace GUI.DTO
             }
         }
 
+        public List<int> notPassedIds {  get; set; }
+        public List<int> gradesIds { get; set; }
+
+
         public StudentDTO()
         {
+            notPassedIds = new List<int>();
         }
 
 
@@ -371,6 +376,27 @@ namespace GUI.DTO
             TrenutnaGodinaStudija = student.TrenutnaGodinaStudija;
             StatusStudenta = student.Status.ToString();
             prosecnaOcena = student.ProsecnaOcena;
+
+            notPassedIds = new List<int>();
+            
+            if(student.NepolozeniIspiti.Any())
+            {
+                foreach (Predmet p in student.NepolozeniIspiti)
+                {
+                    notPassedIds.Add(p.idPredmet);
+                }
+            }
+
+            /*
+            if(student.PolozeniIspiti.Any())
+            {
+                foreach (OcenaNaUpisu o in student.PolozeniIspiti)
+                {
+                    gradesIds.Append(o.idOcene);
+                }
+            }
+            */
+
         }
 
 
@@ -397,7 +423,10 @@ namespace GUI.DTO
                 TrenutnaGodinaStudija = this.TrenutnaGodinaStudija,
                 prosecnaOcena = this.prosecnaOcena,
                 idAdrese = this.idAdrese,
-                idIndeksa = this.idIndeksa
+                idIndeksa = this.idIndeksa,
+
+                notPassedIds = this.notPassedIds
+
             };
         }
     }

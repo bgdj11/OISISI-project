@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -30,6 +31,9 @@ namespace GUI.View.Student
         public StudentDTO Student { get; set; }
         private StudentDAO studentDAO;
 
+        public ObservableCollection<PredmetDTO> NotPassedSubjects { get; set; }  // lista nepolozenih
+        public PredmetDTO SelectedSubject { get; set; } // selektovan nepolozen
+        private PredmetDAO predmetDAO;
 
         List<int> Godine;
         List<string> Statusi;
@@ -41,11 +45,29 @@ namespace GUI.View.Student
             this.studentDAO = studentDAO;
             Student = selectedStudent;
 
+            NotPassedSubjects = new ObservableCollection<PredmetDTO>();
+            predmetDAO = new PredmetDAO();
+            SelectedSubject = new PredmetDTO();
+
             Godine = new List<int> { 1, 2, 3, 4 };
             cmbGodinaStudija.ItemsSource = Godine;
 
             Statusi = new List<string> { "samofinasiranje", "budzet" };
             cmbStatusStudenta.ItemsSource = Statusi;
+
+            Update();
+        }
+
+        private void Update()
+        {
+            if (Student.notPassedIds != null && Student.notPassedIds.Any())
+            {
+                NotPassedSubjects.Clear();
+                foreach (int i in Student.notPassedIds)
+                {
+                    NotPassedSubjects.Add(new PredmetDTO(predmetDAO.GetPredmetById(i)));
+                }
+            }
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

@@ -119,6 +119,7 @@ public class StudentDAO
             oldStudent.Ime = student.Ime;
             oldStudent.DatumRodjenja = student.DatumRodjenja;
             oldStudent.IdAdrese = student.IdAdrese;
+            adresaDAO.UpdateAdresa(student.AdresaStanovanja);
             oldStudent.KontaktTelefon = student.KontaktTelefon;
             oldStudent.EmailAdresa = student.EmailAdresa;
             oldStudent.IdIndeksa = student.IdIndeksa;

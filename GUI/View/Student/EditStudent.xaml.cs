@@ -104,5 +104,20 @@ namespace GUI.View.Student
                    //!string.IsNullOrWhiteSpace(txtBoxProsecnaOcena.Text);
         }
 
+        private void AddSubject_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddGrade_Click(object sender, RoutedEventArgs e) 
+        {
+        
+        }
+
     }
 }

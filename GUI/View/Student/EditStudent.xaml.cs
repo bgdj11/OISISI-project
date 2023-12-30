@@ -128,7 +128,11 @@ namespace GUI.View.Student
 
         private void AddSubject_Click(object sender, RoutedEventArgs e)
         {
-
+            var selectSubjectWindow  = new SelectSubject(predmetDAO);
+            selectSubjectWindow.Owner = this;
+            selectSubjectWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            selectSubjectWindow.ShowDialog();
+            Update();
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)

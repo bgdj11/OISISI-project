@@ -1,0 +1,22 @@
+﻿<Window x:Class="GUI.View.Student.SelectSubject"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GUI.View.Student"
+        mc:Ignorable="d"
+        Title="SelectSubject" Height="450" Width="800">
+    <Grid>
+        <DataGrid Height="517"
+              AutoGenerateColumns="False"
+              x:Name="SubjectsDataGrid"
+              ItemsSource="{Binding Subjects, UpdateSourceTrigger=PropertyChanged}"
+              SelectedItem="{Binding SelectedPredmet, UpdateSourceTrigger=PropertyChanged}"
+              SelectionMode="Single" IsReadOnly="True" SelectionChanged="SubjectsDataGrid_SelectionChanged" Margin="1,0,-1,-83">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Sifra Predmeta" Binding="{Binding SifraPredmeta}"/>
+                <DataGridTextColumn Header="Naziv" Binding="{Binding NazivPredmeta}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

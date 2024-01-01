@@ -10,7 +10,7 @@ using CLI.Storage;
 
 namespace CLI.DAO
 {
-class StudentPredmetDAO
+public class StudentPredmetDAO
 {
         private readonly List<StudentPredmet> _studentpredmet;
         private readonly Storage<StudentPredmet> _storage;
@@ -26,6 +26,26 @@ class StudentPredmetDAO
             StudentPredmet sp = new StudentPredmet(ids, idp);
             _studentpredmet.Add(sp);
             _storage.Save(_studentpredmet);
+        }
+
+        public StudentPredmet? GetByIds(int idStudenta, int idPredmeta)
+        {
+            foreach(StudentPredmet sp in _studentpredmet)
+            {
+                if (sp.IdStudent == idStudenta && idPredmeta == sp.IdPredmet)
+                    return sp;
+            }
+            return null;
+        }
+
+        public void RemovePredmetFromStudent(StudentPredmet sp)
+        {
+            if(sp != null)
+            {
+                _studentpredmet.Remove(sp);
+                _storage.Save(_studentpredmet);
+            }
+
         }
 }
 }

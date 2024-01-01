@@ -32,7 +32,7 @@ public class StudentDAO
             return _studenti[^1].IdStudent + 1;
         }
 
-        void MakeStudent()
+        public void MakeStudent()
         {
             Storage<Predmet> _predmetiStorage = new Storage<Predmet>("predmeti.csv");
             List<Predmet> _predmeti = _predmetiStorage.Load();
@@ -100,7 +100,6 @@ public class StudentDAO
                     }
                 }
             }
-
 
             /*
             foreach (Student s in _studenti)

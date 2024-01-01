@@ -19,6 +19,7 @@ using System.Windows.Shapes;
 using CLI.DAO;
 using CLI.Model;
 using GUI.DTO;
+using GUI.View.DialogWindows;
 
 namespace GUI.View.Student
 {
@@ -34,6 +35,8 @@ namespace GUI.View.Student
         public ObservableCollection<PredmetDTO> NotPassedSubjects { get; set; }  // lista nepolozenih
         public PredmetDTO SelectedSubject { get; set; } // selektovan nepolozen
         private PredmetDAO predmetDAO;
+
+        private StudentPredmetDAO studentPredmetDAO;
 
         List<int> Godine;
         List<string> Statusi;
@@ -55,11 +58,15 @@ namespace GUI.View.Student
             Statusi = new List<string> { "samofinasiranje", "budzet" };
             cmbStatusStudenta.ItemsSource = Statusi;
 
+            studentPredmetDAO = new StudentPredmetDAO();
+
             Update();
         }
 
         private void Update()
         {
+            studentDAO.MakeStudent();
+
             if (Student.notPassedIds != null && Student.notPassedIds.Any())
             {
                 NotPassedSubjects.Clear();
@@ -137,9 +144,29 @@ namespace GUI.View.Student
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
+            if (SelectedSubject == null)
+            {
+                MessageBox.Show(this, "Izaberite predmet za brisanje!");
+            }
+            else
+            {
+                var confirmationDialog = new ConfirmationWindow("predmet");
+                confirmationDialog.Owner = this;
+                confirmationDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                confirmationDialog.ShowDialog();
 
+                if (confirmationDialog.UserConfirmed)
+                {
+                    studentPredmetDAO.RemovePredmetFromStudent(studentPredmetDAO.GetByIds(Student.StudentId, SelectedSubject.predmetId));
+                }
+
+                // da bi se izmene odmah prikazale:
+                Student.notPassedIds.Remove(SelectedSubject.predmetId);
+            }
+
+            Update();
         }
-
+    
         private void AddGrade_Click(object sender, RoutedEventArgs e) 
         {
         

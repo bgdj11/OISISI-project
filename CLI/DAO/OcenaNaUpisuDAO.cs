@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace CLI.DAO
 {
-    internal class OcenaNaUpisuDAO
+    public class OcenaNaUpisuDAO
     {
         private readonly List<OcenaNaUpisu> _ocene;
         private readonly Storage<OcenaNaUpisu> _storage;
@@ -20,7 +20,7 @@ namespace CLI.DAO
         public int GenerateID()
         {
             if (_ocene.Count == 0) return 0;
-            return _ocene[^1].idOcene + 1;
+            return _ocene[^1].IdOcene + 1;
         }
 
         public void MakeOcena()
@@ -33,16 +33,16 @@ namespace CLI.DAO
 
             foreach(OcenaNaUpisu o in _ocene)
             {
-                Student s = _studenti.Find(n => n.IdStudent == o.idStudenta);
-                o.student = s;
+                Student s = _studenti.Find(n => n.IdStudent == o.IdStudenta);
+                o.Student = s;
 
-                if(o.idStudenta == s.IdStudent)
+                if(o.IdStudenta == s.IdStudent)
                 {
                     s.PolozeniIspiti.Add(o);
                 }
 
-                Predmet p = _predmeti.Find(n => n.idPredmet == o.idPredmeta);
-                o.predmet = p;
+                Predmet p = _predmeti.Find(n => n.idPredmet == o.IdPredmeta);
+                o.Predmet = p;
             }
 
             _storage.Save(_ocene);
@@ -52,7 +52,7 @@ namespace CLI.DAO
 
         public OcenaNaUpisu AddOcena(OcenaNaUpisu ocena)
         {
-            ocena.idOcene = GenerateID();
+            ocena.IdOcene = GenerateID();
             _ocene.Add(ocena);
             MakeOcena();
             _storage.Save(_ocene);
@@ -61,13 +61,13 @@ namespace CLI.DAO
 
         public OcenaNaUpisu? UpdateOcena(OcenaNaUpisu ocena)
         {
-            OcenaNaUpisu? oldOcena = GetOcenaById(ocena.idOcene);
+            OcenaNaUpisu? oldOcena = GetOcenaById(ocena.IdOcene);
             if (oldOcena == null) return null;
 
             oldOcena.Ocena = ocena.Ocena;
-            oldOcena.idStudenta = ocena.idStudenta;
-            oldOcena.idPredmeta = ocena.idPredmeta;
-            oldOcena.datum = ocena.datum;
+            oldOcena.IdStudenta = ocena.IdStudenta;
+            oldOcena.IdPredmeta = ocena.IdPredmeta;
+            oldOcena.Datum = ocena.Datum;
 
             MakeOcena();
 
@@ -86,9 +86,9 @@ namespace CLI.DAO
             return ocena;
         }
 
-        private OcenaNaUpisu? GetOcenaById(int id)
+        public OcenaNaUpisu? GetOcenaById(int id)
         {
-            return _ocene.Find(o => o.idOcene == id);
+            return _ocene.Find(o => o.IdOcene == id);
         }
 
         public List<OcenaNaUpisu> GetAllOcena()
@@ -103,16 +103,16 @@ namespace CLI.DAO
             switch (sortCriteria)
             {
                 case "idOcene":
-                    ocene = _ocene.OrderBy(x => x.idOcene);
+                    ocene = _ocene.OrderBy(x => x.IdOcene);
                     break;
                 case "ocena":
                     ocene = _ocene.OrderBy(x => x.Ocena);
                     break;
                 case "idStudenta":
-                    ocene = _ocene.OrderBy(x => x.idStudenta);
+                    ocene = _ocene.OrderBy(x => x.IdStudenta);
                     break;
                 case "idPredmeta":
-                    ocene = _ocene.OrderBy(x => x.idPredmeta);
+                    ocene = _ocene.OrderBy(x => x.IdPredmeta);
                     break;
             }
 

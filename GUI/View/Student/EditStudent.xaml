@@ -105,7 +105,34 @@
         </TabItem>
         
         <TabItem Header="Polozeni">
-            
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="Ponisti ocenu" Click="PonistiOcenu_Click" Margin="5"/>
+                </StackPanel>
+
+                <DataGrid Grid.Column="1" Grid.Row="2" CanUserAddRows="False" IsReadOnly="True " AutoGenerateColumns="False"
+                     ItemsSource="{Binding Ocene}" SelectedItem="{Binding SelectedOcena}" Grid.ColumnSpan="2" SelectionChanged="DataGrid_SelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Oznaka" Width="50" Binding="{Binding SifraPredmeta}"/>
+                        <DataGridTextColumn Header="Naziv predmeta" Width="150" Binding="{Binding NazivPredmeta}"/>
+                        <DataGridTextColumn Header="ESPB" Width="45" Binding="{Binding BrojESPB}"/>
+                        <DataGridTextColumn Header="Ocena" Width="55" Binding="{Binding Ocena}"/>
+                        <DataGridTextColumn Header="Datum" Width="*" Binding="{Binding Datum}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
         </TabItem>
         
         <TabItem Header="Nepolozeni">

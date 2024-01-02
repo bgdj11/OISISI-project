@@ -9,12 +9,12 @@ namespace CLI.Model
 {
     public class OcenaNaUpisu : ISerializable
     {
-        public int idOcene { get; set; }
-        public int idStudenta {  get; set; }
-        public Student student { get; set; }
-        public int idPredmeta { get; set; }
-        public Predmet predmet { get; set; }
-        public DateOnly datum { get; set; }
+        public int IdOcene { get; set; }
+        public int IdStudenta {  get; set; }
+        public Student Student { get; set; }
+        public int IdPredmeta { get; set; }
+        public Predmet Predmet { get; set; }
+        public DateOnly Datum { get; set; }
 
         private int ocena;
 
@@ -35,43 +35,43 @@ namespace CLI.Model
             }
         }
         public OcenaNaUpisu() { }
-        public OcenaNaUpisu(Student student, Predmet predmet, DateOnly datum, int ocena, int oc)
+        public OcenaNaUpisu(Student student, Predmet predmet, string datum, int ocena)
         {
-            this.student = student;
-            this.predmet = predmet;
-            this.datum = datum;
-            Ocena = oc;
+            this.Student = student;
+            this.Predmet = predmet;
+            this.Datum = DateOnly.Parse(datum);
+            this.ocena = ocena;
         }
 
         public string[] ToCSV()
         {
             string[] csvValues =
             {
-                idOcene.ToString(),
+                IdOcene.ToString(),
                 ocena.ToString(),
-                idStudenta.ToString(),
-                idPredmeta.ToString(),
-                datum.ToString()
+                IdStudenta.ToString(),
+                IdPredmeta.ToString(),
+                Datum.ToString()
             };
             return csvValues;
         }
 
         public void FromCSV(string[] values)
         {
-            idOcene = int.Parse(values[0]);
+            IdOcene = int.Parse(values[0]);
             ocena = int.Parse(values[1]);
-            idStudenta = int.Parse(values[2]);
-            idPredmeta = int.Parse(values[3]);
-            datum = DateOnly.Parse(values[4]);
+            IdStudenta = int.Parse(values[2]);
+            IdPredmeta = int.Parse(values[3]);
+            Datum = DateOnly.Parse(values[4]);
         }
 
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("Ocena: ").Append(ocena.ToString()).Append(", ");
-            sb.Append("IdStudenta: ").Append(idStudenta.ToString()).Append(", ");
-            sb.Append("IdPredmeta: ").Append(idPredmeta.ToString()).Append(", ");  
-            sb.Append("Datum: ").Append(datum);
+            sb.Append("IdStudenta: ").Append(IdStudenta.ToString()).Append(", ");
+            sb.Append("IdPredmeta: ").Append(IdPredmeta.ToString()).Append(", ");  
+            sb.Append("Datum: ").Append(Datum);
 
             return sb.ToString();
         }

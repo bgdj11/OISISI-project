@@ -33,6 +33,11 @@ namespace GUI.View.Student
         private StudentDAO studentDAO;
 
         public ObservableCollection<PredmetDTO> NotPassedSubjects { get; set; }  // lista nepolozenih
+        public ObservableCollection<OcenaDTO> Ocene { get; set; }
+
+        public OcenaDTO SelectedOcena { get; set; }
+        private OcenaNaUpisuDAO ocenaDAO;
+
         public PredmetDTO SelectedSubject { get; set; } // selektovan nepolozen
         private PredmetDAO predmetDAO;
 
@@ -51,6 +56,11 @@ namespace GUI.View.Student
             NotPassedSubjects = new ObservableCollection<PredmetDTO>();
             predmetDAO = new PredmetDAO();
             SelectedSubject = new PredmetDTO();
+
+            Ocene = new ObservableCollection<OcenaDTO>();
+            ocenaDAO = new OcenaNaUpisuDAO();
+            SelectedOcena = new OcenaDTO();
+
 
             Godine = new List<int> { 1, 2, 3, 4 };
             cmbGodinaStudija.ItemsSource = Godine;
@@ -75,6 +85,16 @@ namespace GUI.View.Student
                     NotPassedSubjects.Add(new PredmetDTO(predmetDAO.GetPredmetById(i)));
                 }
             }
+
+            if (Student.gradesIds != null)
+            {
+                Ocene.Clear();
+                foreach (int i in Student.gradesIds)
+                {
+                    Ocene.Add(new OcenaDTO(ocenaDAO.GetOcenaById(i)));
+                }
+            }
+
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -173,6 +193,11 @@ namespace GUI.View.Student
         }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void PonistiOcenu_Click(object sender, RoutedEventArgs e)
         {
 
         }

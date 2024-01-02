@@ -52,9 +52,9 @@ namespace CLI.Console
 
             OcenaNaUpisu ocenaNaUpisu = new OcenaNaUpisu()
             {
-                idStudenta = idStudenta,
-                idPredmeta = idPredmeta,
-                datum = datumpol,
+                IdStudenta = idStudenta,
+                IdPredmeta = idPredmeta,
+                Datum = datumpol,
                 Ocena = ocena
             };
 
@@ -130,7 +130,7 @@ namespace CLI.Console
         {
             int id = InputOcenaNaUpisuId();
             OcenaNaUpisu ocenaNaUpisu = InputOcenaNaUpisu();
-            ocenaNaUpisu.idOcene = id;
+            ocenaNaUpisu.IdOcene = id;
             OcenaNaUpisu updatedOcenaNaUpisu = _ocenaNaUpisuDao.UpdateOcena(ocenaNaUpisu);
             if (updatedOcenaNaUpisu != null)
             {

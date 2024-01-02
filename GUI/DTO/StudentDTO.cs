@@ -344,6 +344,7 @@ namespace GUI.DTO
         public StudentDTO()
         {
             notPassedIds = new List<int>();
+            gradesIds = new List<int>();
         }
 
 
@@ -378,6 +379,7 @@ namespace GUI.DTO
             prosecnaOcena = student.ProsecnaOcena;
 
             notPassedIds = new List<int>();
+            gradesIds = new List<int>();
             
             if(student.NepolozeniIspiti.Any())
             {
@@ -387,15 +389,15 @@ namespace GUI.DTO
                 }
             }
 
-            /*
+
             if(student.PolozeniIspiti.Any())
             {
                 foreach (OcenaNaUpisu o in student.PolozeniIspiti)
                 {
-                    gradesIds.Append(o.idOcene);
+                    gradesIds.Append(o.IdOcene);
                 }
             }
-            */
+
 
         }
 
@@ -424,8 +426,9 @@ namespace GUI.DTO
                 prosecnaOcena = this.prosecnaOcena,
                 idAdrese = this.idAdrese,
                 idIndeksa = this.idIndeksa,
+                notPassedIds = this.notPassedIds,
+                gradesIds = this.gradesIds
 
-                notPassedIds = this.notPassedIds
 
             };
         }

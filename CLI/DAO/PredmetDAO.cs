@@ -46,7 +46,7 @@ namespace CLI.DAO
                         p.spisakNepolozenihStudenata.Add(s);
                     }
 
-                    if (s.PolozeniIspiti.Find(n => n.idPredmeta == p.idPredmet) != null)
+                    if (s.PolozeniIspiti.Find(n => n.IdPredmeta == p.idPredmet) != null)
                     {
                         p.spisakPolozenihStudenata.Add(s);
                     }

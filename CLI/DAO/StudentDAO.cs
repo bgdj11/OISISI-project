@@ -84,7 +84,7 @@ public class StudentDAO
                 {
                     if (s.IdStudent == sp.IdStudent)
                     {
-                        var ocena = _ocene.Find(n => n.idPredmeta == sp.IdPredmet && n.idStudenta == sp.IdStudent);
+                        var ocena = _ocene.Find(n => n.IdPredmeta == sp.IdPredmet && n.IdStudenta == sp.IdStudent);
                         if (ocena != null)
                         {
                             s.PolozeniIspiti.Add(ocena);

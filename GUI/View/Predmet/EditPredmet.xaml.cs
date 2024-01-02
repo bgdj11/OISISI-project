@@ -1,5 +1,6 @@
 ﻿using CLI.DAO;
 using GUI.DTO;
+using GUI.View.Student;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -45,10 +46,9 @@ namespace GUI.View.Predmet
             cmbGodinaStudija.ItemsSource = Godine;
         }
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private void Update()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
+            Predmet = new PredmetDTO(predmetDAO.GetPredmetById(Predmet.predmetId));
         }
 
         private void btnAccept_Click(object sender, RoutedEventArgs e)
@@ -81,6 +81,20 @@ namespace GUI.View.Predmet
                    cmbGodinaStudija.SelectedItem != null &&
                    !string.IsNullOrWhiteSpace(txtBoxProfesorID.Text) &&
                    !string.IsNullOrWhiteSpace(txtESPB.Text);
+        }
+
+        private void AddProfessor_Click(object sender, RoutedEventArgs e)
+        {
+            var selectProfesorWindow = new SelectProfesor(predmetDAO, Predmet);
+            selectProfesorWindow.Owner = this;
+            selectProfesorWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            selectProfesorWindow.ShowDialog();
+            Update();
+        }
+
+        private void RemoveProfessor_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

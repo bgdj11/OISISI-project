@@ -23,11 +23,6 @@ using GUI.View.Profesor;
 using GUI.View.Predmet;
 
 
-
-
-
-
-
 namespace GUI.View.Student
 {
     /// <summary>
@@ -56,11 +51,6 @@ namespace GUI.View.Student
             Subjects.Clear();
             foreach (CLI.Model.Predmet predmet in predmetDAO.GetAllPredmeti())
                 Subjects.Add(new PredmetDTO(predmet));
-
-
-                MessageBox.Show("test");
-            
-
         }
 
 

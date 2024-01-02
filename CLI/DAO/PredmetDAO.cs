@@ -27,7 +27,7 @@ namespace CLI.DAO
             return _predmeti[^1].idPredmet + 1;
         }
 
-        private void MakePredmet()
+        public void MakePredmet()
         {
             Storage<Student> _studentStorage = new Storage<Student>("studenti.csv");
             List<Student> _studenti = _studentStorage.Load();

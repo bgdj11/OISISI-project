@@ -61,14 +61,13 @@ namespace GUI.View.Student
             ocenaDAO = new OcenaNaUpisuDAO();
             SelectedOcena = new OcenaDTO();
 
+            studentPredmetDAO = new StudentPredmetDAO();
 
             Godine = new List<int> { 1, 2, 3, 4 };
             cmbGodinaStudija.ItemsSource = Godine;
 
             Statusi = new List<string> { "samofinasiranje", "budzet" };
             cmbStatusStudenta.ItemsSource = Statusi;
-
-            studentPredmetDAO = new StudentPredmetDAO();
 
             Update();
         }
@@ -86,14 +85,28 @@ namespace GUI.View.Student
                 }
             }
 
+
+            //if (Student.gradesIds == null || Student.gradesIds.Count == 0)
+            //{
+             //   MessageBox.Show("Nema ID-ova ocena za proveru.", "Informacija", MessageBoxButton.OK, MessageBoxImage.Information);
+           // }
+
             if (Student.gradesIds != null)
             {
-                Ocene.Clear();
+                int count = Student.gradesIds?.Count ?? 0; // Koristi null-conditional operator i null-coalescing operator
+                MessageBox.Show($"Broj ocena: {count}", "Broj Ocena", MessageBoxButton.OK, MessageBoxImage.Information);
+            
+
+
+            Ocene.Clear();
                 foreach (int i in Student.gradesIds)
                 {
                     Ocene.Add(new OcenaDTO(ocenaDAO.GetOcenaById(i)));
                 }
+
             }
+
+            //ProveriOcene();
 
         }
 
@@ -200,6 +213,30 @@ namespace GUI.View.Student
         private void PonistiOcenu_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void ProveriOcene()
+        {
+            if (Student.gradesIds == null || Student.gradesIds.Count == 0)
+            {
+                MessageBox.Show("Nema ID-ova ocena za proveru.", "Informacija", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            bool postojiOcena = false;
+            foreach (var id in Student.gradesIds)
+            {
+                if (ocenaDAO.GetOcenaById(id) != null)
+                {
+                    postojiOcena = true;
+                    break;
+                }
+            }
+
+            if (!postojiOcena)
+            {
+                MessageBox.Show("Nema dostupnih ocena za prikaz.", "Informacija", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
     }
 }

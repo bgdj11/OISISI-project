@@ -18,5 +18,10 @@
                 <DataGridTextColumn Header="Naziv" Binding="{Binding NazivPredmeta}"/>
             </DataGrid.Columns>
         </DataGrid>
+
+        <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,20,0,10">
+            <Button Name="btnAccept" Content="Potvrdi" Width="75" Margin="0,0,10,0" Click="btnAccept_Click" />
+            <Button Name="btnCancel" Content="Odustani" Width="75" Click="btnCancel_Click" />
+        </StackPanel>
     </Grid>
 </Window>

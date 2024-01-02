@@ -63,11 +63,11 @@ namespace GUI.View.Student
             Update();
         }
 
-        private void Update()
+        public void Update()
         {
             studentDAO.MakeStudent();
 
-            if (Student.notPassedIds != null && Student.notPassedIds.Any())
+            if (Student.notPassedIds != null)
             {
                 NotPassedSubjects.Clear();
                 foreach (int i in Student.notPassedIds)
@@ -135,7 +135,7 @@ namespace GUI.View.Student
 
         private void AddSubject_Click(object sender, RoutedEventArgs e)
         {
-            var selectSubjectWindow  = new SelectSubject(predmetDAO);
+            var selectSubjectWindow  = new SelectSubject(predmetDAO, Student, studentPredmetDAO);
             selectSubjectWindow.Owner = this;
             selectSubjectWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             selectSubjectWindow.ShowDialog();
@@ -172,5 +172,9 @@ namespace GUI.View.Student
         
         }
 
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

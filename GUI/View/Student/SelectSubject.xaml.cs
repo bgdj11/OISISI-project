@@ -32,16 +32,25 @@ namespace GUI.View.Student
     {
         public ObservableCollection<PredmetDTO> Subjects { get; set; }
         public PredmetDTO SelectedPredmet { get; set; }
+
+        public StudentDTO SelectedStudent { get; set; }
         private PredmetDAO predmetDAO { get; set; }
 
-        public SelectSubject(PredmetDAO predmetDAO)
+        private StudentPredmetDAO studentPredmetDAO { get; set; }
+
+        public SelectSubject(PredmetDAO predmetDAO, StudentDTO student, StudentPredmetDAO spDAO)
         {
             InitializeComponent();
 
             DataContext = this;
 
-            Subjects = new ObservableCollection<PredmetDTO>();
+            this.SelectedStudent = student;
             this.predmetDAO = predmetDAO;
+
+            Subjects = new ObservableCollection<PredmetDTO>();
+            studentPredmetDAO = spDAO;
+
+
             Update();
         }
 
@@ -57,5 +66,18 @@ namespace GUI.View.Student
         private void SubjectsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
         }
+
+        private void btnAccept_Click(object sender, RoutedEventArgs e)
+        {
+            studentPredmetDAO.AddPredmetToStudent(SelectedStudent.StudentId, SelectedPredmet.predmetId);
+            MessageBox.Show("Predmet je uspesno dodat!", "Uspesno", MessageBoxButton.OK, MessageBoxImage.Information);
+            SelectedStudent.notPassedIds.Add(SelectedPredmet.predmetId);
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
     }
 }

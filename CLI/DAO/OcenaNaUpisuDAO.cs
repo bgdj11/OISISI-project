@@ -14,7 +14,7 @@ namespace CLI.DAO
         public OcenaNaUpisuDAO()
         {
             _storage = new Storage<OcenaNaUpisu>("ocene.csv");
-            _ocene = new List<OcenaNaUpisu>();
+            _ocene = _storage.Load();
         }
 
         public int GenerateID()
@@ -88,6 +88,7 @@ namespace CLI.DAO
 
         public OcenaNaUpisu? GetOcenaById(int id)
         {
+            MakeOcena();
             return _ocene.Find(o => o.IdOcene == id);
         }
 

@@ -394,7 +394,7 @@ namespace GUI.DTO
             {
                 foreach (OcenaNaUpisu o in student.PolozeniIspiti)
                 {
-                    gradesIds.Append(o.IdOcene);
+                    gradesIds.Add(o.IdOcene);
                 }
             }
 

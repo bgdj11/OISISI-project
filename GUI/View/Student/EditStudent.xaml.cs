@@ -93,15 +93,15 @@ namespace GUI.View.Student
 
             if (Student.gradesIds != null)
             {
-                int count = Student.gradesIds?.Count ?? 0; // Koristi null-conditional operator i null-coalescing operator
-                MessageBox.Show($"Broj ocena: {count}", "Broj Ocena", MessageBoxButton.OK, MessageBoxImage.Information);
-            
-
-
-            Ocene.Clear();
+                Ocene.Clear();
                 foreach (int i in Student.gradesIds)
                 {
-                    Ocene.Add(new OcenaDTO(ocenaDAO.GetOcenaById(i)));
+
+                    if (ocenaDAO.GetOcenaById(i) != null)
+                    {
+                       // MessageBox.Show("nasao je ocenuuu");
+                        Ocene.Add(new OcenaDTO(ocenaDAO.GetOcenaById(i)));
+                    }
                 }
 
             }
@@ -110,7 +110,7 @@ namespace GUI.View.Student
 
         }
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPrortyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 

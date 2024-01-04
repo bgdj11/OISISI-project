@@ -392,7 +392,7 @@ namespace GUI.DTO
             brojIndeksa = student.Indeks.brojUpisa;
             TrenutnaGodinaStudija = student.TrenutnaGodinaStudija;
             StatusStudenta = student.Status.ToString();
-            prosecnaOcena = -1;
+            prosecnaOcena = student.ProsecnaOcena;
             ukupnoEspb = -1;
 
 

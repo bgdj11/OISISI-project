@@ -133,7 +133,7 @@
                             <DataGridTextColumn Header="Prezime" Binding="{Binding Prezime}"/>
                             <DataGridTextColumn Header="Godina Studija" Binding="{Binding TrenutnaGodinaStudija}"/>
                             <DataGridTextColumn Header="Status" Binding="{Binding StatusStudenta}"/>
-                        <!--    <DataGridTextColumn Header="Prosek" Binding="{Binding ProsecnaOcena}"/> -->
+                            <DataGridTextColumn Header="Prosek" Binding="{Binding ProsecnaOcena}"/> 
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>

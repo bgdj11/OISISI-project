@@ -100,53 +100,71 @@ public class StudentDAO
                     }
                 }
             }
-            
-            /*
+
+            // racuna prosecnu ocenu
             foreach (Student s in _studenti)
             {
-                foreach(StudentPredmet sp in _studPred)
+                double sum = 0;
+                int cnt = 0;
+
+                foreach(OcenaNaUpisu o in s.PolozeniIspiti)
                 {
-                    if(s.IdStudent == sp.IdStudent)
+                    sum += o.Ocena;
+                    cnt++;
+                }
+
+                if (cnt != 0)
+                    s.ProsecnaOcena = sum / cnt;
+                else
+                    s.ProsecnaOcena = 0;
+            }
+
+                /*
+                foreach (Student s in _studenti)
+                {
+                    foreach(StudentPredmet sp in _studPred)
                     {
-                        if(_ocene.Find(n => n.idPredmeta == sp.IdPredmet && n.idStudenta == sp.IdStudent) != null)
+                        if(s.IdStudent == sp.IdStudent)
                         {
-                            s.PolozeniIspiti.Add(_ocene.Find(n => n.idPredmeta == sp.IdPredmet && n.idStudenta == sp.IdStudent));
+                            if(_ocene.Find(n => n.idPredmeta == sp.IdPredmet && n.idStudenta == sp.IdStudent) != null)
+                            {
+                                s.PolozeniIspiti.Add(_ocene.Find(n => n.idPredmeta == sp.IdPredmet && n.idStudenta == sp.IdStudent));
+                            }
+                            else
+                            {
+                                s.NepolozeniIspiti.Add(_predmeti.Find(n => n.idPredmet == sp.IdPredmet));
+                            }
                         }
-                        else
+                    }
+                }
+                */
+
+                /*
+                foreach(Student s in _studenti)
+                {
+                    s.PolozeniIspiti.Clear();
+                    s.NepolozeniIspiti.Clear();
+
+                    foreach (StudentPredmet sp in _studPred)
+                    {
+                        if (s.IdStudent == sp.IdStudent)
                         {
                             s.NepolozeniIspiti.Add(_predmeti.Find(n => n.idPredmet == sp.IdPredmet));
                         }
                     }
-                }
-            }
-            */
 
-            /*
-            foreach(Student s in _studenti)
-            {
-                s.PolozeniIspiti.Clear();
-                s.NepolozeniIspiti.Clear();
-
-                foreach (StudentPredmet sp in _studPred)
-                {
-                    if (s.IdStudent == sp.IdStudent)
+                    foreach(OcenaNaUpisu o in _ocene)
                     {
-                        s.NepolozeniIspiti.Add(_predmeti.Find(n => n.idPredmet == sp.IdPredmet));
+                        if(s.IdStudent == o.IdStudenta)
+                        {
+                            s.PolozeniIspiti.Add(o);
+                        }
                     }
-                }
 
-                foreach(OcenaNaUpisu o in _ocene)
-                {
-                    if(s.IdStudent == o.IdStudenta)
-                    {
-                        s.PolozeniIspiti.Add(o);
-                    }
-                }
-
-            } */
+                } */
 
 
-            _storage.Save(_studenti);
+                _storage.Save(_studenti);
             _adresaStorage.Save(_adrese);
             _indeksStorage.Save(_indeksi);
 

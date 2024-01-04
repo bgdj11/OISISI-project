@@ -49,7 +49,7 @@ namespace CLI.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(oznakaSmera).Append("-");
-            sb.Append(brojUpisa).Append("/");
+            sb.Append(brojUpisa).Append("-");
             sb.Append(godinaUpisa);
             return sb.ToString();
         }

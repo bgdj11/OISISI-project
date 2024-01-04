@@ -308,19 +308,56 @@ namespace GUI
 
             if (MainTabControl.SelectedItem == StudentsTab)
             {
-                StudentsDataGrid.ItemsSource = FilterData(Students, searchTerm);
+                StudentsDataGrid.ItemsSource = FilterStudent(Students, searchTerm);
             }
             else if (MainTabControl.SelectedItem == ProfesorsTab)
             {
-                ProfesorsDataGrid.ItemsSource = FilterData(Profesors, searchTerm);
+                //ProfesorsDataGrid.ItemsSource = FilterData(Profesors, searchTerm);
             }
             else
             {
-                SubjectsDataGrid.ItemsSource = FilterData(Subjects, searchTerm);
+                //SubjectsDataGrid.ItemsSource = FilterData(Subjects, searchTerm);
             }
 
         }
 
+
+        private ObservableCollection<StudentDTO> FilterStudent(ObservableCollection<StudentDTO> originalCollection, string searchTerm)
+        {
+            // Razdvajanje unetog upita na reči i konverzija u mala slova
+            var terms = searchTerm.ToLower().Split(',').Select(s => s.Trim()).ToList();
+
+            // Filtriranje na osnovu broja unetih reči
+            switch (terms.Count)
+            {
+                case 1: // Samo prezime
+                    return new ObservableCollection<StudentDTO>(
+                        originalCollection.Where(studentDto =>
+                            studentDto.Prezime.ToLower().Contains(terms[0]))
+                    );
+
+                case 2: // Prezime i ime
+                    return new ObservableCollection<StudentDTO>(
+                        originalCollection.Where(studentDto =>
+                            studentDto.Prezime.ToLower().Contains(terms[0]) &&
+                            studentDto.Ime.ToLower().Contains(terms[1]))
+                    );
+
+                case 3: // Indeks, ime i prezime
+                    return new ObservableCollection<StudentDTO>(
+                        originalCollection.Where(studentDto =>
+                            studentDto.Indeks.ToLower().Contains(terms[0]) &&
+                            studentDto.Ime.ToLower().Contains(terms[1]) &&
+                            studentDto.Prezime.ToLower().Contains(terms[2]))
+                    );
+
+                default:
+                    return originalCollection;
+            }
+        }
+
+
+        /*
         private ObservableCollection<T> FilterData<T>(ObservableCollection<T> originalCollection, string searchTerm)
         {
             // Dinamička pretraga po svim poljima objekta
@@ -329,7 +366,7 @@ namespace GUI
                     item.GetType().GetProperties().Any(prop =>
                         prop.GetValue(item, null).ToString().Contains(searchTerm)))
             );
-        }
+        } */
 
 
         private void CreateEntityButton_Click(object sender, RoutedEventArgs e)

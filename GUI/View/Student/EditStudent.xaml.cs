@@ -108,6 +108,38 @@ namespace GUI.View.Student
 
             //ProveriOcene();
 
+            Student.UkupnoEspb = izracunajEspb();
+            Student.ProsecnaOcena = izracunajProsecnuOcenu();
+
+        }
+
+        public int izracunajEspb()
+        {
+            int espb = 0;
+            foreach (int i in Student.gradesIds)
+            {
+                espb += ocenaDAO.GetOcenaById(i).Predmet.brojESPB;
+            }
+
+
+            return espb;
+        }
+
+
+        public double izracunajProsecnuOcenu()
+        {
+            double suma = 0;
+            int count = 0;
+            foreach (int i in Student.gradesIds)
+            {
+                suma += ocenaDAO.GetOcenaById(i).Ocena;
+                ++count;
+            }
+            if (count == 0)
+            {
+                return 5;
+            }
+            else return Math.Round(suma / count, 2);
         }
 
         protected virtual void OnPrortyChanged([CallerMemberName] string propertyName = null)
@@ -212,7 +244,29 @@ namespace GUI.View.Student
 
         private void PonistiOcenu_Click(object sender, RoutedEventArgs e)
         {
+            if (SelectedSubject == null)
+            {
+                MessageBox.Show(this, "Izaberite predmet za brisanje!");
+            }
+            else
+            {
+                var confirmationDialog = new ConfirmationWindow("ocena");
+                confirmationDialog.Owner = this;
+                confirmationDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                confirmationDialog.ShowDialog();
 
+                if (confirmationDialog.UserConfirmed)
+                {
+                    ocenaDAO.RemoveOcena(SelectedOcena.idOcene);
+                }
+
+                Student.notPassedIds.Add(SelectedOcena.IdPredmeta);
+                // da bi se izmene odmah prikazale:
+                Student.gradesIds.Remove(SelectedOcena.idOcene);
+
+            }
+
+            Update();
         }
 
         private void ProveriOcene()

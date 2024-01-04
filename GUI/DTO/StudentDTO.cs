@@ -308,7 +308,6 @@ namespace GUI.DTO
 
         private double prosecnaOcena { get; set; }
 
-        /*
         public double ProsecnaOcena
         {
             get
@@ -324,8 +323,25 @@ namespace GUI.DTO
                 }
             }
         }
-        */
 
+
+        private int ukupnoEspb { get; set; }
+
+        public int UkupnoEspb
+        {
+            get
+            {
+                return ukupnoEspb;
+            }
+            set
+            {
+                if (ukupnoEspb != value)
+                {
+                    ukupnoEspb = value;
+                    OnPropertyChanged("UkupnoEspb");
+                }
+            }
+        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -351,7 +367,7 @@ namespace GUI.DTO
         public Student toStudent()
         {
             
-            return new Student(prezime, ime, datumRodjenja, ulica, broj, grad, drzava, kontaktTelefon, emailAdresa, oznakaSmera, brojIndeksa, godinaUpisa, trenutnaGodinaStudija, statusStudenta, prosecnaOcena);
+            return new Student(prezime, ime, datumRodjenja, ulica, broj, grad, drzava, kontaktTelefon, emailAdresa, oznakaSmera, brojIndeksa, godinaUpisa, trenutnaGodinaStudija, statusStudenta);
         }
 
 
@@ -376,7 +392,9 @@ namespace GUI.DTO
             brojIndeksa = student.Indeks.brojUpisa;
             TrenutnaGodinaStudija = student.TrenutnaGodinaStudija;
             StatusStudenta = student.Status.ToString();
-            prosecnaOcena = student.ProsecnaOcena;
+            prosecnaOcena = -1;
+            ukupnoEspb = -1;
+
 
             notPassedIds = new List<int>();
             gradesIds = new List<int>();
@@ -390,11 +408,14 @@ namespace GUI.DTO
             }
 
 
+            //ukupnoEspb = 0;
+
             if(student.PolozeniIspiti.Any())
             {
                 foreach (OcenaNaUpisu o in student.PolozeniIspiti)
                 {
                     gradesIds.Add(o.IdOcene);
+                    //ukupnoEspb += o.Predmet.brojESPB;
                 }
             }
 
@@ -424,6 +445,7 @@ namespace GUI.DTO
                 StatusStudenta = this.StatusStudenta,
                 TrenutnaGodinaStudija = this.TrenutnaGodinaStudija,
                 prosecnaOcena = this.prosecnaOcena,
+                ukupnoEspb = this.ukupnoEspb,
                 idAdrese = this.idAdrese,
                 idIndeksa = this.idIndeksa,
                 notPassedIds = this.notPassedIds,

@@ -116,6 +116,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -132,6 +133,13 @@
                         <DataGridTextColumn Header="Datum" Width="*" Binding="{Binding Datum}"/>
                     </DataGrid.Columns>
                 </DataGrid>
+
+                <StackPanel Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Label Content="Prosečna ocena:" Margin="5" VerticalAlignment="Center"/>
+                    <Label Content="{Binding Student.ProsecnaOcena}" Margin="5" VerticalAlignment="Center"/>
+                    <Label Content="Ukupno ESPB:" Margin="5" VerticalAlignment="Center"/>
+                    <Label Content="{Binding Student.UkupnoEspb}" Margin="5" VerticalAlignment="Center"/>
+                </StackPanel>
             </Grid>
         </TabItem>
         
@@ -165,6 +173,8 @@
                         <DataGridTextColumn Header="Semestar" Width="*" Binding="{Binding Semestar}"/>
                      </DataGrid.Columns>
                 </DataGrid>
+
+
             </Grid>
         </TabItem>
 

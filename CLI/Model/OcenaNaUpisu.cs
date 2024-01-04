@@ -16,6 +16,8 @@ namespace CLI.Model
         public Predmet Predmet { get; set; }
         public DateOnly Datum { get; set; }
 
+        public int Espb { get; set; }
+
         private int ocena;
 
         public int Ocena
@@ -39,8 +41,10 @@ namespace CLI.Model
         {
             this.Student = student;
             this.Predmet = predmet;
+            //this.Espb = espb;
             this.Datum = DateOnly.Parse(datum);
             this.ocena = ocena;
+
         }
 
         public string[] ToCSV()

@@ -94,8 +94,7 @@ namespace CLI.Model
             int broji,
             int godinaUpisa,
             int godinastudija,
-            string status,
-            double prosecnaocena
+            string status
         )
         {
             this.Prezime = prezime;
@@ -114,6 +113,40 @@ namespace CLI.Model
             //this.IdIndeksa = this.Indeks.idIndeksa;
 
         }
+
+
+        public double izracunajProsecnuOcenu()
+        {
+            double suma = 0;
+            int i = 0;
+
+            foreach(OcenaNaUpisu o in PolozeniIspiti)
+            {
+                suma += o.Ocena;
+                ++i;
+            }
+            if (i == 0)
+            {
+                return 5;
+            }
+            else return Math.Round(suma / i,2);
+        }
+
+        /*
+                public int izracunajEspb()
+                {
+                    int espb = 5;
+                    int i = 0;
+                    foreach (OcenaNaUpisu o in PolozeniIspiti)
+                    {
+                        espb += o.Predmet.brojESPB;
+                        ++i;
+                    }
+
+                    return i;
+                }
+        */
+
 
         public Status MakeStatus(string stat)
         {

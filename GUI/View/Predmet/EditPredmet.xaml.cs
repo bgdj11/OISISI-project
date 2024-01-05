@@ -56,7 +56,7 @@ namespace GUI.View.Predmet
             if (ValidateFields())
             {
                 CLI.Model.Predmet pr = Predmet.toPredmet();
-                pr.idPredmet = Predmet.predmetId;
+                pr.IdPredmet = Predmet.predmetId;
 
                 predmetDAO.UpdatePredmet(pr);
                 MessageBox.Show("Predmet je uspesno promenjen!", "Uspesno", MessageBoxButton.OK, MessageBoxImage.Information);

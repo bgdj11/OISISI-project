@@ -203,7 +203,7 @@ namespace GUI
                 }
                 else
                 {
-                    var editsProfesorWindow = new EditProfesor(profesorDAO, SelectedProfesor.Clone());
+                    var editsProfesorWindow = new EditProfesor(profesorDAO, predmetDAO, SelectedProfesor.Clone());
                     editsProfesorWindow.Owner = this;
                     editsProfesorWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                     editsProfesorWindow.ShowDialog();

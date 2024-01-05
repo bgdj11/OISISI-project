@@ -136,7 +136,7 @@ namespace CLI.Console
         {
             int id = InputPredmetId();
             Predmet predmet = InputPredmet();
-            predmet.idPredmet = id;
+            predmet.IdPredmet = id;
             Predmet updatedPredmet = _predmetDao.UpdatePredmet(predmet);
             if (updatedPredmet != null)
             {

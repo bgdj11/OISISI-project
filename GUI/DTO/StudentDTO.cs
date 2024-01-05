@@ -403,7 +403,7 @@ namespace GUI.DTO
             {
                 foreach (Predmet p in student.NepolozeniIspiti)
                 {
-                    notPassedIds.Add(p.idPredmet);
+                    notPassedIds.Add(p.IdPredmet);
                 }
             }
 

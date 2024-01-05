@@ -39,15 +39,16 @@ namespace GUI.View.Profesor
         private ProfesorPredmetDAO profesorPredmetDAO;
 
 
-        public EditProfesor(ProfesorDAO profesorDAO, ProfesorDTO selectedProfesor)
+        public EditProfesor(ProfesorDAO profesorDAO, PredmetDAO predmetDao, ProfesorDTO selectedProfesor)
         {
             InitializeComponent();
             DataContext = this;
             this.profesorDAO = profesorDAO;
+            this.predmetDAO = predmetDao;
             Profesor = selectedProfesor;
 
             Predmeti = new ObservableCollection<PredmetDTO>();
-            predmetDAO = new PredmetDAO();
+            //predmetDAO = new PredmetDAO();
             SelectedPredmet = new PredmetDTO();
 
             profesorPredmetDAO = new ProfesorPredmetDAO();
@@ -103,16 +104,6 @@ namespace GUI.View.Profesor
             this.Close();
         }
 
-        private void btnDodajPredmet_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnUkloniPredmet_Click(Object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private bool ValidateFields()
         {
             return !string.IsNullOrWhiteSpace(txtBoxIme.Text) &&
@@ -137,7 +128,11 @@ namespace GUI.View.Profesor
 
         private void DodajPredmet_Click(object sender, RoutedEventArgs e)
         {
-
+            var selectSubjectProfesorWindow = new SelectSubjectProfesor(profesorDAO, predmetDAO, Profesor);
+            selectSubjectProfesorWindow.Owner = this;
+            selectSubjectProfesorWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            selectSubjectProfesorWindow.ShowDialog();
+            Update();
         }
 
         private void UkloniPredmet_Click(object sender, RoutedEventArgs e)

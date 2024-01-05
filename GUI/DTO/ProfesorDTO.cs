@@ -294,9 +294,9 @@ namespace GUI.DTO
             {
                 foreach (Predmet p in profesor.SpisakPredmeta)
                 {
-                    if (!PredmetiListaId.Contains(p.idPredmet))
+                    if (!PredmetiListaId.Contains(p.IdPredmet))
                     {
-                        PredmetiListaId.Add(p.idPredmet);
+                        PredmetiListaId.Add(p.IdPredmet);
                     }
                 }
             }

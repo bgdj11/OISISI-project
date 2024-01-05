@@ -58,6 +58,24 @@ namespace GUI.DTO
             }
         }
 
+        private string nazivSpojen { get; set; }
+
+        public string NazivSpojen
+        {
+            get
+            {
+                return nazivSpojen;
+            }
+            set
+            {
+                if (nazivSpojen != value)
+                {
+                    nazivSpojen = value;
+                    OnPropertyChanged("NazivSpojen");
+                }
+            }
+        }
+
         private string semestar { get; set;}
 
         public string Semestar
@@ -154,16 +172,17 @@ namespace GUI.DTO
 
         public PredmetDTO(Predmet predmet)
         {
-            predmetId = predmet.idPredmet;
-            sifraPredmeta = predmet.sifraPredmeta;
-            nazivPredmeta = predmet.nazivPredmeta;
-            semestar = predmet.semestar.ToString();
-            godinaStudija = predmet.godinaStudija;
+            predmetId = predmet.IdPredmet;
+            sifraPredmeta = predmet.SifraPredmeta;
+            nazivPredmeta = predmet.NazivPredmeta;
+            semestar = predmet.Semestar.ToString();
+            godinaStudija = predmet.GodinaStudija;
+            nazivSpojen = sifraPredmeta + " - " + nazivPredmeta;
 
-            if(predmet.profesor != null)
+            if(predmet.Profesor != null)
             {
-                profesor = predmet.profesor.Ime + " " + predmet.profesor.Prezime;
-                profesorID = predmet.idProfesora;
+                profesor = predmet.Profesor.Ime + " " + predmet.Profesor.Prezime;
+                profesorID = predmet.IdProfesora;
             } else
             {
                 profesor = "nedostaje profesor";
@@ -171,7 +190,7 @@ namespace GUI.DTO
             }
 
 
-            espb = predmet.brojESPB;
+            espb = predmet.BrojESPB;
         }
 
         public PredmetDTO clone()
@@ -186,6 +205,7 @@ namespace GUI.DTO
             pr.profesor = this.profesor;
             pr.profesorID = this.profesorID;
             pr.espb = this.ESPB;
+            pr.nazivSpojen = this.sifraPredmeta + " - " + this.nazivPredmeta;
 
             return pr;
         }

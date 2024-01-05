@@ -118,7 +118,7 @@ namespace GUI.View.Student
             int espb = 0;
             foreach (int i in Student.gradesIds)
             {
-                espb += ocenaDAO.GetOcenaById(i).Predmet.brojESPB;
+                espb += ocenaDAO.GetOcenaById(i).Predmet.BrojESPB;
             }
 
 
@@ -279,30 +279,6 @@ namespace GUI.View.Student
             }
 
             Update();
-        }
-
-        private void ProveriOcene()
-        {
-            if (Student.gradesIds == null || Student.gradesIds.Count == 0)
-            {
-                MessageBox.Show("Nema ID-ova ocena za proveru.", "Informacija", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
-
-            bool postojiOcena = false;
-            foreach (var id in Student.gradesIds)
-            {
-                if (ocenaDAO.GetOcenaById(id) != null)
-                {
-                    postojiOcena = true;
-                    break;
-                }
-            }
-
-            if (!postojiOcena)
-            {
-                MessageBox.Show("Nema dostupnih ocena za prikaz.", "Informacija", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
         }
     }
 }

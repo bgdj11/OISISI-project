@@ -91,7 +91,7 @@ public class StudentDAO
                         }
                         else
                         {
-                            var nepolozenPredmet = _predmeti.Find(n => n.idPredmet == sp.IdPredmet);
+                            var nepolozenPredmet = _predmeti.Find(n => n.IdPredmet == sp.IdPredmet);
                             if (!s.NepolozeniIspiti.Contains(nepolozenPredmet))
                             {
                                 s.NepolozeniIspiti.Add(nepolozenPredmet);

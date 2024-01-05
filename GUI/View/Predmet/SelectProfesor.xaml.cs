@@ -61,8 +61,10 @@ namespace GUI.View.Predmet
             else
             {   
                 CLI.Model.Predmet pr = subject.toPredmet();
-                pr.idPredmet = subject.predmetId;
-                pr.idProfesora = SelectedProfesor.IdProfesor;
+                pr.IdPredmet = subject.predmetId;
+                pr.IdProfesora = SelectedProfesor.IdProfesor;
+
+                //SelectedProfesor.PredmetiListaId.Add(pr.IdPredmet);
 
                 predmetDAO.UpdatePredmet(pr);
                 this.Close();

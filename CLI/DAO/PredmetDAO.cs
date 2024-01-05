@@ -24,7 +24,7 @@ namespace CLI.DAO
         private int GenerateId()
         {
             if (_predmeti.Count == 0) return 0;
-            return _predmeti[^1].idPredmet + 1;
+            return _predmeti[^1].IdPredmet + 1;
         }
 
         public void MakePredmet()
@@ -41,23 +41,23 @@ namespace CLI.DAO
                 
                 foreach (Student s in _studenti)
                 {
-                    if (s.NepolozeniIspiti.Find(n => n.idPredmet == p.idPredmet) != null)
+                    if (s.NepolozeniIspiti.Find(n => n.IdPredmet == p.IdPredmet) != null)
                     {
-                        p.spisakNepolozenihStudenata.Add(s);
+                        p.SpisakNepolozenihStudenata.Add(s);
                     }
 
-                    if (s.PolozeniIspiti.Find(n => n.IdPredmeta == p.idPredmet) != null)
+                    if (s.PolozeniIspiti.Find(n => n.IdPredmeta == p.IdPredmet) != null)
                     {
-                        p.spisakPolozenihStudenata.Add(s);
+                        p.SpisakPolozenihStudenata.Add(s);
                     }
                 }
                
 
                 foreach (Profesor pr in _profesori)
                 {
-                    if (pr.IdProfesor == p.idProfesora)
+                    if (pr.IdProfesor == p.IdProfesora)
                     {
-                        p.profesor = pr;
+                        p.Profesor = pr;
                     }
                 }
             }
@@ -68,7 +68,7 @@ namespace CLI.DAO
 
         public Predmet AddPredmet(Predmet predmet)
         {
-            predmet.idPredmet = GenerateId();
+            predmet.IdPredmet = GenerateId();
             MakePredmet();
             _predmeti.Add(predmet);
             
@@ -78,15 +78,15 @@ namespace CLI.DAO
 
         public Predmet? UpdatePredmet(Predmet predmet)
         {
-            Predmet? oldPredmet = GetPredmetById(predmet.idPredmet);
+            Predmet? oldPredmet = GetPredmetById(predmet.IdPredmet);
             if (oldPredmet == null) return null;
 
-            oldPredmet.sifraPredmeta = predmet.sifraPredmeta;
-            oldPredmet.nazivPredmeta = predmet.nazivPredmeta;
-            oldPredmet.semestar = predmet.semestar;
-            oldPredmet.godinaStudija = predmet.godinaStudija;
-            oldPredmet.idProfesora = predmet.idProfesora;
-            oldPredmet.brojESPB = predmet.brojESPB;
+            oldPredmet.SifraPredmeta = predmet.SifraPredmeta;
+            oldPredmet.NazivPredmeta = predmet.NazivPredmeta;
+            oldPredmet.Semestar = predmet.Semestar;
+            oldPredmet.GodinaStudija = predmet.GodinaStudija;
+            oldPredmet.IdProfesora = predmet.IdProfesora;
+            oldPredmet.BrojESPB = predmet.BrojESPB;
 
             MakePredmet();
 
@@ -107,7 +107,7 @@ namespace CLI.DAO
         public Predmet? GetPredmetById(int idPredmet)
         {
             MakePredmet();
-            return _predmeti.Find(p => p.idPredmet == idPredmet);
+            return _predmeti.Find(p => p.IdPredmet == idPredmet);
         }
 
         public List<Predmet> GetAllPredmeti()
@@ -123,25 +123,25 @@ namespace CLI.DAO
             switch (sortCriteria)
             {
                 case "Id":
-                    predmeti = _predmeti.OrderBy(p => p.idPredmet);
+                    predmeti = _predmeti.OrderBy(p => p.IdPredmet);
                     break;
                 case "SifraPredmeta":
-                    predmeti = _predmeti.OrderBy(p => p.sifraPredmeta);
+                    predmeti = _predmeti.OrderBy(p => p.SifraPredmeta);
                     break;
                 case "NazivPredmeta":
-                    predmeti = _predmeti.OrderBy(p => p.nazivPredmeta);
+                    predmeti = _predmeti.OrderBy(p => p.NazivPredmeta);
                     break;
                 case "Semestar":
-                    predmeti = _predmeti.OrderBy(p => p.semestar);
+                    predmeti = _predmeti.OrderBy(p => p.Semestar);
                     break;
                 case "GodinaStudija":
-                    predmeti = _predmeti.OrderBy(p => p.godinaStudija);
+                    predmeti = _predmeti.OrderBy(p => p.GodinaStudija);
                     break;
                 case "IdPredmetnogProfesora":
-                    predmeti = _predmeti.OrderBy(p => p.idProfesora);
+                    predmeti = _predmeti.OrderBy(p => p.IdProfesora);
                     break;
                 case "BrojESPB":
-                    predmeti = _predmeti.OrderBy(p => p.brojESPB);
+                    predmeti = _predmeti.OrderBy(p => p.BrojESPB);
                     break;
             }
 

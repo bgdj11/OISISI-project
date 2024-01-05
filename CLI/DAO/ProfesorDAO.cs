@@ -69,7 +69,7 @@ namespace CLI.DAO
 
             foreach (Profesor p in _profesori)
             {
-                var predmet = _predmeti.Find(n => n.idProfesora == p.IdProfesor);
+                var predmet = _predmeti.Find(n => n.IdProfesora == p.IdProfesor);
                 if (predmet != null && !p.SpisakPredmeta.Contains(predmet))
                 {
                     p.SpisakPredmeta.Add(predmet);

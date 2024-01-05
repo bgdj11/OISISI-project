@@ -153,9 +153,9 @@ namespace GUI.DTO
             predmet = o.Predmet;
             datum = o.Datum.ToString();
             ocena = o.Ocena;
-            sifraPredmeta = o.Predmet.sifraPredmeta;
-            nazivPredmeta = o.Predmet.nazivPredmeta;
-            brojESPB = o.Predmet.brojESPB;
+            sifraPredmeta = o.Predmet.SifraPredmeta;
+            nazivPredmeta = o.Predmet.NazivPredmeta;
+            brojESPB = o.Predmet.BrojESPB;
         }
 
         public OcenaDTO()

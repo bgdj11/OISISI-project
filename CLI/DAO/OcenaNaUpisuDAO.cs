@@ -41,7 +41,7 @@ namespace CLI.DAO
                     s.PolozeniIspiti.Add(o);
                 }
 
-                Predmet p = _predmeti.Find(n => n.idPredmet == o.IdPredmeta);
+                Predmet p = _predmeti.Find(n => n.IdPredmet == o.IdPredmeta);
                 o.Predmet = p;
             }
 

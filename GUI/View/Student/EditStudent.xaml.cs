@@ -76,10 +76,10 @@ namespace GUI.View.Student
         {
             studentDAO.MakeStudent();
 
-            if (Student.notPassedIds != null)
+            if (Student.NotPassedIds != null)
             {
                 NotPassedSubjects.Clear();
-                foreach (int i in Student.notPassedIds)
+                foreach (int i in Student.NotPassedIds)
                 {
                     NotPassedSubjects.Add(new PredmetDTO(predmetDAO.GetPredmetById(i)));
                 }
@@ -91,10 +91,10 @@ namespace GUI.View.Student
              //   MessageBox.Show("Nema ID-ova ocena za proveru.", "Informacija", MessageBoxButton.OK, MessageBoxImage.Information);
            // }
 
-            if (Student.gradesIds != null)
+            if (Student.GradesIds != null)
             {
                 Ocene.Clear();
-                foreach (int i in Student.gradesIds)
+                foreach (int i in Student.GradesIds)
                 {
 
                     if (ocenaDAO.GetOcenaById(i) != null)
@@ -116,7 +116,7 @@ namespace GUI.View.Student
         public int izracunajEspb()
         {
             int espb = 0;
-            foreach (int i in Student.gradesIds)
+            foreach (int i in Student.GradesIds)
             {
                 espb += ocenaDAO.GetOcenaById(i).Predmet.BrojESPB;
             }
@@ -130,7 +130,7 @@ namespace GUI.View.Student
         {
             double suma = 0;
             int count = 0;
-            foreach (int i in Student.gradesIds)
+            foreach (int i in Student.GradesIds)
             {
                 suma += ocenaDAO.GetOcenaById(i).Ocena;
                 ++count;
@@ -226,7 +226,7 @@ namespace GUI.View.Student
                 }
 
                 // da bi se izmene odmah prikazale:
-                Student.notPassedIds.Remove(SelectedSubject.predmetId);
+                Student.NotPassedIds.Remove(SelectedSubject.predmetId);
             }
 
             Update();
@@ -272,9 +272,9 @@ namespace GUI.View.Student
                     ocenaDAO.RemoveOcena(SelectedOcena.idOcene);
                 }
 
-                Student.notPassedIds.Add(SelectedOcena.IdPredmeta);
-                // da bi se izmene odmah prikazale:
-                Student.gradesIds.Remove(SelectedOcena.idOcene);
+                Student.NotPassedIds.Add(SelectedOcena.IdPredmeta);
+                Student.GradesIds.Remove(SelectedOcena.idOcene);
+                Student.PassedIds.Remove(SelectedOcena.IdPredmeta);
 
             }
 

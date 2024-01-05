@@ -59,7 +59,10 @@ namespace GUI.View.Student
 
             Subjects.Clear();
             foreach (CLI.Model.Predmet predmet in predmetDAO.GetAllPredmeti())
-                Subjects.Add(new PredmetDTO(predmet));
+                if(SelectedStudent.TrenutnaGodinaStudija >= predmet.GodinaStudija &&
+                    !SelectedStudent.PassedIds.Contains(predmet.IdPredmet) &&
+                    !SelectedStudent.NotPassedIds.Contains(predmet.IdPredmet))
+                        Subjects.Add(new PredmetDTO(predmet));
         }
 
 
@@ -71,7 +74,7 @@ namespace GUI.View.Student
         {
             studentPredmetDAO.AddPredmetToStudent(SelectedStudent.StudentId, SelectedPredmet.predmetId);
             MessageBox.Show("Predmet je uspesno dodat!", "Uspesno", MessageBoxButton.OK, MessageBoxImage.Information);
-            SelectedStudent.notPassedIds.Add(SelectedPredmet.predmetId);
+            SelectedStudent.NotPassedIds.Add(SelectedPredmet.predmetId);
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)

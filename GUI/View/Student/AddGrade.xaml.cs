@@ -67,8 +67,9 @@ namespace GUI.View.Student
 
                 OcenaDAO.AddOcena(o);
 
-                Student.notPassedIds.Remove(Ocena.IdPredmeta);
-                Student.gradesIds.Add(o.IdOcene);
+                Student.NotPassedIds.Remove(Ocena.IdPredmeta);
+                Student.GradesIds.Add(o.IdOcene);
+                Student.PassedIds.Add(Ocena.IdPredmeta);
 
                 this.Close();
             }

@@ -270,7 +270,6 @@ namespace GUI.DTO
             }
         }
 
-
         private int trenutnaGodinaStudija { get; set; }
         public int TrenutnaGodinaStudija
         {
@@ -287,7 +286,6 @@ namespace GUI.DTO
                 }
             }
         }
-
         private string statusStudenta { get; set; }
         public string StatusStudenta
         {
@@ -305,7 +303,6 @@ namespace GUI.DTO
                 }
             }
         }
-
         private double prosecnaOcena { get; set; }
 
         public double ProsecnaOcena
@@ -323,7 +320,6 @@ namespace GUI.DTO
                 }
             }
         }
-
 
         private int ukupnoEspb { get; set; }
 
@@ -353,23 +349,23 @@ namespace GUI.DTO
             }
         }
 
-        public List<int> notPassedIds {  get; set; }
-        public List<int> gradesIds { get; set; }
+        public List<int> NotPassedIds {  get; set; }
+        public List<int> GradesIds { get; set; }
 
+        public List<int> PassedIds { get; set; }
 
         public StudentDTO()
         {
-            notPassedIds = new List<int>();
-            gradesIds = new List<int>();
+            NotPassedIds = new List<int>();
+            GradesIds = new List<int>();
+            PassedIds = new List<int>();
         }
-
 
         public Student toStudent()
         {
             
             return new Student(prezime, ime, datumRodjenja, ulica, broj, grad, drzava, kontaktTelefon, emailAdresa, oznakaSmera, brojIndeksa, godinaUpisa, trenutnaGodinaStudija, statusStudenta);
         }
-
 
         public StudentDTO(Student student)
         {
@@ -395,33 +391,29 @@ namespace GUI.DTO
             prosecnaOcena = student.ProsecnaOcena;
             ukupnoEspb = -1;
 
-
-            notPassedIds = new List<int>();
-            gradesIds = new List<int>();
+            NotPassedIds = new List<int>();
+            GradesIds = new List<int>();
+            PassedIds = new List<int>();
             
             if(student.NepolozeniIspiti.Any())
             {
                 foreach (Predmet p in student.NepolozeniIspiti)
                 {
-                    notPassedIds.Add(p.IdPredmet);
+                    NotPassedIds.Add(p.IdPredmet);
                 }
             }
-
-
-            //ukupnoEspb = 0;
 
             if(student.PolozeniIspiti.Any())
             {
                 foreach (OcenaNaUpisu o in student.PolozeniIspiti)
                 {
-                    gradesIds.Add(o.IdOcene);
-                    //ukupnoEspb += o.Predmet.brojESPB;
+                    GradesIds.Add(o.IdOcene);
+                    PassedIds.Add(o.IdPredmeta);
                 }
             }
 
 
         }
-
 
         public StudentDTO Clone()
         {
@@ -448,10 +440,9 @@ namespace GUI.DTO
                 ukupnoEspb = this.ukupnoEspb,
                 idAdrese = this.idAdrese,
                 idIndeksa = this.idIndeksa,
-                notPassedIds = this.notPassedIds,
-                gradesIds = this.gradesIds
-
-
+                NotPassedIds = this.NotPassedIds,
+                GradesIds = this.GradesIds,
+                PassedIds = this.PassedIds,
             };
         }
     }

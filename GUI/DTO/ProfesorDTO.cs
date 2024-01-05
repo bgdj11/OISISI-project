@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using CLI.Model;
 
@@ -25,7 +27,7 @@ namespace GUI.DTO
             }
         }
 
-        public int idAdrese {  get; set; }
+        public int idAdrese { get; set; }
 
         private string prezime { get; set; }
         public string Prezime
@@ -189,8 +191,11 @@ namespace GUI.DTO
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public List<int> PredmetiListaId { get; set; }
+
         public ProfesorDTO()
         {
+            PredmetiListaId = new List<int>();
         }
 
         public ProfesorDTO(Profesor profesor)
@@ -207,6 +212,21 @@ namespace GUI.DTO
             GodineStaza = profesor.GodineStaza;
             IdKatedre = profesor.IdKatedre;
             idAdrese = profesor.IdAdrese;
+
+            PredmetiListaId = new List<int>();
+
+
+            if (profesor.SpisakPredmeta.Count() != 0)
+            {
+                foreach (Predmet p in profesor.SpisakPredmeta)
+                {
+                    if (!PredmetiListaId.Contains(p.idPredmet))
+                    {
+                        PredmetiListaId.Add(p.idPredmet);
+                    }
+                }
+            }
+
         }
 
 
@@ -225,15 +245,16 @@ namespace GUI.DTO
                 Zvanje = this.Zvanje,
                 GodineStaza = this.GodineStaza,
                 IdKatedre = this.IdKatedre,
-                idAdrese= this.idAdrese
-                
+                idAdrese = this.idAdrese,
+                PredmetiListaId = this.PredmetiListaId
+
             };
         }
 
 
         public Profesor toProfesor()
         {
-            return new Profesor( Prezime, Ime, Adresa, DatumRodjenja, KontaktTelefon, EmailAdresa, BrojLicneKarte, Zvanje, GodineStaza, IdKatedre);
+            return new Profesor(Prezime, Ime, Adresa, DatumRodjenja, KontaktTelefon, EmailAdresa, BrojLicneKarte, Zvanje, GodineStaza, IdKatedre);
         }
     }
 }

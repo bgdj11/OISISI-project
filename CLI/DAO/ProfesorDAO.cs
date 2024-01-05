@@ -31,7 +31,7 @@ namespace CLI.DAO
             return _profesori[^1].IdProfesor + 1;
         }
 
-        private void MakeProfesor()
+        public void MakeProfesor()
         {
             Storage<Adresa> _adresaStorage = new Storage<Adresa>("adrese.csv");
             List<Adresa> _adrese = _adresaStorage.Load();
@@ -69,13 +69,15 @@ namespace CLI.DAO
 
             foreach (Profesor p in _profesori)
             {
-                if(_predmeti.Find(n => n.idProfesora == p.IdProfesor) != null)
+                var predmet = _predmeti.Find(n => n.idProfesora == p.IdProfesor);
+                if (predmet != null && !p.SpisakPredmeta.Contains(predmet))
                 {
-                    p.SpisakPredmeta.Add(_predmeti.Find(n => n.idPredmet == p.IdProfesor));
+                    p.SpisakPredmeta.Add(predmet);
                 }
             }
 
-            
+
+
 
             _katedreStorage.Save(_katedre);
             _storage.Save(_profesori);

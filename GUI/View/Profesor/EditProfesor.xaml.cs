@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -26,10 +27,17 @@ namespace GUI.View.Profesor
     /// </summary>
     public partial class EditProfesor : Window, INotifyPropertyChanged
     {
-
+        public event PropertyChangedEventHandler? PropertyChanged;
         public ProfesorDTO Profesor { get; set; }
         private ProfesorDAO profesorDAO;
-        public event PropertyChangedEventHandler? PropertyChanged;
+
+
+        public ObservableCollection<PredmetDTO> Predmeti { get; set; }
+
+        public PredmetDTO SelectedPredmet { get; set; }
+        private PredmetDAO predmetDAO;
+        private ProfesorPredmetDAO profesorPredmetDAO;
+
 
         public EditProfesor(ProfesorDAO profesorDAO, ProfesorDTO selectedProfesor)
         {
@@ -37,7 +45,33 @@ namespace GUI.View.Profesor
             DataContext = this;
             this.profesorDAO = profesorDAO;
             Profesor = selectedProfesor;
+
+            Predmeti = new ObservableCollection<PredmetDTO>();
+            predmetDAO = new PredmetDAO();
+            SelectedPredmet = new PredmetDTO();
+
+            profesorPredmetDAO = new ProfesorPredmetDAO();
+
+            Update();
         }
+
+
+        public void Update()
+        {
+            profesorDAO.MakeProfesor();
+            predmetDAO.MakePredmet();
+
+            if (Profesor.PredmetiListaId != null)
+            {
+                Predmeti.Clear();
+                foreach (int i in Profesor.PredmetiListaId)
+                {
+                    Predmeti.Add(new PredmetDTO(predmetDAO.GetPredmetById(i)));
+                }
+            }
+
+        }
+
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -69,6 +103,15 @@ namespace GUI.View.Profesor
             this.Close();
         }
 
+        private void btnDodajPredmet_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnUkloniPredmet_Click(Object sender, RoutedEventArgs e)
+        {
+
+        }
 
         private bool ValidateFields()
         {
@@ -81,6 +124,22 @@ namespace GUI.View.Profesor
                    !string.IsNullOrWhiteSpace(txtBoxBrojLicneKarte.Text) &&
                    !string.IsNullOrWhiteSpace(txtBoxZvanje.Text) &&
                    !string.IsNullOrWhiteSpace(txtBoxGodinaStaza.Text);
+        }
+
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void DodajPredmet_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void UkloniPredmet_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -8,7 +8,7 @@ using CLI.Storage;
 
 namespace CLI.DAO
 {
-    class ProfesorPredmetDAO
+    public class ProfesorPredmetDAO
     {
 
         private readonly Storage<ProfesorPredmet> _storage;

@@ -19,6 +19,8 @@ using System.Windows.Shapes;
 using CLI.DAO;
 using CLI.Model;
 using GUI.DTO;
+using GUI.View.DialogWindows;
+using GUI.View.Student;
 
 namespace GUI.View.Profesor
 {
@@ -137,6 +139,37 @@ namespace GUI.View.Profesor
 
         private void UkloniPredmet_Click(object sender, RoutedEventArgs e)
         {
+            if (SelectedPredmet == null)
+            {
+                MessageBox.Show(this, "Izaberite predmet za brisanje!");
+            }
+            else
+            {
+                var confirmationDialog = new ConfirmationWindow("predmet");
+                confirmationDialog.Owner = this;
+                confirmationDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                confirmationDialog.ShowDialog();
+
+                if (confirmationDialog.UserConfirmed)
+                {
+                    CLI.Model.Predmet pred = SelectedPredmet.toPredmet();
+                    pred.IdPredmet = SelectedPredmet.predmetId;
+                    pred.IdProfesora = -1;
+
+
+                    Profesor.PredmetiListaId.Remove(SelectedPredmet.predmetId);
+                    CLI.Model.Profesor prof = Profesor.toProfesor();
+
+                    prof.IdProfesor = Profesor.IdProfesor;
+                    prof.IdAdrese = Profesor.idAdrese;
+                    prof.AdresaStanovanja.IdAdrese = Profesor.idAdrese;
+
+                    predmetDAO.UpdatePredmet(pred);
+                    profesorDAO.UpdateProfesor(prof);
+                    Update();
+                }
+            }
+
 
         }
     }

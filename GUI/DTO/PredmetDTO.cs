@@ -179,14 +179,17 @@ namespace GUI.DTO
             godinaStudija = predmet.GodinaStudija;
             nazivSpojen = sifraPredmeta + " - " + nazivPredmeta;
 
-            if(predmet.Profesor != null)
+            if(predmet.Profesor == null || profesorID == -1)
+            {
+                profesorID = -1;
+                profesor = "nedostaje profesor";
+
+            } else
+            
             {
                 profesor = predmet.Profesor.Ime + " " + predmet.Profesor.Prezime;
                 profesorID = predmet.IdProfesora;
-            } else
-            {
-                profesor = "nedostaje profesor";
-                profesorID = -1;
+
             }
 
 

@@ -82,8 +82,10 @@ namespace GUI.View.Profesor
 
             Profesor.PredmetiListaId.Add(SelectedPredmet.predmetId);
 
-            profesorDAO.UpdateProfesor(prof);
             predmetDAO.UpdatePredmet(pred);
+            profesorDAO.UpdateProfesor(prof);
+            Update();
+
             MessageBox.Show("Predmet je uspesno dodat.", "Uspesno", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();
         }

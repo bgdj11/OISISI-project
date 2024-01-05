@@ -75,6 +75,7 @@ namespace GUI.View.Student
             studentPredmetDAO.AddPredmetToStudent(SelectedStudent.StudentId, SelectedPredmet.predmetId);
             MessageBox.Show("Predmet je uspesno dodat!", "Uspesno", MessageBoxButton.OK, MessageBoxImage.Information);
             SelectedStudent.NotPassedIds.Add(SelectedPredmet.predmetId);
+            Update();
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)

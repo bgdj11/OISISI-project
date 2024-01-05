@@ -184,6 +184,76 @@ namespace GUI.DTO
             }
         }
 
+        private string ulica { get; set; }
+        public string Ulica
+        {
+            get
+            {
+                return ulica;
+            }
+            set
+            {
+                if (ulica != value)
+                {
+                    ulica = value;
+                    OnPropertyChanged("Ulica");
+                }
+            }
+        }
+
+        private string grad { get; set; }
+        public string Grad
+        {
+            get
+            {
+                return grad;
+            }
+            set
+            {
+                if (grad != value)
+                {
+                    grad = value;
+                    OnPropertyChanged("Grad");
+                }
+            }
+        }
+
+        private int broj { get; set; }
+        public int Broj
+        {
+            get
+            {
+                return broj;
+            }
+            set
+            {
+                if (broj != value)
+                {
+                    broj = value;
+                    OnPropertyChanged("Broj");
+                }
+            }
+        }
+
+        private string drzava { get; set; }
+        public string Drzava
+        {
+            get
+            {
+                return drzava;
+            }
+            set
+            {
+                if (drzava != value)
+                {
+                    drzava = value;
+                    OnPropertyChanged("Drzava");
+                }
+            }
+        }
+
+
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
@@ -205,6 +275,10 @@ namespace GUI.DTO
             Ime = profesor.Ime;
             DatumRodjenja = profesor.DatumRodjenja.ToString();
             Adresa = profesor.AdresaStanovanja.ToString();
+            Ulica = profesor.AdresaStanovanja.Ulica;
+            Grad = profesor.AdresaStanovanja.Grad;
+            Broj = profesor.AdresaStanovanja.Broj;
+            Drzava = profesor.AdresaStanovanja.Drzava;
             KontaktTelefon = profesor.KontaktTelefon;
             EmailAdresa = profesor.EmailAdresa;
             BrojLicneKarte = profesor.BrojLicneKarte;
@@ -216,7 +290,7 @@ namespace GUI.DTO
             PredmetiListaId = new List<int>();
 
 
-            if (profesor.SpisakPredmeta.Count() != 0)
+            if (profesor.SpisakPredmeta.Any())
             {
                 foreach (Predmet p in profesor.SpisakPredmeta)
                 {
@@ -239,6 +313,10 @@ namespace GUI.DTO
                 IdProfesor = this.IdProfesor,
                 DatumRodjenja = this.DatumRodjenja,
                 Adresa = this.Adresa,
+                Grad = this.Grad,
+                Ulica = this.Ulica,
+                Drzava = this.Drzava,
+                broj = this.Broj,
                 KontaktTelefon = this.KontaktTelefon,
                 EmailAdresa = this.EmailAdresa,
                 BrojLicneKarte = this.BrojLicneKarte,
@@ -254,7 +332,7 @@ namespace GUI.DTO
 
         public Profesor toProfesor()
         {
-            return new Profesor(Prezime, Ime, Adresa, DatumRodjenja, KontaktTelefon, EmailAdresa, BrojLicneKarte, Zvanje, GodineStaza, IdKatedre);
+            return new Profesor(Prezime, Ime, Ulica, Broj, Grad,  Drzava, DatumRodjenja, KontaktTelefon, EmailAdresa, BrojLicneKarte, Zvanje, GodineStaza, IdKatedre);
         }
     }
 }

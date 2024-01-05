@@ -66,7 +66,10 @@ namespace GUI.View.Profesor
             return !string.IsNullOrWhiteSpace(txtBoxIme.Text) &&
                    !string.IsNullOrWhiteSpace(txtBoxPrezime.Text) &&
                    !string.IsNullOrWhiteSpace(dpDatumRodjenja.Text) &&
-                   !string.IsNullOrWhiteSpace(txtBoxAdresa.Text) &&
+                   !string.IsNullOrWhiteSpace(txtBoxUlica.Text) &&
+                   !string.IsNullOrWhiteSpace(txtBoxBroj.Text) &&
+                   !string.IsNullOrWhiteSpace(txtBoxGrad.Text) &&
+                   !string.IsNullOrWhiteSpace(txtBoxDrzava.Text) &&
                    !string.IsNullOrWhiteSpace(txtBoxKontakt.Text) &&
                    !string.IsNullOrWhiteSpace(txtBoxEmail.Text) &&
                    !string.IsNullOrWhiteSpace(txtBoxBrojLicneKarte.Text) &&

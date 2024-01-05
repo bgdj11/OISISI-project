@@ -110,43 +110,8 @@ namespace CLI.Model
             PolozeniIspiti = new List<OcenaNaUpisu>();
             NepolozeniIspiti = new List<Predmet>();
             //this.IdAdrese = this.AdresaStanovanja.idAdrese;
-            //this.IdIndeksa = this.Indeks.idIndeksa;
-
+            //this.IdIndeksa = this.Indeks.idIndeksa
         }
-
-
-        public double izracunajProsecnuOcenu()
-        {
-            double suma = 0;
-            int i = 0;
-
-            foreach(OcenaNaUpisu o in PolozeniIspiti)
-            {
-                suma += o.Ocena;
-                ++i;
-            }
-            if (i == 0)
-            {
-                return 5;
-            }
-            else return Math.Round(suma / i,2);
-        }
-
-        /*
-                public int izracunajEspb()
-                {
-                    int espb = 5;
-                    int i = 0;
-                    foreach (OcenaNaUpisu o in PolozeniIspiti)
-                    {
-                        espb += o.Predmet.brojESPB;
-                        ++i;
-                    }
-
-                    return i;
-                }
-        */
-
 
         public Status MakeStatus(string stat)
         {
@@ -154,35 +119,6 @@ namespace CLI.Model
                 return Status.S;
             else
                 return Status.B;
-        }
-
-        private Adresa makeAdresa(string input)
-        {
-            var delovi = input.Split(',');
-            if (delovi.Length != 4)
-            {
-                throw new FormatException("String ne sadrži ispravan broj polja.");
-            }
-
-            return new Adresa
-            (   delovi[0].Trim(),
-                int.Parse(delovi[1].Trim()),
-                delovi[2].Trim(),
-                delovi[3].Trim()
-            );
-        }
-
-        private Indeks makeIndex(string input)
-        {
-            string[] parts = input.Split('/');
-
-            string oznaka = input.Substring(0, 2);
-            int upis = int.Parse(parts[0].Substring(3));
-            int godina = int.Parse(parts[1]);
-
-            Indeks indeks = new Indeks(oznaka, upis, godina);
-
-            return indeks;
         }
 
         public string[] ToCSV()

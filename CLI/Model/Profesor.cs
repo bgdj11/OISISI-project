@@ -62,7 +62,10 @@ namespace CLI.Model
         public Profesor(
             string prezime,
             string ime, 
-            string adresa,
+            string ulica,
+            int broj,
+            string grad,
+            string drzava,
             string datumRodj,
             string kontaktTel,
             string email,
@@ -74,7 +77,7 @@ namespace CLI.Model
         {
             this.Prezime = prezime;
             this.Ime = ime;
-            this.AdresaStanovanja = makeAdresa(adresa);
+            this.AdresaStanovanja = new Adresa(ulica, broj, grad, drzava);
             this.DatumRodjenja = DateOnly.Parse(datumRodj);
             this.KontaktTelefon = kontaktTel;
             this.EmailAdresa = email;
@@ -82,23 +85,8 @@ namespace CLI.Model
             this.Zvanje = zvanje;
             this.GodineStaza = staz;
             this.IdKatedre = idkatedre;
-        }
 
-
-        private Adresa makeAdresa(string input)
-        {
-            var delovi = input.Split(',');
-            if (delovi.Length != 4)
-            {
-                throw new FormatException("String ne sadrži ispravan broj polja.");
-            }
-
-            return new Adresa
-            (delovi[0].Trim(),
-                int.Parse(delovi[1].Trim()),
-                delovi[2].Trim(),
-                delovi[3].Trim()
-            );
+            SpisakPredmeta = new List<Predmet>();
         }
 
         public string[] ToCSV()

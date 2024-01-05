@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using CLI.Serialization;
@@ -45,6 +46,14 @@ namespace CLI.Model
             this.Datum = DateOnly.Parse(datum);
             this.ocena = ocena;
 
+        }
+
+        public OcenaNaUpisu(int StudentId, int PredmetId, string datum, int ocena)
+        {
+            this.IdStudenta = StudentId;
+            this.IdPredmeta = PredmetId;
+            this.Datum = DateOnly.Parse(datum);
+            this.ocena = ocena;
         }
 
         public string[] ToCSV()

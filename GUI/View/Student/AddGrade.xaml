@@ -1,0 +1,58 @@
+﻿<Window x:Class="GUI.View.Student.AddGrade"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GUI.View.Student"
+        mc:Ignorable="d"
+        Title="AddGrade" Height="350" Width="350">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+
+        <Grid Grid.Column="1" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="Sifra Predmeta:" Grid.Row="0"/>
+            <TextBox Name="txtBoxSifraPredmeta" Text="{Binding Path=Predmet.SifraPredmeta, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="1" Margin="0,0,0,5"/>
+
+            <Label Content="Naziv Predmeta:" Grid.Row="1"/>
+            <TextBox Name="txtBoxNaziv" Text="{Binding Path=Predmet.NazivPredmeta, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5"/>
+
+            <Label Content="Ocena:" Grid.Row="2"/>
+            <ComboBox Name="cmbOcena"  SelectedItem="{Binding Path=Ocena.Ocena, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1"  Margin="0,0,0,5">
+
+            </ComboBox>
+
+            <Label Content="Datum polaganja:" Grid.Row="3"/>
+            <TextBox Name="txtDatum" Text="{Binding Path=Ocena.Datum, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" Margin="0,0,0,5"/>
+
+        </Grid>
+
+
+        <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,20,0,10">
+            <Button Name="btnAccept" Content="Potvrdi" Width="75" Margin="0,0,10,0" Click="btnAccept_Click" />
+            <Button Name="btnCancel" Content="Odustani" Width="75" Click="btnCancel_Click" />
+        </StackPanel>
+
+    </Grid>
+</Window>

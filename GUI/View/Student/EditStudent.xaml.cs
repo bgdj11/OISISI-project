@@ -234,7 +234,19 @@ namespace GUI.View.Student
     
         private void AddGrade_Click(object sender, RoutedEventArgs e) 
         {
-        
+            if (SelectedSubject == null)
+            {
+                MessageBox.Show(this, "Izaberite predmet!");
+            }
+            else
+            {
+                var addGrade = new AddGrade(SelectedSubject, Student, ocenaDAO);
+                addGrade.Owner = this;
+                addGrade.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                addGrade.ShowDialog();
+            }
+
+            Update();
         }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

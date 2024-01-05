@@ -165,7 +165,7 @@ namespace GUI.DTO
 
         public OcenaNaUpisu toOcena()
         {
-            return new OcenaNaUpisu(student, predmet, datum, ocena);
+            return new OcenaNaUpisu(idStudenta, idPredmeta, datum, ocena);
         }
 
 

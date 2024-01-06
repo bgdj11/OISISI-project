@@ -231,6 +231,7 @@ public class StudentDAO
 
         public List<Student> GetAllStudents(int page, int pageSize, string sortCriteria, SortDirection sortDirection)
         {
+            MakeStudent();
             IEnumerable<Student> students = _studenti;
 
             switch (sortCriteria)

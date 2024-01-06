@@ -31,14 +31,15 @@ namespace GUI.View.Profesor
     {
         public event PropertyChangedEventHandler? PropertyChanged;
         public ProfesorDTO Profesor { get; set; }
-        private ProfesorDAO profesorDAO;
+        public PredmetDTO SelectedPredmet { get; set; }
 
+        private ProfesorDAO profesorDAO;
+        private PredmetDAO predmetDAO;
+        private StudentDAO studentDAO;
 
         public ObservableCollection<PredmetDTO> Predmeti { get; set; }
+        public ObservableCollection<StudentPredmetDTO> Studenti { get; set; }
 
-        public PredmetDTO SelectedPredmet { get; set; }
-        private PredmetDAO predmetDAO;
-        private ProfesorPredmetDAO profesorPredmetDAO;
 
 
         public EditProfesor(ProfesorDAO profesorDAO, PredmetDAO predmetDao, ProfesorDTO selectedProfesor)
@@ -50,10 +51,10 @@ namespace GUI.View.Profesor
             Profesor = selectedProfesor;
 
             Predmeti = new ObservableCollection<PredmetDTO>();
-            //predmetDAO = new PredmetDAO();
-            SelectedPredmet = new PredmetDTO();
+            Studenti = new ObservableCollection<StudentPredmetDTO>();
 
-            profesorPredmetDAO = new ProfesorPredmetDAO();
+            studentDAO = new StudentDAO();
+            SelectedPredmet = new PredmetDTO();
 
             Update();
         }
@@ -61,8 +62,10 @@ namespace GUI.View.Profesor
 
         public void Update()
         {
+            studentDAO.MakeStudent();
             profesorDAO.MakeProfesor();
             predmetDAO.MakePredmet();
+
 
             if (Profesor.PredmetiListaId != null)
             {
@@ -73,6 +76,24 @@ namespace GUI.View.Profesor
                 }
             }
 
+            foreach (CLI.Model.Student student in studentDAO.GetAllStudents())
+            {
+/*                foreach (CLI.Model.Predmet predmet in predmetDAO.GetAllPredmeti())
+                {
+                    if (predmet.IdProfesora == Profesor.IdProfesor &&
+                        student.NepolozeniIspiti.Contains(predmet))
+                    {
+                        Studenti.Add(new StudentPredmetDTO(student, predmet));
+                    }
+                }*/
+                foreach(CLI.Model.Predmet predmet in student.NepolozeniIspiti)
+                {
+                    if (predmet.IdProfesora == Profesor.IdProfesor)
+                    {
+                        Studenti.Add(new StudentPredmetDTO(student, predmet));
+                    }
+                }
+            }
         }
 
 

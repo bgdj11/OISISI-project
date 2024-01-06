@@ -35,6 +35,11 @@ namespace GUI.View.Student
         public ObservableCollection<PredmetDTO> NotPassedSubjects { get; set; }  // lista nepolozenih
         public ObservableCollection<OcenaDTO> Ocene { get; set; }
 
+        public ObservableCollection<ProfesorPredmetDTO> Profesori { get; set; }
+
+        public ProfesorPredmetDTO SelectedProfesorPredmet { get; set; } 
+
+        private ProfesorDAO profesorDAO;
         public OcenaDTO SelectedOcena { get; set; }
         private OcenaNaUpisuDAO ocenaDAO;
 
@@ -68,6 +73,11 @@ namespace GUI.View.Student
 
             Statusi = new List<string> { "samofinasiranje", "budzet" };
             cmbStatusStudenta.ItemsSource = Statusi;
+
+            profesorDAO = new ProfesorDAO();
+            Profesori = new ObservableCollection<ProfesorPredmetDTO>();
+
+            SelectedProfesorPredmet = new ProfesorPredmetDTO();
 
             Update();
         }
@@ -110,6 +120,18 @@ namespace GUI.View.Student
 
             Student.UkupnoEspb = izracunajEspb();
             Student.ProsecnaOcena = izracunajProsecnuOcenu();
+
+
+            foreach(int ids in Student.NotPassedIds)
+            {
+                CLI.Model.Predmet pr = predmetDAO.GetPredmetById(ids);
+                int idProf = pr.IdProfesora;
+
+                CLI.Model.Profesor prof = profesorDAO.GetProfesorById(idProf);
+
+                if(prof != null)
+                    Profesori.Add(new ProfesorPredmetDTO(prof, pr));
+            }
 
         }
 
@@ -280,5 +302,11 @@ namespace GUI.View.Student
 
             Update();
         }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+           // Implementirati !
+        }
+
     }
 }

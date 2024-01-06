@@ -112,29 +112,39 @@
         </TabItem>
         <TabItem Header="Studenti">
             <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
 
-                <DataGrid Grid.Column="1" Grid.Row="2" CanUserAddRows="False" IsReadOnly="True " AutoGenerateColumns="False"
-                     ItemsSource="{Binding Studenti}" SelectedItem="{Binding SelectedStudentPredmet}" Grid.ColumnSpan="2" SelectionChanged="DataGrid_SelectionChanged">
+                <!-- Studenti Label -->
+                <Label Content="Studenti:" HorizontalAlignment="Left" Margin="0,0,0,0" Grid.Row="0" Grid.Column="0"/>
+
+                <!-- Search StackPanel -->
+                <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
+                    <TextBox Width="140" Margin="10,0,2,0" x:Name="searchTextBox" RenderTransformOrigin="0.5,0.5" Height="20"></TextBox>
+                    <Button Click="SearchButton_Click">
+                        <Image Source="Images/lupa.png" Width="16" Height="16" Margin="0,0,5,0"/>
+                    </Button>
+                </StackPanel>
+
+                <!-- DataGrid -->
+                <DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False" x:Name="StudentiDataGrid"
+             ItemsSource="{Binding Studenti}" SelectedItem="{Binding SelectedStudentPredmet}" SelectionChanged="DataGrid_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Indeks" Width="88" Binding="{Binding Indeks}"/>
                         <DataGridTextColumn Header="Ime" Width="88" Binding="{Binding Ime}"/>
                         <DataGridTextColumn Header="Prezime" Width="87" Binding="{Binding Prezime}"/>
-                        <DataGridTextColumn Header="Naziv predmeta" Width="87" Binding="{Binding NazivPredmeta}"/>
+                        <DataGridTextColumn Header="Predmet" Width="87" Binding="{Binding NazivPredmeta}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
         </TabItem>
+
 
     </TabControl>
 

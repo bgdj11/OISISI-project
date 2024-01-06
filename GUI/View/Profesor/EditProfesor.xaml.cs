@@ -99,6 +99,7 @@ namespace GUI.View.Profesor
             {
                 MessageBox.Show("Popunite sva polja pre potvrde", "Greska", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            Update();
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)

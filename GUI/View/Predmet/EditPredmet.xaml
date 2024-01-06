@@ -44,20 +44,17 @@
             <Label Content="Godina Studija:" Grid.Row="3" Grid.Column="0"/>
             <ComboBox Name="cmbGodinaStudija" SelectedItem="{Binding Path=Predmet.GodinaStudija, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" Margin="0,0,0,5" Grid.ColumnSpan="2"/>
 
-            <Label Content="ID profesora:" Grid.Row="4" Grid.Column="0"/>
-            <TextBox Name="txtBoxProfesorID" Text="{Binding Path=Predmet.ProfesorID, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Margin="0,0,0,5" Grid.ColumnSpan="2"/>
+            <Label Content="ESPB:" Grid.Row="4" Grid.Column="0"/>
+            <TextBox Name="txtESPB" Text="{Binding Path=Predmet.ESPB, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Margin="0,0,0,5" Grid.ColumnSpan="2"/>
 
-            <Label Content="ESPB:" Grid.Row="5" Grid.Column="0"/>
-            <TextBox Name="txtESPB" Text="{Binding Path=Predmet.ESPB, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1" Margin="0,0,0,5" Grid.ColumnSpan="2"/>
+            <Label Content="Profesor:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center"/>
 
-            <Label Content="Profesor:" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center"/>
-
-            <TextBox Grid.Row="6"  Text="{Binding Path=Predmet.Profesor, UpdateSourceTrigger=PropertyChanged}"
+            <TextBox Grid.Row="5"  Text="{Binding Path=Predmet.Profesor, UpdateSourceTrigger=PropertyChanged}"
                      Height="20" Margin="96,0,15,2" Name="txtBoxProfesor" Grid.ColumnSpan="2" VerticalAlignment="Center">
             </TextBox>
             
-            <Button Name="AddProfessorButton" Width="30" Height="20" Click="AddProfessor_Click" Content="+" Grid.Row="6" Grid.Column="2" Margin="0,0,5,0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-            <Button Name="RemoveProfessorButton" Width="30" Height="20" Click="RemoveProfessor_Click" Content="-" Grid.Row="6" Grid.Column="2" Margin="35,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <Button Name="AddProfessorButton" Width="30" Height="20" Click="AddProfessor_Click" Content="+" Grid.Row="5" Grid.Column="2" Margin="0,0,5,0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            <Button Name="RemoveProfessorButton" Width="30" Height="20" Click="RemoveProfessor_Click" Content="-" Grid.Row="5" Grid.Column="2" Margin="35,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
 
         </Grid>
 

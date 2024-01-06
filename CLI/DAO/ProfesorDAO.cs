@@ -69,15 +69,15 @@ namespace CLI.DAO
 
             foreach (Profesor p in _profesori)
             {
-                var predmet = _predmeti.Find(n => n.IdProfesora == p.IdProfesor);
-                if (predmet != null && !p.SpisakPredmeta.Contains(predmet))
+                p.SpisakPredmeta.Clear();
+                foreach (Predmet predmet in _predmeti)
                 {
-                    p.SpisakPredmeta.Add(predmet);
+                    if (predmet.IdProfesora == p.IdProfesor && !p.SpisakPredmeta.Contains(predmet))
+                    {
+                        p.SpisakPredmeta.Add(predmet);
+                    }
                 }
             }
-
-
-
 
             _katedreStorage.Save(_katedre);
             _storage.Save(_profesori);
@@ -128,11 +128,13 @@ namespace CLI.DAO
 
         public Profesor? GetProfesorById(int idProfesor)
         {
+            MakeProfesor();
             return _profesori.Find(p => p.IdProfesor == idProfesor);
         }
 
         public List<Profesor> GetAllProfesors()
         {
+            MakeProfesor();
             return _profesori;
         }
 

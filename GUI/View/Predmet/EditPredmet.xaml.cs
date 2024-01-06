@@ -1,5 +1,6 @@
 ﻿using CLI.DAO;
 using GUI.DTO;
+using GUI.View.DialogWindows;
 using GUI.View.Student;
 using System;
 using System.Collections.Generic;
@@ -79,20 +80,45 @@ namespace GUI.View.Predmet
                    !string.IsNullOrWhiteSpace(txtBoxNaziv.Text) &&
                    !string.IsNullOrWhiteSpace(cmbSemestar.Text) &&
                    cmbGodinaStudija.SelectedItem != null &&
-                   !string.IsNullOrWhiteSpace(txtBoxProfesorID.Text) &&
                    !string.IsNullOrWhiteSpace(txtESPB.Text);
         }
 
         private void AddProfessor_Click(object sender, RoutedEventArgs e)
         {
-            var selectProfesorWindow = new SelectProfesor(predmetDAO, Predmet);
-            selectProfesorWindow.Owner = this;
-            selectProfesorWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            selectProfesorWindow.ShowDialog();
-            Update();
+            if (Predmet.ProfesorID == -1)
+            {
+                var selectProfesorWindow = new SelectProfesor(predmetDAO, Predmet);
+                selectProfesorWindow.Owner = this;
+                selectProfesorWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                selectProfesorWindow.ShowDialog();
+                Update();
+            }
         }
 
         private void RemoveProfessor_Click(object sender, RoutedEventArgs e)
+        {
+            if(Predmet.ProfesorID != -1)
+            {
+
+                var confirmationDialog = new ConfirmationWindow("Profesor");
+                confirmationDialog.Owner = this;
+                confirmationDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                confirmationDialog.ShowDialog();
+
+                if (confirmationDialog.UserConfirmed)
+                {
+                    Predmet.Profesor = "nedostaje profesor";
+                    CLI.Model.Predmet pr = Predmet.toPredmet();
+                    pr.IdPredmet = Predmet.predmetId;
+                    pr.IdProfesora = -1;
+
+                    predmetDAO.UpdatePredmet(pr);
+                }
+            }
+            Update();
+        }
+
+        private void txtBoxProfesorID_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }

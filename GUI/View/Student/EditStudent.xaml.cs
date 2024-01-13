@@ -305,7 +305,41 @@ namespace GUI.View.Student
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-           // Implementirati !
+            string searchTerm = searchTextBox.Text;
+            ProfesorsDataGrid.ItemsSource = FilterProfesor(Profesori, searchTerm);
+        }
+
+        private ObservableCollection<ProfesorPredmetDTO> FilterProfesor(ObservableCollection<ProfesorPredmetDTO> originalCollection, string searchTerm)
+        {
+            var terms = searchTerm.ToLower().Split(',').Select(s => s.Trim()).ToList();
+
+
+            switch (terms.Count)
+            {
+                case 1: // Samo prezime
+                    return new ObservableCollection<ProfesorPredmetDTO>(
+                        originalCollection.Where(p =>
+                            p.Prezime.ToLower().Contains(terms[0]))
+                    );
+
+                case 2: // Prezime i ime
+                    return new ObservableCollection<ProfesorPredmetDTO>(
+                        originalCollection.Where(p =>
+                            p.Prezime.ToLower().Contains(terms[0]) &&
+                            p.Ime.ToLower().Contains(terms[1]))
+                    );
+
+                case 3:
+                    return new ObservableCollection<ProfesorPredmetDTO>(
+                        originalCollection.Where(p =>
+                            p.Prezime.ToLower().Contains(terms[0]) &&
+                            p.Ime.ToLower().Contains(terms[1]) &&
+                            p.NazivPredmeta.ToLower().Contains(terms[2]))
+                    );
+
+                default:
+                    return originalCollection;
+            }
         }
 
     }

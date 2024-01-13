@@ -312,11 +312,11 @@ namespace GUI
             }
             else if (MainTabControl.SelectedItem == ProfesorsTab)
             {
-                //ProfesorsDataGrid.ItemsSource = FilterData(Profesors, searchTerm);
+                ProfesorsDataGrid.ItemsSource = FilterProfesor(Profesors, searchTerm);
             }
             else
             {
-                //SubjectsDataGrid.ItemsSource = FilterData(Subjects, searchTerm);
+                SubjectsDataGrid.ItemsSource = FilterSubject(Subjects, searchTerm);
             }
 
         }
@@ -356,6 +356,52 @@ namespace GUI
             }
         }
 
+        private ObservableCollection<ProfesorDTO> FilterProfesor(ObservableCollection<ProfesorDTO> originalCollection, string searchTerm)
+        {
+            var terms = searchTerm.ToLower().Split(',').Select(s => s.Trim()).ToList();
+
+
+            switch (terms.Count)
+            {
+                case 1: // Samo prezime
+                    return new ObservableCollection<ProfesorDTO>(
+                        originalCollection.Where(profesorDTO =>
+                            profesorDTO.Prezime.ToLower().Contains(terms[0]))
+                    );
+
+                case 2: // Prezime i ime
+                    return new ObservableCollection<ProfesorDTO>(
+                        originalCollection.Where(profesorDTO =>
+                            profesorDTO.Prezime.ToLower().Contains(terms[0]) &&
+                            profesorDTO.Ime.ToLower().Contains(terms[1]))
+                    );
+
+                default:
+                    return originalCollection;
+            }
+        }
+
+        private ObservableCollection<PredmetDTO> FilterSubject(ObservableCollection<PredmetDTO> originalCollection, string searchTerm)
+        {
+            var terms = searchTerm.ToLower().Split(',').Select(s => s.Trim()).ToList();
+
+            switch(terms.Count())
+            {
+                case 1: // Samo sifra predmeta
+                    return new ObservableCollection<PredmetDTO>(
+                        originalCollection.Where(s => s.SifraPredmeta.ToLower().Contains(terms[0]))
+                        );
+
+                case 2: // Sifra i naziv predmeta
+                    return new ObservableCollection<PredmetDTO>(
+                        originalCollection.Where(s => s.SifraPredmeta.ToLower().Contains(terms[0]) &&
+                        s.NazivPredmeta.ToLower().Contains(terms[1]))
+                        );
+
+                default:
+                    return originalCollection;
+            }
+        }
 
         /*
         private ObservableCollection<T> FilterData<T>(ObservableCollection<T> originalCollection, string searchTerm)

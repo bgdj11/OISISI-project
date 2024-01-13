@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace CLI.DAO
 {
-    internal class KatedraDAO
+    public class KatedraDAO
     {
         private readonly List<Katedra> _katedre;
         private readonly Storage<Katedra> _storage;
@@ -14,7 +14,7 @@ namespace CLI.DAO
         public KatedraDAO()
         {
             _storage = new Storage<Katedra>("katedre.csv");
-            _katedre = new List<Katedra>();
+            _katedre = _storage.Load();
             MakeKatedra();
         }
 
@@ -33,10 +33,17 @@ namespace CLI.DAO
             {
                 foreach(Profesor p in _profesori)
                 {
-                    if(p.IdKatedre == k.idKatedre)
+                    if(p.IdProfesor == k.idSefa)
                     {
-                        k.profesoriNaKatedri.Add(p);
+                        k.sefKatedre = p; break;
                     }
+                }
+
+                k.profesoriNaKatedri.Clear();
+                foreach (Profesor p in _profesori)
+                {
+                    if (k.idKatedre == p.IdKatedre)
+                        k.profesoriNaKatedri.Add(p);
                 }
             }
 
@@ -80,11 +87,13 @@ namespace CLI.DAO
 
         private Katedra? GetKatedraById(int id)
         {
+            MakeKatedra();
             return _katedre.Find(k => k.idKatedre == id);
         }
 
         public List<Katedra> GetAllKatedra() 
         {
+            MakeKatedra();
             return _katedre;
         }
 

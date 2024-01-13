@@ -21,6 +21,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GUI.View.Profesor;
 using GUI.View.Predmet;
+using System.Xml.Serialization;
 
 namespace GUI
 {
@@ -33,13 +34,19 @@ namespace GUI
         public ObservableCollection<ProfesorDTO> Profesors { get; set; }
         public ObservableCollection<PredmetDTO> Subjects { get; set; }
 
+        public ObservableCollection<KatedraDTO> Katedre { get; set; }
+
         public StudentDTO SelectedStudent { get; set; }
         public ProfesorDTO SelectedProfesor { get; set; }
         public PredmetDTO SelectedPredmet { get; set; }
 
+        public KatedraDTO SelectedKatedra { get; set; }
+
         private ProfesorDAO profesorDAO { get; set; }
         private StudentDAO studentDAO { get; set; }
         private PredmetDAO predmetDAO { get; set; }
+
+        private KatedraDAO katedraDAO { get; set; }
 
 
         public MainWindow()
@@ -59,12 +66,16 @@ namespace GUI
             predmetDAO = new PredmetDAO();
             Tab.Text = "Status: Studenti";
 
+            Katedre = new ObservableCollection<KatedraDTO>();
+            katedraDAO = new KatedraDAO();
+
+
             Update();
         }
 
         private void MainWindow_KeyDown(object sender, KeyEventArgs e)
         {
-          
+
         }
 
         private void MenuItem_Predmeti_Click()
@@ -73,9 +84,21 @@ namespace GUI
             Tab.Text = "Status: Predmeti";
         }
 
+
         private void MenuItem_Predmeti_Click(object sender, RoutedEventArgs e)
         {
             MenuItem_Predmeti_Click();
+        }
+
+        private void MenuItem_Katedre_Click()
+        {
+            MainTabControl.SelectedItem = MainTabControl.Items.Cast<TabItem>().First(tab => tab.Header.Equals("Katedre"));
+            Tab.Text = "Status: Katedre";
+        }
+
+        private void MenuItem_Katedre_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem_Katedre_Click();
         }
 
         private void MenuItem_Profesori_Click()
@@ -141,6 +164,12 @@ namespace GUI
             foreach (Predmet predmet in predmetDAO.GetAllPredmeti())
                 Subjects.Add(new PredmetDTO(predmet));
 
+            Katedre.Clear();
+            foreach (Katedra k in katedraDAO.GetAllKatedra()) {
+                int prof_id = k.idSefa;
+                Profesor p = profesorDAO.GetProfesorById(prof_id);
+                Katedre.Add(new KatedraDTO(k, p));
+            }
         }
 
         private void InitializeStatusBar()
@@ -430,7 +459,12 @@ namespace GUI
         }
         private void SubjectsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Tab.Text = "Status Predmeti";
+            Tab.Text = "Status: Predmeti";
+        }
+
+        private void KatedreDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Tab.Text = "Status: Katedre";
         }
 
         private void TabSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -443,10 +477,12 @@ namespace GUI
             {
                 Tab.Text = "Status: Profesori";
             }
-            else
+            else if(MainTabControl.SelectedItem == SubjectsDataGrid)    
             {
-                Tab.Text = "Status Predmeti";
+                Tab.Text = "Status: Predmeti";
             }
+            else
+                Tab.Text = "Status: Katedre";
         }
 
     }

@@ -45,15 +45,7 @@ namespace CLI.DAO
             Storage<ProfesorPredmet> _profPredStorage = new Storage<ProfesorPredmet>("ProfesorPredmet.csv");
             List<ProfesorPredmet> _profPred = _profPredStorage.Load();
 
-            // dodajemo u katedru odgovarajuceg profesora
-
-            foreach (Profesor p in _profesori)
-            {
-                if(_katedre.Find(n => n.idKatedre == p.IdKatedre) != null)
-                {
-                    _katedre.Find(n => n.idKatedre == p.IdKatedre).profesoriNaKatedri.Add(p);
-                }
-            }
+            
 
             // dodajemo adresu stanovanja
 

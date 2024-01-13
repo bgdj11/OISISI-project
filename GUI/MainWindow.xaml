@@ -177,6 +177,19 @@
                     </DataGrid>
                 </TabItem>
 
+                <TabItem x:Name="KatedreTab" Header="Katedre">
+                    <DataGrid Height="517"
+                    AutoGenerateColumns="False"
+                    x:Name="KatedreDataGrid"
+                    ItemsSource="{Binding Katedre, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedItem="{Binding SelectedKatedra, UpdateSourceTrigger=PropertyChanged}"
+                    SelectionMode="Single" IsReadOnly="True" SelectionChanged="KatedreDataGrid_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Naziv katedre" Binding="{Binding Naziv}" Width="*"/>
+                            <DataGridTextColumn Header="Sef katedre" Binding="{Binding Profesor}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
 
             </TabControl>
 

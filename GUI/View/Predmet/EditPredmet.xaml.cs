@@ -1,9 +1,11 @@
 ﻿using CLI.DAO;
 using GUI.DTO;
 using GUI.View.DialogWindows;
+using GUI.View.Profesor;
 using GUI.View.Student;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -27,8 +29,15 @@ namespace GUI.View.Predmet
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public PredmetDAO predmetDAO { get; set; }
+        public ObservableCollection<StudentDTO> Studenti { get; set; }
+
         public PredmetDTO Predmet { get; set; }
+
+        public PredmetDTO DrugiPredmet { get; set; }
+
+        public PredmetDAO PredmetDAO { get; set; }
+        public StudentDAO StudentDAO { get; set; }
+
 
         List<string> Semesters { get; set; }
         List<int> Godine { get; set; }
@@ -37,7 +46,7 @@ namespace GUI.View.Predmet
         {
             InitializeComponent();
             DataContext = this;
-            this.predmetDAO = predmetDAO;
+            this.PredmetDAO = predmetDAO;
             this.Predmet = selectedPredmet;
 
             Semesters = new List<string> { "letnji", "zimski" };
@@ -45,11 +54,43 @@ namespace GUI.View.Predmet
 
             Godine = new List<int> { 1, 2, 3, 4 };
             cmbGodinaStudija.ItemsSource = Godine;
+
+            this.StudentDAO = new StudentDAO();
+            this.DrugiPredmet = null;
+            Studenti = new ObservableCollection<StudentDTO>();
+
         }
 
         private void Update()
         {
-            Predmet = new PredmetDTO(predmetDAO.GetPredmetById(Predmet.predmetId));
+            Predmet = new PredmetDTO(PredmetDAO.GetPredmetById(Predmet.predmetId));
+
+            if (DrugiPredmet != null)
+            {
+                PredmetDAO.MakePredmet();
+                StudentDAO.MakeStudent();
+
+                foreach (CLI.Model.Student student in StudentDAO.GetAllStudents())
+                {
+/*                    if (student.NepolozeniIspiti.Count == 0)
+                    {
+                        MessageBox.Show(this, "PRAZNA.");
+                    }*/
+                    int counter = 0;
+                    foreach(CLI.Model.Predmet predmet in student.NepolozeniIspiti)
+                    {
+                        if(predmet.IdPredmet == DrugiPredmet.predmetId ||
+                            predmet.IdPredmet == Predmet.predmetId)
+                        {
+                            counter++;
+                        }
+                    }
+
+                    if(counter == 2) {
+                        Studenti.Add(new StudentDTO(student));
+                    }
+                }
+            }
         }
 
         private void btnAccept_Click(object sender, RoutedEventArgs e)
@@ -59,7 +100,7 @@ namespace GUI.View.Predmet
                 CLI.Model.Predmet pr = Predmet.toPredmet();
                 pr.IdPredmet = Predmet.predmetId;
 
-                predmetDAO.UpdatePredmet(pr);
+                PredmetDAO.UpdatePredmet(pr);
                 MessageBox.Show("Predmet je uspesno promenjen!", "Uspesno", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
@@ -87,7 +128,7 @@ namespace GUI.View.Predmet
         {
             if (Predmet.ProfesorID == -1)
             {
-                var selectProfesorWindow = new SelectProfesor(predmetDAO, Predmet);
+                var selectProfesorWindow = new SelectProfesor(PredmetDAO, Predmet);
                 selectProfesorWindow.Owner = this;
                 selectProfesorWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 selectProfesorWindow.ShowDialog();
@@ -112,13 +153,66 @@ namespace GUI.View.Predmet
                     pr.IdPredmet = Predmet.predmetId;
                     pr.IdProfesora = -1;
 
-                    predmetDAO.UpdatePredmet(pr);
+                    PredmetDAO.UpdatePredmet(pr);
                 }
             }
             Update();
         }
 
         private void txtBoxProfesorID_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void IzaberiPredmet_Click(object sender, RoutedEventArgs e)
+        {
+            var selectSubjectSubjectWindow = new SelectSubjectSubjcet(PredmetDAO, Predmet);
+            selectSubjectSubjectWindow.Owner = this;
+            selectSubjectSubjectWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            selectSubjectSubjectWindow.ShowDialog();
+            if(selectSubjectSubjectWindow.SelectedPredmet != null)
+            {
+                DrugiPredmet = selectSubjectSubjectWindow.SelectedPredmet;
+            }
+            Update();
+        }
+
+        private void PoloziliPrvi_Click(object sender, RoutedEventArgs e)
+        {
+            StudentiDataGrid.ItemsSource = FilterStudent();
+        }
+
+        public ObservableCollection<StudentDTO> FilterStudent()
+        {
+
+            Studenti.Clear();
+            foreach (CLI.Model.Student student in StudentDAO.GetAllStudents())
+            {
+                int polozioPrviPredmet = 0;
+                int polozioDrugiPredmet = 0;
+                foreach(CLI.Model.OcenaNaUpisu ocena in student.PolozeniIspiti)
+                {
+                    if(ocena.IdPredmeta == Predmet.predmetId)
+                    {
+                        polozioPrviPredmet = 1;
+                    }
+                    if(ocena.IdPredmeta == DrugiPredmet.predmetId)
+                    {
+                        polozioDrugiPredmet = 1;
+                    }
+                }
+
+                if(polozioPrviPredmet == 1 && polozioDrugiPredmet == 0)
+                {
+                    Studenti.Add(new StudentDTO(student));
+                }
+            }
+                
+                
+            return Studenti;
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }

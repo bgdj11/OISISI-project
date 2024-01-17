@@ -84,7 +84,8 @@
                     </ComboBox>
 
                     <Label Content="Status Studenta:" Grid.Row="11"/>
-                    <ComboBox Name="cmbStatusStudenta"  SelectedItem="{Binding Path=Student.StatusStudenta, UpdateSourceTrigger=PropertyChanged}" Grid.Row="11" Grid.Column="1"  Margin="0,0,0,5">
+                    <ComboBox Name="cmbStatusStudenta" SelectedValue="{Binding Path=Student.StatusStudenta, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Content" Grid.Row="11" Grid.Column="1"  Margin="0,0,0,5">
+
 
                     </ComboBox>
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -118,7 +119,7 @@ namespace GUI.View.Profesor
             }
             else
             {
-                MessageBox.Show("Popunite sva polja pre potvrde", "Greska", MessageBoxButton.OK, MessageBoxImage.Error);
+               // MessageBox.Show("Popunite sva polja pre potvrde", "Greska", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             Update();
         }
@@ -130,19 +131,35 @@ namespace GUI.View.Profesor
 
         private bool ValidateFields()
         {
-            return !string.IsNullOrWhiteSpace(txtBoxIme.Text) &&
-                   !string.IsNullOrWhiteSpace(txtBoxPrezime.Text) &&
-                   !string.IsNullOrWhiteSpace(dpDatumRodjenja.Text) &&
-                   !string.IsNullOrWhiteSpace(txtBoxUlica.Text) &&
-                   !string.IsNullOrWhiteSpace(txtBoxBroj.Text) &&
-                   !string.IsNullOrWhiteSpace(txtBoxGrad.Text) &&
-                   !string.IsNullOrWhiteSpace(txtBoxDrzava.Text) &&
-                   !string.IsNullOrWhiteSpace(txtBoxKontakt.Text) &&
-                   !string.IsNullOrWhiteSpace(txtBoxEmail.Text) &&
-                   !string.IsNullOrWhiteSpace(txtBoxBrojLicneKarte.Text) &&
-                   !string.IsNullOrWhiteSpace(txtBoxZvanje.Text) &&
-                   !string.IsNullOrWhiteSpace(txtBoxGodinaStaza.Text);
+            var validations = new (TextBox textBox, string message, Func<string, bool> validator)[]
+            {
+                (txtBoxIme, "Unesite validno ime.", s => s.All(char.IsLetter)),
+                (txtBoxPrezime, "Unesite validno prezime.", s => s.All(char.IsLetter)),
+                (dpDatumRodjenja, "Unesite validan datum rodjenja u formatu d.M.yyyy.", s => DateTime.TryParseExact(s, "d.M.yyyy.", CultureInfo.InvariantCulture, DateTimeStyles.None, out _)),
+                (txtBoxUlica, "Unesite validnu adresu ulice.", s => s.All(c => char.IsLetter(c) || char.IsWhiteSpace(c))),
+                (txtBoxBroj, "Unesite validan broj.", s => s.All(char.IsDigit)),
+                (txtBoxGrad, "Unesite validan grad.", s => s.All(c => char.IsLetter(c) || char.IsWhiteSpace(c))),
+                (txtBoxDrzava, "Unesite validnu drzavu (samo slova).", s => s.All(char.IsLetter)),
+                (txtBoxKontakt, "Unesite validni kontakt telefon.", s => s.All(char.IsDigit)),
+                (txtBoxEmail, "Unesite validnu email adresu.", s => s.Contains("@")),
+                (txtBoxBrojLicneKarte, "Unesite validan broj licne karte.", s => s.All(char.IsDigit)),
+                (txtBoxZvanje, "Unesite zvanje.", s => !string.IsNullOrWhiteSpace(s)),
+                (txtBoxGodinaStaza, "Unesite validnu godinu staza.", s => s.All(char.IsDigit))
+            };
+
+            foreach (var validation in validations)
+            {
+                if (string.IsNullOrWhiteSpace(validation.textBox.Text) || !validation.validator(validation.textBox.Text))
+                {
+                    MessageBox.Show(validation.message);
+                    return false;
+                }
+            }
+
+            return true;
         }
+
+
 
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

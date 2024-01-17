@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -192,7 +193,7 @@ namespace GUI.View.Student
             }
             else
             {
-                MessageBox.Show("Popunite sva polja pre potvrde", "Greska", MessageBoxButton.OK, MessageBoxImage.Error);
+                //MessageBox.Show("Popunite sva polja pre potvrde", "Greska", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -203,22 +204,50 @@ namespace GUI.View.Student
 
         private bool ValidateFields()
         {
-            return !string.IsNullOrWhiteSpace(txtBoxIme.Text) &&
-                   !string.IsNullOrWhiteSpace(txtBoxPrezime.Text) &&
-                   !string.IsNullOrWhiteSpace(datpDatumRodjenja.Text) &&
-                   !string.IsNullOrWhiteSpace(txtBoxUlica.Text) &&
-                   !string.IsNullOrWhiteSpace(txtBoxBroj.Text) &&
-                   !string.IsNullOrWhiteSpace(txtBoxGrad.Text) &&
-                   !string.IsNullOrWhiteSpace(txtBoxDrzava.Text) &&
-                   !string.IsNullOrWhiteSpace(txtBoxKontakt.Text) &&
-                   !string.IsNullOrWhiteSpace(txtBoxEmail.Text) &&
-                   !string.IsNullOrWhiteSpace(txtBoxOznakaSmera.Text) &&
-                   !string.IsNullOrWhiteSpace(txtBoxBrojIndeksa.Text) &&
-                   !string.IsNullOrWhiteSpace(txtBoxGodinaUpisa.Text) &&
-                   cmbGodinaStudija.SelectedItem != null &&
-                   cmbStatusStudenta.SelectedItem != null;
-                   //!string.IsNullOrWhiteSpace(txtBoxProsecnaOcena.Text);
+            var validations = new (TextBox textBox, string message, Func<string, bool> validator)[]
+            {
+                (txtBoxIme, "Unesite validno ime.", s => s.All(char.IsLetter)),
+                (txtBoxPrezime, "Unesite validno prezime.", s => s.All(char.IsLetter)),
+                (datpDatumRodjenja, "Unesite validan datum u formatu d.M.yyyy.", s => DateTime.TryParseExact(s, "d.M.yyyy.", CultureInfo.InvariantCulture, DateTimeStyles.None, out _)),
+                (txtBoxUlica, "Unesite validnu ulicu.", s => s.All(c => char.IsLetter(c) || char.IsWhiteSpace(c))),
+                (txtBoxBroj, "Unesite validan broj.", s => s.All(char.IsDigit)),
+                (txtBoxGrad, "Unesite validan grad.", s => s.All(c => char.IsLetter(c) || char.IsWhiteSpace(c))),
+                (txtBoxDrzava, "Unesite validnu drzavu.", s => s.All(char.IsLetter)),
+                (txtBoxKontakt, "Unesite kontakt informacije (samo brojevi).", s => s.All(char.IsDigit)),
+                (txtBoxEmail, "Unesite validnu email adresu (sadrži '@').", s => s.Contains("@")),
+                (txtBoxOznakaSmera, "Unesite oznaku smera (ne sme biti prazno).", s => !string.IsNullOrWhiteSpace(s)),
+                (txtBoxBrojIndeksa, "Unesite broj indeksa (samo brojevi).", s => s.All(char.IsDigit)),
+                (txtBoxGodinaUpisa, "Unesite validnu godinu upisa (samo brojevi).", s => s.All(char.IsDigit)),
+            };
+
+            foreach (var validation in validations)
+            {
+                if (string.IsNullOrWhiteSpace(validation.textBox.Text) || !validation.validator(validation.textBox.Text))
+                {
+                    MessageBox.Show(validation.message);
+                    return false;
+                }
+            }
+
+            if (cmbGodinaStudija.SelectedItem == null)
+            {
+                MessageBox.Show("Izaberite godinu studija.");
+                return false;
+            }
+
+
+            if (cmbStatusStudenta.SelectedItem == null)
+            {
+                MessageBox.Show("Izaberite status studenta.");
+                return false;
+            }
+
+
+            return true;
         }
+
+
+
 
         private void AddSubject_Click(object sender, RoutedEventArgs e)
         {

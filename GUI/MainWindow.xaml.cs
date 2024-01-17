@@ -48,6 +48,15 @@ namespace GUI
 
         private KatedraDAO katedraDAO { get; set; }
 
+        public static RoutedCommand NewCommand = new RoutedCommand();
+        public static RoutedCommand SaveCommand = new RoutedCommand();
+        public static RoutedCommand CloseCommand = new RoutedCommand();
+        public static RoutedCommand EditCommand = new RoutedCommand();
+        public static RoutedCommand HelpCommand = new RoutedCommand();
+        public static RoutedCommand DeleteCommand = new RoutedCommand();
+
+
+
 
         public MainWindow()
         {
@@ -71,6 +80,22 @@ namespace GUI
 
 
             Update();
+
+            CommandBindings.Add(new CommandBinding(NewCommand, CreateEntityButton_Click));
+            CommandBindings.Add(new CommandBinding(SaveCommand, SaveApp));
+            CommandBindings.Add(new CommandBinding(CloseCommand, CloseApp_Execution));
+            CommandBindings.Add(new CommandBinding(EditCommand, EditEntityButton_Click));
+            CommandBindings.Add(new CommandBinding(HelpCommand, OpenAboutWindow));
+            CommandBindings.Add(new CommandBinding(DeleteCommand, DeleteEntityButton_Click));
+
+            // Postavljanje Input Gestures
+            NewCommand.InputGestures.Add(new KeyGesture(Key.N, ModifierKeys.Control));
+            SaveCommand.InputGestures.Add(new KeyGesture(Key.S, ModifierKeys.Control));
+            CloseCommand.InputGestures.Add(new KeyGesture(Key.F4, ModifierKeys.Alt));
+            EditCommand.InputGestures.Add(new KeyGesture(Key.E, ModifierKeys.Control));
+            HelpCommand.InputGestures.Add(new KeyGesture(Key.H, ModifierKeys.Control));
+            DeleteCommand.InputGestures.Add(new KeyGesture(Key.D, ModifierKeys.Control));
+
         }
 
         private void MainWindow_KeyDown(object sender, KeyEventArgs e)

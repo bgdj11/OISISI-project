@@ -41,7 +41,7 @@
                     <TextBox Name="txtBoxNaziv" Text="{Binding Path=Predmet.NazivPredmeta, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5" Grid.ColumnSpan="2"/>
 
                     <Label Content="Semestar:" Grid.Row="2" Grid.Column="0"/>
-                    <ComboBox Name="cmbSemestar" SelectedItem="{Binding Path=Predmet.Semestar, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" Margin="0,0,0,5" Grid.ColumnSpan="2"/>
+                    <ComboBox Name="cmbSemestar" SelectedValue="{Binding Path=Predmet.Semestar, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Content" Grid.Row="2" Grid.Column="1" Margin="0,0,0,5" Grid.ColumnSpan="2"/>
 
                     <Label Content="Godina Studija:" Grid.Row="3" Grid.Column="0"/>
                     <ComboBox Name="cmbGodinaStudija" SelectedItem="{Binding Path=Predmet.GodinaStudija, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" Margin="0,0,0,5" Grid.ColumnSpan="2"/>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI.View.Predmet"
         mc:Ignorable="d"
-        Title="DodajPredmet" Height="450" Width="350">
+        Title="Dodaj predmet" Height="450" Width="350">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>

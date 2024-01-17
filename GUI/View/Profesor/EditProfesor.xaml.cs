@@ -50,6 +50,7 @@ namespace GUI.View.Profesor
             this.profesorDAO = profesorDAO;
             this.predmetDAO = predmetDao;
             Profesor = selectedProfesor;
+            cmbZvanje.ItemsSource = new List<string>() { "redovni profesor", "vanredni profesor", "docent" };
 
             Predmeti = new ObservableCollection<PredmetDTO>();
             Studenti = new ObservableCollection<StudentPredmetDTO>();
@@ -143,7 +144,6 @@ namespace GUI.View.Profesor
                 (txtBoxKontakt, "Unesite validni kontakt telefon.", s => s.All(char.IsDigit)),
                 (txtBoxEmail, "Unesite validnu email adresu.", s => s.Contains("@")),
                 (txtBoxBrojLicneKarte, "Unesite validan broj licne karte.", s => s.All(char.IsDigit)),
-                (txtBoxZvanje, "Unesite zvanje.", s => !string.IsNullOrWhiteSpace(s)),
                 (txtBoxGodinaStaza, "Unesite validnu godinu staza.", s => s.All(char.IsDigit))
             };
 
@@ -154,6 +154,12 @@ namespace GUI.View.Profesor
                     MessageBox.Show(validation.message);
                     return false;
                 }
+            }
+
+            if (cmbZvanje.SelectedItem == null)
+            {
+                MessageBox.Show("Izaberite zvanje.");
+                return false;
             }
 
             return true;

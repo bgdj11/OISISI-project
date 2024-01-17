@@ -67,8 +67,7 @@
                     <TextBox Name="txtBoxBrojLicneKarte" Text="{Binding Path=Profesor.BrojLicneKarte, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="9" Grid.Column="1" Margin="0,0,0,5"/>
 
                     <Label Content="Zvanje:" Grid.Row="10"/>
-                    <TextBox Name="txtBoxZvanje" Text="{Binding Path=Profesor.Zvanje, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="10" Grid.Column="1" Margin="0,0,0,5"/>
-
+                    <ComboBox Name="cmbZvanje" SelectedValue="{Binding Path=Profesor.Zvanje, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Content" Grid.Row="10" Grid.Column="1" Margin="0,0,0,5"></ComboBox>
 
                     <Label Content="Godine Staza:" Grid.Row="11"/>
                     <TextBox Name="txtBoxGodinaStaza" Text="{Binding Path=Profesor.GodineStaza, UpdateSourceTrigger=PropertyChanged}" Grid.Row="11" Grid.Column="1" Margin="0,0,0,5"/>

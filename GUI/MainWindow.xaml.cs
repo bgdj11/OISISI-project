@@ -91,7 +91,7 @@ namespace GUI
             // Postavljanje Input Gestures
             NewCommand.InputGestures.Add(new KeyGesture(Key.N, ModifierKeys.Control));
             SaveCommand.InputGestures.Add(new KeyGesture(Key.S, ModifierKeys.Control));
-            CloseCommand.InputGestures.Add(new KeyGesture(Key.F4, ModifierKeys.Alt));
+            CloseCommand.InputGestures.Add(new KeyGesture(Key.C, ModifierKeys.Control));
             EditCommand.InputGestures.Add(new KeyGesture(Key.E, ModifierKeys.Control));
             HelpCommand.InputGestures.Add(new KeyGesture(Key.H, ModifierKeys.Control));
             DeleteCommand.InputGestures.Add(new KeyGesture(Key.D, ModifierKeys.Control));

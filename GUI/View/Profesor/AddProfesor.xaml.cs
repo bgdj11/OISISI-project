@@ -32,6 +32,8 @@ namespace GUI.View.Profesor
         {
             InitializeComponent();
 
+            cmbZvanje.ItemsSource = new List<string>() {"redovni profesor", "vanredni profesor", "docent" };
+
             DataContext = this;
             Profesor = new ProfesorDTO();
             this.profesorsDAO = profesorDAO;
@@ -76,7 +78,6 @@ namespace GUI.View.Profesor
                 (txtBoxKontakt, "Unesite validni kontakt telefon.", s => s.All(char.IsDigit)),
                 (txtBoxEmail, "Unesite validnu email adresu.", s => s.Contains("@")),
                 (txtBoxBrojLicneKarte, "Unesite validan broj licne karte.", s => s.All(char.IsDigit)),
-                (txtBoxZvanje, "Unesite zvanje.", s => !string.IsNullOrWhiteSpace(s)),
                 (txtBoxGodinaStaza, "Unesite validnu godinu staza.", s => s.All(char.IsDigit))
             };
 
@@ -87,6 +88,12 @@ namespace GUI.View.Profesor
                     MessageBox.Show(validation.message);
                     return false;
                 }
+            }
+
+            if (cmbZvanje.SelectedItem == null)
+            {
+                MessageBox.Show("Izaberite zvanje.");
+                return false;
             }
 
             return true;

@@ -24,7 +24,7 @@ namespace CLI.DAO
             return _katedre[^1].idKatedre + 1;
         }
 
-        private void MakeKatedra()
+        public void MakeKatedra()
         {
             Storage<Profesor> _profesorStorage = new Storage<Profesor>("profesori.csv");
             List<Profesor> _profesori = _profesorStorage.Load();

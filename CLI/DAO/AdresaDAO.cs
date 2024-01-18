@@ -70,38 +70,5 @@ namespace CLI.DAO
             return _adrese;
         }
 
-        public List<Adresa> GetAllAdresa(int page, int pageSize, string sortCriteria, SortDirection sortDirection)
-        {
-            IEnumerable<Adresa> adrese = _adrese;
-
-            switch (sortCriteria)
-            {
-                case "idAdrese":
-                    adrese = _adrese.OrderBy(x => x.IdAdrese);
-                    break;
-                case "grad":
-                    adrese = _adrese.OrderBy(x => x.Grad);
-                    break;
-                case "ulica":
-                    adrese = _adrese.OrderBy(x => x.Ulica);
-                    break;
-                case "broj":
-                    adrese = _adrese.OrderBy(x => x.Broj);
-                    break;
-                case "drzava":
-                    adrese = _adrese.OrderBy(x => x.Drzava);
-                    break;
-            }
-
-            if (sortDirection == SortDirection.Descending)
-            {
-                adrese = adrese.Reverse();
-            }
-
-            adrese = adrese.Skip((page - 1) * pageSize).Take(pageSize);
-
-            return adrese.ToList();
-        }
-
     }
 }

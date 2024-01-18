@@ -23,14 +23,13 @@ public class StudentPredmetDAO
 
         public void AddPredmetToStudent(int ids, int idp)
         {
-            // Check if the subject is already in the list for the student
+
             if (_studentpredmet.Any(sp => sp.IdStudent == ids && sp.IdPredmet == idp))
             {
-                // If it is, just continue (do nothing)
+
                 return;
             }
 
-            // If the subject is not in the list, add it
             StudentPredmet sp = new StudentPredmet(ids, idp);
             _studentpredmet.Add(sp);
             _storage.Save(_studentpredmet);

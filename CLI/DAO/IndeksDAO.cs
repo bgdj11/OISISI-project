@@ -69,34 +69,5 @@ namespace CLI.DAO
             return _indeksi;
         }
 
-        public List<Indeks> GetAllIndeks(int page, int pageSize, string sortCriteria, SortDirection sortDirection)
-        {
-            IEnumerable<Indeks> indeksi = _indeksi;
-
-            switch (sortCriteria)
-            {
-                case "idIndeksa":
-                    indeksi = _indeksi.OrderBy(x => x.idIndeksa);
-                    break;
-                case "oznakaSmera":
-                    indeksi = _indeksi.OrderBy(x => x.oznakaSmera);
-                    break;
-                case "brojUpisa":
-                    indeksi = _indeksi.OrderBy(x => x.brojUpisa);
-                    break;
-                case "godinaUpisa":
-                    indeksi = _indeksi.OrderBy(x => x.godinaUpisa);
-                    break;
-            }
-
-            if (sortDirection == SortDirection.Descending)
-            {
-                indeksi = indeksi.Reverse();
-            }
-
-            indeksi = indeksi.Skip((page - 1) * pageSize).Take(pageSize);
-
-            return indeksi.ToList();
-        }
     }
 }

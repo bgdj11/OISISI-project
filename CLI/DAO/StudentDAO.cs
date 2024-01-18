@@ -119,51 +119,6 @@ public class StudentDAO
                     s.ProsecnaOcena = 0;
             }
 
-                /*
-                foreach (Student s in _studenti)
-                {
-                    foreach(StudentPredmet sp in _studPred)
-                    {
-                        if(s.IdStudent == sp.IdStudent)
-                        {
-                            if(_ocene.Find(n => n.idPredmeta == sp.IdPredmet && n.idStudenta == sp.IdStudent) != null)
-                            {
-                                s.PolozeniIspiti.Add(_ocene.Find(n => n.idPredmeta == sp.IdPredmet && n.idStudenta == sp.IdStudent));
-                            }
-                            else
-                            {
-                                s.NepolozeniIspiti.Add(_predmeti.Find(n => n.idPredmet == sp.IdPredmet));
-                            }
-                        }
-                    }
-                }
-                */
-
-                /*
-                foreach(Student s in _studenti)
-                {
-                    s.PolozeniIspiti.Clear();
-                    s.NepolozeniIspiti.Clear();
-
-                    foreach (StudentPredmet sp in _studPred)
-                    {
-                        if (s.IdStudent == sp.IdStudent)
-                        {
-                            s.NepolozeniIspiti.Add(_predmeti.Find(n => n.idPredmet == sp.IdPredmet));
-                        }
-                    }
-
-                    foreach(OcenaNaUpisu o in _ocene)
-                    {
-                        if(s.IdStudent == o.IdStudenta)
-                        {
-                            s.PolozeniIspiti.Add(o);
-                        }
-                    }
-
-                } */
-
-
                 _storage.Save(_studenti);
             _adresaStorage.Save(_adrese);
             _indeksStorage.Save(_indeksi);
@@ -228,52 +183,5 @@ public class StudentDAO
             MakeStudent();
             return _studenti;
         }
-
-        public List<Student> GetAllStudents(int page, int pageSize, string sortCriteria, SortDirection sortDirection)
-        {
-            MakeStudent();
-            IEnumerable<Student> students = _studenti;
-
-            switch (sortCriteria)
-            {
-                case "Id":
-                    students = _studenti.OrderBy(x => x.IdStudent);
-                    break;
-                case "Name":
-                    students = _studenti.OrderBy(x => x.Ime);
-                    break;
-                case "DatumRodjenja":
-                    students = _studenti.OrderBy(x => x.DatumRodjenja);
-                    break;
-                case "AdresaStanovanja":
-                    students = _studenti.OrderBy(x => x.AdresaStanovanja);
-                    break;
-                case "KontaktTelefon":
-                    students = _studenti.OrderBy(x => x.KontaktTelefon);
-                    break;
-                case "EmailAdresa":
-                    students = _studenti.OrderBy(x => x.EmailAdresa);
-                    break;
-                case "TrenutnaGodinaStudija":
-                    students = _studenti.OrderBy(x => x.TrenutnaGodinaStudija);
-                    break;
-                case "Status":
-                    students = _studenti.OrderBy(x => x.Status);
-                    break;
-                case "ProsecnaOcena":
-                    students = _studenti.OrderBy(x => x.ProsecnaOcena);
-                    break;
-            }
-
-            // promeni redosled ukoliko ima potrebe za tim
-            if (sortDirection == SortDirection.Descending)
-                students = students.Reverse();
-
-            // paginacija
-            students = students.Skip((page - 1) * pageSize).Take(pageSize);
-
-            return students.ToList();
-        }
-
     }
 }

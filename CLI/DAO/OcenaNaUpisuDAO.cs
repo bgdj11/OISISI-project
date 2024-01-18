@@ -96,35 +96,5 @@ namespace CLI.DAO
         {
             return _ocene;
         }
-
-        public List<OcenaNaUpisu> GetAllOcena(int page, int pageSize, string sortCriteria, SortDirection sortDirection)
-        {
-            IEnumerable<OcenaNaUpisu> ocene = _ocene;
-
-            switch (sortCriteria)
-            {
-                case "idOcene":
-                    ocene = _ocene.OrderBy(x => x.IdOcene);
-                    break;
-                case "ocena":
-                    ocene = _ocene.OrderBy(x => x.Ocena);
-                    break;
-                case "idStudenta":
-                    ocene = _ocene.OrderBy(x => x.IdStudenta);
-                    break;
-                case "idPredmeta":
-                    ocene = _ocene.OrderBy(x => x.IdPredmeta);
-                    break;
-            }
-
-            if (sortDirection == SortDirection.Descending)
-            {
-                ocene = ocene.Reverse();
-            }
-
-            ocene = ocene.Skip((page - 1) * pageSize).Take(pageSize);
-
-            return ocene.ToList();
-        }
     }
 }

@@ -33,6 +33,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Menu Grid.Row="0" Margin="0,0,0,1" Grid.ColumnSpan="2">
@@ -193,11 +194,17 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
-
             </TabControl>
 
 
-            <StatusBar Grid.Row="3" VerticalAlignment="Center" Grid.ColumnSpan="2">
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" >
+                <Button Content="prethodna" Click="PrethodnaStranica_Click"/>
+                <TextBlock Text="{Binding CurrentPage}"/>
+                <Button Content="naredna" Click="NarednaStranica_Click"/>
+            </StackPanel>
+
+
+            <StatusBar Grid.Row="4" VerticalAlignment="Center" Grid.ColumnSpan="2">
                 <TextBlock FontWeight="Bold" x:Name="statusAppName">Studentska sluzba</TextBlock>
                 <TextBlock x:Name="Tab" Margin="0,0,10,0">Status:</TextBlock>
                 <TextBlock x:Name="statusTime" HorizontalAlignment="Right" Margin="0,0,10,0">Time:</TextBlock>

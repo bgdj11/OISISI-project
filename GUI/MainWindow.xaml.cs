@@ -56,6 +56,9 @@ namespace GUI
         public static RoutedCommand DeleteCommand = new RoutedCommand();
 
 
+        public int TrenutnaStranica { get; set; } = 1;
+        public int UkupnoStranica { get; set; }
+        public int StavkiPoStranici { get; set; } = 3;
 
 
         public MainWindow()
@@ -373,6 +376,8 @@ namespace GUI
                 SubjectsDataGrid.ItemsSource = FilterSubject(Subjects, searchTerm);
             }
 
+            IzracunajPaginaciju();
+
         }
 
 
@@ -457,18 +462,6 @@ namespace GUI
             }
         }
 
-        /*
-        private ObservableCollection<T> FilterData<T>(ObservableCollection<T> originalCollection, string searchTerm)
-        {
-            // Dinamička pretraga po svim poljima objekta
-            return new ObservableCollection<T>(
-                originalCollection.Where(item =>
-                    item.GetType().GetProperties().Any(prop =>
-                        prop.GetValue(item, null).ToString().Contains(searchTerm)))
-            );
-        } */
-
-
         private void CreateEntityButton_Click(object sender, RoutedEventArgs e)
         {
             CreateEntityButton_Click();
@@ -508,7 +501,101 @@ namespace GUI
             }
             else
                 Tab.Text = "Status: Katedre";
+
+            IzracunajPaginaciju();
         }
 
+        private void IzracunajPaginaciju()
+        {
+            TrenutnaStranica = 1;
+
+            int ukupnoEntiteta = 0;
+
+            if(MainTabControl.SelectedItem == StudentsTab)
+            {
+                ukupnoEntiteta = Students.Count;
+                UkupnoStranica = (int)Math.Ceiling(ukupnoEntiteta / (double)StavkiPoStranici);
+                PostaviEntiteteZaTrenutnuStranicu(Students);
+            } else if(MainTabControl.SelectedItem == ProfesorsTab)
+            {
+                ukupnoEntiteta = Profesors.Count;
+                UkupnoStranica = (int)Math.Ceiling(ukupnoEntiteta / (double)StavkiPoStranici);
+                PostaviEntiteteZaTrenutnuStranicu(Profesors);
+            } else
+            {
+                ukupnoEntiteta = Subjects.Count;
+                UkupnoStranica = (int)Math.Ceiling(ukupnoEntiteta / (double)StavkiPoStranici);
+                PostaviEntiteteZaTrenutnuStranicu(Subjects);
+            }
+
+
+        }
+
+        private void PostaviEntiteteZaTrenutnuStranicu<T>(ObservableCollection<T> entiteti)
+        {
+            int startIndex = (TrenutnaStranica - 1) * StavkiPoStranici;
+            var filtriraniEntiteti = entiteti.Skip(startIndex).Take(StavkiPoStranici);
+
+            if (MainTabControl.SelectedItem == StudentsTab)
+            {
+                StudentsDataGrid.ItemsSource = new ObservableCollection<StudentDTO>(filtriraniEntiteti.Cast<StudentDTO>());
+            }
+            else if (MainTabControl.SelectedItem == ProfesorsTab)
+            {
+                ProfesorsDataGrid.ItemsSource = new ObservableCollection<ProfesorDTO>(filtriraniEntiteti.Cast<ProfesorDTO>());
+            }
+            else if (MainTabControl.SelectedItem == SubjectsTab)
+            {
+                SubjectsDataGrid.ItemsSource = new ObservableCollection<PredmetDTO>(filtriraniEntiteti.Cast<PredmetDTO>());
+            }
+        }
+
+
+        public void SledecaStranica()
+        {
+            if (TrenutnaStranica < UkupnoStranica)
+            {
+                TrenutnaStranica++;
+                OsveziTrenutnuStranicu();
+            }
+        }
+
+        public void PrethodnaStranica()
+        {
+            if (TrenutnaStranica > 1)
+            {
+                TrenutnaStranica--;
+                OsveziTrenutnuStranicu();
+            }
+        }
+
+        private void OsveziTrenutnuStranicu()
+        {
+            if (MainTabControl.SelectedItem == StudentsTab)
+            {
+                PostaviEntiteteZaTrenutnuStranicu(Students);
+            }
+            else if (MainTabControl.SelectedItem == ProfesorsTab)
+            {
+                PostaviEntiteteZaTrenutnuStranicu(Profesors);
+            }
+            else if (MainTabControl.SelectedItem == SubjectsTab)
+            {
+                PostaviEntiteteZaTrenutnuStranicu(Subjects);
+            }
+        }
+
+
+
+
+        private void PrethodnaStranica_Click(object sender, RoutedEventArgs e)
+        {
+            PrethodnaStranica();
+        }
+
+        private void NarednaStranica_Click(object sender, RoutedEventArgs e)
+        {
+            SledecaStranica();
+        }
     }
 }

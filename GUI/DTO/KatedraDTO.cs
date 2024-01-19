@@ -74,6 +74,8 @@ namespace GUI.DTO
         }
 
         private int idSefa { get; set; }
+
+        public int katedraId { get; set; }
         
         public KatedraDTO() {
             idSefa = -1;
@@ -83,13 +85,21 @@ namespace GUI.DTO
         public KatedraDTO(CLI.Model.Katedra katedra, CLI.Model.Profesor prof)
         {
             naziv = katedra.nazivKatedre;
+            if(katedra.idSefa == -1)
+            {
+                profesor = "sef nije dodat";
+            }
+            
+            idSefa = katedra.idSefa;
+
             if (prof != null)
             {
                 profesor = prof.Ime + " " + prof.Prezime;
 
             }
             sifra = katedra.sifra;
-            idSefa = katedra.idSefa;
+
+            katedraId = katedra.idKatedre;
         }
 
         public Katedra toKatedra()

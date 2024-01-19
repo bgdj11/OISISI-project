@@ -343,7 +343,7 @@ namespace GUI
                         profesorDAO.RemoveProfesor(SelectedProfesor.IdProfesor);
                     }
                 }
-            } else
+            } else if (MainTabControl.SelectedContent == SubjectsTab)
             {
                 if (SelectedPredmet == null)
                 {
@@ -362,6 +362,27 @@ namespace GUI
                     }
                 }
             }
+            else
+            {
+                if(SelectedKatedra == null)
+                {
+                    MessageBox.Show(this, "Izaberite katedru za brisanje!");
+                }
+                else
+                {
+                    var confirmationDialog = new ConfirmationWindow("Katedra");
+                    confirmationDialog.Owner = this;
+                    confirmationDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                    confirmationDialog.ShowDialog();
+
+                    if (confirmationDialog.UserConfirmed)
+                    {
+                        katedraDAO.RemoveKatedra(SelectedKatedra.katedraId);
+                    }
+                }
+            }
+
+
             Update();
         }
 

@@ -77,8 +77,11 @@ namespace GUI.DTO
 
         public int katedraId { get; set; }
         
+        public List<int> profesorIds { get; set; }
+
         public KatedraDTO() {
             idSefa = -1;
+            profesorIds = new List<int>();
         }
 
 
@@ -100,6 +103,16 @@ namespace GUI.DTO
             sifra = katedra.sifra;
 
             katedraId = katedra.idKatedre;
+
+            profesorIds = new List<int>();
+
+            if(katedra.profesoriNaKatedri.Count() != 0)
+            {
+                foreach(Profesor p in katedra.profesoriNaKatedri)
+                {
+                    profesorIds.Add(p.IdProfesor);
+                }
+            }
         }
 
         public Katedra toKatedra()

@@ -180,7 +180,7 @@
         </TabItem>
 
 
-        <TabItem Header="Profesori" Height="22" Margin="-2,-2,-2,0" VerticalAlignment="Top">
+        <TabItem Header="Profesori" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>

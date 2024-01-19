@@ -13,7 +13,7 @@ namespace CLI.DAO
 {
     public class ProfesorDAO
     {
-        private readonly List<Profesor> _profesori;
+        private  List<Profesor> _profesori;
         private readonly AdresaDAO adresaDAO = new AdresaDAO();
         private readonly Storage<Profesor> _storage;
 
@@ -45,6 +45,8 @@ namespace CLI.DAO
             Storage<ProfesorPredmet> _profPredStorage = new Storage<ProfesorPredmet>("ProfesorPredmet.csv");
             List<ProfesorPredmet> _profPred = _profPredStorage.Load();
 
+            _profesori = _storage.Load();
+
             
 
             // dodajemo adresu stanovanja
@@ -71,7 +73,6 @@ namespace CLI.DAO
                 }
             }
 
-            _katedreStorage.Save(_katedre);
             _storage.Save(_profesori);
         }
 
@@ -88,6 +89,8 @@ namespace CLI.DAO
 
         public Profesor? UpdateProfesor(Profesor profesor)
         {
+            MakeProfesor();
+
             Profesor? oldProfesor = GetProfesorById(profesor.IdProfesor);
             if (oldProfesor == null) return null;
 
@@ -101,8 +104,7 @@ namespace CLI.DAO
             oldProfesor.BrojLicneKarte = profesor.BrojLicneKarte;
             oldProfesor.Zvanje = profesor.Zvanje;
             oldProfesor.GodineStaza = profesor.GodineStaza;
-
-            MakeProfesor();
+            oldProfesor.IdKatedre = profesor.IdKatedre; 
 
             _storage.Save(_profesori);
             return oldProfesor;

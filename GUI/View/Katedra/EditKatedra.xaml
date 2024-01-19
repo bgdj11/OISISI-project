@@ -53,38 +53,31 @@
             </Grid>
         </TabItem>
         <TabItem Header="Profesori">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="95*"/>
-                    <ColumnDefinition Width="44*"/>
-                    <ColumnDefinition Width="32*"/>
-                    <ColumnDefinition Width="223*"/>
-                </Grid.ColumnDefinitions>
+            <DockPanel>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.ColumnSpan="3" Margin="1,376,0,0" Grid.RowSpan="2" Grid.Column="1">
-                    <Button Content="Dodaj profesora" Click="DodajProfesora_Click" Margin="5"/>
-                    <Button Content="Ukloni profesora" Click="UkloniProfesora_Click" Margin="5"/>
-                </StackPanel>
-
-                <DataGrid
-                    AutoGenerateColumns="False"
-                    x:Name="ProfesorsDataGrid"
-                    ItemsSource="{Binding Profesors, UpdateSourceTrigger=PropertyChanged}"
-                    SelectedItem="{Binding SelectedProfesor, UpdateSourceTrigger=PropertyChanged}"
-                    SelectionMode="Single" IsReadOnly="True" Grid.ColumnSpan="4" Margin="0,0,0,39">
+                <!-- DataGrid za prikaz informacija o profesorima -->
+                <DataGrid AutoGenerateColumns="False"
+                  x:Name="ProfesorsDataGrid"
+                  ItemsSource="{Binding Profesors, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding SelectedProfesor, UpdateSourceTrigger=PropertyChanged}"
+                  SelectionMode="Single" IsReadOnly="True"
+                  DockPanel.Dock="Top">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Ime" Binding="{Binding Ime}" Width="*"/>
                         <DataGridTextColumn Header="Prezime" Binding="{Binding Prezime}" Width="*"/>
                         <DataGridTextColumn Header="Zvanje" Binding="{Binding Zvanje}" Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
-            </Grid>
+
+                <!-- Panel za dugmiće, centrirani na dnu -->
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5">
+                    <Button Content="Dodaj profesora" Click="DodajProfesora_Click" Width="100" Height="25" Margin="5"/>
+                    <Button Content="Ukloni profesora" Click="UkloniProfesora_Click" Width="100" Height="25" Margin="5"/>
+                </StackPanel>
+
+            </DockPanel>
         </TabItem>
+
 
         <TabItem Header="Predmeti">
             <Grid>
@@ -94,11 +87,12 @@
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="101*"/>
+                    <ColumnDefinition Width="294*"/>
                 </Grid.ColumnDefinitions>
 
                 <!-- DataGrid -->
-                <DataGrid Grid.Column="1" Grid.Row="2" CanUserAddRows="False" IsReadOnly="True " AutoGenerateColumns="False"
+                <DataGrid Grid.Column="1" Grid.Row="1" CanUserAddRows="False" IsReadOnly="True " AutoGenerateColumns="False"
                 ItemsSource="{Binding Predmeti}" SelectedItem="{Binding SelectedPredmet}" Grid.ColumnSpan="2">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Sifra predmeta" Width="*" Binding="{Binding SifraPredmeta}"/>

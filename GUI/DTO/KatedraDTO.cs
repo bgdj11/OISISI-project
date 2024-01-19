@@ -1,4 +1,5 @@
-﻿using CLI.Model;
+﻿using CLI.DAO;
+using CLI.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -85,7 +86,7 @@ namespace GUI.DTO
         }
 
 
-        public KatedraDTO(CLI.Model.Katedra katedra, CLI.Model.Profesor prof)
+        public KatedraDTO(CLI.Model.Katedra katedra)
         {
             naziv = katedra.nazivKatedre;
             if(katedra.idSefa == -1)
@@ -95,9 +96,9 @@ namespace GUI.DTO
             
             idSefa = katedra.idSefa;
 
-            if (prof != null)
+            if (katedra.sefKatedre != null)
             {
-                profesor = prof.Ime + " " + prof.Prezime;
+                profesor = katedra.sefKatedre.Ime + " " + katedra.sefKatedre.Prezime;
 
             }
             sifra = katedra.sifra;
@@ -118,6 +119,19 @@ namespace GUI.DTO
         public Katedra toKatedra()
         {
             return new Katedra(sifra, naziv, idSefa);
+        }
+
+        public KatedraDTO clone()
+        {
+            KatedraDTO ret = new KatedraDTO();
+            ret.Sifra = this.Sifra;
+            ret.profesorIds = this.profesorIds;
+            ret.Profesor = this.Profesor;
+            ret.idSefa = this.idSefa;
+            ret.Naziv = this.Naziv;
+            ret.katedraId = this.katedraId;
+
+            return ret;
         }
 
     }

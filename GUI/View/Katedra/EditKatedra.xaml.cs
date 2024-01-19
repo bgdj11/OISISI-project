@@ -54,11 +54,19 @@ namespace GUI.View.Katedra
         {
             katedraDAO.MakeKatedra();
 
+            CLI.Model.Katedra k = katedraDAO.GetKatedraById(Katedra.katedraId);
+
+            Katedra = new KatedraDTO(k);
+
+            Profesors.Clear();
+
             if (Katedra.profesorIds.Count() != 0)
             {
                 foreach (int i in Katedra.profesorIds)
                 {
+
                     Profesors.Add(new ProfesorDTO(profesorDAO.GetProfesorById(i)));
+
                 }
             }
         }
@@ -67,8 +75,8 @@ namespace GUI.View.Katedra
         {
             if (ValidateFields())
             {
-                katedraDAO.AddKatedra(Katedra.toKatedra());
-                MessageBox.Show("katedra je uspesno dodata!", "Uspesno", MessageBoxButton.OK, MessageBoxImage.Information);
+                katedraDAO.UpdateKatedra(Katedra.toKatedra());
+                MessageBox.Show("Katedra je uspesno izmenjena!", "Uspesno", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
             else
@@ -103,13 +111,33 @@ namespace GUI.View.Katedra
         }
 
 
-        private void AddSef_Click(object sender, RoutedEventArgs e) { }
+        private void AddSef_Click(object sender, RoutedEventArgs e) 
+        {
+            
+            
+        }
         
-        private void RemoveSef_Click(object sender, RoutedEventArgs e) { }
+        private void RemoveSef_Click(object sender, RoutedEventArgs e) 
+        { 
+            
 
-        private void DodajProfesora_Click(object sender, RoutedEventArgs e) { }
+        }
 
-        private void UkloniProfesora_Click(object sender, RoutedEventArgs e) { }
+        private void DodajProfesora_Click(object sender, RoutedEventArgs e)
+        {
+            var chooseProfesorWindow = new ChooseProfesor(Katedra);
+            chooseProfesorWindow.Owner = this;
+            chooseProfesorWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            chooseProfesorWindow.ShowDialog();
+            Update();
+
+        }
+
+        private void UkloniProfesora_Click(object sender, RoutedEventArgs e) 
+        {
+            
+
+        }
 
     }
 }

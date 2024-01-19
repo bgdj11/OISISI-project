@@ -31,6 +31,7 @@ namespace CLI.DAO
 
             foreach (Katedra k in _katedre)
             {
+                k.profesoriNaKatedri.Clear();
                 foreach(Profesor p in _profesori)
                 {
                     if(p.IdProfesor == k.idSefa)
@@ -85,7 +86,7 @@ namespace CLI.DAO
             return katedra;
         }
 
-        private Katedra? GetKatedraById(int id)
+        public Katedra? GetKatedraById(int id)
         {
             MakeKatedra();
             return _katedre.Find(k => k.idKatedre == id);

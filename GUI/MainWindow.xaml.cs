@@ -195,9 +195,7 @@ namespace GUI
 
             Katedre.Clear();
             foreach (Katedra k in katedraDAO.GetAllKatedra()) {
-                int prof_id = k.idSefa;
-                Profesor p = profesorDAO.GetProfesorById(prof_id);
-                Katedre.Add(new KatedraDTO(k, p));
+                Katedre.Add(new KatedraDTO(k));
             }
         }
 
@@ -286,7 +284,7 @@ namespace GUI
                     editPredmetWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                     editPredmetWindow.ShowDialog();
                 }
-            } else
+            } else if(MainTabControl.SelectedItem == StudentsTab)
             {
                 if(SelectedStudent == null)
                 {
@@ -301,6 +299,21 @@ namespace GUI
                 }
 
             }
+            else
+            {
+                if(SelectedKatedra == null)
+                {
+                    MessageBox.Show(this, "Izaberi katedru za izmenu.");
+                }
+                else
+                {
+                    var editKatedraWindow = new EditKatedra(katedraDAO, SelectedKatedra.clone());
+                    editKatedraWindow.Owner = this;
+                    editKatedraWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                    editKatedraWindow.ShowDialog();
+                }
+            }
+
             Update();
         }
 

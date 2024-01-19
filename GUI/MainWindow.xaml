@@ -189,6 +189,7 @@
                     SelectedItem="{Binding SelectedKatedra, UpdateSourceTrigger=PropertyChanged}"
                     SelectionMode="Single" IsReadOnly="True" SelectionChanged="KatedreDataGrid_SelectionChanged">
                         <DataGrid.Columns>
+                            <DataGridTextColumn Header="Sifra katedre" Binding="{Binding Sifra}" Width="*"/>
                             <DataGridTextColumn Header="Naziv katedre" Binding="{Binding Naziv}" Width="*"/>
                             <DataGridTextColumn Header="Sef katedre" Binding="{Binding Profesor}" Width="*"/>
                         </DataGrid.Columns>

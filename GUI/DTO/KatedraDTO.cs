@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CLI.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -38,6 +39,23 @@ namespace GUI.DTO
             }
         }
 
+        private string sifra { get; set; }
+        public string Sifra
+        {
+            get
+            {
+                return sifra;
+            }
+            set
+            {
+                if(sifra != value)
+                {
+                    sifra = value;
+                    OnPropertyChanged("Sifra");
+                }
+            }
+        }
+
         private string profesor { get; set; }
         public string Profesor
         {
@@ -55,7 +73,11 @@ namespace GUI.DTO
             }
         }
 
-        public KatedraDTO() { }
+        private int idSefa { get; set; }
+        
+        public KatedraDTO() {
+            idSefa = -1;
+        }
 
 
         public KatedraDTO(CLI.Model.Katedra katedra, CLI.Model.Profesor prof)
@@ -66,6 +88,13 @@ namespace GUI.DTO
                 profesor = prof.Ime + " " + prof.Prezime;
 
             }
+            sifra = katedra.sifra;
+            idSefa = katedra.idSefa;
+        }
+
+        public Katedra toKatedra()
+        {
+            return new Katedra(sifra, naziv, idSefa);
         }
 
     }

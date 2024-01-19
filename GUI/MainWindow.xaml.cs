@@ -22,6 +22,7 @@ using System.Windows.Shapes;
 using GUI.View.Profesor;
 using GUI.View.Predmet;
 using System.Xml.Serialization;
+using GUI.View.Katedra;
 
 namespace GUI
 {
@@ -246,6 +247,13 @@ namespace GUI
                 addPredmetWindow.Owner = this;
                 addPredmetWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 addPredmetWindow.ShowDialog();
+                Update();
+            } else
+            {
+                var addKatedraWindow = new AddKatedra(katedraDAO);
+                addKatedraWindow.Owner = this;
+                addKatedraWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                addKatedraWindow.ShowDialog();
                 Update();
             }
         }

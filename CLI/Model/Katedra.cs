@@ -12,6 +12,8 @@ namespace CLI.Model
     {
         public int idKatedre { get; set; }
         public int sifraKatedre { get; set; }
+
+        public string sifra { get; set;}
         public string nazivKatedre { get; set; }
 
         public int idSefa {  get; set; }
@@ -28,13 +30,21 @@ namespace CLI.Model
             nazivKatedre = naziv;
             idSefa = id;
             profesoriNaKatedri = new List<Profesor>();
-        }       
+        }  
+        
+        public Katedra(string sifra, string naziv, int id)
+        {
+            this.sifra = sifra;
+            nazivKatedre = naziv;
+            idSefa = id;
+            profesoriNaKatedri = new List<Profesor>();
+        }
         public string[] ToCSV()
         {
             string[] csvValues =
             {
                    idKatedre.ToString(),
-                   sifraKatedre.ToString(),
+                   sifra,
                    nazivKatedre,
                    idSefa.ToString()
             };
@@ -44,7 +54,7 @@ namespace CLI.Model
         public void FromCSV(string[] values)
         {
             idKatedre = int.Parse(values[0]);
-            sifraKatedre = int.Parse(values[1]);
+            sifra = values[1];
             nazivKatedre = values[2];
             idSefa = int.Parse(values[3]);
         }
@@ -53,7 +63,7 @@ namespace CLI.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("IdKatedre: ").Append(idKatedre).Append(", ");
-            sb.Append("SifraKatedre: ").Append(sifraKatedre).Append(", ");
+            sb.Append("SifraKatedre: ").Append(sifra).Append(", ");
             sb.Append("NazivKatedre: ").Append(nazivKatedre).Append(", ");
             sb.Append("IdSefa: ").Append(idSefa).Append(", ");
 

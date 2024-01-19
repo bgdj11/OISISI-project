@@ -205,7 +205,7 @@ namespace CLI.Console
             int sortDirectionInput = ConsoleViewUtils.SafeInputInt();
             SortDirection sortDirection = sortDirectionInput == 0 ? SortDirection.Ascending : SortDirection.Descending;
 
-            PrintStudents(_studentsDao.GetAllStudents(page, pageSize, sortCriteria, sortDirection));
+            //PrintStudents(_studentsDao.GetAllStudents(page, pageSize, sortCriteria, sortDirection));
         }
 
         private void AddPredmetToStudent()

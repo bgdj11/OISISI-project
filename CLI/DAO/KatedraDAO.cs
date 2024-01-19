@@ -64,7 +64,7 @@ namespace CLI.DAO
             Katedra? oldKatedra = GetKatedraById(katedra.idKatedre);
             if (oldKatedra == null) return null;
 
-            oldKatedra.sifraKatedre = katedra.sifraKatedre;
+            oldKatedra.sifra = katedra.sifra;
             oldKatedra.nazivKatedre = katedra.nazivKatedre;
             oldKatedra.idSefa = katedra.idSefa;
 
@@ -107,8 +107,8 @@ namespace CLI.DAO
                 case "idKatedre":
                     katedre = _katedre.OrderBy(x => x.idKatedre);
                     break;
-                case "sifraKatedre":
-                    katedre = _katedre.OrderBy(x => x.sifraKatedre);
+                case "sifra":
+                    katedre = _katedre.OrderBy(x => x.sifra);
                     break;
                 case "nazivKatedre":
                     katedre = _katedre.OrderBy(x => x.nazivKatedre);

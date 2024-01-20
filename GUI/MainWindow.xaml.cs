@@ -93,7 +93,7 @@ private object SelectedEntity { get; set; }
             Tab.Text = "Status: Studenti";
 
             Katedre = new ObservableCollection<KatedraDTO>();
-            katedraDAO = new KatedraDAO();
+            katedraController = new KatedraController();
 
 
             Update();
@@ -207,7 +207,7 @@ private object SelectedEntity { get; set; }
                 Subjects.Add(new PredmetDTO(predmet));
 
             Katedre.Clear();
-            foreach (Katedra k in katedraDAO.GetAllKatedra()) {
+            foreach (Katedra k in katedraController.GetAllKatedra()) {
                 Katedre.Add(new KatedraDTO(k));
             }
         }
@@ -261,7 +261,7 @@ private object SelectedEntity { get; set; }
                 Update();
             } else if(MainTabControl.SelectedItem == KatedreTab)
             {
-                var addKatedraWindow = new AddKatedra(katedraDAO);
+                var addKatedraWindow = new AddKatedra(katedraController);
                 addKatedraWindow.Owner = this;
                 addKatedraWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 addKatedraWindow.ShowDialog();
@@ -320,7 +320,7 @@ private object SelectedEntity { get; set; }
                 }
                 else
                 {
-                    var editKatedraWindow = new EditKatedra(katedraDAO, SelectedKatedra.clone());
+                    var editKatedraWindow = new EditKatedra(katedraController, SelectedKatedra.clone(), profesorController);
                     editKatedraWindow.Owner = this;
                     editKatedraWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                     editKatedraWindow.ShowDialog();
@@ -404,7 +404,7 @@ private object SelectedEntity { get; set; }
 
                     if (confirmationDialog.UserConfirmed)
                     {
-                        katedraDAO.RemoveKatedra(SelectedKatedra.katedraId);
+                        katedraController.RemoveKatedra(SelectedKatedra.katedraId);
                     }
                 }
             }

@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using GUI.DTO;
 using CLI.DAO;
+using CLI.Controller;
 
 namespace GUI.View.Katedra
 {
@@ -27,24 +28,31 @@ namespace GUI.View.Katedra
 
         public ObservableCollection<ProfesorDTO> Profesors { get; set; }
 
+        public ObservableCollection<PredmetDTO> Predmeti { get; set; }
+
         public KatedraDTO Katedra { get; set; }
 
-        private KatedraDAO katedraDAO;
+        private KatedraController katedraDAO;
 
-        private ProfesorDAO profesorDAO;
+        private ProfesorController profesorDAO;
+
+        private PredmetController predmetController;
 
 
-        public EditKatedra(KatedraDAO katedraDAO, KatedraDTO katedraDTO)
+        public EditKatedra(KatedraController katedraDAO, KatedraDTO katedraDTO, ProfesorController profesorDAO)
         {
             InitializeComponent();
             DataContext = this;
 
-            profesorDAO = new ProfesorDAO();
+            this.profesorDAO = profesorDAO;
 
             this.katedraDAO = katedraDAO;
             this.Katedra = katedraDTO;
 
             Profesors = new ObservableCollection<ProfesorDTO>();
+            Predmeti = new ObservableCollection<PredmetDTO>();
+
+            predmetController = new PredmetController();
 
             Update();
 
@@ -59,6 +67,7 @@ namespace GUI.View.Katedra
             Katedra = new KatedraDTO(k);
 
             Profesors.Clear();
+            Predmeti.Clear();
 
             if (Katedra.profesorIds.Count() != 0)
             {
@@ -67,8 +76,17 @@ namespace GUI.View.Katedra
 
                     Profesors.Add(new ProfesorDTO(profesorDAO.GetProfesorById(i)));
 
+                    foreach(CLI.Model.Predmet pr in predmetController.GetAllPredmet())
+                    {
+                        if(pr.IdProfesora == i)
+                        {
+                            Predmeti.Add(new PredmetDTO(pr));
+                        }
+                    }
+
                 }
             }
+
         }
 
         private void btnAccept_Click(object sender, RoutedEventArgs e)
@@ -125,7 +143,7 @@ namespace GUI.View.Katedra
 
         private void DodajProfesora_Click(object sender, RoutedEventArgs e)
         {
-            var chooseProfesorWindow = new ChooseProfesor(Katedra);
+            var chooseProfesorWindow = new ChooseProfesor(Katedra, profesorDAO);
             chooseProfesorWindow.Owner = this;
             chooseProfesorWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             chooseProfesorWindow.ShowDialog();

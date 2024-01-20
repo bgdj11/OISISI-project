@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Linq;
+using CLI.Controller;
 using CLI.DAO;
 using CLI.Observer;
 using GUI.DTO;
@@ -27,18 +28,18 @@ namespace GUI.View.Katedra
         public List<ProfesorDTO> Profesors { get; set; }
         public ProfesorDTO SelectedProfesor { get; set; }
 
-        private ProfesorDAO profesorDAO;
-        private KatedraDAO katedraDAO;
+        private ProfesorController profesorDAO;
+        private KatedraController katedraDAO;
 
         public KatedraDTO Katedra;
 
-        public ChooseProfesor(KatedraDTO katedraDTO)
+        public ChooseProfesor(KatedraDTO katedraDTO, ProfesorController prof)
         {
             InitializeComponent();
             DataContext = this;
             Profesors = new List<ProfesorDTO>();
-            profesorDAO = new ProfesorDAO();
-            katedraDAO = new KatedraDAO();
+            profesorDAO = prof;
+            katedraDAO = new KatedraController();
             Katedra = katedraDTO;
 
             Update();
@@ -47,7 +48,7 @@ namespace GUI.View.Katedra
         public void Update()
         {
             Profesors.Clear();
-            foreach(CLI.Model.Profesor p in profesorDAO.GetAllProfesors())
+            foreach(CLI.Model.Profesor p in profesorDAO.GetAllProfesor())
             {
                 if(p.IdKatedre != Katedra.katedraId)
                 {

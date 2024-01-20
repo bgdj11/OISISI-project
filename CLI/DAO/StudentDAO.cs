@@ -20,6 +20,8 @@ public class StudentDAO
 
         private readonly AdresaDAO adresaDAO = new AdresaDAO();
         private readonly IndeksDAO indeksDAO = new IndeksDAO();
+        private readonly StudentPredmetDAO studentPredmetDAO = new StudentPredmetDAO();
+        private readonly OcenaNaUpisuDAO ocenaDAO = new OcenaNaUpisuDAO();
 
         public Subject StudentSubject;
         public StudentDAO()
@@ -171,6 +173,13 @@ public class StudentDAO
         {
             Student? student = GetStudentById(id);
             if (student == null) return null;
+
+            adresaDAO.RemoveAdresa(student.IdAdrese);
+            indeksDAO.RemoveIndeks(student.IdIndeksa);
+
+            studentPredmetDAO.RemoveStudentPredmet(student.IdStudent);
+
+            ocenaDAO.Delete(student.IdStudent);
 
             _studenti.Remove(student);
             _storage.Save(_studenti);

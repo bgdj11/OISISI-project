@@ -34,15 +34,21 @@ namespace CLI.DAO
             foreach(OcenaNaUpisu o in _ocene)
             {
                 Student s = _studenti.Find(n => n.IdStudent == o.IdStudenta);
-                o.Student = s;
 
-                if(o.IdStudenta == s.IdStudent)
+                if(s != null)
                 {
-                    s.PolozeniIspiti.Add(o);
+                    o.Student = s;
+
+                    if (o.IdStudenta == s.IdStudent)
+                    {
+                        s.PolozeniIspiti.Add(o);
+                    }
                 }
+                
 
                 Predmet p = _predmeti.Find(n => n.IdPredmet == o.IdPredmeta);
-                o.Predmet = p;
+                if(p != null)
+                    o.Predmet = p;
             }
 
             _storage.Save(_ocene);
@@ -84,6 +90,20 @@ namespace CLI.DAO
             MakeOcena();
             _storage.Save(_ocene);
             return ocena;
+        }
+
+        public void Delete(int ids)
+        {
+            var zaUklanjanje = _ocene.Where(o => o.IdStudenta == ids).ToList();
+
+            foreach (var o in zaUklanjanje)
+            {
+                _ocene.Remove(o);
+            }
+
+            MakeOcena();
+            _storage.Save(_ocene);
+
         }
 
         public OcenaNaUpisu? GetOcenaById(int id)

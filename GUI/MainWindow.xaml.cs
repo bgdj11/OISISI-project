@@ -55,6 +55,7 @@ namespace GUI
         private AdresaController adresaController;
         private KatedraController katedraController;
         private OcenaController ocenaController;
+        private StudentPredmetController studentPredmetController;
 
         public static RoutedCommand NewCommand = new RoutedCommand();
         public static RoutedCommand SaveCommand = new RoutedCommand();
@@ -95,6 +96,7 @@ private object SelectedEntity { get; set; }
             Katedre = new ObservableCollection<KatedraDTO>();
             katedraController = new KatedraController();
 
+            studentPredmetController = new StudentPredmetController();
 
             Update();
 
@@ -348,6 +350,7 @@ private object SelectedEntity { get; set; }
 
                     if (confirmationDialog.UserConfirmed)
                     {
+                  
                         studentController.DeleteStudent(SelectedStudent.StudentId);
                         Students.Remove(SelectedStudent);
                     }

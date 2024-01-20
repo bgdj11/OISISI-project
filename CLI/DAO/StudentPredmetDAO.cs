@@ -54,5 +54,17 @@ public class StudentPredmetDAO
             }
 
         }
+
+        public void RemoveStudentPredmet(int idStudenta)
+        {
+            var zaUklanjanje = _studentpredmet.Where(sp => sp.IdStudent == idStudenta).ToList();
+
+            foreach (var sp in zaUklanjanje)
+            {
+                _studentpredmet.Remove(sp);
+            }
+
+            _storage.Save(_studentpredmet);
+        }
 }
 }

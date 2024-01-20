@@ -112,6 +112,8 @@ namespace CLI.DAO
             Profesor? profesor = GetProfesorById(id);
             if (profesor == null) return null;
 
+            adresaDAO.RemoveAdresa(profesor.IdProfesor);
+
             _profesori.Remove(profesor);
             _storage.Save(_profesori);
             return profesor;

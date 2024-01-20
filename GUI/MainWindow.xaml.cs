@@ -66,7 +66,11 @@ namespace GUI
 
         public int TrenutnaStranica { get; set; } = 1;
         public int UkupnoStranica { get; set; }
-        public int StavkiPoStranici { get; set; } = 16;
+        public int StavkiPoStranici { get; set; } = 3;
+
+        private int SelectedPageIndex { get; set; } = 1;
+private object SelectedEntity { get; set; }
+
 
 
         public MainWindow()
@@ -405,7 +409,8 @@ namespace GUI
                 }
             }
 
-
+            AzurirajPaginacijuPosleBrisanja();
+            OsveziTrenutnuStranicu();
             Update();
         }
 
@@ -417,18 +422,28 @@ namespace GUI
 
             if (MainTabControl.SelectedItem == StudentsTab)
             {
-                StudentsDataGrid.ItemsSource = FilterStudent(Students, searchTerm);
+                ObservableCollection<StudentDTO> filteredStudents = FilterStudent(Students, searchTerm);
+                UkupnoStranica = (int)Math.Ceiling(filteredStudents.Count / (double)StavkiPoStranici);
+                TrenutnaStranica = 1;
+                PostaviEntiteteZaTrenutnuStranicu(filteredStudents);
             }
             else if (MainTabControl.SelectedItem == ProfesorsTab)
             {
-                ProfesorsDataGrid.ItemsSource = FilterProfesor(Profesors, searchTerm);
+                ObservableCollection<ProfesorDTO> filteredProfesors = FilterProfesor(Profesors, searchTerm);
+                UkupnoStranica = (int)Math.Ceiling(filteredProfesors.Count / (double)StavkiPoStranici);
+                TrenutnaStranica = 1;
+                PostaviEntiteteZaTrenutnuStranicu(filteredProfesors);
             }
-            else
+            else if(MainTabControl.SelectedItem == SubjectsTab)
             {
-                SubjectsDataGrid.ItemsSource = FilterSubject(Subjects, searchTerm);
+                ObservableCollection<PredmetDTO> filteredSubjects = FilterSubject(Subjects, searchTerm);
+                UkupnoStranica = (int)Math.Ceiling(filteredSubjects.Count / (double)StavkiPoStranici);
+                TrenutnaStranica = 1;
+                PostaviEntiteteZaTrenutnuStranicu(filteredSubjects);
             }
 
-            //IzracunajPaginaciju();
+
+
 
         }
 
@@ -554,12 +569,12 @@ namespace GUI
             else if(MainTabControl.SelectedItem == KatedreTab)
                 Tab.Text = "Status: Katedre";
 
-            //IzracunajPaginaciju();
+            IzracunajPaginaciju();
         }
 
         private void IzracunajPaginaciju()
         {
-            TrenutnaStranica = 1;
+            //TrenutnaStranica = 1;
 
             int ukupnoEntiteta = 0;
 
@@ -603,11 +618,14 @@ namespace GUI
         }
 
 
+
+
         public void SledecaStranica()
         {
             if (TrenutnaStranica < UkupnoStranica)
             {
                 TrenutnaStranica++;
+                ResetSelectedEntities();
                 OsveziTrenutnuStranicu();
             }
         }
@@ -617,12 +635,16 @@ namespace GUI
             if (TrenutnaStranica > 1)
             {
                 TrenutnaStranica--;
+                ResetSelectedEntities();
                 OsveziTrenutnuStranicu();
             }
         }
 
         private void OsveziTrenutnuStranicu()
+
         {
+            ResetSelectedEntities();
+
             if (MainTabControl.SelectedItem == StudentsTab)
             {
                 PostaviEntiteteZaTrenutnuStranicu(Students);
@@ -649,5 +671,45 @@ namespace GUI
         {
             SledecaStranica();
         }
+
+        private void ResetSelectedEntities()
+        {
+            SelectedStudent = null;
+            SelectedProfesor = null;
+            SelectedPredmet = null;
+            SelectedKatedra = null;
+
+        }
+
+        private void AzurirajPaginacijuPosleBrisanja()
+        {
+            // Izračunajte ukupan broj stranica na osnovu novog broja elemenata
+            UkupnoStranica = (int)Math.Ceiling(VratiTrenutniBrojElemenata() / (double)StavkiPoStranici);
+
+            // Proverite da li je trenutna stranica sada izvan opsega i prilagodite ako je potrebno
+            if (TrenutnaStranica > UkupnoStranica)
+            {
+                TrenutnaStranica = Math.Max(1, UkupnoStranica);
+            }
+
+            // Osvežite prikaz
+            OsveziTrenutnuStranicu();
+        }
+
+        private int VratiTrenutniBrojElemenata()
+        {
+            // Ovde vratite ukupan broj elemenata na osnovu trenutno aktivnog taba
+            // Na primer, za StudentsTab:
+            if (MainTabControl.SelectedItem == StudentsTab)
+            {
+                return Students.Count;
+            }
+            // Dodajte logiku za ostale tabove...
+
+            return 0; // Ako nijedan tab nije selektovan
+        }
+
+
     }
 }
+

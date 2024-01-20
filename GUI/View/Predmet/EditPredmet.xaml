@@ -4,10 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI.View.Predmet"
+        xmlns:ns="clr-namespace:GUI.Localization"
         mc:Ignorable="d"
-        Title="Izmeni predmet" Height="450" Width="350">
+        Title="{ns:Loc Edit_subject}" Height="450" Width="350">
     <TabControl>
-        <TabItem Header="Informacije">
+        <TabItem Header="{ns:Loc info}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -34,22 +35,22 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <Label Content="Sifra Predmeta:" Grid.Row="0" Grid.Column="0"/>
+                    <Label Content="{ns:Loc Subject_id}" Grid.Row="0" Grid.Column="0"/>
                     <TextBox Name="txtBoxSifraPredmeta" Text="{Binding Path=Predmet.SifraPredmeta, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="1" Margin="0,0,0,5" Grid.ColumnSpan="2"/>
 
-                    <Label Content="Naziv Predmeta:" Grid.Row="1" Grid.Column="0"/>
+                    <Label Content="{ns:Loc Subject_name}" Grid.Row="1" Grid.Column="0"/>
                     <TextBox Name="txtBoxNaziv" Text="{Binding Path=Predmet.NazivPredmeta, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5" Grid.ColumnSpan="2"/>
 
-                    <Label Content="Semestar:" Grid.Row="2" Grid.Column="0"/>
+                    <Label Content="{ns:Loc Semester}" Grid.Row="2" Grid.Column="0"/>
                     <ComboBox Name="cmbSemestar" SelectedValue="{Binding Path=Predmet.Semestar, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Content" Grid.Row="2" Grid.Column="1" Margin="0,0,0,5" Grid.ColumnSpan="2"/>
 
-                    <Label Content="Godina Studija:" Grid.Row="3" Grid.Column="0"/>
+                    <Label Content="{ns:Loc Year}" Grid.Row="3" Grid.Column="0"/>
                     <ComboBox Name="cmbGodinaStudija" SelectedItem="{Binding Path=Predmet.GodinaStudija, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" Margin="0,0,0,5" Grid.ColumnSpan="2"/>
 
-                    <Label Content="ESPB:" Grid.Row="4" Grid.Column="0"/>
+                    <Label Content="{ns:Loc ESPB}" Grid.Row="4" Grid.Column="0"/>
                     <TextBox Name="txtESPB" Text="{Binding Path=Predmet.ESPB, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Margin="0,0,0,5" Grid.ColumnSpan="2"/>
 
-                    <Label Content="Profesor:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center"/>
+                    <Label Content="{ns:Loc Professor}" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center"/>
 
                     <TextBox Grid.Row="5"  Text="{Binding Path=Predmet.Profesor, UpdateSourceTrigger=PropertyChanged}"
                      Height="20" Margin="96,0,15,2" Name="txtBoxProfesor" Grid.ColumnSpan="2" VerticalAlignment="Center">
@@ -61,12 +62,12 @@
                 </Grid>
 
                 <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="95,0,0,10">
-                    <Button Name="btnAccept" Content="Potvrdi" Width="75" Margin="0,0,10,0" Click="btnAccept_Click" />
-                    <Button Name="btnCancel" Content="Odustani" Width="75" Click="btnCancel_Click" />
+                    <Button Name="btnAccept" Content="{ns:Loc Confirm}" Width="75" Margin="0,0,10,0" Click="btnAccept_Click" />
+                    <Button Name="btnCancel" Content="{ns:Loc Close}" Width="75" Click="btnCancel_Click" />
                 </StackPanel>
             </Grid>
         </TabItem>
-        <TabItem Header="Uslov">
+        <TabItem Header="{ns:Loc Students}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -76,18 +77,18 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Content="Izaberi predmet" Click="IzaberiPredmet_Click" Margin="5"/>
-                    <Button Content="Polozili prvi" Click="PoloziliPrvi_Click" Margin="5"/>
+                    <Button Content="{ns:Loc ChooseSubject}" Click="IzaberiPredmet_Click" Margin="5"/>
+                    <Button Content="{ns:Loc PassedFirst}" Click="PoloziliPrvi_Click" Margin="5"/>
                 </StackPanel>
 
-                <Label Content="Studenti:" HorizontalAlignment="Left" Margin="5,5,0,0" Grid.Row="1"/>
+                <Label Content="{ns:Loc Students}" HorizontalAlignment="Left" Margin="5,5,0,0" Grid.Row="1"/>
 
                 <DataGrid Grid.Row="2" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False" x:Name="StudentiDataGrid"
                   ItemsSource="{Binding Studenti}" SelectedItem="{Binding SelectedStudentPredmet}" SelectionChanged="DataGrid_SelectionChanged">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Indeks" Width="88" Binding="{Binding Indeks}"/>
-                        <DataGridTextColumn Header="Ime" Width="88" Binding="{Binding Ime}"/>
-                        <DataGridTextColumn Header="Prezime" Width="87" Binding="{Binding Prezime}"/>
+                        <DataGridTextColumn Header="{ns:Loc Index}" Width="88" Binding="{Binding Indeks}"/>
+                        <DataGridTextColumn Header="{ns:Loc Name}" Width="88" Binding="{Binding Ime}"/>
+                        <DataGridTextColumn Header="{ns:Loc LastName}" Width="87" Binding="{Binding Prezime}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

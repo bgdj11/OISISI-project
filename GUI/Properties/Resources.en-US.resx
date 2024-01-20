@@ -127,7 +127,7 @@
     <value>Add department</value>
   </data>
   <data name="Add_grade" xml:space="preserve">
-    <value>Add_grade</value>
+    <value>Add grade</value>
   </data>
   <data name="Add_prof" xml:space="preserve">
     <value>Add professor</value>
@@ -146,6 +146,12 @@
   </data>
   <data name="Chief" xml:space="preserve">
     <value>Chief</value>
+  </data>
+  <data name="ChooseProfesor" xml:space="preserve">
+    <value>Choose Profesor</value>
+  </data>
+  <data name="ChooseSubject" xml:space="preserve">
+    <value>Choose Subject</value>
   </data>
   <data name="Choose_subject" xml:space="preserve">
     <value>Choose subject</value>
@@ -194,6 +200,9 @@
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
+  </data>
+  <data name="EditDepartment" xml:space="preserve">
+    <value>Edit Department</value>
   </data>
   <data name="Edit_department" xml:space="preserve">
     <value>Edit department</value>
@@ -246,6 +255,9 @@
   <data name="Index" xml:space="preserve">
     <value>Index</value>
   </data>
+  <data name="info" xml:space="preserve">
+    <value>informations</value>
+  </data>
   <data name="Information" xml:space="preserve">
     <value>Informations</value>
   </data>
@@ -273,6 +285,9 @@
   <data name="Passed" xml:space="preserve">
     <value>Exams passed</value>
   </data>
+  <data name="PassedFirst" xml:space="preserve">
+    <value>Passed First</value>
+  </data>
   <data name="Previous" xml:space="preserve">
     <value>Previous</value>
   </data>
@@ -284,6 +299,12 @@
   </data>
   <data name="Remaining" xml:space="preserve">
     <value>Remaining exams</value>
+  </data>
+  <data name="RemoveGrade" xml:space="preserve">
+    <value>Remove Grade</value>
+  </data>
+  <data name="remove_prof" xml:space="preserve">
+    <value>Remove professor</value>
   </data>
   <data name="Remove_subject" xml:space="preserve">
     <value>Remove subject</value>
@@ -329,6 +350,9 @@
   </data>
   <data name="Subject_name" xml:space="preserve">
     <value>Subject name</value>
+  </data>
+  <data name="SumESPB" xml:space="preserve">
+    <value>Sum of ESPB</value>
   </data>
   <data name="Take_exam" xml:space="preserve">
     <value>Take exam</value>

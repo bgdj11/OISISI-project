@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI.View.Katedra"
+        xmlns:ns="clr-namespace:GUI.Localization"
         mc:Ignorable="d"
         Title="Dodaj katedru" Height="200" Width="400">
     <Grid>
@@ -26,10 +27,10 @@
                     
                 </Grid.RowDefinitions>
 
-                <Label Content="Sifra Katedre:" Grid.Row="0"/>
+            <Label Content="{ns:Loc Department_id}" Grid.Row="0"/>
                 <TextBox Name="txtBoxSifraKatedre" Text="{Binding Path=Katedra.Sifra, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="1" Margin="0,0,0,5"/>
 
-                <Label Content="Naziv Katedre:" Grid.Row="1"/>
+            <Label Content="{ns:Loc Department_name}" Grid.Row="1"/>
             <TextBox Name="txtBoxNaziv" Text="{Binding Path=Katedra.Naziv, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5"/>
 
 
@@ -37,8 +38,8 @@
 
 
             <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,20,0,10">
-                <Button Name="btnAccept" Content="Potvrdi" Width="75" Margin="0,0,10,0" Click="btnAccept_Click" />
-                <Button Name="btnCancel" Content="Odustani" Width="75" Click="btnCancel_Click" />
+            <Button Name="btnAccept" Content="{ns:Loc Confirm}" Width="75" Margin="0,0,10,0" Click="btnAccept_Click" />
+            <Button Name="btnCancel" Content="{ns:Loc Close}" Width="75" Click="btnCancel_Click" />
             </StackPanel>
 
         </Grid>

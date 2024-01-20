@@ -25,6 +25,8 @@ using System.Xml.Serialization;
 using GUI.View.Katedra;
 using CLI.Controller;
 using System.ComponentModel;
+using System.DirectoryServices;
+using System.Windows.Controls.Primitives;
 
 namespace GUI
 {
@@ -75,11 +77,14 @@ namespace GUI
         public int TrenutnaStranica { get; set; } = 1;
         public int UkupnoStranica { get; set; }
         public int StavkiPoStranici { get; set; } = 16;
-
         private int SelectedPageIndex { get; set; } = 1;
-private object SelectedEntity { get; set; }
+
+       
+
+        private object SelectedEntity { get; set; }
 
 
+        private Dictionary<string, ListSortDirection> columnSortDirections = new Dictionary<string, ListSortDirection>();
 
         public MainWindow()
         {
@@ -87,6 +92,7 @@ private object SelectedEntity { get; set; }
             InitializeStatusBar();
 
             DataContext = this;
+
 
             Students = new ObservableCollection<StudentDTO>();
             studentController = new StudentController();
@@ -137,30 +143,24 @@ private object SelectedEntity { get; set; }
             MainTabControl.SelectedItem = MainTabControl.Items.Cast<TabItem>().First(tab => tab.Header.Equals("Predmeti"));
             Tab.Text = "Status: Predmeti";
         }
-
-
         private void MenuItem_Predmeti_Click(object sender, RoutedEventArgs e)
         {
             MenuItem_Predmeti_Click();
         }
-
         private void MenuItem_Katedre_Click()
         {
             MainTabControl.SelectedItem = MainTabControl.Items.Cast<TabItem>().First(tab => tab.Header.Equals("Katedre"));
             Tab.Text = "Status: Katedre";
         }
-
         private void MenuItem_Katedre_Click(object sender, RoutedEventArgs e)
         {
             MenuItem_Katedre_Click();
         }
-
         private void MenuItem_Profesori_Click()
         {
             MainTabControl.SelectedItem = MainTabControl.Items.Cast<TabItem>().First(tab => tab.Header.Equals("Profesori"));
             Tab.Text = "Status: Profesori";
         }
-
         private void MenuItem_Profesori_Click(object sender, RoutedEventArgs e)
         {
             MenuItem_Profesori_Click();
@@ -174,21 +174,17 @@ private object SelectedEntity { get; set; }
         {
             MenuItem_Studenti_Click();
         }
-
         private void AddNewEntity(object sender, RoutedEventArgs e)
         {
 
         }
-
         private void SaveApp(object sender, RoutedEventArgs e)
         {
-
         }
         private void CloseApp_Execution(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-
         private void OpenAboutWindow()
         {
             MessageBox.Show("Bogdan Djukic RA98/2021 i Mateja Jovanovic RA160/2021", "Informacije", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -199,11 +195,6 @@ private object SelectedEntity { get; set; }
         {
             OpenAboutWindow();
         }
-
-
-
-
-
         public void Update()
         {
             Profesors.Clear();
@@ -223,7 +214,6 @@ private object SelectedEntity { get; set; }
                 Katedre.Add(new KatedraDTO(k));
             }
         }
-
         private void InitializeStatusBar()
         {
             var timer = new System.Windows.Threading.DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
@@ -234,7 +224,6 @@ private object SelectedEntity { get; set; }
             };
             timer.Start();
         }
-
         private void UpdateDate()
         {
             statusDate.Text = $"Datum: {DateTime.Now.ToString("yyyy-MM-dd")}";
@@ -244,8 +233,6 @@ private object SelectedEntity { get; set; }
         {
             statusTime.Text = $"Vreme: {DateTime.Now.ToString("HH:mm:ss")}";
         }
-
-
         private void CreateEntityButton_Click()
         {
             if (MainTabControl.SelectedItem == StudentsTab)
@@ -280,7 +267,6 @@ private object SelectedEntity { get; set; }
                 Update();
             }
         }
-
         private void EditEntityButton_Click(object sender, RoutedEventArgs e)
         {
             if (MainTabControl.SelectedItem == ProfesorsTab)
@@ -341,8 +327,6 @@ private object SelectedEntity { get; set; }
 
             Update();
         }
-
-
         private void DeleteEntityButton_Click(object sender, RoutedEventArgs e)
         {
             if (MainTabControl.SelectedItem == StudentsTab)
@@ -428,7 +412,6 @@ private object SelectedEntity { get; set; }
             AzurirajPaginacijuPosleBrisanja();
             Update();
         }
-
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             string searchTerm = searchTextBox.Text;
@@ -461,8 +444,6 @@ private object SelectedEntity { get; set; }
 
 
         }
-
-
         private ObservableCollection<StudentDTO> FilterStudent(ObservableCollection<StudentDTO> originalCollection, string searchTerm)
         {
             // Razdvajanje unetog upita na reči i konverzija u mala slova
@@ -496,7 +477,6 @@ private object SelectedEntity { get; set; }
                     return originalCollection;
             }
         }
-
         private ObservableCollection<ProfesorDTO> FilterProfesor(ObservableCollection<ProfesorDTO> originalCollection, string searchTerm)
         {
             var terms = searchTerm.ToLower().Split(',').Select(s => s.Trim()).ToList();
@@ -521,7 +501,6 @@ private object SelectedEntity { get; set; }
                     return originalCollection;
             }
         }
-
         private ObservableCollection<PredmetDTO> FilterSubject(ObservableCollection<PredmetDTO> originalCollection, string searchTerm)
         {
             var terms = searchTerm.ToLower().Split(',').Select(s => s.Trim()).ToList();
@@ -543,7 +522,6 @@ private object SelectedEntity { get; set; }
                     return originalCollection;
             }
         }
-
         private void CreateEntityButton_Click(object sender, RoutedEventArgs e)
         {
             CreateEntityButton_Click();
@@ -632,9 +610,6 @@ private object SelectedEntity { get; set; }
             }
         }
 
-
-
-
         public void SledecaStranica()
         {
             if (TrenutnaStranica < UkupnoStranica)
@@ -654,7 +629,6 @@ private object SelectedEntity { get; set; }
                 OsveziTrenutnuStranicu();
             }
         }
-
         private void OsveziTrenutnuStranicu()
 
         {
@@ -673,10 +647,6 @@ private object SelectedEntity { get; set; }
                 PostaviEntiteteZaTrenutnuStranicu(Subjects);
             }
         }
-
-
-
-
         private void PrethodnaStranica_Click(object sender, RoutedEventArgs e)
         {
             PrethodnaStranica();
@@ -695,7 +665,6 @@ private object SelectedEntity { get; set; }
             SelectedKatedra = null;
 
         }
-
         private void AzurirajPaginacijuPosleBrisanja()
         {
             UkupnoStranica = (int)Math.Ceiling(VratiTrenutniBrojElemenata() / (double)StavkiPoStranici);
@@ -707,7 +676,6 @@ private object SelectedEntity { get; set; }
 
             OsveziTrenutnuStranicu();
         }
-
         private int VratiTrenutniBrojElemenata()
         {
             if (MainTabControl.SelectedItem == StudentsTab)
@@ -718,8 +686,6 @@ private object SelectedEntity { get; set; }
 
             return 0;
         }
-
-
         private void Serbian_Click(object sender, RoutedEventArgs e)
         {
             app.ChangeLanguage(SRB);
@@ -754,7 +720,57 @@ private object SelectedEntity { get; set; }
                 Tab.Text = "Katedre";
         }
 
+        private void StudentsDataGrid_Sorting(object sender, DataGridSortingEventArgs e)
+        {
+            var dataGrid = sender as DataGrid;
+            if (dataGrid == null || e.Column == null) return;
 
+            e.Handled = true;
+
+            var propertyName = e.Column.SortMemberPath;
+
+            // Provera da li je kolona već sortirana i menjanje smera sortiranja
+            if (!columnSortDirections.TryGetValue(propertyName, out var currentDirection))
+            {
+                currentDirection = ListSortDirection.Ascending;
+            }
+            else
+            {
+                currentDirection = currentDirection == ListSortDirection.Ascending ?
+                                   ListSortDirection.Descending : ListSortDirection.Ascending;
+            }
+
+            // Ažuriranje rečnika sa novim smerom sortiranja
+            columnSortDirections[propertyName] = currentDirection;
+
+            e.Column.SortDirection = currentDirection;
+
+            SortStudentsWithPagination(propertyName, currentDirection);
+        }
+
+        private void SortStudentsWithPagination(string sortBy, ListSortDirection direction)
+        {
+            if (Students == null) return;
+
+            // Sortiranje cele kolekcije
+            var sortedStudents = direction == ListSortDirection.Ascending ?
+                                 Students.OrderBy(x => GetPropertyValue(x, sortBy)) :
+                                 Students.OrderByDescending(x => GetPropertyValue(x, sortBy));
+
+            // Ažuriranje kolekcije Students sa sortiranim podacima
+            Students = new ObservableCollection<StudentDTO>(sortedStudents);
+
+            // Izračunavanje ukupnog broja stranica posle sortiranja
+            UkupnoStranica = (int)Math.Ceiling(Students.Count / (double)StavkiPoStranici);
+
+            // Paginacija
+            PostaviEntiteteZaTrenutnuStranicu(Students);
+        }
+
+        private object GetPropertyValue(object obj, string propName)
+        {
+            return obj.GetType().GetProperty(propName)?.GetValue(obj, null);
+        }
     }
 }
 

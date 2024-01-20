@@ -144,7 +144,9 @@
                   x:Name="StudentsDataGrid"
                   ItemsSource="{Binding Students, UpdateSourceTrigger=PropertyChanged}"
                   SelectedItem="{Binding SelectedStudent, UpdateSourceTrigger=PropertyChanged}"
-                  SelectionMode="Single" IsReadOnly="True" SelectionChanged="StudentsDataGrid_SelectionChanged">
+                  SelectionMode="Single" IsReadOnly="True" SelectionChanged="StudentsDataGrid_SelectionChanged"
+                  Sorting="StudentsDataGrid_Sorting"
+                    CanUserSortColumns="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="{ns:Loc Index}" Binding="{Binding Indeks}"/>
                             <DataGridTextColumn Header="{ns:Loc Name}" Binding="{Binding Ime}"/>
@@ -158,11 +160,12 @@
 
                 <TabItem x:Name="ProfesorsTab" Header="{ns:Loc Professors}">
                     <DataGrid Height="517"
-                  AutoGenerateColumns="False"
-                  x:Name="ProfesorsDataGrid"
-                  ItemsSource="{Binding Profesors, UpdateSourceTrigger=PropertyChanged}"
-                  SelectedItem="{Binding SelectedProfesor, UpdateSourceTrigger=PropertyChanged}"
-                  SelectionMode="Single" IsReadOnly="True" SelectionChanged="ProfesorsDataGrid_SelectionChanged">
+          AutoGenerateColumns="False"
+          x:Name="ProfesorsDataGrid"
+          ItemsSource="{Binding Profesors, UpdateSourceTrigger=PropertyChanged}"
+          SelectedItem="{Binding SelectedProfesor, UpdateSourceTrigger=PropertyChanged}"
+          SelectionMode="Single" IsReadOnly="True" SelectionChanged="ProfesorsDataGrid_SelectionChanged"
+          Sorting="ProfesorsDataGrid_Sorting" CanUserSortColumns="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="{ns:Loc Name}" Binding="{Binding Ime}"/>
                             <DataGridTextColumn Header="{ns:Loc LastName}" Binding="{Binding Prezime}"/>
@@ -175,11 +178,12 @@
 
                 <TabItem x:Name="SubjectsTab" Header="{ns:Loc Subjects}">
                     <DataGrid Height="517"
-                AutoGenerateColumns="False"
-                x:Name="SubjectsDataGrid"
-                ItemsSource="{Binding Subjects, UpdateSourceTrigger=PropertyChanged}"
-                SelectedItem="{Binding SelectedPredmet, UpdateSourceTrigger=PropertyChanged}"
-                SelectionMode="Single" IsReadOnly="True" SelectionChanged="SubjectsDataGrid_SelectionChanged">
+          AutoGenerateColumns="False"
+          x:Name="SubjectsDataGrid"
+          ItemsSource="{Binding Subjects, UpdateSourceTrigger=PropertyChanged}"
+          SelectedItem="{Binding SelectedPredmet, UpdateSourceTrigger=PropertyChanged}"
+          SelectionMode="Single" IsReadOnly="True" SelectionChanged="SubjectsDataGrid_SelectionChanged"
+          Sorting="SubjectsDataGrid_Sorting" CanUserSortColumns="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="{ns:Loc Subject_id}" Binding="{Binding SifraPredmeta}"/>
                             <DataGridTextColumn Header="{ns:Loc Subject}" Binding="{Binding NazivPredmeta}"/>

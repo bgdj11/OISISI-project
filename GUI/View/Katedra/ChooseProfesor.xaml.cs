@@ -28,8 +28,8 @@ namespace GUI.View.Katedra
         public List<ProfesorDTO> Profesors { get; set; }
         public ProfesorDTO SelectedProfesor { get; set; }
 
-        private ProfesorController profesorDAO;
-        private KatedraController katedraDAO;
+        private ProfesorController profesorController;
+        private KatedraController katedraController;
 
         public KatedraDTO Katedra;
 
@@ -38,8 +38,8 @@ namespace GUI.View.Katedra
             InitializeComponent();
             DataContext = this;
             Profesors = new List<ProfesorDTO>();
-            profesorDAO = prof;
-            katedraDAO = new KatedraController();
+            profesorController = prof;
+            katedraController = new KatedraController();
             Katedra = katedraDTO;
 
             Update();
@@ -48,7 +48,7 @@ namespace GUI.View.Katedra
         public void Update()
         {
             Profesors.Clear();
-            foreach(CLI.Model.Profesor p in profesorDAO.GetAllProfesor())
+            foreach(CLI.Model.Profesor p in profesorController.GetAllProfesor())
             {
                 if(p.IdKatedre != Katedra.katedraId)
                 {
@@ -65,14 +65,14 @@ namespace GUI.View.Katedra
             }
             else
             {
-                CLI.Model.Profesor p = profesorDAO.GetProfesorById(SelectedProfesor.IdProfesor);
+                CLI.Model.Profesor p = profesorController.GetProfesorById(SelectedProfesor.IdProfesor);
 
                 if (p == null)
                     MessageBox.Show("P je NULL");
 
                 p.IdKatedre = Katedra.katedraId;
-                
-                profesorDAO.UpdateProfesor(p);
+
+                profesorController.UpdateProfesor(p);
                 
                 this.Close();
             }

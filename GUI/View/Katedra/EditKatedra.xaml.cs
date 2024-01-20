@@ -34,6 +34,8 @@ namespace GUI.View.Katedra
 
         public KatedraDTO Katedra { get; set; }
 
+        public ProfesorDTO SelectedProfesor { get; set; }
+
         private KatedraController katedraController;
 
         private ProfesorController profesorController;
@@ -167,7 +169,20 @@ namespace GUI.View.Katedra
 
         private void UkloniProfesora_Click(object sender, RoutedEventArgs e) 
         {
-            
+            if(SelectedProfesor == null)
+            {
+                MessageBox.Show(this, "Izaberi profesora.");
+            } else
+            {
+                CLI.Model.Profesor p = profesorController.GetProfesorById(SelectedProfesor.IdProfesor);
+
+                if (p == null)
+                    MessageBox.Show("P je NULL");
+                p.IdKatedre = -1;
+                profesorController.UpdateProfesor(p);
+                MessageBox.Show(this, "Profesor uspesno uklonjen.");
+                Update();
+            }
 
         }
 

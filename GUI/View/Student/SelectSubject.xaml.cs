@@ -21,7 +21,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GUI.View.Profesor;
 using GUI.View.Predmet;
-
+using CLI.Controller;
 
 namespace GUI.View.Student
 {
@@ -34,21 +34,23 @@ namespace GUI.View.Student
         public PredmetDTO SelectedPredmet { get; set; }
 
         public StudentDTO SelectedStudent { get; set; }
-        private PredmetDAO predmetDAO { get; set; }
+        //private PredmetDAO predmetDAO { get; set; }
 
-        private StudentPredmetDAO studentPredmetDAO { get; set; }
+        //private StudentPredmetDAO studentPredmetDAO { get; set; }
+        private StudentPredmetController studentPredmetController;
+        private PredmetController predmetController;
 
-        public SelectSubject(PredmetDAO predmetDAO, StudentDTO student, StudentPredmetDAO spDAO)
+        public SelectSubject(PredmetController pc, StudentDTO student, StudentPredmetController studentPredmetController)
         {
             InitializeComponent();
 
             DataContext = this;
 
             this.SelectedStudent = student;
-            this.predmetDAO = predmetDAO;
+            this.predmetController = pc;
+            this.studentPredmetController = studentPredmetController;
 
             Subjects = new ObservableCollection<PredmetDTO>();
-            studentPredmetDAO = spDAO;
 
 
             Update();
@@ -58,7 +60,7 @@ namespace GUI.View.Student
         {
 
             Subjects.Clear();
-            foreach (CLI.Model.Predmet predmet in predmetDAO.GetAllPredmeti())
+            foreach (CLI.Model.Predmet predmet in predmetController.GetAllPredmet())
                 if(SelectedStudent.TrenutnaGodinaStudija >= predmet.GodinaStudija &&
                     !SelectedStudent.PassedIds.Contains(predmet.IdPredmet) &&
                     !SelectedStudent.NotPassedIds.Contains(predmet.IdPredmet))
@@ -72,7 +74,7 @@ namespace GUI.View.Student
 
         private void btnAccept_Click(object sender, RoutedEventArgs e)
         {
-            studentPredmetDAO.AddPredmetToStudent(SelectedStudent.StudentId, SelectedPredmet.predmetId);
+            studentPredmetController.AddPredmetToStudent(SelectedStudent.StudentId, SelectedPredmet.predmetId);
             MessageBox.Show("Predmet je uspesno dodat!", "Uspesno", MessageBoxButton.OK, MessageBoxImage.Information);
             SelectedStudent.NotPassedIds.Add(SelectedPredmet.predmetId);
             Update();

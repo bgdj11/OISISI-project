@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using GUI.DTO;
 using CLI.DAO;
 using CLI.Controller;
+using GUI.View.Predmet;
 
 namespace GUI.View.Katedra
 {
@@ -32,21 +33,21 @@ namespace GUI.View.Katedra
 
         public KatedraDTO Katedra { get; set; }
 
-        private KatedraController katedraDAO;
+        private KatedraController katedraController;
 
-        private ProfesorController profesorDAO;
+        private ProfesorController profesorController;
 
         private PredmetController predmetController;
 
 
-        public EditKatedra(KatedraController katedraDAO, KatedraDTO katedraDTO, ProfesorController profesorDAO)
+        public EditKatedra(KatedraController katedraController, KatedraDTO katedraDTO, ProfesorController profesorDAO)
         {
             InitializeComponent();
             DataContext = this;
 
-            this.profesorDAO = profesorDAO;
+            this.profesorController = profesorDAO;
 
-            this.katedraDAO = katedraDAO;
+            this.katedraController = katedraController;
             this.Katedra = katedraDTO;
 
             Profesors = new ObservableCollection<ProfesorDTO>();
@@ -60,11 +61,13 @@ namespace GUI.View.Katedra
 
         public void Update()
         {
-            katedraDAO.MakeKatedra();
+            katedraController.MakeKatedra();
 
-            CLI.Model.Katedra k = katedraDAO.GetKatedraById(Katedra.katedraId);
+            CLI.Model.Katedra k = katedraController.GetKatedraById(Katedra.katedraId);
 
             Katedra = new KatedraDTO(k);
+          
+
 
             Profesors.Clear();
             Predmeti.Clear();
@@ -74,7 +77,7 @@ namespace GUI.View.Katedra
                 foreach (int i in Katedra.profesorIds)
                 {
 
-                    Profesors.Add(new ProfesorDTO(profesorDAO.GetProfesorById(i)));
+                    Profesors.Add(new ProfesorDTO(profesorController.GetProfesorById(i)));
 
                     foreach(CLI.Model.Predmet pr in predmetController.GetAllPredmet())
                     {
@@ -93,7 +96,7 @@ namespace GUI.View.Katedra
         {
             if (ValidateFields())
             {
-                katedraDAO.UpdateKatedra(Katedra.toKatedra());
+                katedraController.UpdateKatedra(Katedra.toKatedra());
                 MessageBox.Show("Katedra je uspesno izmenjena!", "Uspesno", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
@@ -131,8 +134,12 @@ namespace GUI.View.Katedra
 
         private void AddSef_Click(object sender, RoutedEventArgs e) 
         {
-            
-            
+            var selectSefWindow = new SelectSef(katedraController, Katedra);
+            selectSefWindow.Owner = this;
+            selectSefWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            selectSefWindow.ShowDialog();
+            Update();
+
         }
         
         private void RemoveSef_Click(object sender, RoutedEventArgs e) 
@@ -143,7 +150,7 @@ namespace GUI.View.Katedra
 
         private void DodajProfesora_Click(object sender, RoutedEventArgs e)
         {
-            var chooseProfesorWindow = new ChooseProfesor(Katedra, profesorDAO);
+            var chooseProfesorWindow = new ChooseProfesor(Katedra, profesorController);
             chooseProfesorWindow.Owner = this;
             chooseProfesorWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             chooseProfesorWindow.ShowDialog();

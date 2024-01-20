@@ -52,9 +52,11 @@ namespace GUI.View.Student
         //private OcenaNaUpisuDAO ocenaDAO;
 
         public PredmetDTO SelectedSubject { get; set; } // selektovan nepolozen
-        private PredmetDAO predmetDAO;
+        //private PredmetDAO predmetDAO;
+        private PredmetController predmetController;
+        private StudentPredmetController studentPredmetController;
 
-        private StudentPredmetDAO studentPredmetDAO;
+        //private StudentPredmetDAO studentPredmetDAO;
 
         List<int> Godine;
         List<string> Statusi;
@@ -67,14 +69,16 @@ namespace GUI.View.Student
             Student = selectedStudent;
 
             NotPassedSubjects = new ObservableCollection<PredmetDTO>();
-            predmetDAO = new PredmetDAO();
+            //predmetDAO = new PredmetDAO();
+            predmetController = new PredmetController();
             SelectedSubject = new PredmetDTO();
 
             Ocene = new ObservableCollection<OcenaDTO>();
             ocenaController = new OcenaController();
             SelectedOcena = new OcenaDTO();
 
-            studentPredmetDAO = new StudentPredmetDAO();
+            //studentPredmetDAO = new StudentPredmetDAO();
+            studentPredmetController = new StudentPredmetController();
 
             Godine = new List<int> { 1, 2, 3, 4 };
             cmbGodinaStudija.ItemsSource = Godine;
@@ -99,7 +103,7 @@ namespace GUI.View.Student
                 NotPassedSubjects.Clear();
                 foreach (int i in Student.NotPassedIds)
                 {
-                    NotPassedSubjects.Add(new PredmetDTO(predmetDAO.GetPredmetById(i)));
+                    NotPassedSubjects.Add(new PredmetDTO(predmetController.GetPredmetById(i)));
                 }
             }
 
@@ -132,7 +136,7 @@ namespace GUI.View.Student
 
             foreach(int ids in Student.NotPassedIds)
             {
-                CLI.Model.Predmet pr = predmetDAO.GetPredmetById(ids);
+                CLI.Model.Predmet pr = predmetController.GetPredmetById(ids);
                 int idProf = pr.IdProfesora;
 
                 CLI.Model.Profesor prof = profesorController.GetProfesorById(idProf);
@@ -258,7 +262,7 @@ namespace GUI.View.Student
 
         private void AddSubject_Click(object sender, RoutedEventArgs e)
         {
-            var selectSubjectWindow  = new SelectSubject(predmetDAO, Student, studentPredmetDAO);
+            var selectSubjectWindow  = new SelectSubject(predmetController, Student, studentPredmetController);
             selectSubjectWindow.Owner = this;
             selectSubjectWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             selectSubjectWindow.ShowDialog();
@@ -280,7 +284,7 @@ namespace GUI.View.Student
 
                 if (confirmationDialog.UserConfirmed)
                 {
-                    studentPredmetDAO.RemovePredmetFromStudent(studentPredmetDAO.GetByIds(Student.StudentId, SelectedSubject.predmetId));
+                    studentPredmetController.RemovePredmetFromStudent(studentPredmetController.GetByIds(Student.StudentId, SelectedSubject.predmetId));
                 }
 
                 // da bi se izmene odmah prikazale:

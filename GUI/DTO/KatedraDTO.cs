@@ -74,14 +74,14 @@ namespace GUI.DTO
             }
         }
 
-        private int idSefa { get; set; }
+        public int IdSefa { get; set; }
 
         public int katedraId { get; set; }
         
         public List<int> profesorIds { get; set; }
 
         public KatedraDTO() {
-            idSefa = -1;
+            IdSefa = -1;
             profesorIds = new List<int>();
         }
 
@@ -94,7 +94,7 @@ namespace GUI.DTO
                 profesor = "sef nije dodat";
             }
             
-            idSefa = katedra.idSefa;
+            IdSefa = katedra.idSefa;
 
             if (katedra.sefKatedre != null)
             {
@@ -118,7 +118,7 @@ namespace GUI.DTO
 
         public Katedra toKatedra()
         {
-            return new Katedra(sifra, naziv, idSefa);
+            return new Katedra(sifra, naziv, IdSefa);
         }
 
         public KatedraDTO clone()
@@ -127,7 +127,7 @@ namespace GUI.DTO
             ret.Sifra = this.Sifra;
             ret.profesorIds = this.profesorIds;
             ret.Profesor = this.Profesor;
-            ret.idSefa = this.idSefa;
+            ret.IdSefa = this.IdSefa;
             ret.Naziv = this.Naziv;
             ret.katedraId = this.katedraId;
 

@@ -8,7 +8,7 @@ namespace CLI.DAO
 {
     public class KatedraDAO
     {
-        private readonly List<Katedra> _katedre;
+        private  List<Katedra> _katedre;
         private readonly Storage<Katedra> _storage;
 
         public KatedraDAO()
@@ -28,6 +28,7 @@ namespace CLI.DAO
         {
             Storage<Profesor> _profesorStorage = new Storage<Profesor>("profesori.csv");
             List<Profesor> _profesori = _profesorStorage.Load();
+            _katedre = _storage.Load();
 
             foreach (Katedra k in _katedre)
             {
@@ -65,13 +66,16 @@ namespace CLI.DAO
             Katedra? oldKatedra = GetKatedraById(katedra.idKatedre);
             if (oldKatedra == null) return null;
 
+
+
             oldKatedra.sifra = katedra.sifra;
             oldKatedra.nazivKatedre = katedra.nazivKatedre;
             oldKatedra.idSefa = katedra.idSefa;
+            _storage.Save(_katedre);
 
             MakeKatedra();
 
-            _storage.Save(_katedre);
+
             return oldKatedra;
         }
 

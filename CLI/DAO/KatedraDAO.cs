@@ -71,9 +71,11 @@ namespace CLI.DAO
             oldKatedra.sifra = katedra.sifra;
             oldKatedra.nazivKatedre = katedra.nazivKatedre;
             oldKatedra.idSefa = katedra.idSefa;
-            _storage.Save(_katedre);
 
+            
+            _storage.Save(_katedre);
             MakeKatedra();
+
 
 
             return oldKatedra;

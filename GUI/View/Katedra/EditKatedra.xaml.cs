@@ -17,6 +17,7 @@ using GUI.DTO;
 using CLI.DAO;
 using CLI.Controller;
 using GUI.View.Predmet;
+using CLI.Observer;
 
 namespace GUI.View.Katedra
 {
@@ -65,9 +66,13 @@ namespace GUI.View.Katedra
 
             CLI.Model.Katedra k = katedraController.GetKatedraById(Katedra.katedraId);
 
-            Katedra = new KatedraDTO(k);
-          
+            KatedraDTO kat = new KatedraDTO(k);
 
+            // Mora da se prepise da se ne bi menjala referenca
+            
+            Katedra.Profesor = kat.Profesor;
+            Katedra.IdSefa = kat.IdSefa;
+            Katedra.profesorIds = kat.profesorIds;
 
             Profesors.Clear();
             Predmeti.Clear();
@@ -96,7 +101,9 @@ namespace GUI.View.Katedra
         {
             if (ValidateFields())
             {
-                katedraController.UpdateKatedra(Katedra.toKatedra());
+                CLI.Model.Katedra katedraM = Katedra.toKatedra();
+                katedraM.idKatedre = Katedra.katedraId;
+                katedraController.UpdateKatedra(katedraM);
                 MessageBox.Show("Katedra je uspesno izmenjena!", "Uspesno", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
@@ -164,5 +171,9 @@ namespace GUI.View.Katedra
 
         }
 
+        private void txtBoxProfesor_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

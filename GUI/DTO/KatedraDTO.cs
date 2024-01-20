@@ -93,12 +93,18 @@ namespace GUI.DTO
             {
                 profesor = "sef nije dodat";
             }
+            else
+            {
+                profesor = katedra.sefKatedre.Ime + " " + katedra.sefKatedre.Prezime;
+            }
             
             IdSefa = katedra.idSefa;
 
-            if (katedra.sefKatedre != null)
+            if (katedra.sefKatedre == null)
             {
-                profesor = katedra.sefKatedre.Ime + " " + katedra.sefKatedre.Prezime;
+                // profesor = katedra.sefKatedre.Ime + " " + katedra.sefKatedre.Prezime;
+
+                //MessageBox.Show("Profesor je NULL");
 
             }
             sifra = katedra.sifra;

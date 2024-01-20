@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GUI.View.Katedra"
+        xmlns:local="clr-namespace:GUI.View.Katedra" xmlns:dto="clr-namespace:GUI.DTO" 
         mc:Ignorable="d"
         Title="Izmeni Katedru" Height="450" Width="400">
     <TabControl>
@@ -37,8 +37,8 @@
                     <TextBox Name="txtBoxNaziv" Text="{Binding Path=Katedra.Naziv, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5"/>
 
                     <Label Content="Sef katedre:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
-                    <TextBox Grid.Row="2"  Text="{Binding Path=Katedra.Profesor, UpdateSourceTrigger=PropertyChanged}"
-                        Height="20" Name="txtBoxProfesor" VerticalAlignment="Center" Width="Auto" Grid.Column="1"/>
+                    <TextBox Grid.Row="2"  Text="{Binding Path=Katedra.Profesor, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                        Height="20" Name="txtBoxProfesor" VerticalAlignment="Center" Width="Auto" Grid.Column="1" IsReadOnly="True"/>
 
                     <Button Name="AddSefButton" Width="25" Height="20" Click="AddSef_Click" Content="+" Grid.Row="2" Grid.Column="2" Margin="5,0,0,3" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
                     <Button Name="RemoveSefButton" Width="25" Height="20" Click="RemoveSef_Click" Content="-" Grid.Row="2" Grid.Column="2" Margin="35,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right"/>

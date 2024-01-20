@@ -66,7 +66,10 @@ namespace GUI.View.Predmet
 
         private void Update()
         {
-            Predmet = new PredmetDTO(predmetController.GetPredmetById(Predmet.predmetId));
+            PredmetDTO prd = new PredmetDTO(predmetController.GetPredmetById(Predmet.predmetId));
+            Predmet.ProfesorID = prd.ProfesorID;
+            Predmet.Profesor = prd.Profesor;
+            
 
             if (DrugiPredmet != null)
             {

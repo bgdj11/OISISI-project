@@ -73,13 +73,18 @@ namespace GUI
         public static RoutedCommand HelpCommand = new RoutedCommand();
         public static RoutedCommand DeleteCommand = new RoutedCommand();
 
+        private ObservableCollection<StudentDTO> currentFilteredStudents;
+        private ObservableCollection<ProfesorDTO> currentFilteredProfesors;
+        private ObservableCollection<PredmetDTO> currentFilteredSubjects;
+
+
 
         public int TrenutnaStranica { get; set; } = 1;
         public int UkupnoStranica { get; set; }
         public int StavkiPoStranici { get; set; } = 16;
         private int SelectedPageIndex { get; set; } = 1;
 
-       
+
 
         private object SelectedEntity { get; set; }
 
@@ -202,7 +207,7 @@ namespace GUI
                 Profesors.Add(new ProfesorDTO(profesor));
 
             Students.Clear();
-            foreach (Student student in studentController.GetAllStudents()) 
+            foreach (Student student in studentController.GetAllStudents())
                 Students.Add(new StudentDTO(student));
 
             Subjects.Clear();
@@ -210,7 +215,8 @@ namespace GUI
                 Subjects.Add(new PredmetDTO(predmet));
 
             Katedre.Clear();
-            foreach (Katedra k in katedraController.GetAllKatedra()) {
+            foreach (Katedra k in katedraController.GetAllKatedra())
+            {
                 Katedre.Add(new KatedraDTO(k));
             }
         }
@@ -258,7 +264,8 @@ namespace GUI
                 addPredmetWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 addPredmetWindow.ShowDialog();
                 Update();
-            } else if(MainTabControl.SelectedItem == KatedreTab)
+            }
+            else if (MainTabControl.SelectedItem == KatedreTab)
             {
                 var addKatedraWindow = new AddKatedra(katedraController);
                 addKatedraWindow.Owner = this;
@@ -271,7 +278,7 @@ namespace GUI
         {
             if (MainTabControl.SelectedItem == ProfesorsTab)
             {
-                if(SelectedProfesor == null)
+                if (SelectedProfesor == null)
                 {
                     MessageBox.Show(this, "Izaberi profesora za izmenu.");
                 }
@@ -282,9 +289,10 @@ namespace GUI
                     editsProfesorWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                     editsProfesorWindow.ShowDialog();
                 }
-            }else if(MainTabControl.SelectedItem == SubjectsTab)
+            }
+            else if (MainTabControl.SelectedItem == SubjectsTab)
             {
-                if(SelectedPredmet == null)
+                if (SelectedPredmet == null)
                 {
                     MessageBox.Show(this, "Izaberi predmet za izmenu.");
                 }
@@ -295,9 +303,10 @@ namespace GUI
                     editPredmetWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                     editPredmetWindow.ShowDialog();
                 }
-            } else if(MainTabControl.SelectedItem == StudentsTab)
+            }
+            else if (MainTabControl.SelectedItem == StudentsTab)
             {
-                if(SelectedStudent == null)
+                if (SelectedStudent == null)
                 {
                     MessageBox.Show(this, "Izaberi studenta za izmenu.");
                 }
@@ -305,14 +314,14 @@ namespace GUI
                 {
                     var editStudentWIndow = new EditStudent(studentController, SelectedStudent.Clone());
                     editStudentWIndow.Owner = this;
-                    editStudentWIndow.WindowStartupLocation= WindowStartupLocation.CenterOwner;
+                    editStudentWIndow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                     editStudentWIndow.ShowDialog();
                 }
 
             }
             else
             {
-                if(SelectedKatedra == null)
+                if (SelectedKatedra == null)
                 {
                     MessageBox.Show(this, "Izaberi katedru za izmenu.");
                 }
@@ -344,13 +353,14 @@ namespace GUI
 
                     if (confirmationDialog.UserConfirmed)
                     {
-                  
+
                         studentController.DeleteStudent(SelectedStudent.StudentId);
                         Students.Remove(SelectedStudent);
                     }
                 }
             }
-            else if (MainTabControl.SelectedItem == ProfesorsTab) {
+            else if (MainTabControl.SelectedItem == ProfesorsTab)
+            {
                 if (SelectedProfesor == null)
                 {
                     MessageBox.Show(this, "Izaberite profesora za brisanje!");
@@ -368,12 +378,13 @@ namespace GUI
                         Profesors.Remove(SelectedProfesor);
                     }
                 }
-            } else if (MainTabControl.SelectedItem == SubjectsTab)
+            }
+            else if (MainTabControl.SelectedItem == SubjectsTab)
             {
                 if (SelectedPredmet == null)
                 {
                     MessageBox.Show(this, "Izaberite predmet za brisanje!");
-                } 
+                }
                 else
                 {
                     var confirmationDialog = new ConfirmationWindow("Predmet");
@@ -388,9 +399,9 @@ namespace GUI
                     }
                 }
             }
-            else if(MainTabControl.SelectedItem == KatedreTab)
+            else if (MainTabControl.SelectedItem == KatedreTab)
             {
-                if(SelectedKatedra == null)
+                if (SelectedKatedra == null)
                 {
                     MessageBox.Show(this, "Izaberite katedru za brisanje!");
                 }
@@ -414,30 +425,35 @@ namespace GUI
         }
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            string searchTerm = searchTextBox.Text;
+            string searchTerm = searchTextBox.Text.Trim();
 
-
+            if (string.IsNullOrEmpty(searchTerm))
+            {
+                currentFilteredStudents = null;
+                currentFilteredProfesors = null;
+                currentFilteredSubjects = null;
+            }
 
             if (MainTabControl.SelectedItem == StudentsTab)
             {
-                ObservableCollection<StudentDTO> filteredStudents = FilterStudent(Students, searchTerm);
-                UkupnoStranica = (int)Math.Ceiling(filteredStudents.Count / (double)StavkiPoStranici);
+                currentFilteredStudents = FilterStudent(Students, searchTerm);
+                UkupnoStranica = (int)Math.Ceiling(currentFilteredStudents.Count / (double)StavkiPoStranici);
                 TrenutnaStranica = 1;
-                PostaviEntiteteZaTrenutnuStranicu(filteredStudents);
+                PostaviEntiteteZaTrenutnuStranicu(currentFilteredStudents);
             }
             else if (MainTabControl.SelectedItem == ProfesorsTab)
             {
-                ObservableCollection<ProfesorDTO> filteredProfesors = FilterProfesor(Profesors, searchTerm);
-                UkupnoStranica = (int)Math.Ceiling(filteredProfesors.Count / (double)StavkiPoStranici);
+                currentFilteredProfesors = FilterProfesor(Profesors, searchTerm);
+                UkupnoStranica = (int)Math.Ceiling(currentFilteredProfesors.Count / (double)StavkiPoStranici);
                 TrenutnaStranica = 1;
-                PostaviEntiteteZaTrenutnuStranicu(filteredProfesors);
+                PostaviEntiteteZaTrenutnuStranicu(currentFilteredProfesors);
             }
-            else if(MainTabControl.SelectedItem == SubjectsTab)
+            else if (MainTabControl.SelectedItem == SubjectsTab)
             {
-                ObservableCollection<PredmetDTO> filteredSubjects = FilterSubject(Subjects, searchTerm);
-                UkupnoStranica = (int)Math.Ceiling(filteredSubjects.Count / (double)StavkiPoStranici);
+                currentFilteredSubjects = FilterSubject(Subjects, searchTerm);
+                UkupnoStranica = (int)Math.Ceiling(currentFilteredSubjects.Count / (double)StavkiPoStranici);
                 TrenutnaStranica = 1;
-                PostaviEntiteteZaTrenutnuStranicu(filteredSubjects);
+                PostaviEntiteteZaTrenutnuStranicu(currentFilteredSubjects);
             }
 
 
@@ -505,7 +521,7 @@ namespace GUI
         {
             var terms = searchTerm.ToLower().Split(',').Select(s => s.Trim()).ToList();
 
-            switch(terms.Count())
+            switch (terms.Count())
             {
                 case 1: // Samo sifra predmeta
                     return new ObservableCollection<PredmetDTO>(
@@ -555,11 +571,11 @@ namespace GUI
             {
                 Tab.Text = "Status: Profesori";
             }
-            else if(MainTabControl.SelectedItem == SubjectsTab)    
+            else if (MainTabControl.SelectedItem == SubjectsTab)
             {
                 Tab.Text = "Status: Predmeti";
             }
-            else if(MainTabControl.SelectedItem == KatedreTab)
+            else if (MainTabControl.SelectedItem == KatedreTab)
                 Tab.Text = "Status: Katedre";
 
             IzracunajPaginaciju();
@@ -571,17 +587,19 @@ namespace GUI
 
             int ukupnoEntiteta = 0;
 
-            if(MainTabControl.SelectedItem == StudentsTab)
+            if (MainTabControl.SelectedItem == StudentsTab)
             {
                 ukupnoEntiteta = Students.Count;
                 UkupnoStranica = (int)Math.Ceiling(ukupnoEntiteta / (double)StavkiPoStranici);
                 PostaviEntiteteZaTrenutnuStranicu(Students);
-            } else if(MainTabControl.SelectedItem == ProfesorsTab)
+            }
+            else if (MainTabControl.SelectedItem == ProfesorsTab)
             {
                 ukupnoEntiteta = Profesors.Count;
                 UkupnoStranica = (int)Math.Ceiling(ukupnoEntiteta / (double)StavkiPoStranici);
                 PostaviEntiteteZaTrenutnuStranicu(Profesors);
-            } else
+            }
+            else
             {
                 ukupnoEntiteta = Subjects.Count;
                 UkupnoStranica = (int)Math.Ceiling(ukupnoEntiteta / (double)StavkiPoStranici);
@@ -750,27 +768,39 @@ namespace GUI
 
         private void SortStudentsWithPagination(string sortBy, ListSortDirection direction)
         {
-            if (Students == null) return;
+            var collectionToSort = currentFilteredStudents != null && currentFilteredStudents.Any()
+                ? currentFilteredStudents
+                : Students;
 
-            // Sortiranje cele kolekcije
-            var sortedStudents = direction == ListSortDirection.Ascending ?
-                                 Students.OrderBy(x => GetPropertyValue(x, sortBy)) :
-                                 Students.OrderByDescending(x => GetPropertyValue(x, sortBy));
+            var sortedStudents = direction == ListSortDirection.Ascending
+                ? collectionToSort.OrderBy(x => GetPropertyValue(x, sortBy))
+                : collectionToSort.OrderByDescending(x => GetPropertyValue(x, sortBy));
 
-            // Ažuriranje kolekcije Students sa sortiranim podacima
-            Students = new ObservableCollection<StudentDTO>(sortedStudents);
-
-            // Izračunavanje ukupnog broja stranica posle sortiranja
-            UkupnoStranica = (int)Math.Ceiling(Students.Count / (double)StavkiPoStranici);
-
-            // Paginacija
-            PostaviEntiteteZaTrenutnuStranicu(Students);
+            // Apply sorted data to either filtered collection or main collection
+            if (currentFilteredStudents != null)
+            {
+                currentFilteredStudents = new ObservableCollection<StudentDTO>(sortedStudents);
+                PostaviEntiteteZaTrenutnuStranicu(currentFilteredStudents);
+            }
+            else
+            {
+                Students = new ObservableCollection<StudentDTO>(sortedStudents);
+                PostaviEntiteteZaTrenutnuStranicu(Students);
+            }
         }
 
         private object GetPropertyValue(object obj, string propName)
         {
             return obj.GetType().GetProperty(propName)?.GetValue(obj, null);
         }
+
+        //
+        private void SubjectsDataGrid_Sorting(object sender, DataGridSortingEventArgs e)
+        {
+        }
+
+        private void ProfesorsDataGrid_Sorting(object sender, DataGridSortingEventArgs e)
+        {
+        }
     }
 }
-

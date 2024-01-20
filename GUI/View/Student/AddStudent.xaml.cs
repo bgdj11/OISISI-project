@@ -82,15 +82,15 @@ namespace GUI.View.Student
                 (txtBoxIme, "Unesite validno ime.", s => s.All(char.IsLetter)),
                 (txtBoxPrezime, "Unesite validno prezime.", s => s.All(char.IsLetter)),
                 (datpDatumRodjenja, "Unesite validan datum u formatu d.M.yyyy.", s => DateTime.TryParseExact(s, "d.M.yyyy.", CultureInfo.InvariantCulture, DateTimeStyles.None, out _)),
-                (txtBoxUlica, "Unesite validnu ulicu.", s => s.All(c => char.IsLetter(c) || char.IsWhiteSpace(c))),
+                (txtBoxUlica, "Unesite validnu ulicu.", s => s.All(c => char.IsLetterOrDigit(c) || char.IsWhiteSpace(c))),
                 (txtBoxBroj, "Unesite validan broj.", s => s.All(char.IsDigit)),
                 (txtBoxGrad, "Unesite validan grad.", s => s.All(c => char.IsLetter(c) || char.IsWhiteSpace(c))),
                 (txtBoxDrzava, "Unesite validnu drzavu.", s => s.All(c => char.IsLetter(c) || char.IsWhiteSpace(c))),
                 (txtBoxKontakt, "Unesite validni kontakt telefon.", s => s.All(c => char.IsDigit(c) || c == '+')),
-                (txtBoxEmail, "Unesite validnu email adresu (sadrži '@').", s => s.Contains("@")),
-                (txtBoxOznakaSmera, "Unesite oznaku smera (ne sme biti prazno).", s => !string.IsNullOrWhiteSpace(s)),
-                (txtBoxBrojIndeksa, "Unesite broj indeksa (samo brojevi).", s => s.All(char.IsDigit)),
-                (txtBoxGodinaUpisa, "Unesite validnu godinu upisa (samo brojevi).", s => s.All(char.IsDigit)),
+                (txtBoxEmail, "Unesite validnu email adresu.", s => s.Contains("@")),
+                (txtBoxOznakaSmera, "Unesite oznaku smera.", s => !string.IsNullOrWhiteSpace(s)),
+                (txtBoxBrojIndeksa, "Unesite broj indeksa.", s => s.All(char.IsDigit)),
+                (txtBoxGodinaUpisa, "Unesite validnu godinu upisa.", s => s.All(char.IsDigit)),
             };
 
             foreach (var validation in validations)

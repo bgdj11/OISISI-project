@@ -141,9 +141,9 @@ namespace GUI.View.Profesor
                 (dpDatumRodjenja, "Unesite validan datum rodjenja u formatu d.M.yyyy.", s => DateTime.TryParseExact(s, "d.M.yyyy.", CultureInfo.InvariantCulture, DateTimeStyles.None, out _)),
                 (txtBoxUlica, "Unesite validnu adresu ulice.", s => s.All(c => char.IsLetter(c) || char.IsWhiteSpace(c))),
                 (txtBoxBroj, "Unesite validan broj.", s => s.All(char.IsDigit)),
-                (txtBoxGrad, "Unesite validan grad.", s => s.All(c => char.IsLetter(c) || char.IsWhiteSpace(c))),
-                (txtBoxDrzava, "Unesite validnu drzavu (samo slova).", s => s.All(char.IsLetter)),
-                (txtBoxKontakt, "Unesite validni kontakt telefon.", s => s.All(char.IsDigit)),
+                (txtBoxGrad, "Unesite validan grad.", s => s.All(c => char.IsLetterOrDigit(c) || char.IsWhiteSpace(c))),
+                (txtBoxDrzava, "Unesite validnu drzavu (samo slova).", s => s.All(c => char.IsLetter(c) || char.IsWhiteSpace(c))),
+                (txtBoxKontakt, "Unesite validni kontakt telefon.", s => s.All(c => char.IsDigit(c) || c == '+')),
                 (txtBoxEmail, "Unesite validnu email adresu.", s => s.Contains("@")),
                 (txtBoxBrojLicneKarte, "Unesite validan broj licne karte.", s => s.All(char.IsDigit)),
                 (txtBoxGodinaStaza, "Unesite validnu godinu staza.", s => s.All(char.IsDigit))

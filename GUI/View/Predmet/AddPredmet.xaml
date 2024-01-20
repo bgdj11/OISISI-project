@@ -41,22 +41,23 @@
 
             <Label Content="{ns:Loc Semester}" Grid.Row="2"/>
             <ComboBox Name="cmbSemestar"  SelectedItem="{Binding Path=Predmet.Semestar, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1"  Margin="0,0,0,5">
-                
+
             </ComboBox>
 
             <Label Content="{ns:Loc Year}" Grid.Row="3"/>
             <ComboBox Name="cmbGodinaStudija"  SelectedItem="{Binding Path=Predmet.GodinaStudija, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1"  Margin="0,0,0,5">
-                
+
             </ComboBox>
 
-            <Label Content="ID profesora:" Grid.Row="4"/>
-            <TextBox Name="txtBoxProfesorID" Text="{Binding Path=Predmet.ProfesorID, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Margin="0,0,0,5"/>
+            <Label Content="{ns:Loc ESPB}" Grid.Row="4"/>
+            <TextBox Name="txtESPB" Text="{Binding Path=Predmet.ESPB, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Margin="0,0,0,5"/>
 
-            <Label Content="{ns:Loc ESPB}" Grid.Row="5"/>
-            <TextBox Name="txtESPB" Text="{Binding Path=Predmet.ESPB, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1" Margin="0,0,0,5"/>
+            
+
+
 
         </Grid>
-        
+
 
         <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,20,0,10">
             <Button Name="btnAccept" Content="{ns:Loc Confirm}" Width="75" Margin="0,0,10,0" Click="btnAccept_Click" />

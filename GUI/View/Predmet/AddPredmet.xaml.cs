@@ -53,6 +53,7 @@ namespace GUI.View.Predmet
         {
             if (ValidateFields())
             {
+                Predmet.ProfesorID = -1;
                 predmetController.AddPredmet(Predmet.toPredmet());
                 MessageBox.Show("Predmet je uspesno dodat!", "Uspesno", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
@@ -92,6 +93,12 @@ namespace GUI.View.Predmet
                 return false;
             }
 
+
+            if (cmbSemestar.SelectedItem == null)
+            {
+                MessageBox.Show("Izaberite semestar.");
+                return false;
+            }
 
             return true;
         }

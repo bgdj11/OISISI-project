@@ -67,7 +67,7 @@ namespace GUI
 
         public int TrenutnaStranica { get; set; } = 1;
         public int UkupnoStranica { get; set; }
-        public int StavkiPoStranici { get; set; } = 3;
+        public int StavkiPoStranici { get; set; } = 16;
 
         private int SelectedPageIndex { get; set; } = 1;
 private object SelectedEntity { get; set; }

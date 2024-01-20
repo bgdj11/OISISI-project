@@ -7,8 +7,8 @@ using CLI.Serialization;
 
 public enum Semestar
 {
-    L,
-    Z
+    Letnji,
+    Zimski
 }
 
 namespace CLI.Model
@@ -61,10 +61,10 @@ namespace CLI.Model
         {
             if (sem.Equals("letnji"))
             {
-                return Semestar.L;
+                return Semestar.Letnji;
             }
             else
-                return Semestar.Z;
+                return Semestar.Zimski;
         }
 
         public string[] ToCSV()

@@ -61,9 +61,9 @@ namespace CLI.Model
             string[] csvValues =
             {
                 IdOcene.ToString(),
-                ocena.ToString(),
                 IdStudenta.ToString(),
                 IdPredmeta.ToString(),
+                ocena.ToString(),
                 Datum.ToString()
             };
             return csvValues;
@@ -72,9 +72,9 @@ namespace CLI.Model
         public void FromCSV(string[] values)
         {
             IdOcene = int.Parse(values[0]);
-            ocena = int.Parse(values[1]);
-            IdStudenta = int.Parse(values[2]);
-            IdPredmeta = int.Parse(values[3]);
+            IdStudenta = int.Parse(values[1]);
+            IdPredmeta = int.Parse(values[2]);
+            ocena = int.Parse(values[3]);
             Datum = DateOnly.Parse(values[4]);
         }
 

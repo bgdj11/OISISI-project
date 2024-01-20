@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GUI.Localization;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -12,6 +13,14 @@ namespace GUI
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
-    {
+    { 
+        public string trenutniJezik { get; set; }
+
+        public void ChangeLanguage(string lang)
+        {
+            TranslationSource.Instance.CurrentCulture = new System.Globalization.CultureInfo(lang);
+            trenutniJezik = lang;
+        }
+
     }
 }

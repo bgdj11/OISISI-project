@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI"
+        xmlns:ns="clr-namespace:GUI.Localization"
         mc:Ignorable="d"
-        Title="Glavni prozor" Height="650" Width="850" WindowStartupLocation="CenterScreen"
+        Title="{ns:Loc SS}" Height="650" Width="850" WindowStartupLocation="CenterScreen"
         KeyDown = "MainWindow_KeyDown">
 
     <Window.InputBindings>
@@ -37,32 +38,32 @@
             </Grid.RowDefinitions>
 
             <Menu Grid.Row="0" Margin="0,0,0,1" Grid.ColumnSpan="2">
-                <MenuItem Header="File">
+                <MenuItem Header="{ns:Loc File}">
 
-                    <MenuItem Header="New" InputGestureText="Ctrl+N" Command="local:MainWindow.NewCommand" Click="CreateEntityButton_Click">
+                    <MenuItem Header="{ns:Loc New}" InputGestureText="Ctrl+N" Command="local:MainWindow.NewCommand" Click="CreateEntityButton_Click">
                         <MenuItem.Icon>
                             <Image Source="Images/folder-plus.png" Width="16" Height="15"/>
                         </MenuItem.Icon>
                     </MenuItem>
 
-                    <MenuItem Header="Save" Command="local:MainWindow.SaveCommand" Click="SaveApp" InputGestureText="Ctrl+S">
+                    <MenuItem Header="{ns:Loc Save}" Command="local:MainWindow.SaveCommand" Click="SaveApp" InputGestureText="Ctrl+S">
                         <MenuItem.Icon>
                             <Image Source="Images/save.png" Width="16" Height="15"/>
                         </MenuItem.Icon>
                     </MenuItem>
 
-                    <MenuItem Header="Open">
+                    <MenuItem Header="{ns:Loc Open}">
                         <MenuItem.Icon>
                             <Image Source="Images/open-in-app.png" Width="16" Height="15"/>
                         </MenuItem.Icon>
-                        <MenuItem Header="Studenti"  Click="MenuItem_Studenti_Click"></MenuItem>
-                        <MenuItem Header="Predmeti"  Click="MenuItem_Predmeti_Click"></MenuItem>
-                        <MenuItem Header="Profesori" Click="MenuItem_Profesori_Click"></MenuItem>
+                        <MenuItem Header="{ns:Loc Students}"  Click="MenuItem_Studenti_Click"></MenuItem>
+                        <MenuItem Header="{ns:Loc Subjects}"  Click="MenuItem_Predmeti_Click"></MenuItem>
+                        <MenuItem Header="{ns:Loc Professors}" Click="MenuItem_Profesori_Click"></MenuItem>
                     </MenuItem>
 
                     <Separator/>
 
-                    <MenuItem x:Name="CLOSE" Command="local:MainWindow.CloseCommand" Header="Close" Click="CloseApp_Execution" InputGestureText="Ctrl + C">
+                    <MenuItem x:Name="Close" Command="local:MainWindow.CloseCommand" Header="{ns:Loc Close}" Click="CloseApp_Execution" InputGestureText="Ctrl + C">
                         <MenuItem.Icon>
                             <Image Source="Images/x.png" Width="16" Height="15"/>
                         </MenuItem.Icon>
@@ -70,28 +71,36 @@
 
                 </MenuItem>
 
-                <MenuItem Header="Edit">
+                <MenuItem Header="{ns:Loc Edit}">
 
-                    <MenuItem Header="Edit" Command="{x:Static local:MainWindow.EditCommand}" Click="EditEntityButton_Click" InputGestureText="Ctrl+E">
+                    <MenuItem Header="{ns:Loc Edit}" Command="{x:Static local:MainWindow.EditCommand}" Click="EditEntityButton_Click" InputGestureText="Ctrl+E">
                         <MenuItem.Icon>
                             <Image Source="Images/pen.png" Width="16" Height="15"/>
                         </MenuItem.Icon>
                     </MenuItem>
 
-                    <MenuItem Header="Delete" Command="{x:Static local:MainWindow.DeleteCommand}" InputGestureText="Ctrl + D" Click="DeleteEntityButton_Click">
+                    <MenuItem Header="{ns:Loc Delete}" Command="{x:Static local:MainWindow.DeleteCommand}" InputGestureText="Ctrl + D" Click="DeleteEntityButton_Click">
                         <MenuItem.Icon>
                             <Image Source="Images/delete.png" Width="15" Height="15"/>
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
 
-                <MenuItem Header="Help">
-                    <MenuItem Header="About" Command="{x:Static local:MainWindow.HelpCommand}" Click="OpenAboutWindow" InputGestureText="Ctrl+H">
+                <MenuItem Header="{ns:Loc Help}">
+                    <MenuItem Header="{ns:Loc About}" Command="{x:Static local:MainWindow.HelpCommand}" Click="OpenAboutWindow" InputGestureText="Ctrl+H">
                         <MenuItem.Icon>
                             <Image Source="Images/about.png" Width="15" Height="15"/>
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
+
+                <MenuItem Header="{ns:Loc Localization}">
+                    <MenuItem x:Name="Serbian" Header="{ns:Loc Serbian}" Click="Serbian_Click"/>
+                    <MenuItem x:Name="English" Header="{ns:Loc English}" Click="English_Click"/>
+                </MenuItem>
+
+
+
             </Menu>
 
             <ToolBarTray Grid.Row="1" Grid.ColumnSpan="2" Margin="0,10,0,10" Grid.RowSpan="2">
@@ -129,7 +138,7 @@
 
             <TabControl Grid.Row="2" x:Name="MainTabControl" SelectionChanged="TabSelectionChanged" Grid.ColumnSpan="2" Margin="0,43,0,0">
 
-                <TabItem x:Name="StudentsTab" Header="Studenti">
+                <TabItem x:Name="StudentsTab" Header="{ns:Loc Students}">
                     <DataGrid Height="517"
                   AutoGenerateColumns="False"
                   x:Name="StudentsDataGrid"
@@ -137,17 +146,17 @@
                   SelectedItem="{Binding SelectedStudent, UpdateSourceTrigger=PropertyChanged}"
                   SelectionMode="Single" IsReadOnly="True" SelectionChanged="StudentsDataGrid_SelectionChanged">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Indeks" Binding="{Binding Indeks}"/>
-                            <DataGridTextColumn Header="Ime" Binding="{Binding Ime}"/>
-                            <DataGridTextColumn Header="Prezime" Binding="{Binding Prezime}"/>
-                            <DataGridTextColumn Header="Godina Studija" Binding="{Binding TrenutnaGodinaStudija}"/>
-                            <DataGridTextColumn Header="Status" Binding="{Binding StatusStudenta}"/>
-                            <DataGridTextColumn Header="Prosek" Binding="{Binding ProsecnaOcena}"/> 
+                            <DataGridTextColumn Header="{ns:Loc Index}" Binding="{Binding Indeks}"/>
+                            <DataGridTextColumn Header="{ns:Loc Name}" Binding="{Binding Ime}"/>
+                            <DataGridTextColumn Header="{ns:Loc LastName}" Binding="{Binding Prezime}"/>
+                            <DataGridTextColumn Header="{ns:Loc Year}" Binding="{Binding TrenutnaGodinaStudija}"/>
+                            <DataGridTextColumn Header="{ns:Loc Status}" Binding="{Binding StatusStudenta}"/>
+                            <DataGridTextColumn Header="{ns:Loc Average}" Binding="{Binding ProsecnaOcena}"/> 
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
 
-                <TabItem x:Name="ProfesorsTab" Header="Profesori">
+                <TabItem x:Name="ProfesorsTab" Header="{ns:Loc Professors}">
                     <DataGrid Height="517"
                   AutoGenerateColumns="False"
                   x:Name="ProfesorsDataGrid"
@@ -155,16 +164,16 @@
                   SelectedItem="{Binding SelectedProfesor, UpdateSourceTrigger=PropertyChanged}"
                   SelectionMode="Single" IsReadOnly="True" SelectionChanged="ProfesorsDataGrid_SelectionChanged">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Ime" Binding="{Binding Ime}"/>
-                            <DataGridTextColumn Header="Prezime" Binding="{Binding Prezime}"/>
-                            <DataGridTextColumn Header="Zvanje" Binding="{Binding Zvanje}"/>
-                            <DataGridTextColumn Header="Email" Binding="{Binding EmailAdresa}"/>
+                            <DataGridTextColumn Header="{ns:Loc Name}" Binding="{Binding Ime}"/>
+                            <DataGridTextColumn Header="{ns:Loc LastName}" Binding="{Binding Prezime}"/>
+                            <DataGridTextColumn Header="{ns:Loc Title}" Binding="{Binding Zvanje}"/>
+                            <DataGridTextColumn Header="{ns:Loc Email}" Binding="{Binding EmailAdresa}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
 
 
-                <TabItem x:Name="SubjectsTab" Header="Predmeti">
+                <TabItem x:Name="SubjectsTab" Header="{ns:Loc Subjects}">
                     <DataGrid Height="517"
                 AutoGenerateColumns="False"
                 x:Name="SubjectsDataGrid"
@@ -172,16 +181,16 @@
                 SelectedItem="{Binding SelectedPredmet, UpdateSourceTrigger=PropertyChanged}"
                 SelectionMode="Single" IsReadOnly="True" SelectionChanged="SubjectsDataGrid_SelectionChanged">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Sifra Predmeta" Binding="{Binding SifraPredmeta}"/>
-                            <DataGridTextColumn Header="Naziv" Binding="{Binding NazivPredmeta}"/>
-                            <DataGridTextColumn Header="Semestar" Binding="{Binding Semestar}"/>
-                            <DataGridTextColumn Header="GodinaStudija" Binding="{Binding GodinaStudija}"/>
-                            <DataGridTextColumn Header="ESPB" Binding="{Binding ESPB}"/>
+                            <DataGridTextColumn Header="{ns:Loc Subject_id}" Binding="{Binding SifraPredmeta}"/>
+                            <DataGridTextColumn Header="{ns:Loc Subject}" Binding="{Binding NazivPredmeta}"/>
+                            <DataGridTextColumn Header="{ns:Loc Semester}" Binding="{Binding Semestar}"/>
+                            <DataGridTextColumn Header="{ns:Loc Year}" Binding="{Binding GodinaStudija}"/>
+                            <DataGridTextColumn Header="{ns:Loc ESPB}" Binding="{Binding ESPB}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
 
-                <TabItem x:Name="KatedreTab" Header="Katedre">
+                <TabItem x:Name="KatedreTab" Header="{ns:Loc Department}">
                     <DataGrid Height="517"
                     AutoGenerateColumns="False"
                     x:Name="KatedreDataGrid"
@@ -189,9 +198,9 @@
                     SelectedItem="{Binding SelectedKatedra, UpdateSourceTrigger=PropertyChanged}"
                     SelectionMode="Single" IsReadOnly="True" SelectionChanged="KatedreDataGrid_SelectionChanged">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Sifra katedre" Binding="{Binding Sifra}" Width="*"/>
-                            <DataGridTextColumn Header="Naziv katedre" Binding="{Binding Naziv}" Width="*"/>
-                            <DataGridTextColumn Header="Sef katedre" Binding="{Binding Profesor}" Width="*"/>
+                            <DataGridTextColumn Header="{ns:Loc Department_id}" Binding="{Binding Sifra}" Width="*"/>
+                            <DataGridTextColumn Header="{ns:Loc Department}" Binding="{Binding Naziv}" Width="*"/>
+                            <DataGridTextColumn Header="{ns:Loc Chief}" Binding="{Binding Profesor}" Width="*"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
@@ -199,17 +208,17 @@
 
 
             <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" >
-                <Button Content="prethodna" Click="PrethodnaStranica_Click"/>
+                <Button Content="{ns:Loc Previous}" Click="PrethodnaStranica_Click"/>
                 <TextBlock Text="{Binding CurrentPage}"/>
-                <Button Content="naredna" Click="NarednaStranica_Click"/>
+                <Button Content="{ns:Loc Next}" Click="NarednaStranica_Click"/>
             </StackPanel>
 
 
             <StatusBar Grid.Row="4" VerticalAlignment="Center" Grid.ColumnSpan="2">
-                <TextBlock FontWeight="Bold" x:Name="statusAppName">Studentska sluzba</TextBlock>
-                <TextBlock x:Name="Tab" Margin="0,0,10,0">Status:</TextBlock>
-                <TextBlock x:Name="statusTime" HorizontalAlignment="Right" Margin="0,0,10,0">Time:</TextBlock>
-                <TextBlock x:Name="statusDate" HorizontalAlignment="Right">Date:</TextBlock>
+                <TextBlock FontWeight="Bold" x:Name="statusAppName" Text="{ns:Loc SS}"></TextBlock>
+                <TextBlock x:Name="Tab" Margin="0,0,10,0" Text="{ns:Loc Status}"></TextBlock>
+                <TextBlock x:Name="statusTime" HorizontalAlignment="Right" Margin="0,0,10,0" Text="{ns:Loc Time}"></TextBlock>
+                <TextBlock x:Name="statusDate" HorizontalAlignment="Right" Text="{ns:Loc Date}"></TextBlock>
             </StatusBar>
 
         </Grid>

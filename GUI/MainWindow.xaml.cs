@@ -24,14 +24,21 @@ using GUI.View.Predmet;
 using System.Xml.Serialization;
 using GUI.View.Katedra;
 using CLI.Controller;
+using System.ComponentModel;
 
 namespace GUI
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, IObserver
+    public partial class MainWindow : Window, IObserver, INotifyPropertyChanged
     {
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public App app;
+        private const string SRB = "sr-Latn-RS";
+        private const string ENG = "en-US";
         public ObservableCollection<StudentDTO> Students { get; set; }
         public ObservableCollection<ProfesorDTO> Profesors { get; set; }
         public ObservableCollection<PredmetDTO> Subjects { get; set; }
@@ -97,6 +104,9 @@ private object SelectedEntity { get; set; }
             katedraController = new KatedraController();
 
             studentPredmetController = new StudentPredmetController();
+
+            app = (App)Application.Current;
+            app.ChangeLanguage(SRB);
 
             Update();
 
@@ -709,6 +719,40 @@ private object SelectedEntity { get; set; }
             return 0;
         }
 
+
+        private void Serbian_Click(object sender, RoutedEventArgs e)
+        {
+            app.ChangeLanguage(SRB);
+            Serbian_Tabs();
+        }
+
+        private void English_Click(object sender, RoutedEventArgs e)
+        {
+            app.ChangeLanguage(ENG);
+            English_Tabs();
+        }
+        public void English_Tabs()
+        {
+            if (MainTabControl.SelectedItem == StudentsTab)
+                Tab.Text = "Students";
+            else if (MainTabControl.SelectedItem == SubjectsTab)
+                Tab.Text = "Subjects";
+            else if (MainTabControl.SelectedItem == ProfesorsTab)
+                Tab.Text = "Professors";
+            else
+                Tab.Text = "Departments";
+        }
+        public void Serbian_Tabs()
+        {
+            if (MainTabControl.SelectedItem == StudentsTab)
+                Tab.Text = "Studenti";
+            else if (MainTabControl.SelectedItem == SubjectsTab)
+                Tab.Text = "Predmeti";
+            else if (MainTabControl.SelectedItem == ProfesorsTab)
+                Tab.Text = "Profesori";
+            else
+                Tab.Text = "Katedre";
+        }
 
 
     }

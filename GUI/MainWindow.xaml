@@ -211,10 +211,10 @@
             </TabControl>
 
 
-            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" >
-                <Button Content="{ns:Loc Previous}" Click="PrethodnaStranica_Click"/>
-                <TextBlock Text="{Binding CurrentPage}"/>
-                <Button Content="{ns:Loc Next}" Click="NarednaStranica_Click"/>
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="0.496,0.53" Margin="317,0,0,0" Width="235" >
+                <Button Content="{ns:Loc Previous}" Width="100" Margin="0,0,10,0" Click="PrethodnaStranica_Click"/>
+                <TextBlock Text="{Binding CurrentPage}" Margin="0,0,10,0"/>
+                <Button Content="{ns:Loc Next}" Width="100" Click="NarednaStranica_Click"/>
             </StackPanel>
 
 

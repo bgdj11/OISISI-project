@@ -58,7 +58,6 @@ namespace GUI.View.Profesor
             Studenti = new ObservableCollection<StudentPredmetDTO>();
 
             studentController = new StudentController();
-            SelectedPredmet = new PredmetDTO();
 
             Update();
         }
@@ -216,8 +215,6 @@ namespace GUI.View.Profesor
                     Update();
                 }
             }
-
-
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)

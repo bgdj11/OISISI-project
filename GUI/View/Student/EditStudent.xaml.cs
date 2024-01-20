@@ -71,11 +71,11 @@ namespace GUI.View.Student
             NotPassedSubjects = new ObservableCollection<PredmetDTO>();
             //predmetDAO = new PredmetDAO();
             predmetController = new PredmetController();
-            SelectedSubject = new PredmetDTO();
+            //SelectedSubject = new PredmetDTO();
 
             Ocene = new ObservableCollection<OcenaDTO>();
             ocenaController = new OcenaController();
-            SelectedOcena = new OcenaDTO();
+           // SelectedOcena = new OcenaDTO();
 
             //studentPredmetDAO = new StudentPredmetDAO();
             studentPredmetController = new StudentPredmetController();
@@ -95,7 +95,7 @@ namespace GUI.View.Student
         }
 
         public void Update()
-        {
+        { 
             studentController.MakeStudent();
 
             if (Student.NotPassedIds != null)
@@ -318,7 +318,7 @@ namespace GUI.View.Student
 
         private void PonistiOcenu_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedSubject == null)
+            if (SelectedOcena == null)
             {
                 MessageBox.Show(this, "Izaberite predmet za brisanje!");
             }
@@ -332,12 +332,10 @@ namespace GUI.View.Student
                 if (confirmationDialog.UserConfirmed)
                 {
                     ocenaController.DeleteOcena(SelectedOcena.idOcene);
+                    Student.NotPassedIds.Add(SelectedOcena.IdPredmeta);
+                    Student.GradesIds.Remove(SelectedOcena.idOcene);
+                    Student.PassedIds.Remove(SelectedOcena.IdPredmeta);
                 }
-
-                Student.NotPassedIds.Add(SelectedOcena.IdPredmeta);
-                Student.GradesIds.Remove(SelectedOcena.idOcene);
-                Student.PassedIds.Remove(SelectedOcena.IdPredmeta);
-
             }
 
             Update();

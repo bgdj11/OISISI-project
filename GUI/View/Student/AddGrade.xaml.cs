@@ -5,6 +5,7 @@ using GUI.DTO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -88,10 +89,17 @@ namespace GUI.View.Student
 
         private bool ValidateFields()
         {
+            DateTime parsedDate;
+            bool isDateFormatValid = DateTime.TryParseExact(txtDatum.Text, "d.M.yyyy",
+                                                            CultureInfo.InvariantCulture,
+                                                            DateTimeStyles.None,
+                                                            out parsedDate);
+
             return !string.IsNullOrWhiteSpace(txtBoxSifraPredmeta.Text) &&
                    !string.IsNullOrWhiteSpace(txtBoxNaziv.Text) &&
                    cmbOcena.SelectedItem != null &&
-                   !string.IsNullOrWhiteSpace(txtDatum.Text);
+                   !string.IsNullOrWhiteSpace(txtDatum.Text) &&
+                   isDateFormatValid;
         }
 
     }

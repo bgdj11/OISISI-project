@@ -220,9 +220,9 @@
 
             <StatusBar Grid.Row="4" VerticalAlignment="Center" Grid.ColumnSpan="2">
                 <TextBlock FontWeight="Bold" x:Name="statusAppName" Text="{ns:Loc SS}"></TextBlock>
-                <TextBlock x:Name="Tab" Margin="0,0,10,0" Text="{ns:Loc Status}"></TextBlock>
+                <TextBlock x:Name="Tab" Margin="0,0,10,0"></TextBlock>
                 <TextBlock x:Name="statusTime" HorizontalAlignment="Right" Margin="0,0,10,0" Text="{ns:Loc Time}"></TextBlock>
-                <TextBlock x:Name="statusDate" HorizontalAlignment="Right" Text="{ns:Loc Date}"></TextBlock>
+                <TextBlock x:Name="statusDate" HorizontalAlignment="Right" ></TextBlock>
             </StatusBar>
 
         </Grid>

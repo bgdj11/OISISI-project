@@ -109,7 +109,7 @@ namespace GUI
 
             Subjects = new ObservableCollection<PredmetDTO>();
             predmetController = new PredmetController();
-            Tab.Text = "Status: Studenti";
+            Tab.Text = "Studenti";
 
             Katedre = new ObservableCollection<KatedraDTO>();
             katedraController = new KatedraController();
@@ -146,7 +146,10 @@ namespace GUI
         private void MenuItem_Predmeti_Click()
         {
             MainTabControl.SelectedItem = MainTabControl.Items.Cast<TabItem>().First(tab => tab.Header.Equals("Predmeti"));
-            Tab.Text = "Status: Predmeti";
+            if (app.trenutniJezik == SRB)
+                Tab.Text = "Predmeti";
+            else
+                Tab.Text = "Subjects";
         }
         private void MenuItem_Predmeti_Click(object sender, RoutedEventArgs e)
         {
@@ -155,7 +158,10 @@ namespace GUI
         private void MenuItem_Katedre_Click()
         {
             MainTabControl.SelectedItem = MainTabControl.Items.Cast<TabItem>().First(tab => tab.Header.Equals("Katedre"));
-            Tab.Text = "Status: Katedre";
+            if (app.trenutniJezik == SRB)
+                Tab.Text = "Katedre";
+            else
+                Tab.Text = "Departments";
         }
         private void MenuItem_Katedre_Click(object sender, RoutedEventArgs e)
         {
@@ -164,7 +170,10 @@ namespace GUI
         private void MenuItem_Profesori_Click()
         {
             MainTabControl.SelectedItem = MainTabControl.Items.Cast<TabItem>().First(tab => tab.Header.Equals("Profesori"));
-            Tab.Text = "Status: Profesori";
+            if (app.trenutniJezik == SRB)
+                Tab.Text = " Profesori";
+            else
+                Tab.Text = "Professors";
         }
         private void MenuItem_Profesori_Click(object sender, RoutedEventArgs e)
         {
@@ -173,7 +182,10 @@ namespace GUI
         private void MenuItem_Studenti_Click()
         {
             MainTabControl.SelectedItem = MainTabControl.Items.Cast<TabItem>().First(tab => tab.Header.Equals("Studenti"));
-            Tab.Text = "Status: Studenti";
+            if (app.trenutniJezik == SRB)
+                Tab.Text = "Studenti";
+            else
+                Tab.Text = "Students";
         }
         private void MenuItem_Studenti_Click(object sender, RoutedEventArgs e)
         {
@@ -192,7 +204,7 @@ namespace GUI
         }
         private void OpenAboutWindow()
         {
-            MessageBox.Show("Bogdan Djukic RA98/2021 i Mateja Jovanovic RA160/2021", "Informacije", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Bogdan Djukic RA98/2021 i Mateja Jovanovic RA160/2021", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
 
         }
 
@@ -232,12 +244,18 @@ namespace GUI
         }
         private void UpdateDate()
         {
-            statusDate.Text = $"Datum: {DateTime.Now.ToString("yyyy-MM-dd")}";
+            if (app.trenutniJezik == SRB)
+                statusDate.Text = $"Datum: {DateTime.Now.ToString("yyyy-MM-dd")}";
+            else
+                statusDate.Text = $"Date: {DateTime.Now.ToString("yyyy-MM-dd")}";
         }
 
         private void UpdateTime()
         {
-            statusTime.Text = $"Vreme: {DateTime.Now.ToString("HH:mm:ss")}";
+            if (app.trenutniJezik == SRB)
+                statusTime.Text = $"Vreme: {DateTime.Now.ToString("HH:mm:ss")}";
+            else
+                statusTime.Text = $"Time: {DateTime.Now.ToString("HH:mm:ss")}";
         }
         private void CreateEntityButton_Click()
         {
@@ -280,7 +298,10 @@ namespace GUI
             {
                 if (SelectedProfesor == null)
                 {
-                    MessageBox.Show(this, "Izaberi profesora za izmenu.");
+                    if (app.trenutniJezik == SRB)
+                        MessageBox.Show("Niste izabrali nijednog profesora!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                    else
+                        MessageBox.Show("You did not choose any professor!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
@@ -294,7 +315,10 @@ namespace GUI
             {
                 if (SelectedPredmet == null)
                 {
-                    MessageBox.Show(this, "Izaberi predmet za izmenu.");
+                    if (app.trenutniJezik == SRB)
+                        MessageBox.Show("Niste izabrali nijedan predmet!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                    else
+                        MessageBox.Show("You did not choose any subject!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
@@ -308,7 +332,10 @@ namespace GUI
             {
                 if (SelectedStudent == null)
                 {
-                    MessageBox.Show(this, "Izaberi studenta za izmenu.");
+                    if (app.trenutniJezik == SRB)
+                        MessageBox.Show("Niste izabrali nijednog studenta!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                    else
+                        MessageBox.Show("You did not choose any student!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
@@ -323,7 +350,10 @@ namespace GUI
             {
                 if (SelectedKatedra == null)
                 {
-                    MessageBox.Show(this, "Izaberi katedru za izmenu.");
+                    if (app.trenutniJezik == SRB)
+                        MessageBox.Show("Niste izabrali nijednu katedru!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                    else
+                        MessageBox.Show("You did not choose any department!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
@@ -342,11 +372,15 @@ namespace GUI
             {
                 if (SelectedStudent == null)
                 {
-                    MessageBox.Show(this, "Izaberite studenta za brisanje!");
+                    if (app.trenutniJezik == SRB)
+                        MessageBox.Show("Niste izabrali nijednog studenta!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                    else
+                        MessageBox.Show("You did not choose any student!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
-                    var confirmationDialog = new ConfirmationWindow("Student");
+                   
+                    var confirmationDialog = new ConfirmationWindow("studenta");
                     confirmationDialog.Owner = this;
                     confirmationDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                     confirmationDialog.ShowDialog();
@@ -363,11 +397,15 @@ namespace GUI
             {
                 if (SelectedProfesor == null)
                 {
-                    MessageBox.Show(this, "Izaberite profesora za brisanje!");
+                    if (app.trenutniJezik == SRB)
+                        MessageBox.Show("Niste izabrali nijednog profesora!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                    else
+                        MessageBox.Show("You did not choose any professor!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
-                    var confirmationDialog = new ConfirmationWindow("Profesor");
+
+                    var confirmationDialog = new ConfirmationWindow("profesora");
                     confirmationDialog.Owner = this;
                     confirmationDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                     confirmationDialog.ShowDialog();
@@ -383,11 +421,15 @@ namespace GUI
             {
                 if (SelectedPredmet == null)
                 {
-                    MessageBox.Show(this, "Izaberite predmet za brisanje!");
+                    if (app.trenutniJezik == SRB)
+                        MessageBox.Show("Niste izabrali nijedan predmet!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                    else
+                        MessageBox.Show("You did not choose any subject!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
-                    var confirmationDialog = new ConfirmationWindow("Predmet");
+
+                    var confirmationDialog = new ConfirmationWindow("predmet");
                     confirmationDialog.Owner = this;
                     confirmationDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                     confirmationDialog.ShowDialog();
@@ -403,11 +445,15 @@ namespace GUI
             {
                 if (SelectedKatedra == null)
                 {
-                    MessageBox.Show(this, "Izaberite katedru za brisanje!");
+                    if (app.trenutniJezik == SRB)
+                        MessageBox.Show("Niste izabrali nijednu katedru!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                    else
+                        MessageBox.Show("You did not choose any department!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
-                    var confirmationDialog = new ConfirmationWindow("Katedra");
+
+                    var confirmationDialog = new ConfirmationWindow("katedru");
                     confirmationDialog.Owner = this;
                     confirmationDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                     confirmationDialog.ShowDialog();
@@ -565,18 +611,30 @@ namespace GUI
         {
             if (MainTabControl.SelectedItem == StudentsTab)
             {
-                Tab.Text = "Status: Studenti";
+                if (app.trenutniJezik == SRB)
+                    Tab.Text = "Studenti";
+                else
+                    Tab.Text = "Students";
             }
             else if (MainTabControl.SelectedItem == ProfesorsTab)
             {
-                Tab.Text = "Status: Profesori";
+                if (app.trenutniJezik == SRB)
+                    Tab.Text = " Profesori";
+                else
+                    Tab.Text = "Professors";
             }
             else if (MainTabControl.SelectedItem == SubjectsTab)
             {
-                Tab.Text = "Status: Predmeti";
+                if (app.trenutniJezik == SRB)
+                    Tab.Text = "Predmeti";
+                else
+                    Tab.Text = "Subjects";
             }
             else if (MainTabControl.SelectedItem == KatedreTab)
-                Tab.Text = "Status: Katedre";
+                if (app.trenutniJezik == SRB)
+                    Tab.Text = "Katedre";
+                else
+                    Tab.Text = "Departments";
 
             IzracunajPaginaciju();
         }
@@ -794,13 +852,103 @@ namespace GUI
             return obj.GetType().GetProperty(propName)?.GetValue(obj, null);
         }
 
-        //
         private void SubjectsDataGrid_Sorting(object sender, DataGridSortingEventArgs e)
         {
+            var dataGrid = sender as DataGrid;
+            if (dataGrid == null || e.Column == null) return;
+
+            e.Handled = true;
+
+            var propertyName = e.Column.SortMemberPath;
+
+            if (!columnSortDirections.TryGetValue(propertyName, out var currentDirection))
+            {
+                currentDirection = ListSortDirection.Ascending;
+            }
+            else
+            {
+                currentDirection = currentDirection == ListSortDirection.Ascending ?
+                                   ListSortDirection.Descending : ListSortDirection.Ascending;
+            }
+
+            columnSortDirections[propertyName] = currentDirection;
+
+            e.Column.SortDirection = currentDirection;
+
+            SortSubjectsWithPagination(propertyName, currentDirection);
         }
+
+        private void SortSubjectsWithPagination(string sortBy, ListSortDirection direction)
+        {
+            var collectionToSort = currentFilteredSubjects != null && currentFilteredSubjects.Any()
+                ? currentFilteredSubjects
+                : Subjects;
+
+            var sortedSubjects = direction == ListSortDirection.Ascending
+                ? collectionToSort.OrderBy(x => GetPropertyValue(x, sortBy))
+                : collectionToSort.OrderByDescending(x => GetPropertyValue(x, sortBy));
+
+            // Apply sorted data to either filtered collection or main collection
+            if (currentFilteredSubjects != null)
+            {
+                currentFilteredSubjects = new ObservableCollection<PredmetDTO>(sortedSubjects);
+                PostaviEntiteteZaTrenutnuStranicu(currentFilteredSubjects);
+            }
+            else
+            {
+                Subjects = new ObservableCollection<PredmetDTO>(sortedSubjects);
+                PostaviEntiteteZaTrenutnuStranicu(Subjects);
+            }
+        }
+
 
         private void ProfesorsDataGrid_Sorting(object sender, DataGridSortingEventArgs e)
         {
+            var dataGrid = sender as DataGrid;
+            if (dataGrid == null || e.Column == null) return;
+
+            e.Handled = true;
+
+            var propertyName = e.Column.SortMemberPath;
+
+            if (!columnSortDirections.TryGetValue(propertyName, out var currentDirection))
+            {
+                currentDirection = ListSortDirection.Ascending;
+            }
+            else
+            {
+                currentDirection = currentDirection == ListSortDirection.Ascending ?
+                                   ListSortDirection.Descending : ListSortDirection.Ascending;
+            }
+
+            columnSortDirections[propertyName] = currentDirection;
+
+            e.Column.SortDirection = currentDirection;
+
+            SortProfessorsWithPagination(propertyName, currentDirection);
+        }
+
+        private void SortProfessorsWithPagination(string sortBy, ListSortDirection direction)
+        {
+            var collectionToSort = currentFilteredProfesors != null && currentFilteredProfesors.Any()
+                ? currentFilteredProfesors
+                : Profesors;
+
+            var sortedProfessors = direction == ListSortDirection.Ascending
+                ? collectionToSort.OrderBy(x => GetPropertyValue(x, sortBy))
+                : collectionToSort.OrderByDescending(x => GetPropertyValue(x, sortBy));
+
+            // Apply sorted data to either filtered collection or main collection
+            if (currentFilteredProfesors != null)
+            {
+                currentFilteredProfesors = new ObservableCollection<ProfesorDTO>(sortedProfessors);
+                PostaviEntiteteZaTrenutnuStranicu(currentFilteredProfesors);
+            }
+            else
+            {
+                Profesors = new ObservableCollection<ProfesorDTO>(sortedProfessors);
+                PostaviEntiteteZaTrenutnuStranicu(Profesors);
+            }
         }
     }
 }

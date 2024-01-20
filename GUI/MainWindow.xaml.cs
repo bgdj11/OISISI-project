@@ -89,7 +89,7 @@ namespace GUI
             Tab.Text = "Status: Studenti";
 
             Katedre = new ObservableCollection<KatedraDTO>();
-            katedraDAO = new KatedraDAO();
+            katedraController = new KatedraController();
 
 
             Update();
@@ -203,7 +203,7 @@ namespace GUI
                 Subjects.Add(new PredmetDTO(predmet));
 
             Katedre.Clear();
-            foreach (Katedra k in katedraDAO.GetAllKatedra()) {
+            foreach (Katedra k in katedraController.GetAllKatedra()) {
                 Katedre.Add(new KatedraDTO(k));
             }
         }
@@ -257,7 +257,7 @@ namespace GUI
                 Update();
             } else if(MainTabControl.SelectedItem == KatedreTab)
             {
-                var addKatedraWindow = new AddKatedra(katedraDAO);
+                var addKatedraWindow = new AddKatedra(katedraController);
                 addKatedraWindow.Owner = this;
                 addKatedraWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 addKatedraWindow.ShowDialog();
@@ -316,7 +316,7 @@ namespace GUI
                 }
                 else
                 {
-                    var editKatedraWindow = new EditKatedra(katedraDAO, SelectedKatedra.clone());
+                    var editKatedraWindow = new EditKatedra(katedraController, SelectedKatedra.clone(), profesorController);
                     editKatedraWindow.Owner = this;
                     editKatedraWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                     editKatedraWindow.ShowDialog();
@@ -400,7 +400,7 @@ namespace GUI
 
                     if (confirmationDialog.UserConfirmed)
                     {
-                        katedraDAO.RemoveKatedra(SelectedKatedra.katedraId);
+                        katedraController.RemoveKatedra(SelectedKatedra.katedraId);
                     }
                 }
             }

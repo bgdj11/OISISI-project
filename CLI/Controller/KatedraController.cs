@@ -45,6 +45,16 @@ namespace CLI.Controller
             katedraDao.UpdateKatedra(k);
         }
 
+        public Katedra? GetKatedraById(int id)
+        {
+            return katedraDao.GetKatedraById(id);
+        }
+
+        public Katedra? RemoveKatedra(int id)
+        {
+            return katedraDao.RemoveKatedra(id);
+        }
+
     }
 
 

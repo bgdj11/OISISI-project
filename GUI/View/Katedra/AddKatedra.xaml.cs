@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using CLI.DAO;
 using System.Runtime.CompilerServices;
+using CLI.Controller;
 
 namespace GUI.View.Katedra
 {
@@ -31,10 +32,10 @@ namespace GUI.View.Katedra
         }
 
         public KatedraDTO Katedra { get; set; }
-        private KatedraDAO katedraDAO;
+        private KatedraController katedraDAO;
 
 
-        public AddKatedra(KatedraDAO katDAO)
+        public AddKatedra(KatedraController katDAO)
         {
             InitializeComponent();
             DataContext = this;

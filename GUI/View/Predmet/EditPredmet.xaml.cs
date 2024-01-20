@@ -205,12 +205,18 @@ namespace GUI.View.Predmet
 
         private void PoloziliPrvi_Click(object sender, RoutedEventArgs e)
         {
-            StudentiDataGrid.ItemsSource = FilterStudent();
+            if (DrugiPredmet == null)
+            {
+                MessageBox.Show(this, "Izaberite drugi predmet.");
+            }
+            else
+            {
+                StudentiDataGrid.ItemsSource = FilterStudent();
+            }
         }
 
         public ObservableCollection<StudentDTO> FilterStudent()
         {
-
             Studenti.Clear();
             foreach (CLI.Model.Student student in studentController.GetAllStudents())
             {

@@ -122,8 +122,8 @@ namespace GUI.View.Predmet
         {
             var validations = new (TextBox textBox, string message, Func<string,bool> validator)[]
             {
-                (txtBoxSifraPredmeta, "Unesite validnu sifru predmeta", s=>s.All(c => char.IsLetter(c) || char.IsWhiteSpace(c))),
-                (txtBoxNaziv, "Unesite validan naziv predmeta", s => s.All(char.IsLetter)),
+                (txtBoxSifraPredmeta, "Unesite validnu sifru predmeta", s=>s.All(c => char.IsLetterOrDigit(c) || char.IsWhiteSpace(c))),
+                (txtBoxNaziv, "Unesite validan naziv predmeta", s => s.All(c => char.IsLetterOrDigit(c) || char.IsWhiteSpace(c))),
                 (txtESPB, "Unesite validan broj ESPB bodova.", s => s.All(char.IsDigit))
             };
 

@@ -68,7 +68,7 @@ namespace GUI.View.Katedra
             var validations = new (TextBox textBox, string message, Func<string, bool> validator)[]
             {
                 (txtBoxSifraKatedre, "Unesite validnu sifru katedre", s => s.All(c => char.IsLetterOrDigit(c))),
-                (txtBoxNaziv, "Unesite validan naziv katedre", s => s.All(char.IsLetter))
+                (txtBoxNaziv, "Unesite validan naziv katedre", s => s.All(c => char.IsLetterOrDigit(c) || char.IsWhiteSpace(c)))
             };
 
             foreach (var validation in validations)

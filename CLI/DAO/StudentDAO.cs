@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using CLI.Model;
+using CLI.Observer;
 using CLI.Serialization;
 using CLI.Storage;
 
@@ -19,10 +20,13 @@ public class StudentDAO
 
         private readonly AdresaDAO adresaDAO = new AdresaDAO();
         private readonly IndeksDAO indeksDAO = new IndeksDAO();
+
+        public Subject StudentSubject;
         public StudentDAO()
         {
             _storage = new Storage<Student>("studenti.csv");
             _studenti = _storage.Load();
+            StudentSubject = new Subject();
             MakeStudent();
         }
 

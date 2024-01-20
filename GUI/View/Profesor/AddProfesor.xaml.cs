@@ -14,7 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using CLI.Controller;
 using CLI.DAO;
 using GUI.DTO;
 
@@ -23,12 +23,13 @@ namespace GUI.View.Profesor
     public partial class AddProfesor : Window, INotifyPropertyChanged
     {
         public ProfesorDTO Profesor { get; set; }
-        private ProfesorDAO profesorsDAO;
+        //private ProfesorDAO profesorsDAO;
+        private ProfesorController profesorController;
 
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public AddProfesor(ProfesorDAO profesorDAO) 
+        public AddProfesor(ProfesorController pc) 
         {
             InitializeComponent();
 
@@ -36,7 +37,7 @@ namespace GUI.View.Profesor
 
             DataContext = this;
             Profesor = new ProfesorDTO();
-            this.profesorsDAO = profesorDAO;
+            this.profesorController = pc;
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -49,7 +50,7 @@ namespace GUI.View.Profesor
         {
             if (ValidateFields())
             {
-                profesorsDAO.AddProfesor(Profesor.toProfesor());
+                profesorController.AddProfesor(Profesor.toProfesor());
                 MessageBox.Show("Profesor je uspesno dodat!", "Uspesno", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }

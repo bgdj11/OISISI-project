@@ -22,7 +22,7 @@ namespace CLI.Controller
             return profesorDao.GetAllProfesors();
         }
 
-        public void RemoveProfesor(int id)
+        public void DeleteProfesor(int id)
         {
             profesorDao.RemoveProfesor(id);
         }
@@ -40,6 +40,11 @@ namespace CLI.Controller
         public void UpdateProfesor(Profesor p)
         {
             profesorDao.UpdateProfesor(p);
+        }
+
+        public Profesor? GetProfesorById(int id)
+        {
+            return profesorDao?.GetProfesorById(id);   
         }
 
     }

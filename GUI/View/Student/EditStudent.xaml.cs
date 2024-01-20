@@ -15,8 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
-
+using CLI.Controller;
 using CLI.DAO;
 using CLI.Model;
 using GUI.DTO;
@@ -30,19 +29,27 @@ namespace GUI.View.Student
     public partial class EditStudent : Window, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
-        public StudentDTO Student { get; set; }
-        private StudentDAO studentDAO;
+
 
         public ObservableCollection<PredmetDTO> NotPassedSubjects { get; set; }  // lista nepolozenih
         public ObservableCollection<OcenaDTO> Ocene { get; set; }
-
         public ObservableCollection<ProfesorPredmetDTO> Profesori { get; set; }
 
-        public ProfesorPredmetDTO SelectedProfesorPredmet { get; set; } 
 
-        private ProfesorDAO profesorDAO;
+        public StudentDTO Student { get; set; }
+        public ProfesorPredmetDTO SelectedProfesorPredmet { get; set; }
         public OcenaDTO SelectedOcena { get; set; }
-        private OcenaNaUpisuDAO ocenaDAO;
+
+
+
+        private StudentController studentController;
+        private ProfesorController profesorController;
+        private OcenaController ocenaController;
+
+        //private ProfesorDAO profesorDAO;
+        
+
+        //private OcenaNaUpisuDAO ocenaDAO;
 
         public PredmetDTO SelectedSubject { get; set; } // selektovan nepolozen
         private PredmetDAO predmetDAO;
@@ -52,11 +59,11 @@ namespace GUI.View.Student
         List<int> Godine;
         List<string> Statusi;
 
-        public EditStudent(StudentDAO studentDAO, StudentDTO selectedStudent)
+        public EditStudent(StudentController sc, StudentDTO selectedStudent)
         {
             InitializeComponent();
             DataContext = this;
-            this.studentDAO = studentDAO;
+            this.studentController = sc;
             Student = selectedStudent;
 
             NotPassedSubjects = new ObservableCollection<PredmetDTO>();
@@ -64,7 +71,7 @@ namespace GUI.View.Student
             SelectedSubject = new PredmetDTO();
 
             Ocene = new ObservableCollection<OcenaDTO>();
-            ocenaDAO = new OcenaNaUpisuDAO();
+            ocenaController = new OcenaController();
             SelectedOcena = new OcenaDTO();
 
             studentPredmetDAO = new StudentPredmetDAO();
@@ -75,7 +82,7 @@ namespace GUI.View.Student
             Statusi = new List<string> { "samofinasiranje", "budzet" };
             cmbStatusStudenta.ItemsSource = Statusi;
 
-            profesorDAO = new ProfesorDAO();
+            profesorController = new ProfesorController();
             Profesori = new ObservableCollection<ProfesorPredmetDTO>();
 
             SelectedProfesorPredmet = new ProfesorPredmetDTO();
@@ -85,7 +92,7 @@ namespace GUI.View.Student
 
         public void Update()
         {
-            studentDAO.MakeStudent();
+            studentController.MakeStudent();
 
             if (Student.NotPassedIds != null)
             {
@@ -108,10 +115,10 @@ namespace GUI.View.Student
                 foreach (int i in Student.GradesIds)
                 {
 
-                    if (ocenaDAO.GetOcenaById(i) != null)
+                    if (ocenaController.GetOcenaById(i) != null)
                     {
                        // MessageBox.Show("nasao je ocenuuu");
-                        Ocene.Add(new OcenaDTO(ocenaDAO.GetOcenaById(i)));
+                        Ocene.Add(new OcenaDTO(ocenaController.GetOcenaById(i)));
                     }
                 }
 
@@ -128,7 +135,7 @@ namespace GUI.View.Student
                 CLI.Model.Predmet pr = predmetDAO.GetPredmetById(ids);
                 int idProf = pr.IdProfesora;
 
-                CLI.Model.Profesor prof = profesorDAO.GetProfesorById(idProf);
+                CLI.Model.Profesor prof = profesorController.GetProfesorById(idProf);
 
                 if(prof != null)
                     Profesori.Add(new ProfesorPredmetDTO(prof, pr));
@@ -141,7 +148,7 @@ namespace GUI.View.Student
             int espb = 0;
             foreach (int i in Student.GradesIds)
             {
-                espb += ocenaDAO.GetOcenaById(i).Predmet.BrojESPB;
+                espb += ocenaController.GetOcenaById(i).Predmet.BrojESPB;
             }
 
 
@@ -155,7 +162,7 @@ namespace GUI.View.Student
             int count = 0;
             foreach (int i in Student.GradesIds)
             {
-                suma += ocenaDAO.GetOcenaById(i).Ocena;
+                suma += ocenaController.GetOcenaById(i).Ocena;
                 ++count;
             }
             if (count == 0)
@@ -187,7 +194,7 @@ namespace GUI.View.Student
 
                 
 
-                studentDAO.UpdateStudent(sr);
+                studentController.UpdateStudent(sr);
                 MessageBox.Show("Student je uspesno promenjen!", "Uspesno", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
@@ -291,7 +298,7 @@ namespace GUI.View.Student
             }
             else
             {
-                var addGrade = new AddGrade(SelectedSubject, Student, ocenaDAO);
+                var addGrade = new AddGrade(SelectedSubject, Student, ocenaController);
                 addGrade.Owner = this;
                 addGrade.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 addGrade.ShowDialog();
@@ -320,7 +327,7 @@ namespace GUI.View.Student
 
                 if (confirmationDialog.UserConfirmed)
                 {
-                    ocenaDAO.RemoveOcena(SelectedOcena.idOcene);
+                    ocenaController.DeleteOcena(SelectedOcena.idOcene);
                 }
 
                 Student.NotPassedIds.Add(SelectedOcena.IdPredmeta);

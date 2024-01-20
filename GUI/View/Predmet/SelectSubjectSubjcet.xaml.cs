@@ -1,4 +1,5 @@
-﻿using CLI.DAO;
+﻿using CLI.Controller;
+using CLI.DAO;
 using GUI.DTO;
 using System;
 using System.Collections.Generic;
@@ -26,14 +27,15 @@ namespace GUI.View.Predmet
         public PredmetDTO SelectedPredmet { get; set; }
 
         public PredmetDTO Predmet { get; set; }
-        private PredmetDAO predmetDAO { get; set; }
+        //private PredmetDAO predmetDAO { get; set; 
+        private PredmetController predmetController;
 
 
-        public SelectSubjectSubjcet(PredmetDAO predmetDAO, PredmetDTO predmetInitial)
+        public SelectSubjectSubjcet(PredmetController pr, PredmetDTO predmetInitial)
         {
             InitializeComponent();
             DataContext = this;
-            this.predmetDAO = predmetDAO;
+            this.predmetController = pr;
             this.Predmet = predmetInitial;
 
             Predmeti = new ObservableCollection<PredmetDTO>();
@@ -45,7 +47,7 @@ namespace GUI.View.Predmet
         public void Update()
         {
             Predmeti.Clear();
-            foreach(CLI.Model.Predmet predmet in predmetDAO.GetAllPredmeti())
+            foreach(CLI.Model.Predmet predmet in predmetController.GetAllPredmet())
             {
                 if(Predmet.predmetId == predmet.IdPredmet)
                 {

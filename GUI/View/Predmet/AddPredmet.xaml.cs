@@ -15,26 +15,26 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using CLI.DAO;
-
+using CLI.Controller;
 
 namespace GUI.View.Predmet
 {
     public partial class AddPredmet : Window, INotifyPropertyChanged
     {
         public PredmetDTO Predmet { get; set; }
-        private PredmetDAO predmetDAO;
+        private PredmetController predmetController;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
         List<string> Semesters { get; set; }
         List<int> Godine { get; set; }
 
-        public AddPredmet(PredmetDAO predmetDAO)
+        public AddPredmet(PredmetController pc)
         {
             InitializeComponent();
             DataContext = this;
             Predmet = new PredmetDTO();
-            this.predmetDAO = predmetDAO;
+            this.predmetController = pc;
 
             Semesters = new List<string> { "letnji", "zimski" };
             cmbSemestar.ItemsSource = Semesters;
@@ -53,7 +53,7 @@ namespace GUI.View.Predmet
         {
             if (ValidateFields())
             {
-                predmetDAO.AddPredmet(Predmet.toPredmet());
+                predmetController.AddPredmet(Predmet.toPredmet());
                 MessageBox.Show("Predmet je uspesno dodat!", "Uspesno", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }

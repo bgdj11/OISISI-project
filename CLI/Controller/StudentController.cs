@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using CLI.Model;
 using CLI.DAO;
+using CLI.Observer;
+
 namespace CLI.Controller
 {
     public class StudentController
@@ -38,6 +40,11 @@ namespace CLI.Controller
         public void MakeStudent()
         {
             studentDAO.MakeStudent();
+        }
+
+        public void Subscribe(IObserver observer)
+        {
+            studentDAO.StudentSubject.Subscribe(observer);
         }
     }
 }

@@ -14,7 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using CLI.Controller;
 using CLI.DAO;
 using GUI.DTO;
 
@@ -24,20 +24,23 @@ namespace GUI.View.Student
     public partial class AddStudent : Window, INotifyPropertyChanged
     {
         public StudentDTO Student { get; set; }
-        private StudentDAO studentsDAO;
+
+        //private StudentDAO studentsDAO;
+        private StudentController studentController;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
         List<int> Godine;
         List<string> Statusi;
 
-        public AddStudent(StudentDAO studentsDAO)
+        //public AddStudent(StudentDAO studentsDAO)
+        public AddStudent(StudentController studentController)
         {
             InitializeComponent();
 
             DataContext = this;
             Student = new StudentDTO();
-            this.studentsDAO = studentsDAO;
+            this.studentController = studentController;
 
             Godine = new List<int> { 1, 2, 3, 4 };
             cmbGodinaStudija.ItemsSource = Godine;
@@ -56,9 +59,8 @@ namespace GUI.View.Student
         {
             if (ValidateFields())
             {
-                //adresaDAO.AddAdresa(Student.toStudent().AdresaStanovanja);
-                //indeksDAO.AddIndeks(Student.toStudent().Indeks);
-                studentsDAO.AddStudent(Student.toStudent());
+                studentController.AddStudent(Student.toStudent());
+                studentController.MakeStudent();
                 MessageBox.Show("Student je uspesno dodat!", "Uspesno", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }

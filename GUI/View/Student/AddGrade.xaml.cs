@@ -1,4 +1,5 @@
-﻿using CLI.DAO;
+﻿using CLI.Controller;
+using CLI.DAO;
 using CLI.Model;
 using GUI.DTO;
 using System;
@@ -25,7 +26,7 @@ namespace GUI.View.Student
     public partial class AddGrade : Window, INotifyPropertyChanged
     {
         public OcenaDTO Ocena { get; set; }
-        private OcenaNaUpisuDAO OcenaDAO;
+        private OcenaController ocenaController;
         private StudentDTO Student;
         public PredmetDTO Predmet { get; set; }
 
@@ -39,14 +40,14 @@ namespace GUI.View.Student
 
         }
 
-        public AddGrade(PredmetDTO predmet, StudentDTO student, OcenaNaUpisuDAO oceneDAO)
+        public AddGrade(PredmetDTO predmet, StudentDTO student, OcenaController oc)
         {
             InitializeComponent();
 
             DataContext = this;
             this.Student = student;
             this.Predmet = predmet;
-            this.OcenaDAO = oceneDAO;
+            this.ocenaController = oc;
 
             Ocena = new OcenaDTO();
 
@@ -65,7 +66,7 @@ namespace GUI.View.Student
 
                 OcenaNaUpisu o = Ocena.toOcena();
 
-                OcenaDAO.AddOcena(o);
+                ocenaController.AddOcena(o);
 
                 Student.NotPassedIds.Remove(Ocena.IdPredmeta);
                 Student.GradesIds.Add(o.IdOcene);

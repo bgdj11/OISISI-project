@@ -23,6 +23,7 @@ using GUI.View.Profesor;
 using GUI.View.Predmet;
 using System.Xml.Serialization;
 using GUI.View.Katedra;
+using CLI.Controller;
 
 namespace GUI
 {
@@ -43,11 +44,17 @@ namespace GUI
 
         public KatedraDTO SelectedKatedra { get; set; }
 
-        private ProfesorDAO profesorDAO { get; set; }
-        private StudentDAO studentDAO { get; set; }
-        private PredmetDAO predmetDAO { get; set; }
-
+        //private ProfesorDAO profesorDAO { get; set; }
+        //private StudentDAO studentDAO { get; set; }
+        //private PredmetDAO predmetDAO { get; set; }
         private KatedraDAO katedraDAO { get; set; }
+
+        private StudentController studentController;
+        private ProfesorController profesorController;
+        private PredmetController predmetController;
+        private AdresaController adresaController;
+        private KatedraController katedraController;
+        private OcenaController ocenaController;
 
         public static RoutedCommand NewCommand = new RoutedCommand();
         public static RoutedCommand SaveCommand = new RoutedCommand();
@@ -59,7 +66,7 @@ namespace GUI
 
         public int TrenutnaStranica { get; set; } = 1;
         public int UkupnoStranica { get; set; }
-        public int StavkiPoStranici { get; set; } = 3;
+        public int StavkiPoStranici { get; set; } = 16;
 
 
         public MainWindow()
@@ -70,13 +77,15 @@ namespace GUI
             DataContext = this;
 
             Students = new ObservableCollection<StudentDTO>();
-            studentDAO = new StudentDAO();
+            studentController = new StudentController();
+            studentController.Subscribe(this);
 
             Profesors = new ObservableCollection<ProfesorDTO>();
-            profesorDAO = new ProfesorDAO();
+            //profesorDAO = new ProfesorDAO();
+            profesorController = new ProfesorController();
 
             Subjects = new ObservableCollection<PredmetDTO>();
-            predmetDAO = new PredmetDAO();
+            predmetController = new PredmetController();
             Tab.Text = "Status: Studenti";
 
             Katedre = new ObservableCollection<KatedraDTO>();
@@ -182,15 +191,15 @@ namespace GUI
         public void Update()
         {
             Profesors.Clear();
-            foreach (Profesor profesor in profesorDAO.GetAllProfesors())
+            foreach (Profesor profesor in profesorController.GetAllProfesor())
                 Profesors.Add(new ProfesorDTO(profesor));
 
             Students.Clear();
-            foreach (Student student in studentDAO.GetAllStudents()) 
+            foreach (Student student in studentController.GetAllStudents()) 
                 Students.Add(new StudentDTO(student));
 
             Subjects.Clear();
-            foreach (Predmet predmet in predmetDAO.GetAllPredmeti())
+            foreach (Predmet predmet in predmetController.GetAllPredmet())
                 Subjects.Add(new PredmetDTO(predmet));
 
             Katedre.Clear();
@@ -225,7 +234,7 @@ namespace GUI
         {
             if (MainTabControl.SelectedItem == StudentsTab)
             {
-                var addStudentWindow = new AddStudent(studentDAO);
+                var addStudentWindow = new AddStudent(studentController);
                 addStudentWindow.Owner = this;
                 addStudentWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 addStudentWindow.ShowDialog();
@@ -233,7 +242,7 @@ namespace GUI
             }
             else if (MainTabControl.SelectedItem == ProfesorsTab)
             {
-                var addProfesorWindow = new AddProfesor(profesorDAO);
+                var addProfesorWindow = new AddProfesor(profesorController);
                 addProfesorWindow.Owner = this;
                 addProfesorWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 addProfesorWindow.ShowDialog();
@@ -241,12 +250,12 @@ namespace GUI
             }
             else if (MainTabControl.SelectedItem == SubjectsTab)
             {
-                var addPredmetWindow = new AddPredmet(predmetDAO);
+                var addPredmetWindow = new AddPredmet(predmetController);
                 addPredmetWindow.Owner = this;
                 addPredmetWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 addPredmetWindow.ShowDialog();
                 Update();
-            } else
+            } else if(MainTabControl.SelectedItem == KatedreTab)
             {
                 var addKatedraWindow = new AddKatedra(katedraDAO);
                 addKatedraWindow.Owner = this;
@@ -266,7 +275,7 @@ namespace GUI
                 }
                 else
                 {
-                    var editsProfesorWindow = new EditProfesor(profesorDAO, predmetDAO, SelectedProfesor.Clone());
+                    var editsProfesorWindow = new EditProfesor(profesorController, predmetController, SelectedProfesor.Clone());
                     editsProfesorWindow.Owner = this;
                     editsProfesorWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                     editsProfesorWindow.ShowDialog();
@@ -279,7 +288,7 @@ namespace GUI
                 }
                 else
                 {
-                    var editPredmetWindow = new EditPredmet(predmetDAO, SelectedPredmet.clone());
+                    var editPredmetWindow = new EditPredmet(predmetController, SelectedPredmet.clone());
                     editPredmetWindow.Owner = this;
                     editPredmetWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                     editPredmetWindow.ShowDialog();
@@ -292,7 +301,7 @@ namespace GUI
                 }
                 else
                 {
-                    var editStudentWIndow = new EditStudent(studentDAO, SelectedStudent.Clone());
+                    var editStudentWIndow = new EditStudent(studentController, SelectedStudent.Clone());
                     editStudentWIndow.Owner = this;
                     editStudentWIndow.WindowStartupLocation= WindowStartupLocation.CenterOwner;
                     editStudentWIndow.ShowDialog();
@@ -335,7 +344,8 @@ namespace GUI
 
                     if (confirmationDialog.UserConfirmed)
                     {
-                        studentDAO.RemoveStudent(SelectedStudent.StudentId);
+                        studentController.DeleteStudent(SelectedStudent.StudentId);
+                        
                     }
                 }
             }
@@ -353,10 +363,10 @@ namespace GUI
 
                     if (confirmationDialog.UserConfirmed)
                     {
-                        profesorDAO.RemoveProfesor(SelectedProfesor.IdProfesor);
+                        profesorController.DeleteProfesor(SelectedProfesor.IdProfesor);
                     }
                 }
-            } else if (MainTabControl.SelectedContent == SubjectsTab)
+            } else if (MainTabControl.SelectedItem == SubjectsTab)
             {
                 if (SelectedPredmet == null)
                 {
@@ -371,11 +381,11 @@ namespace GUI
 
                     if (confirmationDialog.UserConfirmed)
                     {
-                        predmetDAO.RemovePredmet(SelectedPredmet.predmetId);
+                        predmetController.RemovePredmet(SelectedPredmet.predmetId);
                     }
                 }
             }
-            else
+            else if(MainTabControl.SelectedItem == KatedreTab)
             {
                 if(SelectedKatedra == null)
                 {
@@ -418,7 +428,7 @@ namespace GUI
                 SubjectsDataGrid.ItemsSource = FilterSubject(Subjects, searchTerm);
             }
 
-            IzracunajPaginaciju();
+            //IzracunajPaginaciju();
 
         }
 
@@ -537,14 +547,14 @@ namespace GUI
             {
                 Tab.Text = "Status: Profesori";
             }
-            else if(MainTabControl.SelectedItem == SubjectsDataGrid)    
+            else if(MainTabControl.SelectedItem == SubjectsTab)    
             {
                 Tab.Text = "Status: Predmeti";
             }
-            else
+            else if(MainTabControl.SelectedItem == KatedreTab)
                 Tab.Text = "Status: Katedre";
 
-            IzracunajPaginaciju();
+            //IzracunajPaginaciju();
         }
 
         private void IzracunajPaginaciju()

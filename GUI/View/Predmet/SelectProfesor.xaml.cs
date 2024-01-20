@@ -1,4 +1,5 @@
-﻿using CLI.DAO;
+﻿using CLI.Controller;
+using CLI.DAO;
 using CLI.Observer;
 using GUI.DTO;
 using System;
@@ -29,23 +30,25 @@ namespace GUI.View.Predmet
         public List<ProfesorDTO> Profesors { get; set; }
         public ProfesorDTO SelectedProfesor { get; set; }
 
-        private ProfesorDAO profesorDAO;
+        //private ProfesorDAO profesorDAO;
+        private ProfesorController profesorController;
         private PredmetDTO subject;
-        private PredmetDAO predmetDAO;
+        //private PredmetDAO predmetDAO;
+        private PredmetController predmetController;
 
         public void Update()
         {
             Profesors.Clear();
-            foreach (CLI.Model.Profesor profesor in profesorDAO.GetAllProfesors())
+            foreach (CLI.Model.Profesor profesor in profesorController.GetAllProfesor())
                 Profesors.Add(new ProfesorDTO(profesor));
         }
-        public SelectProfesor(PredmetDAO predmetDAO, PredmetDTO subjectDTO)
+        public SelectProfesor(PredmetController pr, PredmetDTO subjectDTO)
         {
             InitializeComponent();
             DataContext = this;
             Profesors = new List<ProfesorDTO>();
-            profesorDAO = new ProfesorDAO();
-            this.predmetDAO = predmetDAO;
+            profesorController = new ProfesorController();
+            this.predmetController = pr;
             subject = subjectDTO;
 
             Update();
@@ -66,7 +69,7 @@ namespace GUI.View.Predmet
 
                 //SelectedProfesor.PredmetiListaId.Add(pr.IdPredmet);
 
-                predmetDAO.UpdatePredmet(pr);
+                predmetController.UpdatePredmet(pr);
                 this.Close();
             }
         }

@@ -15,8 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
-
+using CLI.Controller;
 using CLI.DAO;
 using CLI.Model;
 using GUI.DTO;
@@ -34,28 +33,31 @@ namespace GUI.View.Profesor
         public ProfesorDTO Profesor { get; set; }
         public PredmetDTO SelectedPredmet { get; set; }
 
-        private ProfesorDAO profesorDAO;
-        private PredmetDAO predmetDAO;
-        private StudentDAO studentDAO;
+        //private ProfesorDAO profesorDAO;
+        private ProfesorController profesorController;
+        private PredmetController predmetController;
+        private StudentController studentController;
+        //private PredmetDAO predmetDAO;
+        //private StudentDAO studentDAO;
 
         public ObservableCollection<PredmetDTO> Predmeti { get; set; }
         public ObservableCollection<StudentPredmetDTO> Studenti { get; set; }
 
 
 
-        public EditProfesor(ProfesorDAO profesorDAO, PredmetDAO predmetDao, ProfesorDTO selectedProfesor)
+        public EditProfesor(ProfesorController pc, PredmetController p, ProfesorDTO selectedProfesor)
         {
             InitializeComponent();
             DataContext = this;
-            this.profesorDAO = profesorDAO;
-            this.predmetDAO = predmetDao;
+            this.profesorController = pc;
+            this.predmetController = p;
             Profesor = selectedProfesor;
             cmbZvanje.ItemsSource = new List<string>() { "redovni profesor", "vanredni profesor", "docent" };
 
             Predmeti = new ObservableCollection<PredmetDTO>();
             Studenti = new ObservableCollection<StudentPredmetDTO>();
 
-            studentDAO = new StudentDAO();
+            studentController = new StudentController();
             SelectedPredmet = new PredmetDTO();
 
             Update();
@@ -64,9 +66,9 @@ namespace GUI.View.Profesor
 
         public void Update()
         {
-            studentDAO.MakeStudent();
-            profesorDAO.MakeProfesor();
-            predmetDAO.MakePredmet();
+            studentController.MakeStudent();
+            profesorController.MakeProfesor();
+            predmetController.MakePredmet();
 
 
             if (Profesor.PredmetiListaId != null)
@@ -74,11 +76,11 @@ namespace GUI.View.Profesor
                 Predmeti.Clear();
                 foreach (int i in Profesor.PredmetiListaId)
                 {
-                    Predmeti.Add(new PredmetDTO(predmetDAO.GetPredmetById(i)));
+                    Predmeti.Add(new PredmetDTO(predmetController.GetPredmetById(i)));
                 }
             }
 
-            foreach (CLI.Model.Student student in studentDAO.GetAllStudents())
+            foreach (CLI.Model.Student student in studentController.GetAllStudents())
             {
 /*                foreach (CLI.Model.Predmet predmet in predmetDAO.GetAllPredmeti())
                 {
@@ -114,7 +116,7 @@ namespace GUI.View.Profesor
                 pr.IdAdrese = Profesor.idAdrese;
                 pr.AdresaStanovanja.IdAdrese = Profesor.idAdrese;
 
-                profesorDAO.UpdateProfesor(pr);
+                profesorController.UpdateProfesor(pr);
                 MessageBox.Show("Profesor je uspesno promenjen!", "Uspesno", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
@@ -175,7 +177,7 @@ namespace GUI.View.Profesor
 
         private void DodajPredmet_Click(object sender, RoutedEventArgs e)
         {
-            var selectSubjectProfesorWindow = new SelectSubjectProfesor(profesorDAO, predmetDAO, Profesor);
+            var selectSubjectProfesorWindow = new SelectSubjectProfesor(profesorController, predmetController, Profesor);
             selectSubjectProfesorWindow.Owner = this;
             selectSubjectProfesorWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             selectSubjectProfesorWindow.ShowDialog();
@@ -209,8 +211,8 @@ namespace GUI.View.Profesor
                     prof.IdAdrese = Profesor.idAdrese;
                     prof.AdresaStanovanja.IdAdrese = Profesor.idAdrese;
 
-                    predmetDAO.UpdatePredmet(pred);
-                    profesorDAO.UpdateProfesor(prof);
+                    predmetController.UpdatePredmet(pred);
+                    profesorController.UpdateProfesor(prof);
                     Update();
                 }
             }

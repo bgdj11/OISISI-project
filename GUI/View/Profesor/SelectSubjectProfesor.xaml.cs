@@ -1,4 +1,5 @@
-﻿using CLI.DAO;
+﻿using CLI.Controller;
+using CLI.DAO;
 using CLI.Observer;
 using GUI.DTO;
 using System;
@@ -27,22 +28,23 @@ namespace GUI.View.Profesor
         public ObservableCollection<PredmetDTO> Subjects { get; set; }
         public PredmetDTO SelectedPredmet { get; set; }
         public ProfesorDTO Profesor { get; set; }
-        private ProfesorDAO profesorDAO { get; set; }
+        //private ProfesorDAO profesorDAO { get; set; }
+        private ProfesorController profesorController;
 
-        private PredmetDAO predmetDAO { get; set; }
+        //private PredmetDAO predmetDAO { get; set; }
+        private PredmetController predmetController;
 
 
-
-        public SelectSubjectProfesor(ProfesorDAO profesorDAO, PredmetDAO predmetDao, ProfesorDTO profesor)
+        public SelectSubjectProfesor(ProfesorController pc, PredmetController pr, ProfesorDTO profesor)
         {
             InitializeComponent();
             DataContext = this;
 
             this.Profesor = profesor;
-            this.profesorDAO = profesorDAO;
+            this.profesorController = pc;
 
             Subjects = new ObservableCollection<PredmetDTO>();
-            predmetDAO = predmetDao;
+            predmetController = pr;
 
             Update();
 
@@ -54,7 +56,7 @@ namespace GUI.View.Profesor
         {
             Subjects.Clear();
 
-            foreach (CLI.Model.Predmet pr in predmetDAO.GetAllPredmeti())
+            foreach (CLI.Model.Predmet pr in predmetController.GetAllPredmet())
             {
                 if (!Profesor.PredmetiListaId.Contains(pr.IdPredmet))
                 {
@@ -82,8 +84,8 @@ namespace GUI.View.Profesor
 
             Profesor.PredmetiListaId.Add(SelectedPredmet.predmetId);
 
-            predmetDAO.UpdatePredmet(pred);
-            profesorDAO.UpdateProfesor(prof);
+            predmetController.UpdatePredmet(pred);
+            profesorController.UpdateProfesor(prof);
             Update();
 
             MessageBox.Show("Predmet je uspesno dodat.", "Uspesno", MessageBoxButton.OK, MessageBoxImage.Information);

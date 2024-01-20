@@ -44,9 +44,6 @@ namespace CLI.DAO
 
             Storage<ProfesorPredmet> _profPredStorage = new Storage<ProfesorPredmet>("ProfesorPredmet.csv");
             List<ProfesorPredmet> _profPred = _profPredStorage.Load();
-
-            _profesori = _storage.Load();
-
             
 
             // dodajemo adresu stanovanja

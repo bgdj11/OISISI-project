@@ -23,17 +23,17 @@ namespace CLI.Controller
             return ocenaDao.GetAllOcena();
         }
 
-        public void makeOcena()
+        public void MakeOcena()
         {
             ocenaDao.MakeOcena();
         }
 
-        public void deleteOcena(int id)
+        public void DeleteOcena(int id)
         {
             ocenaDao.RemoveOcena(id);
         }
 
-        public void addOcena(CLI.Model.OcenaNaUpisu ocena)
+        public void AddOcena(CLI.Model.OcenaNaUpisu ocena)
         {
             ocenaDao.AddOcena(ocena);
         }

@@ -1,4 +1,5 @@
-﻿using CLI.DAO;
+﻿using CLI.Controller;
+using CLI.DAO;
 using GUI.DTO;
 using GUI.View.DialogWindows;
 using GUI.View.Profesor;
@@ -35,18 +36,20 @@ namespace GUI.View.Predmet
 
         public PredmetDTO DrugiPredmet { get; set; }
 
-        public PredmetDAO PredmetDAO { get; set; }
-        public StudentDAO StudentDAO { get; set; }
+        //public PredmetDAO PredmetDAO { get; set; }
+        private PredmetController predmetController;
+        //public StudentDAO StudentDAO { get; set; }
+        private StudentController studentController;
 
 
         List<string> Semesters { get; set; }
         List<int> Godine { get; set; }
 
-        public EditPredmet(PredmetDAO predmetDAO, PredmetDTO selectedPredmet)
+        public EditPredmet(PredmetController pr, PredmetDTO selectedPredmet)
         {
             InitializeComponent();
             DataContext = this;
-            this.PredmetDAO = predmetDAO;
+            predmetController = pr;
             this.Predmet = selectedPredmet;
 
             Semesters = new List<string> { "letnji", "zimski" };
@@ -55,7 +58,7 @@ namespace GUI.View.Predmet
             Godine = new List<int> { 1, 2, 3, 4 };
             cmbGodinaStudija.ItemsSource = Godine;
 
-            this.StudentDAO = new StudentDAO();
+            studentController = new StudentController();
             this.DrugiPredmet = null;
             Studenti = new ObservableCollection<StudentDTO>();
 
@@ -63,14 +66,14 @@ namespace GUI.View.Predmet
 
         private void Update()
         {
-            Predmet = new PredmetDTO(PredmetDAO.GetPredmetById(Predmet.predmetId));
+            Predmet = new PredmetDTO(predmetController.GetPredmetById(Predmet.predmetId));
 
             if (DrugiPredmet != null)
             {
-                PredmetDAO.MakePredmet();
-                StudentDAO.MakeStudent();
+                predmetController.MakePredmet();
+                studentController.MakeStudent();
 
-                foreach (CLI.Model.Student student in StudentDAO.GetAllStudents())
+                foreach (CLI.Model.Student student in studentController.GetAllStudents())
                 {
 /*                    if (student.NepolozeniIspiti.Count == 0)
                     {
@@ -100,7 +103,7 @@ namespace GUI.View.Predmet
                 CLI.Model.Predmet pr = Predmet.toPredmet();
                 pr.IdPredmet = Predmet.predmetId;
 
-                PredmetDAO.UpdatePredmet(pr);
+                predmetController.UpdatePredmet(pr);
                 MessageBox.Show("Predmet je uspesno promenjen!", "Uspesno", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
@@ -148,7 +151,7 @@ namespace GUI.View.Predmet
         {
             if (Predmet.ProfesorID == -1)
             {
-                var selectProfesorWindow = new SelectProfesor(PredmetDAO, Predmet);
+                var selectProfesorWindow = new SelectProfesor(predmetController, Predmet);
                 selectProfesorWindow.Owner = this;
                 selectProfesorWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 selectProfesorWindow.ShowDialog();
@@ -173,7 +176,7 @@ namespace GUI.View.Predmet
                     pr.IdPredmet = Predmet.predmetId;
                     pr.IdProfesora = -1;
 
-                    PredmetDAO.UpdatePredmet(pr);
+                    predmetController.UpdatePredmet(pr);
                 }
             }
             Update();
@@ -186,7 +189,7 @@ namespace GUI.View.Predmet
 
         private void IzaberiPredmet_Click(object sender, RoutedEventArgs e)
         {
-            var selectSubjectSubjectWindow = new SelectSubjectSubjcet(PredmetDAO, Predmet);
+            var selectSubjectSubjectWindow = new SelectSubjectSubjcet(predmetController, Predmet);
             selectSubjectSubjectWindow.Owner = this;
             selectSubjectSubjectWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             selectSubjectSubjectWindow.ShowDialog();
@@ -206,7 +209,7 @@ namespace GUI.View.Predmet
         {
 
             Studenti.Clear();
-            foreach (CLI.Model.Student student in StudentDAO.GetAllStudents())
+            foreach (CLI.Model.Student student in studentController.GetAllStudents())
             {
                 int polozioPrviPredmet = 0;
                 int polozioDrugiPredmet = 0;

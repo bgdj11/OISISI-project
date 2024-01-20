@@ -41,5 +41,10 @@ namespace CLI.Controller
         {
             predmetDao.UpdatePredmet(p);
         }
+
+        public Predmet? GetPredmetById(int id)
+        {
+            return predmetDao.GetPredmetById(id);
+        }
     }
 }

@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI.View.Predmet"
+        xmlns:ns="clr-namespace:GUI.Localization"
         mc:Ignorable="d"
-        Title="Dodaj predmet" Height="450" Width="350">
+        Title="{ns:Loc Add_subject}" Height="450" Width="350">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -32,18 +33,18 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Label Content="Sifra Predmeta:" Grid.Row="0"/>
+            <Label Content="{ns:Loc Subject_id}" Grid.Row="0"/>
             <TextBox Name="txtBoxSifraPredmeta" Text="{Binding Path=Predmet.SifraPredmeta, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="1" Margin="0,0,0,5"/>
 
-            <Label Content="Naziv Predmeta:" Grid.Row="1"/>
+            <Label Content="{ns:Loc Subject}" Grid.Row="1"/>
             <TextBox Name="txtBoxNaziv" Text="{Binding Path=Predmet.NazivPredmeta, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5"/>
 
-            <Label Content="Semestar:" Grid.Row="2"/>
+            <Label Content="{ns:Loc Semester}" Grid.Row="2"/>
             <ComboBox Name="cmbSemestar"  SelectedItem="{Binding Path=Predmet.Semestar, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1"  Margin="0,0,0,5">
                 
             </ComboBox>
 
-            <Label Content="Godina Studija:" Grid.Row="3"/>
+            <Label Content="{ns:Loc Year}" Grid.Row="3"/>
             <ComboBox Name="cmbGodinaStudija"  SelectedItem="{Binding Path=Predmet.GodinaStudija, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1"  Margin="0,0,0,5">
                 
             </ComboBox>
@@ -51,15 +52,15 @@
             <Label Content="ID profesora:" Grid.Row="4"/>
             <TextBox Name="txtBoxProfesorID" Text="{Binding Path=Predmet.ProfesorID, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Margin="0,0,0,5"/>
 
-            <Label Content="ESPB:" Grid.Row="5"/>
+            <Label Content="{ns:Loc ESPB}" Grid.Row="5"/>
             <TextBox Name="txtESPB" Text="{Binding Path=Predmet.ESPB, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1" Margin="0,0,0,5"/>
 
         </Grid>
         
 
         <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,20,0,10">
-            <Button Name="btnAccept" Content="Potvrdi" Width="75" Margin="0,0,10,0" Click="btnAccept_Click" />
-            <Button Name="btnCancel" Content="Odustani" Width="75" Click="btnCancel_Click" />
+            <Button Name="btnAccept" Content="{ns:Loc Confirm}" Width="75" Margin="0,0,10,0" Click="btnAccept_Click" />
+            <Button Name="btnCancel" Content="{ns:Loc Close}" Width="75" Click="btnCancel_Click" />
         </StackPanel>
 
     </Grid>

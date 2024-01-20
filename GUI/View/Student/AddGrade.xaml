@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI.View.Student"
+        xmlns:ns="clr-namespace:GUI.Localization"
         mc:Ignorable="d"
-        Title="Dodaj ocenu" Height="350" Width="350">
+        Title="{ns:Loc Add_grade}" Height="350" Width="350">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -33,26 +34,26 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Label Content="Sifra Predmeta:" Grid.Row="0"/>
+            <Label Content="{ns:Loc Subject_id}" Grid.Row="0"/>
             <TextBox Name="txtBoxSifraPredmeta" Text="{Binding Path=Predmet.SifraPredmeta, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="1" Margin="0,0,0,5"/>
 
-            <Label Content="Naziv Predmeta:" Grid.Row="1"/>
+            <Label Content="{ns:Loc Subject}" Grid.Row="1"/>
             <TextBox Name="txtBoxNaziv" Text="{Binding Path=Predmet.NazivPredmeta, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5"/>
 
-            <Label Content="Ocena:" Grid.Row="2"/>
+            <Label Content="{ns:Loc Grade}" Grid.Row="2"/>
             <ComboBox Name="cmbOcena"  SelectedItem="{Binding Path=Ocena.Ocena, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1"  Margin="0,0,0,5">
 
             </ComboBox>
 
-            <Label Content="Datum polaganja:" Grid.Row="3"/>
+            <Label Content="{ns:Loc Date}" Grid.Row="3"/>
             <TextBox Name="txtDatum" Text="{Binding Path=Ocena.Datum, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" Margin="0,0,0,5"/>
 
         </Grid>
 
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="50,0,0,10" Grid.Column="2">
-            <Button Name="btnAccept" Content="Potvrdi" Width="75" Margin="0,0,10,0" Click="btnAccept_Click" />
-            <Button Name="btnCancel" Content="Odustani" Width="75" Click="btnCancel_Click" />
+            <Button Name="btnAccept" Content="{ns:Loc Confirm}" Width="75" Margin="0,0,10,0" Click="btnAccept_Click" />
+            <Button Name="btnCancel" Content="{ns:Loc Close}" Width="75" Click="btnCancel_Click" />
         </StackPanel>
 
     </Grid>

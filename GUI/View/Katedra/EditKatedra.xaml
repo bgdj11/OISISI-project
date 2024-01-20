@@ -4,10 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI.View.Katedra" xmlns:dto="clr-namespace:GUI.DTO" 
+        xmlns:ns="clr-namespace:GUI.Localization"
         mc:Ignorable="d"
-        Title="Izmeni Katedru" Height="450" Width="400">
+        Title="{ns:Loc EditDepartment}" Height="450" Width="400">
     <TabControl>
-        <TabItem Header="Informacije">
+        <TabItem Header="{ns:Loc info}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -30,13 +31,13 @@
                     </Grid.RowDefinitions>
 
 
-                    <Label Content="Sifra katedre:" Grid.Row="0"/>
+                    <Label Content="{ns:Loc Department_id}" Grid.Row="0"/>
                     <TextBox Name="txtBoxSifra" Text="{Binding Path=Katedra.Sifra, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="1" Margin="0,0,0,5"/>
 
-                    <Label Content="Naziv katedre:" Grid.Row="1"/>
+                    <Label Content="{ns:Loc Department_name}" Grid.Row="1"/>
                     <TextBox Name="txtBoxNaziv" Text="{Binding Path=Katedra.Naziv, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5"/>
 
-                    <Label Content="Sef katedre:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
+                    <Label Content="{ns:Loc Chief}" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
                     <TextBox Grid.Row="2"  Text="{Binding Path=Katedra.Profesor, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                         Height="20" Name="txtBoxProfesor" VerticalAlignment="Center" Width="Auto" Grid.Column="1" IsReadOnly="True"/>
 
@@ -47,12 +48,12 @@
                 </Grid>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="15,0,0,10" Grid.Column="2">
-                    <Button Name="btnAccept" Content="Potvrdi" Width="75" Margin="0,0,10,0" Click="btnAccept_Click" />
-                    <Button Name="btnCancel" Content="Odustani" Width="75" Click="btnCancel_Click" />
+                    <Button Name="btnAccept" Content="{ns:Loc Confirm}" Width="75" Margin="0,0,10,0" Click="btnAccept_Click" />
+                    <Button Name="btnCancel" Content="{ns:Loc Close}" Width="75" Click="btnCancel_Click" />
                 </StackPanel>
             </Grid>
         </TabItem>
-        <TabItem Header="Profesori">
+        <TabItem Header="{ns:Loc Professors}">
             <DockPanel>
 
                 <!-- DataGrid za prikaz informacija o profesorima -->
@@ -63,23 +64,23 @@
                   SelectionMode="Single" IsReadOnly="True"
                   DockPanel.Dock="Top">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Ime" Binding="{Binding Ime}" Width="*"/>
-                        <DataGridTextColumn Header="Prezime" Binding="{Binding Prezime}" Width="*"/>
-                        <DataGridTextColumn Header="Zvanje" Binding="{Binding Zvanje}" Width="*"/>
+                        <DataGridTextColumn Header="{ns:Loc Name}" Binding="{Binding Ime}" Width="*"/>
+                        <DataGridTextColumn Header="{ns:Loc LastName}" Binding="{Binding Prezime}" Width="*"/>
+                        <DataGridTextColumn Header="{ns:Loc Title}" Binding="{Binding Zvanje}" Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
 
                 <!-- Panel za dugmiće, centrirani na dnu -->
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5">
-                    <Button Content="Dodaj profesora" Click="DodajProfesora_Click" Width="100" Height="25" Margin="5"/>
-                    <Button Content="Ukloni profesora" Click="UkloniProfesora_Click" Width="100" Height="25" Margin="5"/>
+                    <Button Content="{ns:Loc Add_prof}" Click="DodajProfesora_Click" Width="100" Height="25" Margin="5"/>
+                    <Button Content="{ns:Loc remove_prof}" Click="UkloniProfesora_Click" Width="100" Height="25" Margin="5"/>
                 </StackPanel>
 
             </DockPanel>
         </TabItem>
 
 
-        <TabItem Header="Predmeti">
+        <TabItem Header="{ns:Loc Subjects}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -95,10 +96,10 @@
                 <DataGrid Grid.Column="1" Grid.Row="1" CanUserAddRows="False" IsReadOnly="True " AutoGenerateColumns="False"
                 ItemsSource="{Binding Predmeti}" SelectedItem="{Binding SelectedPredmet}" Grid.ColumnSpan="2">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Sifra predmeta" Width="*" Binding="{Binding SifraPredmeta}"/>
-                        <DataGridTextColumn Header="Naziv predmeta" Width="*" Binding="{Binding NazivPredmeta}"/>
-                        <DataGridTextColumn Header="Godina studija" Width="*" Binding="{Binding GodinaStudija}"/>
-                        <DataGridTextColumn Header="Semestar" Width="*" Binding="{Binding Semestar}"/>
+                        <DataGridTextColumn Header="{ns:Loc Subject_id}" Width="*" Binding="{Binding SifraPredmeta}"/>
+                        <DataGridTextColumn Header="{ns:Loc Subject}" Width="*" Binding="{Binding NazivPredmeta}"/>
+                        <DataGridTextColumn Header="{ns:Loc Year}" Width="*" Binding="{Binding GodinaStudija}"/>
+                        <DataGridTextColumn Header="{ns:Loc Semester}" Width="*" Binding="{Binding Semestar}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

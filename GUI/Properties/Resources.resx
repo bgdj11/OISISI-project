@@ -147,6 +147,12 @@
   <data name="Chief" xml:space="preserve">
     <value>Šef katedre</value>
   </data>
+  <data name="ChooseProfesor" xml:space="preserve">
+    <value>Izaberite profesora</value>
+  </data>
+  <data name="ChooseSubject" xml:space="preserve">
+    <value>Izaberi predmet</value>
+  </data>
   <data name="Choose_subject" xml:space="preserve">
     <value>Odaberi predmet</value>
   </data>
@@ -194,6 +200,9 @@
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Izmeni</value>
+  </data>
+  <data name="EditDepartment" xml:space="preserve">
+    <value>Izmeni katedru</value>
   </data>
   <data name="Edit_department" xml:space="preserve">
     <value>Izmeni katedru</value>
@@ -246,6 +255,9 @@
   <data name="Index" xml:space="preserve">
     <value>Indeks</value>
   </data>
+  <data name="info" xml:space="preserve">
+    <value>informacije</value>
+  </data>
   <data name="Information" xml:space="preserve">
     <value>Informacije</value>
   </data>
@@ -273,6 +285,9 @@
   <data name="Passed" xml:space="preserve">
     <value>Položeni predmeti</value>
   </data>
+  <data name="PassedFirst" xml:space="preserve">
+    <value>Polozili prvi</value>
+  </data>
   <data name="Previous" xml:space="preserve">
     <value>Prethodna</value>
   </data>
@@ -284,6 +299,12 @@
   </data>
   <data name="Remaining" xml:space="preserve">
     <value>Nepoloženi predmeti</value>
+  </data>
+  <data name="RemoveGrade" xml:space="preserve">
+    <value>Ponisti ocenu</value>
+  </data>
+  <data name="remove_prof" xml:space="preserve">
+    <value>Ukloni profesora</value>
   </data>
   <data name="Remove_subject" xml:space="preserve">
     <value>Ukloni predmet</value>
@@ -329,6 +350,9 @@
   </data>
   <data name="Subject_name" xml:space="preserve">
     <value>Naziv predmeta</value>
+  </data>
+  <data name="SumESPB" xml:space="preserve">
+    <value>Ukupno ESPB</value>
   </data>
   <data name="Take_exam" xml:space="preserve">
     <value>Polaganje</value>

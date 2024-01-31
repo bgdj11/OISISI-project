@@ -88,18 +88,12 @@ namespace GUI.View.Student
 
 
         private bool ValidateFields()
-        {
-            DateTime parsedDate;
-            bool isDateFormatValid = DateTime.TryParseExact(txtDatum.Text, "d.M.yyyy",
-                                                            CultureInfo.InvariantCulture,
-                                                            DateTimeStyles.None,
-                                                            out parsedDate);
+        {        
 
             return !string.IsNullOrWhiteSpace(txtBoxSifraPredmeta.Text) &&
                    !string.IsNullOrWhiteSpace(txtBoxNaziv.Text) &&
                    cmbOcena.SelectedItem != null &&
-                   !string.IsNullOrWhiteSpace(txtDatum.Text) &&
-                   isDateFormatValid;
+                   !string.IsNullOrWhiteSpace(txtDatum.Text);
         }
 
     }
